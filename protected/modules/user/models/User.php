@@ -30,6 +30,8 @@ class User extends CActiveRecord
   	public $password2;
   	public $emailChanged = false;
 
+  	private $purgeRecord = false;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -161,9 +163,15 @@ class User extends CActiveRecord
 		return (strtotime($this->dateReset)+3600);
 	}
 
-	public function delete()
+	public function setPurgeRecord($value)
 	{
 		if(Yii::app()->user->permissions == 'admin')
+			$this->purgeRecord = true;
+	}
+
+	public function delete()
+	{
+		if($this->purgeRecord)
 			parent::delete();
 		else
 		{
@@ -200,9 +208,9 @@ class User extends CActiveRecord
 				if(!empty($this->password1) && !empty($this->password2) && $this->password1 == $this->password2)
 				{
 					$this->updatePassword();
-					$this->dateRevert = new CDbExpression('NOW()');
-					$this->revertCode = $this->generateUniqueId();
-					$this->sendRevertEmail('user.views.mail.passwordChangeEmail');
+					// $this->dateRevert = new CDbExpression('NOW()');
+					// $this->revertCode = $this->generateUniqueId();
+					// $this->sendRevertEmail('user.views.mail.passwordChangeEmail');
 				}
 
 				if($this->emailChanged)
@@ -218,7 +226,7 @@ class User extends CActiveRecord
 		{
 			$this->updatePassword();
 			$this->resetCode = null;
-			$this->sendRevertEmail('user.views.mail.passwordChangeEmail');
+			// $this->sendRevertEmail('user.views.mail.passwordChangeEmail');
 		}
 
 		else if($this->scenario == 'validate')
