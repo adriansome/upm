@@ -1,0 +1,395 @@
+<?php
+
+class DefaultController extends Controller
+{
+		/**
+	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
+	 * using two-column layout. See 'protected/views/layouts/column2.php'.
+	 */
+	public $layout='//layouts/single';
+
+	/**
+	 * @return array action filters
+	 */
+	public function filters()
+	{
+		return array(
+			'accessControl', // perform access control for CRUD operations
+			'postOnly + delete', // we only allow deletion via POST request
+		);
+	}
+
+	/**
+	 * Specifies the access control rules.
+	 * This method is used by the 'accessControl' filter.
+	 * @return array access control rules
+	 */
+	public function accessRules()
+	{
+		return array(
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array(
+					'register',
+					'validate',
+					'login',
+					'resetPassword',
+					'forgottenCredentials',
+					'reminderSent',
+					'resetPasswordSuccess',
+					'logout',
+					'registrationSuccess',
+					'revertDelete',
+					'revertPassword',
+					'revertEmail'
+				),
+				'users'=>array('*'),
+			),
+			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				'actions'=>array(
+					'profile',
+					'update',
+					'delete'
+				),
+				'users'=>array('@'),
+			),
+			array('deny',  // deny all users
+				'users'=>array('*'),
+			),
+		);
+	}
+
+	/**
+	 * Creates a new model.
+	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 */
+	public function actionRegister()
+	{
+		$model=new User;
+		$model->scenario = 'register';
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['User']['email']))
+		{
+			$record=User::model()->find(array(
+			  'select'=>array('dateDeleted','dateEmailValidated','username'),
+		      'condition'=>'email=:email',
+		      'params'=>array(':email'=>$_POST['User']['email']),
+		    ));
+
+		    if(isset($record) && !isset($record->dateDeleted) && !isset($record->dateEmailValidated))
+		    {
+		    	$model = $record;
+		    	unset($record);
+		    }
+
+			if(isset($record->dateEmailValidated))
+				$this->redirect(array('login', 'username'=>$record->username));
+			else
+				$model=$this->saveModel($model, $_POST['User'], 'registrationSuccess');
+		}
+
+		$this->render('register',array(
+			'model'=>$model,
+		));
+	}
+
+	public function actionRegistrationSuccess($id)
+	{ 
+		$email=$this->loadModel($id)->email;
+
+		$this->render('registrationSuccess',array(
+			'email'=>$email,
+		));
+	}
+
+	public function actionValidate($uid)
+	{
+		$model=User::model()->find(array(
+			'condition'=>'activationCode=:activationCode',
+			'params'=>array(':activationCode'=>$uid),
+		));
+
+		if(isset($model))
+		{
+			$model->scenario = 'validate';
+
+			if(empty($model->dateEmailValidated))
+			{
+				$model->save();
+				$this->setRefererSessionData($model->username);
+				$this->redirect(array('login'));
+			}
+			else
+				$this->redirect(array('login'));
+		}
+		else
+			throw new CHttpException(500, 'Invalid request. The unique ID provided was not recognised.');
+	}
+
+	/**
+	 * Displays the login page
+	 */
+	public function actionLogin()
+	{
+		$model=new LoginForm;
+
+		$referer = null;
+
+		if(isset(Yii::app()->session['referer']))
+		{
+			$referer = Yii::app()->session['referer']['action'];
+			$model->username = Yii::app()->session['referer']['user'];
+			unset(Yii::app()->session['referer']);
+		}	
+
+		// if it is ajax validation request
+		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
+		{
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
+		}
+
+		// collect user input data
+		if(isset($_POST['LoginForm']))
+		{
+			$model->attributes=$_POST['LoginForm'];
+			// validate user input and redirect to the previous page if valid
+			if($model->validate() && $model->login())
+				$this->redirect(Yii::app()->user->returnUrl);
+		}
+
+		// display the login form
+		$this->render('login',array(
+			'model'=>$model,
+			'referer'=>$referer,
+		));
+	}
+
+	public function actionForgottenCredentials()
+	{
+		$model=new CredentialsForm;
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['CredentialsForm']))
+		{
+			$model->attributes=$_POST['CredentialsForm'];
+			// validate user input and redirect to the previous page if valid
+			if($model->validate() && $model->sendEmail())
+				$this->redirect('reminderSent');
+		}
+
+		$this->render('forgottenCredentials',array(
+			'model'=>$model,
+		));
+	}
+
+	public function actionReminderSent()
+	{
+		$this->render('reminderSent');
+	}
+
+	public function actionResetPassword($uid)
+	{
+		$model=User::model()->find(array(
+			'condition'=>'resetCode=:resetCode',
+			'params'=>array(':resetCode'=>$uid),
+	    ));
+
+	    if(isset($model))
+	    {
+		    $model->scenario = 'updatePassword';
+
+			// Get current time from MySQL server as unix timestamp.
+			$command=Yii::app()->db->createCommand("SELECT NOW() as 'now';")->queryAll();
+			$now=strtotime($command[0]['now']);
+
+		    if($now < $model->resetCodeExpiryTime)
+		    {
+				if(isset($_POST['User']))
+				{
+					$model->password1 = $_POST['User']['password1'];
+					$model->password2 = $_POST['User']['password2'];
+					
+					if($model->save())
+					{
+						$this->setRefererSessionData($model->username);
+						$this->redirect(array('login'));
+					}
+				}
+
+				$this->render('resetPassword',array(
+					'model'=>$model,
+				));
+			}
+			else
+				$this->render('resetExpired');
+		}
+		else
+			throw new CHttpException(500,'Invalid request. The unique ID provided was not recognised.');
+	}
+
+	/**
+	 * Logs out the current user and redirect to homepage.
+	 */
+	public function actionLogout()
+	{
+		Yii::app()->user->logout();
+		$this->redirect(Yii::app()->homeUrl);
+	}
+
+	/**
+	 * Displays a particular model.
+	 * @param integer $id the ID of the model to be displayed
+	 */
+	public function actionProfile()
+	{
+		$this->layout='//layouts/righty';
+
+		$this->render('profile',array(
+			'model'=>$this->loadModel(),
+		));
+	}
+
+	/**
+	 * Updates a particular model.
+	 * If update is successful, the browser will be redirected to the 'view' page.
+	 * @param integer $id the ID of the model to be updated
+	 */
+	public function actionUpdate()
+	{
+		$layout='//layouts/righty';
+
+		$model=$this->loadModel();
+	    
+		$model->scenario = 'update';
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['User']))
+		{
+			$model=$this->saveModel($model, $_POST['User'], 'profile');
+			unset($_POST);
+		}
+
+		$this->render('update',array(
+			'model'=>$model,
+		));
+	}
+
+	/**
+	 * Deletes a particular model.
+	 * If deletion is successful, the browser will be redirected to the 'admin' page.
+	 * @param integer $id the ID of the model to be deleted
+	 */
+	public function actionDelete()
+	{
+		$this->loadModel()->delete();
+		$this->redirect(array('logout'));
+	}
+
+	public function actionRevertDelete($uid)
+	{
+		$model=User::model()->find(array(
+			'condition'=>'revertCode=:revertCode',
+			'params'=>array(':revertCode'=>$uid),
+	    ));
+
+	    if(isset($model))
+	    {
+	    	$model->scenario = 'revertDelete';
+	    	$model->save();
+	    }
+	}
+
+	public function actionRevertPassword($uid)
+	{
+		$model=User::model()->find(array(
+			'condition'=>'revertCode=:revertCode',
+			'params'=>array(':revertCode'=>$uid),
+	    ));
+
+	    if(isset($model))
+	    {
+	    	$model->scenario = 'updatePassword';
+	    	$model->save();
+	    }
+	}
+
+	public function actionRevertEmail($uid)
+	{
+		$model=User::model()->find(array(
+			'condition'=>'revertCode=:revertCode',
+			'params'=>array(':revertCode'=>$uid),
+	    ));
+
+	    if(isset($model))
+	    {
+	    	$model->scenario = 'revertEmail';
+	    	$model->save();
+	    }
+	}
+
+	/**
+	 * Returns the data model based on the primary key given in the GET variable.
+	 * If the data model is not found, an HTTP exception will be raised.
+	 * @param integer $id the ID of the model to be loaded
+	 * @return User the loaded model
+	 * @throws CHttpException
+	 */
+	protected function loadModel($id = null)
+	{
+		if(empty($id))
+			$id = Yii::app()->user->id;
+
+		$model=User::model()->findByPk($id);
+
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+
+		return $model;
+	}
+
+	protected function saveModel($model, $attributes, $action)
+	{	
+		if(!empty($model->email) && $attributes['email'] !== $model->email)
+		{
+			$model->oldEmail = $model->email;
+			$model->emailChanged = true;
+		}
+		
+		$model->email = $attributes['email'];
+		$model->firstname = $attributes['firstname'];
+		$model->lastname = $attributes['lastname'];
+		$model->username = $attributes['username'];
+		$model->password1 = $attributes['password1'];
+		$model->password2 = $attributes['password2'];	
+
+		if($model->save())
+		{
+			if($action == 'registrationSuccess')
+				$this->redirect(array($action, 'id'=>$model->id));
+			else
+				$this->redirect(array($action));
+		}
+		else
+			return $model;
+	}
+
+	/**
+	 * Performs the AJAX validation.
+	 * @param User $model the model to be validated
+	 */
+	protected function performAjaxValidation($model)
+	{
+		if(isset($_POST['ajax']) && $_POST['ajax']==='user-form')
+		{
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
+		}
+	}
+}
