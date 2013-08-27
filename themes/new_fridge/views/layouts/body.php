@@ -12,7 +12,7 @@
 				array('label'=>'Register', 'url'=>array('/user/register'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'Login', 'url'=>array('/user/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'User Profile', 'url'=>array('/user/profile'), 'visible'=>!Yii::app()->user->isGuest),
-				array('label'=>'Logout ('.$this->username.')', 'url'=>array('/user/logout'), 'visible'=>!Yii::app()->user->isGuest)
+				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/user/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
 		)); ?>
 	</div><!-- mainmenu -->
