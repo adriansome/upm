@@ -261,7 +261,7 @@ class DefaultController extends Controller
 	 */
 	public function actionUpdate()
 	{
-		$layout='//layouts/righty';
+		$this->layout='//layouts/righty';
 
 		$model=$this->loadModel();
 	    
@@ -288,7 +288,7 @@ class DefaultController extends Controller
 	 */
 	public function actionUpdateEmail()
 	{
-		$layout='//layouts/righty';
+		$this->layout='//layouts/righty';
 
 		$model=$this->loadModel();
 	    
@@ -318,7 +318,7 @@ class DefaultController extends Controller
 	 */
 	public function actionUpdatePassword()
 	{
-		$layout='//layouts/righty';
+		$this->layout='//layouts/righty';
 
 		$model=$this->loadModel();
 	    
