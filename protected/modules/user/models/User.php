@@ -30,6 +30,7 @@ class User extends CActiveRecord
   	public $password2;
   	public $currentPassword;
   	public $emailChanged = false;
+  	public $fullname;
 
   	private $purgeRecord = false;
 
@@ -105,7 +106,7 @@ class User extends CActiveRecord
 			'username' => 'Username',
 			'firstname' => 'First Name',
 			'lastname' => 'Last Name',
-			'fullname' => 'Full Name',
+			'fullname' => 'Name',
 			'dateTermsAgreed' => 'Date Terms Agreed',
 			'dateUpdated' => 'Date Updated',
 			'dateLastLogin' => 'Date Last Login',
@@ -131,6 +132,8 @@ class User extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
+		$criteria->select = array('*', 'CONCAT(firstname, " ", lastname) AS fullname');
+
 		$criteria->compare('id',$this->id);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('oldEmail',$this->oldEmail,true);
@@ -139,6 +142,7 @@ class User extends CActiveRecord
 		$criteria->compare('username',$this->username,true);
 		$criteria->compare('firstname',$this->firstname,true);
 		$criteria->compare('lastname',$this->lastname,true);
+		$criteria->compare('CONCAT(firstname, " ", lastname)',$this->fullname,true);
 		$criteria->compare('dateTermsAgreed',$this->dateTermsAgreed,true);
 		$criteria->compare('dateUpdated',$this->dateUpdated,true);
 		$criteria->compare('dateLastLogin',$this->dateLastLogin,true);
