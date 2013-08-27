@@ -21,28 +21,4 @@ class Controller extends CController
 	 * for more details on how to specify this property.
 	 */
 	public $breadcrumbs=array();
-
-	protected function setRefererSessionData($username = null, $id = null, $email = null)
-	{
-		if(Yii::app()->controller->action->id == 'register')
-			$action = 'registrationSuccess';
-		else
-			$action = Yii::app()->controller->action->id;
-
-
-		Yii::app()->session['referer'] = array(
-			'action'=>$action,
-			'user'=>$username,
-			'id'=>$id,
-			'email'=>$email,
-		);
-	}
-
-	protected function getUsername()
-	{
-		if(isset(Yii::app()->user) && !Yii::app()->user->isGuest)
-			return Yii::app()->user->firstname.' '.Yii::app()->user->lastname;
-		else
-			return null;
-	}
 }
