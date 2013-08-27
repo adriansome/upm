@@ -12,7 +12,15 @@ $this->breadcrumbs=array(
 <h1>Login</h1>
 
 <p>
-	<?php if(!empty($referer)) $this->renderPartial('_'.$referer); ?>
+	<?php 
+	if(!empty($referer))
+	{
+		if(!empty($email))
+			$data = array('email'=>$email);
+	
+		$this->renderPartial('_'.$referer, $data);
+	}
+	?>
 	
 	Please fill out the following form with your login credentials:
 </p>

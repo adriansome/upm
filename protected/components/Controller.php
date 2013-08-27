@@ -22,7 +22,7 @@ class Controller extends CController
 	 */
 	public $breadcrumbs=array();
 
-	protected function setRefererSessionData($username = null, $id = null)
+	protected function setRefererSessionData($username = null, $id = null, $email = null)
 	{
 		if(Yii::app()->controller->action->id == 'register')
 			$action = 'registrationSuccess';
@@ -34,6 +34,7 @@ class Controller extends CController
 			'action'=>$action,
 			'user'=>$username,
 			'id'=>$id,
+			'email'=>$email,
 		);
 	}
 

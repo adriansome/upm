@@ -27,9 +27,9 @@ $this->menu=array(
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'password'); ?>
-		<?php echo $form->passwordField($model,'password', array('value'=>'')); ?>
-		<?php echo $form->error($model,'password'); ?>
+		<?php echo $form->labelEx($model,'currentPassword'); ?>
+		<?php echo $form->passwordField($model,'currentPassword', array('value'=>'')); ?>
+		<?php echo $form->error($model,'currentPassword'); ?>
 	</div>
 
 	<div class="row">

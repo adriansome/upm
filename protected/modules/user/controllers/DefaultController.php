@@ -144,10 +144,12 @@ class DefaultController extends Controller
 		$model=new LoginForm;
 
 		$referer = null;
+		$email = null;
 
 		if(isset(Yii::app()->session['referer']))
 		{
 			$referer = Yii::app()->session['referer']['action'];
+			$email = Yii::app()->session['referer']['email'];
 			$model->username = Yii::app()->session['referer']['user'];
 			unset(Yii::app()->session['referer']);
 		}	
@@ -172,6 +174,7 @@ class DefaultController extends Controller
 		$this->render('login',array(
 			'model'=>$model,
 			'referer'=>$referer,
+			'email'=>$email,
 		));
 	}
 
@@ -299,7 +302,8 @@ class DefaultController extends Controller
 
 		if(isset($_POST['User']))
 		{
-			$model->password = $_POST['User']['password'];
+			$model->currentPassword = $_POST['User']['currentPassword'];
+			$model->oldEmail = $model->email;
 			$model->email = $_POST['User']['email'];
 			
 			if($model->save())
@@ -329,7 +333,7 @@ class DefaultController extends Controller
 
 		if(isset($_POST['User']))
 		{
-			$model->password = $_POST['User']['password'];
+			$model->currentPassword = $_POST['User']['currentPassword'];
 			$model->password1 = $_POST['User']['password1'];
 			$model->password2 = $_POST['User']['password2'];
 			
@@ -358,7 +362,8 @@ class DefaultController extends Controller
 		$model = $this->loadByUid('revertCode', $uid);
 	    $model->scenario = 'revertDelete';
 	   	$model->save();
-	   	$this->render();
+	   	$this->setRefererSessionData($model->username, $model->id, $model->email);
+		$this->redirect(array('login'));
 	}
 
 	public function actionRevertEmail($uid)
@@ -366,7 +371,8 @@ class DefaultController extends Controller
 		$model = $this->loadByUid('revertCode', $uid);
     	$model->scenario = 'revertEmail';
     	$model->save();
-    	$this->render();
+    	$this->setRefererSessionData($model->username, $model->id, $model->email);
+		$this->redirect(array('login'));
 	}
 
 	/**

@@ -33,9 +33,9 @@ $this->menu=array(
 	</div>
 
 	<div class="row">
-		<?php echo CHtml::label('Password', 'User[password]'); ?>
-		<?php echo $form->passwordField($model,'password', array('value'=>'')); ?>
-		<?php echo $form->error($model,'password'); ?>
+		<?php echo $form->labelEx($model,'currentPassword'); ?>
+		<?php echo $form->passwordField($model,'currentPassword', array('value'=>'')); ?>
+		<?php echo $form->error($model,'currentPassword'); ?>
 	</div>
 
 	<div class="row buttons">
