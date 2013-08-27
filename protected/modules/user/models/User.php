@@ -61,7 +61,8 @@ class User extends CActiveRecord
 			array('email, username, firstname, lastname', 'required', 'on'=>'register, update, adminUpdate'),
 			array('fullname', 'safe'),
 			array('password1, password2', 'required', 'on'=>'register, passwordReset, updatePassword'),
-			array('password', 'required', 'on'=>'emailRevert'),
+			array('password', 'required', 'on'=>'emailRevert, updateEmail, updatePassword'),
+			array('password', 'authenticate', 'on'=>'emailRevert, updateEmail, updatePassword'),
 			array('permissions', 'required', 'on'=>'adminUpdate'),
 			array('email, oldEmail, firstname, lastname', 'length', 'max'=>140),
 			array('password', 'length', 'max'=>60),
@@ -93,10 +94,11 @@ class User extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'email' => 'Email',
-			'oldEmail' => 'Old Email',
-			'password1' => 'Password',
-			'password2' => 'Confirm Password',
+			'email' => 'E-mail',
+			'oldEmail' => 'Old E-mail',
+			'password' => 'Current Password',
+			'password1' => 'New Password',
+			'password2' => 'Confirm New Password',
 			'permissions' => 'Permissions',
 			'username' => 'Username',
 			'firstname' => 'First Name',
@@ -169,6 +171,28 @@ class User extends CActiveRecord
 			$this->purgeRecord = true;
 	}
 
+	/**
+	 * Authenticates the password.
+	 * This is the 'authenticate' validator as declared in rules().
+	 */
+	public function authenticate($attribute,$params)
+	{
+		if(!$this->hasErrors())
+		{
+			$this->_identity=new UserIdentity($this->username,$this->password);
+			$this->_identity->authenticate();
+
+			if($this->_identity->errorCode===UserIdentity::ERROR_USERNAME_INVALID)
+				$this->addError('username','Username not found');
+			
+			if($this->_identity->errorCode===UserIdentity::ERROR_PASSWORD_INVALID)
+				$this->addError('password','Incorrect Password');
+
+			if($this->_identity->errorCode===UserIdentity::ERROR_NOT_ACTIVATED)
+				$this->addError('username','Your e-mail address has not been validated');
+		}
+	}
+
 	public function delete()
 	{
 		if($this->purgeRecord)
@@ -195,6 +219,12 @@ class User extends CActiveRecord
 		{
 			$this->updatePassword();
 			$this->activationCode = $this->generateUniqueId();
+			$this->sendValidationEmail();
+			$this->dateValidationEmailSent = new CDbExpression('NOW()');
+		}
+
+		if($this->scenario == 'resendEmailVerification')
+		{
 			$this->sendValidationEmail();
 			$this->dateValidationEmailSent = new CDbExpression('NOW()');
 		}

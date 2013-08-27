@@ -22,17 +22,24 @@ class Controller extends CController
 	 */
 	public $breadcrumbs=array();
 
-	protected function setRefererSessionData($username)
+	protected function setRefererSessionData($username = null, $id = null)
 	{
+		if(Yii::app()->controller->action->id == 'register')
+			$action = 'registrationSuccess';
+		else
+			$action = Yii::app()->controller->action->id;
+
+
 		Yii::app()->session['referer'] = array(
-			'action'=>Yii::app()->controller->action->id,
+			'action'=>$action,
 			'user'=>$username,
+			'id'=>$id,
 		);
 	}
 
 	protected function getUsername()
 	{
-		if(!Yii::app()->user->isGuest)
+		if(isset(Yii::app()->user) && !Yii::app()->user->isGuest)
 			return Yii::app()->user->firstname.' '.Yii::app()->user->lastname;
 		else
 			return null;

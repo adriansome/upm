@@ -8,17 +8,17 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Change E-mail Address', 'url'=>array('updateEmail')),
+	array('label'=>'Update Account Details', 'url'=>array('update')),
 	array('label'=>'Change Password', 'url'=>array('updatePassword')),
 	array('label'=>'Delete Account', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete'),'confirm'=>'Are you sure you want to delete your account?')),
 );
 ?>
 
-<h1>Update Account Details</h1>
+<h1>Update E-mail Address</h1>
 
 <div class="form">
-	<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'user-update-form',
+<?php $form=$this->beginWidget('CActiveForm', array(
+	'id'=>'email-update-form',
 	'enableAjaxValidation'=>false,
 )); ?>
 
@@ -27,21 +27,15 @@ $this->menu=array(
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'firstname'); ?>
-		<?php echo $form->textField($model,'firstname'); ?>
-		<?php echo $form->error($model,'firstname'); ?>
+		<?php echo CHtml::label('New E-mail Address', 'User[email]'); ?>
+		<?php echo $form->textField($model,'email'); ?>
+		<?php echo $form->error($model,'email'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'lastname'); ?>
-		<?php echo $form->textField($model,'lastname'); ?>
-		<?php echo $form->error($model,'lastname'); ?>
-	</div>
-	
-	<div class="row">
-		<?php echo $form->labelEx($model,'username'); ?>
-		<?php echo $form->textField($model,'username'); ?>
-		<?php echo $form->error($model,'username'); ?>
+		<?php echo CHtml::label('Password', 'User[password]'); ?>
+		<?php echo $form->passwordField($model,'password', array('value'=>'')); ?>
+		<?php echo $form->error($model,'password'); ?>
 	</div>
 
 	<div class="row buttons">

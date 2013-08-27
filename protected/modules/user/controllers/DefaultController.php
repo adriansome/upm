@@ -30,6 +30,7 @@ class DefaultController extends Controller
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array(
 					'register',
+					'resendEmailVerification',
 					'validate',
 					'login',
 					'resetPassword',
@@ -48,6 +49,8 @@ class DefaultController extends Controller
 				'actions'=>array(
 					'profile',
 					'update',
+					'updateEmail',
+					'updatePassword',
 					'delete'
 				),
 				'users'=>array('@'),
@@ -95,37 +98,42 @@ class DefaultController extends Controller
 		));
 	}
 
-	public function actionRegistrationSuccess($id)
+	public function actionRegistrationSuccess()
 	{ 
-		$email=$this->loadModel($id)->email;
+		$model=$this->loadModel(Yii::app()->session['referer']['id']);
+
+		if(isset($_GET['resend']) && $_GET['resend'] == 1)
+		{
+			$this->setRefererSessionData($model->username, $model->id);
+			$this->redirect(array('resendEmailVerification'));
+		}
 
 		$this->render('registrationSuccess',array(
-			'email'=>$email,
+			'email'=>$model->email,
 		));
+	}
+
+	public function actionResendEmailVerification()
+	{
+		$model = $this->loadModel(Yii::app()->session['referer']['id']);
+		$model->scenario = 'resendEmailVerification';
+		$model->save();
+		$this->redirect(array('registrationSuccess'));
 	}
 
 	public function actionValidate($uid)
 	{
-		$model=User::model()->find(array(
-			'condition'=>'activationCode=:activationCode',
-			'params'=>array(':activationCode'=>$uid),
-		));
+		$model=$this->loadByUid('activationCode', $uid);
+		$model->scenario = 'validate';
 
-		if(isset($model))
+		if(empty($model->dateEmailValidated))
 		{
-			$model->scenario = 'validate';
-
-			if(empty($model->dateEmailValidated))
-			{
-				$model->save();
-				$this->setRefererSessionData($model->username);
-				$this->redirect(array('login'));
-			}
-			else
-				$this->redirect(array('login'));
+			$model->save();
+			$this->setRefererSessionData($model->username);
+			$this->redirect(array('login'));
 		}
 		else
-			throw new CHttpException(500, 'Invalid request. The unique ID provided was not recognised.');
+			$this->redirect(array('login'));
 	}
 
 	/**
@@ -194,42 +202,34 @@ class DefaultController extends Controller
 
 	public function actionResetPassword($uid)
 	{
-		$model=User::model()->find(array(
-			'condition'=>'resetCode=:resetCode',
-			'params'=>array(':resetCode'=>$uid),
-	    ));
+		$model=$this->loadByUid('resetCode', $uid);
 
-	    if(isset($model))
+	    $model->scenario = 'updatePassword';
+
+		// Get current time from MySQL server as unix timestamp.
+		$command=Yii::app()->db->createCommand("SELECT NOW() as 'now';")->queryAll();
+		$now=strtotime($command[0]['now']);
+
+	    if($now < $model->resetCodeExpiryTime)
 	    {
-		    $model->scenario = 'updatePassword';
-
-			// Get current time from MySQL server as unix timestamp.
-			$command=Yii::app()->db->createCommand("SELECT NOW() as 'now';")->queryAll();
-			$now=strtotime($command[0]['now']);
-
-		    if($now < $model->resetCodeExpiryTime)
-		    {
-				if(isset($_POST['User']))
+			if(isset($_POST['User']))
+			{
+				$model->password1 = $_POST['User']['password1'];
+				$model->password2 = $_POST['User']['password2'];
+				
+				if($model->save())
 				{
-					$model->password1 = $_POST['User']['password1'];
-					$model->password2 = $_POST['User']['password2'];
-					
-					if($model->save())
-					{
-						$this->setRefererSessionData($model->username);
-						$this->redirect(array('login'));
-					}
+					$this->setRefererSessionData($model->username);
+					$this->redirect(array('login'));
 				}
-
-				$this->render('resetPassword',array(
-					'model'=>$model,
-				));
 			}
-			else
-				$this->render('resetExpired');
+
+			$this->render('resetPassword',array(
+				'model'=>$model,
+			));
 		}
 		else
-			throw new CHttpException(500,'Invalid request. The unique ID provided was not recognised.');
+			$this->render('resetExpired');
 	}
 
 	/**
@@ -282,6 +282,67 @@ class DefaultController extends Controller
 	}
 
 	/**
+	 * Updates a particular model.
+	 * If update is successful, the browser will be redirected to the 'view' page.
+	 * @param integer $id the ID of the model to be updated
+	 */
+	public function actionUpdateEmail()
+	{
+		$layout='//layouts/righty';
+
+		$model=$this->loadModel();
+	    
+		$model->scenario = 'updateEmail';
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['User']))
+		{
+			$model->password = $_POST['User']['password'];
+			$model->email = $_POST['User']['email'];
+			
+			if($model->save())
+				$this->redirect(array('profile'));
+		}
+
+		$this->render('updateEmail',array(
+			'model'=>$model,
+		));
+	}
+
+	/**
+	 * Updates a particular model.
+	 * If update is successful, the browser will be redirected to the 'view' page.
+	 * @param integer $id the ID of the model to be updated
+	 */
+	public function actionUpdatePassword()
+	{
+		$layout='//layouts/righty';
+
+		$model=$this->loadModel();
+	    
+		$model->scenario = 'updatePassword';
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['User']))
+		{
+			$model->password = $_POST['User']['password'];
+			$model->password1 = $_POST['User']['password1'];
+			$model->password2 = $_POST['User']['password2'];
+			
+			if($model->save())
+				$this->redirect(array('profile'));
+		}
+
+		$this->render('updatePassword',array(
+			'model'=>$model,
+		));
+	}
+
+	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
 	 * @param integer $id the ID of the model to be deleted
@@ -294,44 +355,18 @@ class DefaultController extends Controller
 
 	public function actionRevertDelete($uid)
 	{
-		$model=User::model()->find(array(
-			'condition'=>'revertCode=:revertCode',
-			'params'=>array(':revertCode'=>$uid),
-	    ));
-
-	    if(isset($model))
-	    {
-	    	$model->scenario = 'revertDelete';
-	    	$model->save();
-	    }
-	}
-
-	public function actionRevertPassword($uid)
-	{
-		$model=User::model()->find(array(
-			'condition'=>'revertCode=:revertCode',
-			'params'=>array(':revertCode'=>$uid),
-	    ));
-
-	    if(isset($model))
-	    {
-	    	$model->scenario = 'updatePassword';
-	    	$model->save();
-	    }
+		$model = $this->loadByUid('revertCode', $uid);
+	    $model->scenario = 'revertDelete';
+	   	$model->save();
+	   	$this->render();
 	}
 
 	public function actionRevertEmail($uid)
 	{
-		$model=User::model()->find(array(
-			'condition'=>'revertCode=:revertCode',
-			'params'=>array(':revertCode'=>$uid),
-	    ));
-
-	    if(isset($model))
-	    {
-	    	$model->scenario = 'revertEmail';
-	    	$model->save();
-	    }
+		$model = $this->loadByUid('revertCode', $uid);
+    	$model->scenario = 'revertEmail';
+    	$model->save();
+    	$this->render();
 	}
 
 	/**
@@ -349,6 +384,19 @@ class DefaultController extends Controller
 		$model=User::model()->findByPk($id);
 
 		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+
+		return $model;
+	}
+
+	protected function loadByUid($field, $uid)
+	{
+		$model=User::model()->find(array(
+			'condition'=>"$field=:$field",
+			'params'=>array(":$field"=>$uid),
+	    ));
+
+	    if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 
 		return $model;
@@ -372,12 +420,12 @@ class DefaultController extends Controller
 		if($model->save())
 		{
 			if($action == 'registrationSuccess')
-				$this->redirect(array($action, 'id'=>$model->id));
-			else
-				$this->redirect(array($action));
+				$this->setRefererSessionData($model->username, $model->id);
+
+			$this->redirect(array($action));
 		}
-		else
-			return $model;
+		
+		return $model;
 	}
 
 	/**

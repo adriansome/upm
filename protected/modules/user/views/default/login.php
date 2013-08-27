@@ -12,13 +12,7 @@ $this->breadcrumbs=array(
 <h1>Login</h1>
 
 <p>
-	<?php if($referer == 'validate'): ?>
-		Thanks, your e-mail address has been successfully validated.
-		<br />
-	<?php elseif($referer == 'resetPassword'): ?>
-		Thanks, your account password has been successfully updated.
-		<br />
-	<?php endif; ?>
+	<?php if(!empty($referer)) $this->renderPartial('_'.$referer); ?>
 	
 	Please fill out the following form with your login credentials:
 </p>
@@ -51,7 +45,7 @@ $this->breadcrumbs=array(
 		<?php echo $form->label($model,'rememberMe'); ?>
 		<?php echo $form->error($model,'rememberMe'); ?>
 		<p class="hint">
-			<?php echo CHtml::link('Forgot Username Or Password.', array('user/forgottenCredentials')); ?>
+			<?php echo CHtml::link('Forgotten Username Or Password?', array('user/forgottenCredentials')); ?>
 		</p>
 	</div>
 
