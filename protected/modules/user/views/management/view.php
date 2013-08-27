@@ -2,11 +2,6 @@
 /* @var $this ManagmentController */
 /* @var $model User */
 
-$this->breadcrumbs=array(
-	'User Management'=>array('index'),
-	$model->fullname
-);
-
 $this->menu=array(
 	array('label'=>'List Users', 'url'=>array('index')),
 	array('label'=>'Create User', 'url'=>array('create')),
