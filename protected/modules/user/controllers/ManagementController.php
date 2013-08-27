@@ -1,6 +1,6 @@
 <?php
 
-class ManagementController extends Controller
+class ManagementController extends UserController
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -27,8 +27,7 @@ class ManagementController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create','update','admin','delete'),
+			array('allow',  // allow admins to perform all actions
 				'users'=>array('@'),
 				'roles'=>array('admin'),
 			),
@@ -113,19 +112,20 @@ class ManagementController extends Controller
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex()
-	{
-		$dataProvider=new CActiveDataProvider('User');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
-	}
+	// public function actionIndex()
+	// {
+	// 	$dataProvider=new CActiveDataProvider('User');
+	// 	$this->render('index',array(
+	// 		'dataProvider'=>$dataProvider,
+	// 	));
+	// }
 
 	/**
 	 * Manages all models.
 	 */
-	public function actionAdmin()
+	public function actionIndex()
 	{
+		// $this->layout = '//layouts/single';
 		$model=new User('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['User']))
