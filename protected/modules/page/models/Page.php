@@ -27,6 +27,8 @@
  */
 class Page extends CActiveRecord
 {
+	public $searchTerm;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -112,6 +114,9 @@ class Page extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
+
+		$criteria->select = array('*', 'CONCAT(name, " ", window_title, " ", meta_keywords, " ", meta_description) AS searchTerm');
+		$criteria->compare('CONCAT(firstname, " ", lastname, " ", email)', $this->searchTerm, true);
 
 		$criteria->compare('id',$this->id,true);
 		$criteria->compare('name',$this->name,true);
