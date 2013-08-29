@@ -112,28 +112,66 @@ class ManagementController extends UserController
 	/**
 	 * Lists all models.
 	 */
-	// public function actionIndex()
-	// {
-	// 	$dataProvider=new CActiveDataProvider('User');
-	// 	$this->render('index',array(
-	// 		'dataProvider'=>$dataProvider,
-	// 	));
-	// }
+	public function actionIndex()
+	{
+		$model=new User('search');
+		$model->unsetAttributes();  // clear any default values
+
+		if(isset($_GET['User']))
+	 		$model->attributes=$_GET['User'];
+
+		$this->render('index',array(
+			'model'=>$model,
+			'dataProvider'=>$model->search(),
+		));
+	}
 
 	/**
 	 * Manages all models.
 	 */
-	public function actionIndex()
-	{
-		// $this->layout = '//layouts/single';
-		$model=new User('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['User']))
-			$model->attributes=$_GET['User'];
+	// public function actionIndex()
+	// {
+	// 	// $this->layout = '//layouts/single';
+	// 	$model=new User('search');
+	// 	$model->unsetAttributes();  // clear any default values
+	// 	if(isset($_GET['User']))
+	// 		$model->attributes=$_GET['User'];
 
-		$this->render('admin',array(
-			'model'=>$model,
-		));
+	// 	$this->render('admin',array(
+	// 		'model'=>$model,
+	// 	));
+	// }
+
+	public function actionResendEmailVerification($id)
+	{
+		$model = $this->loadModel($id);
+		$model->scenario = 'resendEmailVerification';
+		$model->save();
+		$this->redirect(array('registrationSuccess'));
+	}
+
+	public function actionSendCredentialsReminder($id)
+	{
+		$model = $this->loadModel($id);
+		$model->scenario = 'credentialsReminder';
+		$model->save();
+		$this->redirect(array('view', 'id'=>$id));
+	}
+
+	public function actionRevertEmailAddress($id)
+	{
+		$model = $this->loadModel($id);
+		$model->scenario = 'revertEmailAddress';
+		$model->save();
+		$this->redirect(array('view', 'id'=>$id));
+	}
+
+	public function actionReactivate($id)
+	{
+		$model = $this->loadModel($id);
+		$model->scenario = 'revertDeletion';
+		$model->save();
+		$this->redirect(array('view', 'id'=>$id));
 	}
 
 	/**

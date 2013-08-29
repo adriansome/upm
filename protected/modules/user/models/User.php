@@ -30,7 +30,7 @@ class User extends CActiveRecord
   	public $password2;
   	public $currentPassword;
   	public $emailChanged = false;
-  	public $fullname;
+  	public $searchTerm;
 
   	private $purgeRecord = false;
 
@@ -71,10 +71,10 @@ class User extends CActiveRecord
 			array('password2', 'compare', 'compareAttribute'=>'password1'),
 			array('permissions', 'length', 'max'=>6),
 			array('username, activationCode', 'length', 'max'=>40),
-			array('currentPassword, dateUpdated, dateLastLogin, dateValidationEmailSent, dateEmailValidated, dateAccountExpire, dateRevert, dateReset, dateDeleted', 'safe'),
+			array('searchTerm, currentPassword, dateUpdated, dateLastLogin, dateValidationEmailSent, dateEmailValidated, dateAccountExpire, dateRevert, dateReset, dateDeleted', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, email, oldEmail, password, password1, password2, permissions, username, firstname, lastname, fullname, dateTermsAgreed, dateUpdated, dateLastLogin, dateCreated, dateValidationEmailSent, activationCode, dateEmailValidated, dateAccountExpire, dateRevert, dateReset, dateDeleted', 'safe', 'on'=>'search'),
+			array('searchTerm, id, email, oldEmail, password, password1, password2, permissions, username, firstname, lastname, fullname, dateTermsAgreed, dateUpdated, dateLastLogin, dateCreated, dateValidationEmailSent, activationCode, dateEmailValidated, dateAccountExpire, dateRevert, dateReset, dateDeleted', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -118,6 +118,7 @@ class User extends CActiveRecord
 			'dateRevert' => 'Date Revert',
 			'dateReset' => 'Date Reset',
 			'dateDeleted' => 'Date Deleted',
+			'searchTerm' => 'Search Name or E-mail Address'
 		);
 	}
 
@@ -127,33 +128,11 @@ class User extends CActiveRecord
 	 */
 	public function search()
 	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
-
 		$criteria=new CDbCriteria;
 
-		$criteria->select = array('*', 'CONCAT(firstname, " ", lastname) AS fullname');
-
-		$criteria->compare('id',$this->id);
-		$criteria->compare('email',$this->email,true);
-		$criteria->compare('oldEmail',$this->oldEmail,true);
-		$criteria->compare('password',$this->password,true);
-		$criteria->compare('permissions',$this->permissions,true);
-		$criteria->compare('username',$this->username,true);
-		$criteria->compare('firstname',$this->firstname,true);
-		$criteria->compare('lastname',$this->lastname,true);
-		$criteria->compare('CONCAT(firstname, " ", lastname)',$this->fullname,true);
-		$criteria->compare('dateTermsAgreed',$this->dateTermsAgreed,true);
-		$criteria->compare('dateUpdated',$this->dateUpdated,true);
-		$criteria->compare('dateLastLogin',$this->dateLastLogin,true);
-		$criteria->compare('dateCreated',$this->dateCreated,true);
-		$criteria->compare('dateValidationEmailSent',$this->dateValidationEmailSent,true);
-		$criteria->compare('activationCode',$this->activationCode,true);
-		$criteria->compare('dateEmailValidated',$this->dateEmailValidated,true);
-		$criteria->compare('dateAccountExpire',$this->dateAccountExpire,true);
-		$criteria->compare('dateRevert',$this->dateRevert,true);
-		$criteria->compare('dateReset',$this->dateReset,true);
-		$criteria->compare('dateDeleted',$this->dateDeleted,true);
+		$criteria->select = array('*', 'CONCAT(firstname, " ", lastname, " ", email) AS searchTerm');
+		$criteria->compare('CONCAT(firstname, " ", lastname, " ", email)', $this->searchTerm, true);
+		$criteria->compare('permissions', $this->permissions, true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -225,6 +204,7 @@ class User extends CActiveRecord
 		{
 			$this->updatePassword();
 			$this->activationCode = $this->generateUniqueId();
+			$this->permissions = 'user';
 			$this->sendValidationEmail();
 			$this->dateValidationEmailSent = new CDbExpression('NOW()');
 		}
