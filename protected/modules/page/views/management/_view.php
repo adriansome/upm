@@ -29,21 +29,41 @@
 	<?php echo CHtml::encode($data->meta_description); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('dateCreated')); ?>:</b>
-	<?php echo CHtml::encode($data->dateCreated); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('date_created')); ?>:</b>
+	<?php echo CHtml::encode($data->date_created); ?>
 	<br />
 
 	<?php /*
-	<b><?php echo CHtml::encode($data->getAttributeLabel('dateUpdated')); ?>:</b>
-	<?php echo CHtml::encode($data->dateUpdated); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('date_updated')); ?>:</b>
+	<?php echo CHtml::encode($data->date_updated); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('dateActive')); ?>:</b>
-	<?php echo CHtml::encode($data->dateActive); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('date_active')); ?>:</b>
+	<?php echo CHtml::encode($data->date_active); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('dateDeleted')); ?>:</b>
-	<?php echo CHtml::encode($data->dateDeleted); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('date_deleted')); ?>:</b>
+	<?php echo CHtml::encode($data->date_deleted); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('sort_order')); ?>:</b>
+	<?php echo CHtml::encode($data->sort_order); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('parent_id')); ?>:</b>
+	<?php echo CHtml::encode($data->parent_id); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('date_visible')); ?>:</b>
+	<?php echo CHtml::encode($data->date_visible); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('date_menu')); ?>:</b>
+	<?php echo CHtml::encode($data->date_menu); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('date_subpages')); ?>:</b>
+	<?php echo CHtml::encode($data->date_subpages); ?>
 	<br />
 
 	*/ ?>

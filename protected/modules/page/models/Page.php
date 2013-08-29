@@ -4,16 +4,26 @@
  * This is the model class for table "page".
  *
  * The followings are the available columns in table 'page':
- * @property integer $id
+ * @property string $id
  * @property string $name
  * @property string $layout
  * @property string $window_title
  * @property string $meta_keywords
  * @property string $meta_description
- * @property string $dateCreated
- * @property string $dateUpdated
- * @property string $dateActive
- * @property string $dateDeleted
+ * @property string $date_created
+ * @property string $date_updated
+ * @property string $date_active
+ * @property string $date_deleted
+ * @property string $sort_order
+ * @property string $parent_id
+ * @property string $date_visible
+ * @property string $date_menu
+ * @property string $date_subpages
+ *
+ * The followings are the available model relations:
+ * @property Page $parent
+ * @property Page[] $pages
+ * @property PageMenu[] $pageMenus
  */
 class Page extends CActiveRecord
 {
@@ -43,13 +53,14 @@ class Page extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, layout, window_title, meta_keywords, meta_description', 'required'),
+			array('name, layout, window_title, meta_keywords, meta_description, sort_order, parent_id', 'required'),
 			array('name', 'length', 'max'=>140),
 			array('layout', 'length', 'max'=>30),
-			array('dateCreated, dateUpdated, dateActive, dateDeleted', 'safe'),
+			array('sort_order, parent_id', 'length', 'max'=>11),
+			array('date_created, date_updated, date_active, date_deleted, date_visible, date_menu, date_subpages', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, layout, window_title, meta_keywords, meta_description, dateCreated, dateUpdated, dateActive, dateDeleted', 'safe', 'on'=>'search'),
+			array('id, name, layout, window_title, meta_keywords, meta_description, date_created, date_updated, date_active, date_deleted, sort_order, parent_id, date_visible, date_menu, date_subpages', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -61,6 +72,9 @@ class Page extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'parent' => array(self::BELONGS_TO, 'Page', 'parent_id'),
+			'children' => array(self::HAS_MANY, 'Page', 'parent_id'),
+			'menus' => array(self::HAS_MANY, 'PageMenu', 'page_id'),
 		);
 	}
 
@@ -76,10 +90,15 @@ class Page extends CActiveRecord
 			'window_title' => 'Window Title',
 			'meta_keywords' => 'Meta Keywords',
 			'meta_description' => 'Meta Description',
-			'dateCreated' => 'Date Created',
-			'dateUpdated' => 'Date Updated',
-			'dateActive' => 'Date Active',
-			'dateDeleted' => 'Date Deleted',
+			'date_created' => 'Date Created',
+			'date_updated' => 'Date Updated',
+			'date_active' => 'Date Active',
+			'date_deleted' => 'Date Deleted',
+			'sort_order' => 'Sort Order',
+			'parent_id' => 'Parent',
+			'date_visible' => 'Date Visible',
+			'date_menu' => 'Date Menu',
+			'date_subpages' => 'Date Subpages',
 		);
 	}
 
@@ -94,16 +113,21 @@ class Page extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
+		$criteria->compare('id',$this->id,true);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('layout',$this->layout,true);
 		$criteria->compare('window_title',$this->window_title,true);
 		$criteria->compare('meta_keywords',$this->meta_keywords,true);
 		$criteria->compare('meta_description',$this->meta_description,true);
-		$criteria->compare('dateCreated',$this->dateCreated,true);
-		$criteria->compare('dateUpdated',$this->dateUpdated,true);
-		$criteria->compare('dateActive',$this->dateActive,true);
-		$criteria->compare('dateDeleted',$this->dateDeleted,true);
+		$criteria->compare('date_created',$this->date_created,true);
+		$criteria->compare('date_updated',$this->date_updated,true);
+		$criteria->compare('date_active',$this->date_active,true);
+		$criteria->compare('date_deleted',$this->date_deleted,true);
+		$criteria->compare('sort_order',$this->sort_order,true);
+		$criteria->compare('parent_id',$this->parent_id,true);
+		$criteria->compare('date_visible',$this->date_visible,true);
+		$criteria->compare('date_menu',$this->date_menu,true);
+		$criteria->compare('date_subpages',$this->date_subpages,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

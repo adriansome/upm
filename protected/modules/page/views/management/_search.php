@@ -13,7 +13,7 @@
 
 	<div class="row">
 		<?php echo $form->label($model,'id'); ?>
-		<?php echo $form->textField($model,'id'); ?>
+		<?php echo $form->textField($model,'id',array('size'=>10,'maxlength'=>10)); ?>
 	</div>
 
 	<div class="row">
@@ -42,23 +42,48 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'dateCreated'); ?>
-		<?php echo $form->textField($model,'dateCreated'); ?>
+		<?php echo $form->label($model,'date_created'); ?>
+		<?php echo $form->textField($model,'date_created'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'dateUpdated'); ?>
-		<?php echo $form->textField($model,'dateUpdated'); ?>
+		<?php echo $form->label($model,'date_updated'); ?>
+		<?php echo $form->textField($model,'date_updated'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'dateActive'); ?>
-		<?php echo $form->textField($model,'dateActive'); ?>
+		<?php echo $form->label($model,'date_active'); ?>
+		<?php echo $form->textField($model,'date_active'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'dateDeleted'); ?>
-		<?php echo $form->textField($model,'dateDeleted'); ?>
+		<?php echo $form->label($model,'date_deleted'); ?>
+		<?php echo $form->textField($model,'date_deleted'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'sort_order'); ?>
+		<?php echo $form->textField($model,'sort_order',array('size'=>11,'maxlength'=>11)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'parent_id'); ?>
+		<?php echo $form->textField($model,'parent_id',array('size'=>11,'maxlength'=>11)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'date_visible'); ?>
+		<?php echo $form->textField($model,'date_visible'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'date_menu'); ?>
+		<?php echo $form->textField($model,'date_menu'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'date_subpages'); ?>
+		<?php echo $form->textField($model,'date_subpages'); ?>
 	</div>
 
 	<div class="row buttons">

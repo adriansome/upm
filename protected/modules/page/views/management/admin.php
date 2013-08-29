@@ -52,10 +52,15 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'meta_keywords',
 		'meta_description',
 		/*
-		'dateCreated',
-		'dateUpdated',
-		'dateActive',
-		'dateDeleted',
+		'date_created',
+		'date_updated',
+		'date_active',
+		'date_deleted',
+		'sort_order',
+		'parent_id',
+		'date_visible',
+		'date_menu',
+		'date_subpages',
 		*/
 		array(
 			'class'=>'CButtonColumn',

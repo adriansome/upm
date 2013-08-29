@@ -46,27 +46,57 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'dateCreated'); ?>
-		<?php echo $form->textField($model,'dateCreated'); ?>
-		<?php echo $form->error($model,'dateCreated'); ?>
+		<?php echo $form->labelEx($model,'date_created'); ?>
+		<?php echo $form->textField($model,'date_created'); ?>
+		<?php echo $form->error($model,'date_created'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'dateUpdated'); ?>
-		<?php echo $form->textField($model,'dateUpdated'); ?>
-		<?php echo $form->error($model,'dateUpdated'); ?>
+		<?php echo $form->labelEx($model,'date_updated'); ?>
+		<?php echo $form->textField($model,'date_updated'); ?>
+		<?php echo $form->error($model,'date_updated'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'dateActive'); ?>
-		<?php echo $form->textField($model,'dateActive'); ?>
-		<?php echo $form->error($model,'dateActive'); ?>
+		<?php echo $form->labelEx($model,'date_active'); ?>
+		<?php echo $form->textField($model,'date_active'); ?>
+		<?php echo $form->error($model,'date_active'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'dateDeleted'); ?>
-		<?php echo $form->textField($model,'dateDeleted'); ?>
-		<?php echo $form->error($model,'dateDeleted'); ?>
+		<?php echo $form->labelEx($model,'date_deleted'); ?>
+		<?php echo $form->textField($model,'date_deleted'); ?>
+		<?php echo $form->error($model,'date_deleted'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'sort_order'); ?>
+		<?php echo $form->textField($model,'sort_order',array('size'=>11,'maxlength'=>11)); ?>
+		<?php echo $form->error($model,'sort_order'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'parent_id'); ?>
+		<?php echo $form->textField($model,'parent_id',array('size'=>11,'maxlength'=>11)); ?>
+		<?php echo $form->error($model,'parent_id'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'date_visible'); ?>
+		<?php echo $form->textField($model,'date_visible'); ?>
+		<?php echo $form->error($model,'date_visible'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'date_menu'); ?>
+		<?php echo $form->textField($model,'date_menu'); ?>
+		<?php echo $form->error($model,'date_menu'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'date_subpages'); ?>
+		<?php echo $form->textField($model,'date_subpages'); ?>
+		<?php echo $form->error($model,'date_subpages'); ?>
 	</div>
 
 	<div class="row buttons">
