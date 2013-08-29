@@ -36,6 +36,6 @@ class DefaultController extends Controller
 				$this->refresh();
 			}
 		}
-		$this->render('form',array('model'=>$model));
+		$this->render('index',array('model'=>$model));
 	}
 }
