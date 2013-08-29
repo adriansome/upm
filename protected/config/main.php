@@ -108,6 +108,6 @@ while (false !== ($file = readdir($handle))) {
 }
 closedir($handle);
 
-// echo '<pre>'.print_r($config,1).'</pre>'; exit;
+//echo '<pre>'.print_r($config,1).'</pre>'; exit;
 
 return $config;

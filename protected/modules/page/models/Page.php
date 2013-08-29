@@ -1,164 +1,114 @@
 <?php
 
 /**
- * This is the model class for table "page".
+ * This is the model base class for the table "menu_item".
  *
- * The followings are the available columns in table 'page':
+ * Columns in table "menu_item" available as properties of the model:
  * @property integer $id
+ * @property integer $parent_id
  * @property string $name
- * @property string $layout
- * @property string $window_title
- * @property string $meta_keywords
- * @property string $meta_description
- * @property string $date_created
- * @property string $date_updated
- * @property string $date_active
- * @property string $date_deleted
- * @property string $sort_order
- * @property string $parent_id
- * @property string $date_visible
- * @property string $date_subpages
+ * @property integer $enabled
+ * @property string $target
+ * @property string $description
+ * @property string $link
+ * @property string $role
  *
- * The followings are the available model relations:
+ * Relations of table "menu_item" available as properties of the model:
+ * @property Menu $menu
  * @property Page $parent
- * @property Page[] $pages
- * @property PageMenu[] $pageMenus
+ * @property Page $children
  */
-class Page extends CActiveRecord
-{
-	public $searchTerm;
-	public $purgeRecord;
-	public $allowSubpages;
-	public $isActive;
-	public $isVisible;
+class Page extends CActiveRecord {
 
-	/**
-	 * Returns the static model of the specified AR class.
-	 * @param string $className active record class name.
-	 * @return Page the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
-	}
+    public static function model($className = __CLASS__) {
+        return parent::model($className);
+    }
 
-	/**
-	 * @return string the associated database table name
-	 */
-	public function tableName()
-	{
-		return 'page';
-	}
+    public function init() {
+        return parent::init();
+    }
 
-	/**
-	 * @return array validation rules for model attributes.
-	 */
-	public function rules()
-	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
-		return array(
-			array('name, layout, window_title, meta_keywords, meta_description', 'required'),
-			array('name', 'length', 'max'=>140),
-			array('layout', 'length', 'max'=>30),
-			array('date_created, date_updated, date_active, date_deleted, date_visible, date_subpages', 'safe'),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('searchTerm, name, window_title, meta_keywords, meta_description', 'safe', 'on'=>'search'),
-		);
-	}
+    public function tableName() {
+        return 'page';
+    }
 
-	/**
-	 * @return array relational rules.
-	 */
-	public function relations()
-	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
-		return array(
-			'parent' => array(self::BELONGS_TO, 'Page', 'parent_id'),
-			'children' => array(self::HAS_MANY, 'Page', 'parent_id'),
-			'menus' => array(self::HAS_MANY, 'PageMenu', 'page_id'),
-		);
-	}
+    public function rules() {
+        return array(
+            array('name', 'required'),
+            array('parent_id, enabled, target, link, role', 'default', 'setOnEmpty' => true, 'value' => null),
+            array('enabled', 'numerical', 'integerOnly' => true),
+            array('name', 'length', 'max' => 128),
+            array('target', 'length', 'max' => 10),
+            array('description, link, role', 'safe'),
+            array('id, parent_id, depth, lft, rgt, name, enabled, target, description, link, role', 'safe', 'on' => 'search'),
+        );
+    }
 
-	/**
-	 * @return array customized attribute labels (name=>label)
-	 */
-	public function attributeLabels()
-	{
-		return array(
-			'id' => 'ID',
-			'name' => 'Name',
-			'layout' => 'Layout',
-			'window_title' => 'Window Title',
-			'meta_keywords' => 'Meta Keywords',
-			'meta_description' => 'Meta Description',
-			'date_created' => 'Date Created',
-			'date_updated' => 'Date Updated',
-			'date_active' => 'Date Active',
-			'date_deleted' => 'Date Deleted',
-			'sort_order' => 'Sort Order',
-			'parent_id' => 'Parent',
-			'date_visible' => 'Date Visible',
-			'date_subpages' => 'Date Subpages',
-		);
-	}
+    public function __toString() {
+        return (string) $this->name;
+    }
 
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
-	 */
-	public function search()
-	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
+    public function behaviors() {
+        return array(
+            'activerecord-relation' => array('class' => 'EActiveRecordRelationBehavior')
+        );
+    }
 
-		$criteria=new CDbCriteria;
+    public function relations() {
+        return array(
+            'parent' => array(self::BELONGS_TO, 'Page', 'parent_id'),
+            'children' => array(self::HAS_MANY, 'Page', 'parent_id'),
+            'menus' => array(self::HAS_MANY, 'PageMenu', 'page_id'),
+        );
+    }
 
-		$criteria->select = array('*', 'CONCAT(name, " ", window_title, " ", meta_keywords, " ", meta_description) AS searchTerm');
-		$criteria->compare('CONCAT(name, " ", window_title, " ", meta_keywords, " ", meta_description)', $this->searchTerm, true);
+    public function attributeLabels() {
+        return array(
+            'id' => Yii::t('app', 'ID'),
+            'parent_id' => Yii::t('app', 'Parent'),
+            'name' => Yii::t('app', 'Name'),
+            'enabled' => Yii::t('app', 'Enabled'),
+            'target' => Yii::t('app', 'Target'),
+            'description' => Yii::t('app', 'Description'),
+            'link' => Yii::t('app', 'Link/Path'),
+            'role' => Yii::t('app', 'Visible to:'),
+        );
+    }
 
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
-	}
+    public function search() {
+        $criteria = new CDbCriteria;
 
-	public function beforeSave()
-	{
-		$this->date_updated = new CDbExpression('NOW()');
+        $criteria->compare('id', $this->id);
+        $criteria->compare('parent_id', $this->parent_id);
+        $criteria->compare('name', $this->name, true);
+        $criteria->compare('enabled', $this->enabled);
+        $criteria->compare('target', $this->target);
+        $criteria->compare('description', $this->description, true);
+        $criteria->compare('link', $this->link, true);
+        $criteria->compare('role', $this->role, true);
 
-		if($this->isNewRecord)
-			$this->date_created = new CDbExpression('NOW()');
+        return new CActiveDataProvider(get_class($this), array(
+                    'criteria' => $criteria,
+                ));
+    }
 
-		if($this->allowSubpages && $this->date_subpages === null)
-			$this->date_subpages = new CDbExpression('NOW()');
-		else
-			$this->date_subpages = null;
+    public function getMaxRight() {
+        return Yii::app()->db->createCommand()
+                        ->select('MAX(`rgt`)')
+                        ->from($this->tableName())
+                        ->queryScalar();
+    }
 
-		if($this->isActive && $this->date_active === null)
-			$this->date_active = new CDbExpression('NOW()');
-		else
-			$this->date_active = null;
+    public function getRoles() {
+        $roles = array(
+            'all' => 'All',
+            'guest' => 'Guest',
+            'loggedIn' => 'Logged In',
+        );
+        if (Yii::app()->hasModule('role')) {
+            return array_merge($roles, CHtml::listData(Role::model()->findAll(), 'name', 'name'));
+        }
+        return $roles;
+    }
 
-		if($this->isVisible && $this->date_visible === null)
-			$this->date_visible = new CDbExpression('NOW()');
-		else
-			$this->date_visible = null;
-
-		$this->sort_order = 0;
-
-		return parent::beforeSave();
-	}
-
-	public function delete()
-	{
-		if($this->purgeRecord)
-			parent::delete();
-		else
-		{
-			$this->date_deleted = new CDbExpression('NOW()');
-			$this->save();
-		}
-	}
 }

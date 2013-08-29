@@ -1,19 +1,33 @@
-<?php
-/* @var $this DefaultController */
-/* @var $dataProvider CActiveDataProvider */
+<a class="button" href="<?php echo $this->createUrl('create'); ?>">Create New Page</a>
+<br/><br/>
 
-$this->menu=array(
-	array('label'=>'Create Page', 'url'=>array('create')),
-	array('label'=>'Manage Page', 'url'=>array('admin')),
-);
+<?php Yii::app()->clientScript->registerScriptFile($this->module->assetsDirectory . "/libs/json/json2.min.js"); ?>
+
+<?php
+$this->widget('application.modules.page.extensions.ItemList', array('items' => $items, 'activeId' => $activeId));
 ?>
 
-<h1>Pages</h1>
-
-<?php $this->renderPartial('_search', array('model'=>$model)); ?>
-
-<?php $this->widget('zii.widgets.CListView', array(
-	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view',
-	'id'=>'page-list'
-)); ?>
+<script type="text/javascript">
+    $('ol.sortable').nestedSortable({
+        handle: 'div',
+        helper:	'clone',
+        opacity: .5,
+        revert: 250,
+        tolerance: 'pointer',
+        toleranceElement: '> div',
+        disableNesting: 'no-nest',
+        forcePlaceholderSize: true,
+        items: 'li',
+        placeholder: 'placeholder',
+        update: function () {
+            list = $(this).nestedSortable('toArray', {startDepthCount: 0});
+            $.post('<?php echo $this->createUrl('/' . $this->module->id . '/ajax/save') ?>',
+            {list: list },
+            function(data){
+                $("#result").hide().html(data).fadeIn('slow')
+            },
+            "html"
+        );
+        }
+    });
+</script>
