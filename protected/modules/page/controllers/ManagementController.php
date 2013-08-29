@@ -31,6 +31,11 @@ class ManagementController extends PageController
 				'users'=>array('@'),
 				'roles'=>array('admin'),
 			),
+			array('allow',  // allow admins to perform all actions
+				'actions'=>array('index','create','update','delete','active','visible'),
+				'users'=>array('@'),
+				'roles'=>array('editor'),
+			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -52,9 +57,12 @@ class ManagementController extends PageController
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($parent=null)
 	{
 		$model=new Page;
+
+		if(isset($parent))
+			$model->parent_id = $parent;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
