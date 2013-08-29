@@ -126,22 +126,6 @@ class ManagementController extends UserController
 		));
 	}
 
-	/**
-	 * Manages all models.
-	 */
-	// public function actionIndex()
-	// {
-	// 	// $this->layout = '//layouts/single';
-	// 	$model=new User('search');
-	// 	$model->unsetAttributes();  // clear any default values
-	// 	if(isset($_GET['User']))
-	// 		$model->attributes=$_GET['User'];
-
-	// 	$this->render('admin',array(
-	// 		'model'=>$model,
-	// 	));
-	// }
-
 	public function actionResendEmailVerification($id)
 	{
 		$model = $this->loadModel($id);
