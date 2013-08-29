@@ -38,6 +38,7 @@ $config = array(
 			'class'=>'UrlManager',
 			'urlFormat'=>'path',
 			'showScriptName' => false,
+			'caseSensitive'=>false,
 			'rules'=>array(
 				'setup'=>'site/setup',
 				'home'=>'site/index',
@@ -88,6 +89,11 @@ $config = array(
 	'params'=>array(
 		'adminEmail' => 'mail@mattbiddle.cc',
 		'maxNavLevel' => 3,
+		'overlayAdmin' =>false,
+		'menus'=>array(
+			'main',
+			'footer',
+		)
 	),
 );
 

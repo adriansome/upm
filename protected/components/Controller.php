@@ -21,4 +21,17 @@ class Controller extends CController
 	 * for more details on how to specify this property.
 	 */
 	public $breadcrumbs=array();
+
+	public function beforeAction($action)
+	{
+		if(parent::beforeAction($action))
+		{
+			if($this->id == 'management' && Yii::app()->params['overlayAdmin'])
+				$this->layout = false;
+			
+			return true;
+		}
+		
+		return false;
+	}
 }
