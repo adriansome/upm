@@ -4,7 +4,7 @@
  * This is the model class for table "page".
  *
  * The followings are the available columns in table 'page':
- * @property string $id
+ * @property integer $id
  * @property string $name
  * @property string $layout
  * @property string $window_title
@@ -62,7 +62,7 @@ class Page extends CActiveRecord
 			array('date_created, date_updated, date_active, date_deleted, date_visible, date_menu, date_subpages', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, name, layout, window_title, meta_keywords, meta_description, date_created, date_updated, date_active, date_deleted, sort_order, parent_id, date_visible, date_menu, date_subpages', 'safe', 'on'=>'search'),
+			array('searchTerm, id, name, layout, window_title, meta_keywords, meta_description, date_created, date_updated, date_active, date_deleted, sort_order, parent_id, date_visible, date_menu, date_subpages', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -116,26 +116,18 @@ class Page extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->select = array('*', 'CONCAT(name, " ", window_title, " ", meta_keywords, " ", meta_description) AS searchTerm');
-		$criteria->compare('CONCAT(firstname, " ", lastname, " ", email)', $this->searchTerm, true);
-
-		$criteria->compare('id',$this->id,true);
-		$criteria->compare('name',$this->name,true);
-		$criteria->compare('layout',$this->layout,true);
-		$criteria->compare('window_title',$this->window_title,true);
-		$criteria->compare('meta_keywords',$this->meta_keywords,true);
-		$criteria->compare('meta_description',$this->meta_description,true);
-		$criteria->compare('date_created',$this->date_created,true);
-		$criteria->compare('date_updated',$this->date_updated,true);
-		$criteria->compare('date_active',$this->date_active,true);
-		$criteria->compare('date_deleted',$this->date_deleted,true);
-		$criteria->compare('sort_order',$this->sort_order,true);
-		$criteria->compare('parent_id',$this->parent_id,true);
-		$criteria->compare('date_visible',$this->date_visible,true);
-		$criteria->compare('date_menu',$this->date_menu,true);
-		$criteria->compare('date_subpages',$this->date_subpages,true);
+		$criteria->compare('CONCAT(name, " ", window_title, " ", meta_keywords, " ", meta_description)', $this->searchTerm, true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+
+	public function beforeSave()
+	{
+		if($this->isNewRecord)
+			$this->date_created = new CDbExpression('NOW()');
+
+		return parent::beforeSave();
 	}
 }
