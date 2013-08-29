@@ -38,4 +38,10 @@ class WebUser extends CWebUser
         // allow access if the operation request is the current user's role
         return ($operation === $role);
     }
+
+    public function isAdmin()
+    {
+        $role = $this->getState("roles");
+        return ($role === 'admin');
+    }
 }
