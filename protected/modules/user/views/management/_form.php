@@ -17,7 +17,6 @@ Yii::app()->clientScript->registerCss('user-management-form','
 	    display: inline-block;
 	}
 ');
-
 ?>
 
 <div class="form">
@@ -59,7 +58,7 @@ Yii::app()->clientScript->registerCss('user-management-form','
 		<?php echo $form->labelEx($model,'permissions'); ?>
 		<?php echo $form->radioButtonList($model,'permissions',
 			array(
-				'member'=>'Member', 'user'=>'User', 'editor'=>'Editor', 'admin'=>'Admin'
+				'subscriber'=>'Subscriber', 'user'=>'User', 'editor'=>'Editor', 'admin'=>'Admin'
 			),
 			array(
 				'separator'=>'','template' => '{input} {label}',
