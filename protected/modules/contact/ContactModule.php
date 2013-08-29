@@ -6,12 +6,6 @@ class ContactModule extends CWebModule
 	{
 		// this method is called when the module is being created
 		// you may place code here to customize the module or the application
-
-		// import the module-level models and components
-		$this->setImport(array(
-			'contact.models.*',
-			'contact.components.*',
-		));
 	}
 
 	public function beforeControllerAction($controller, $action)
@@ -24,5 +18,12 @@ class ContactModule extends CWebModule
 		}
 		else
 			return false;
+	}
+
+	public function getAssets()
+	{
+		return Yii::app()->getAssetManager()->publish(
+    		Yii::getPathOfAlias('application.modules.contact.assets')
+    	);
 	}
 }
