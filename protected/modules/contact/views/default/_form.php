@@ -1,17 +1,9 @@
 <?php
-/* @var $this DefaultController */
-/* @var $model ContactForm */
 /* @var $form CActiveForm */
+/* @var $model User */
 
-$this->pageTitle='Contact Us';
-$this->breadcrumbs=array(
-	'Contact',
-);
+if(Yii::app()->user->hasFlash('contact')):
 ?>
-
-<h1>Contact Us</h1>
-
-<?php if(Yii::app()->user->hasFlash('contact')): ?>
 
 <div class="flash-success">
 	<?php echo Yii::app()->user->getFlash('contact'); ?>
