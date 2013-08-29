@@ -6,7 +6,7 @@ $(document).ready(function() {
 
 	function submitSearch(){
 		$.fn.yiiListView.update('page-list', {
-			data: $('input#User_searchTerm').serialize(),
+			data: $('input#Page_searchTerm').serialize(),
 		});
 	}
 });

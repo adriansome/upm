@@ -17,7 +17,6 @@
  * @property string $sort_order
  * @property string $parent_id
  * @property string $date_visible
- * @property string $date_menu
  * @property string $date_subpages
  *
  * The followings are the available model relations:
@@ -28,6 +27,10 @@
 class Page extends CActiveRecord
 {
 	public $searchTerm;
+	public $purgeRecord;
+	public $allowSubpages;
+	public $isActive;
+	public $isVisible;
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -55,14 +58,13 @@ class Page extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, layout, window_title, meta_keywords, meta_description, sort_order, parent_id', 'required'),
+			array('name, layout, window_title, meta_keywords, meta_description', 'required'),
 			array('name', 'length', 'max'=>140),
 			array('layout', 'length', 'max'=>30),
-			array('sort_order, parent_id', 'length', 'max'=>11),
-			array('date_created, date_updated, date_active, date_deleted, date_visible, date_menu, date_subpages', 'safe'),
+			array('date_created, date_updated, date_active, date_deleted, date_visible, date_subpages', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('searchTerm, id, name, layout, window_title, meta_keywords, meta_description, date_created, date_updated, date_active, date_deleted, sort_order, parent_id, date_visible, date_menu, date_subpages', 'safe', 'on'=>'search'),
+			array('searchTerm, name, window_title, meta_keywords, meta_description', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -99,7 +101,6 @@ class Page extends CActiveRecord
 			'sort_order' => 'Sort Order',
 			'parent_id' => 'Parent',
 			'date_visible' => 'Date Visible',
-			'date_menu' => 'Date Menu',
 			'date_subpages' => 'Date Subpages',
 		);
 	}
@@ -125,9 +126,39 @@ class Page extends CActiveRecord
 
 	public function beforeSave()
 	{
+		$this->date_updated = new CDbExpression('NOW()');
+
 		if($this->isNewRecord)
 			$this->date_created = new CDbExpression('NOW()');
 
+		if($this->allowSubpages && $this->date_subpages === null)
+			$this->date_subpages = new CDbExpression('NOW()');
+		else
+			$this->date_subpages = null;
+
+		if($this->isActive && $this->date_active === null)
+			$this->date_active = new CDbExpression('NOW()');
+		else
+			$this->date_active = null;
+
+		if($this->isVisible && $this->date_visible === null)
+			$this->date_visible = new CDbExpression('NOW()');
+		else
+			$this->date_visible = null;
+
+		$this->sort_order = 0;
+
 		return parent::beforeSave();
+	}
+
+	public function delete()
+	{
+		if($this->purgeRecord)
+			parent::delete();
+		else
+		{
+			$this->date_deleted = new CDbExpression('NOW()');
+			$this->save();
+		}
 	}
 }
