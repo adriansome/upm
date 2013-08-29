@@ -25,4 +25,11 @@ class PageModule extends CWebModule
 		else
 			return false;
 	}
+
+	public function getAssets()
+	{
+		return Yii::app()->getAssetManager()->publish(
+    		Yii::getPathOfAlias('application.modules.page.assets')
+    	);
+	}
 }
