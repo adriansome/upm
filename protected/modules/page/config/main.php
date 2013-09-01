@@ -23,6 +23,5 @@ return array(
                 $module_name . '/<action:\w+>' => $module_name . '/' . $default_controller . '/<action>',
             ),
         ),
-        'metadata' => array('class' => 'Metadata'),
     ),
 );
