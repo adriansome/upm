@@ -35,7 +35,7 @@ $config = array(
 	// application components
 	'components'=>array(
 		'urlManager'=>array(
-			'class'=>'UrlManager',
+			'class'=>'EDbUrlManager',
 			'urlFormat'=>'path',
 			'showScriptName' => false,
 			'caseSensitive'=>false,
