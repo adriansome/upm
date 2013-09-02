@@ -55,7 +55,7 @@ class Page extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, window_title, link, layout', 'required'),
+			array('name, window_title, layout', 'required'),
 			array('parent_id, depth, lft, rgt', 'numerical', 'integerOnly'=>true),
 			array('name, role, layout', 'length', 'max'=>128),
 			array('target', 'length', 'max'=>10),
@@ -168,7 +168,13 @@ class Page extends CActiveRecord
     public function beforeSave()
     {
     	$now = new CDbExpression('NOW()');
-
+    	$slug = str_replace(' ', '-', strtolower($this->name));
+    	
+    	if(empty($this->link) && empty($this->parent_id))
+    		$this->link = $slug;
+    	elseif(empty($this->link) && !empty($this->parent_id))
+    		$this->link = $this->parent->link.'/'.$slug;
+    	
     	if($this->isNewRecord)
     		$this->date_created = $now;
     	else
