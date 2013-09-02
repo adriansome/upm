@@ -73,25 +73,25 @@
 
     <div class="row">
         <?php echo $form->labelEx($model, 'date_active'); ?>
-        <?php echo $form->checkBox($model, 'active', !empty($model->date_active), array('value'=>true)) ; ?>
+        <?php echo $form->checkBox($model, 'active', array('value'=>true)) ; ?>
         <?php echo $form->error($model, 'date_active'); ?>
     </div><!-- row -->
 
     <div class="row">
         <?php echo $form->labelEx($model, 'date_visible'); ?>
-        <?php echo $form->checkBox($model, 'visible', !empty($model->date_visible), array('value'=>true)) ; ?>
+        <?php echo $form->checkBox($model, 'visible', array('value'=>true)) ; ?>
         <?php echo $form->error($model, 'date_visible'); ?>
     </div><!-- row -->
 
     <div class="row">
         <?php echo $form->labelEx($model, 'date_subpages'); ?>
-        <?php echo $form->checkBox($model, 'allowSubpages', !empty($model->dateActive), array('value'=>true)) ; ?>
+        <?php echo $form->checkBox($model, 'allowSubpages', array('value'=>true)) ; ?>
         <?php echo $form->error($model, 'date_subpages'); ?>
     </div><!-- row -->
 
     <div class="row">
-        <?php echo $form->labelEx($model, 'Open in new tab'); ?>
-        <?php echo $form->checkBox($model, 'target', !empty($model->target), array('value' => '_blank')); ?>
+        <?php echo $form->labelEx($model, 'target'); ?>
+        <?php echo $form->checkBox($model, 'target', array('value' => '_blank')); ?>
         <?php echo $form->error($model, 'target'); ?>
     </div>
 

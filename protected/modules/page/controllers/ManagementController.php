@@ -31,71 +31,50 @@ class ManagementController extends Controller {
     public function actionCreate() {
         $model = new Page;
         if (isset($_POST['Page'])) {
-            $model->setAttributes($_POST['Page']);
-            
-            if (isset($_POST['Page']['parent']))
-                $model->parent_id = $_POST['Page']['parent'];
-
+            $model->name = $_POST['Page']['name'];
+            $model->parent_id = $_POST['Page']['parent_id'];
+            $model->layout = $_POST['Page']['layout'];
             $model->link = $_POST['Page']['link'];
-
-            if (isset($_POST['Page']['role']))
-                $model->role = $_POST['Page']['role'];
-            else
-                $model->role = '';
+            $model->role = $_POST['Page']['role'];
+            $model->meta_description = $_POST['Page']['meta_description'];
+            $model->meta_keywords = $_POST['Page']['meta_keywords'];
+            $model->active = $_POST['Page']['active'];
+            $model->visible = $_POST['Page']['visible'];
+            $model->allowSubpages = $_POST['Page']['allowSubpages'];
+            $model->target = $_POST['Page']['target'];
 
             //pushing newly added item to last
             $maxRight = $model->getMaxRight();
             $model->lft = $maxRight + 1;
             $model->rgt = $maxRight + 2;
 
-            try {
-                if ($model->save()) {
-                    $this->redirect(array('/' . $this->module->id . '/management/index', 'activeId' => $model->id));
-                }
-            } catch (Exception $e) {
-                $model->addError('', $e->getMessage());
-            }
-        } elseif (isset($_GET['Page'])) {
-            $model->attributes = $_GET['Page'];
+            if ($model->save())
+                $this->redirect(array('/page/management/index', 'activeId' => $model->id));
         }
 
         $this->render('create', array('model' => $model, 'menuId' => key($_GET)));
     }
 
-    public function actionEdit() {
+    public function actionUpdate() {
         $model = $this->loadModel(key($_GET));
         if (isset($_POST['Page'])) {
             $model->name = $_POST['Page']['name'];
-            
-            if(!empty($_POST['Page']['parent_id']))
-                $model->parent_id = $_POST['Page']['parent_id'];
-            else
-                $model->parent_id = null;
-            
+            $model->parent_id = $_POST['Page']['parent_id'];
             $model->layout = $_POST['Page']['layout'];
             $model->link = $_POST['Page']['link'];
-            
-            if (isset($_POST['Page']['role']))
-                $model->role = $_POST['Page']['role'];
-
+            $model->role = $_POST['Page']['role'];
             $model->meta_description = $_POST['Page']['meta_description'];
-
             $model->meta_keywords = $_POST['Page']['meta_keywords'];
-
             $model->active = $_POST['Page']['active'];
             $model->visible = $_POST['Page']['visible'];
             $model->allowSubpages = $_POST['Page']['allowSubpages'];
-
-            if (isset($_POST['Page']['target']))
-                $model->target = $_POST['Page']['target'];
-            else
-                $model->target = null;
+            $model->target = $_POST['Page']['target'];
 
             if ($model->save())
                 $this->redirect(array('/page/management/index', 'activeId' => $model->id));
         }
 
-        $this->render('edit', array(
+        $this->render('update', array(
             'model' => $model,
         ));
     }

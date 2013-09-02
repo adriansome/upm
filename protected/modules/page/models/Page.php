@@ -96,11 +96,11 @@ class Page extends CActiveRecord
 			'lft' => 'Lft',
 			'rgt' => 'Rgt',
 			'name' => 'Name',
-			'target' => 'Target',
+			'target' => 'Open In New Tab',
 			'window_title' => 'Window Title',
 			'meta_description' => 'Meta Description',
 			'meta_keywords' => 'Meta Keywords',
-			'link' => 'Link',
+			'link' => 'URL / Path',
 			'role' => 'Role',
 			'layout' => 'Layout',
 			'date_created' => 'Date Created',
@@ -174,15 +174,47 @@ class Page extends CActiveRecord
     	else
     		$this->date_updated = $now;
 
-    	if(!empty($this->date_active) && $this->active === true)
+    	if(empty($this->parent_id))
+    		$this->parent_id = null;
+
+    	if(empty($this->date_active) && $this->active)
     		$this->date_active = $now;
+    	elseif(!empty($this->date_active) && !$this->active)
+    		$this->date_active = null;
     	
-    	if(!empty($this->date_visible) && $this->visible === true)
+    	if(empty($this->date_visible) && $this->visible)
     		$this->date_visible = $now;
+    	elseif(!empty($this->date_visible) && !$this->visible)
+    		$this->date_active = null;
     	
-    	if(!empty($this->date_subpages) && $this->allowSubpages === true)
+    	if(empty($this->date_subpages) && $this->allowSubpages)
     		$this->date_subpages = $now;
+    	elseif(!empty($this->date_subpages) && !$this->allowSubpages)
+    		$this->date_subpages = null;
+
+    	if(empty($this->target))
+    		$this->target = null;
 
     	return parent::beforeSave();
+    }
+
+    public function afterFind()
+    {
+    	if(!empty($this->date_active))
+    		$this->active = true;
+    	else
+    		$this->active = false;
+    	
+    	if(!empty($this->date_visible))
+    		$this->visible = true;
+    	else
+    		$this->visible = false;
+
+    	if(!empty($this->date_subpages))
+    		$this->allowSubpages = true;
+    	else
+    		$this->allowSubpages = false;
+
+    	return parent::afterFind();
     }
 }
