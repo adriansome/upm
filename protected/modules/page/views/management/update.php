@@ -1,5 +1,5 @@
 <?php $this->beginClip('content'); ?>
-<h1>Edit <?php echo $model->name; ?> </h1>
+<h1>Update <?php echo $model->name; ?> </h1>
 
 <?php
 $this->widget('zii.widgets.CMenu', array(
