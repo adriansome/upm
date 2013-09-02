@@ -4,14 +4,14 @@ $(document).ready(function() {
 	  return false;
 	});
 
-	$('select#User_permissions').change(function(){
+	$('select#User_role').change(function(){
 	  submitSearch();
 	  return false;
 	});
 
 	function submitSearch(){
 		$.fn.yiiListView.update('user-list', {
-			data: $('input#User_searchTerm, select#User_permissions').serialize(),
+			data: $('input#User_searchTerm, select#User_role').serialize(),
 		});
 	}
 });

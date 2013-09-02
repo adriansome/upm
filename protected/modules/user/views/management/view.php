@@ -17,7 +17,7 @@ $this->menu=array(
 	'attributes'=>array(
 		'email',
 		'oldEmail',
-		'permissions',
+		'role',
 		'username',
 		'dateTermsAgreed',
 		'dateUpdated',

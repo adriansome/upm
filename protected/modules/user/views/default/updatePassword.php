@@ -12,6 +12,8 @@ $this->menu=array(
 	array('label'=>'Change E-mail Address', 'url'=>array('updateEmail')),
 	array('label'=>'Delete Account', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete'),'confirm'=>'Are you sure you want to delete your account?')),
 );
+
+$this->beginClip('content');
 ?>
 
 <h1>Update Password</h1>
@@ -50,4 +52,4 @@ $this->menu=array(
 
 <?php $this->endWidget(); ?>
 </div>
-
+<?php $this->endClip(); ?>

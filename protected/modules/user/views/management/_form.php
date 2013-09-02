@@ -4,16 +4,16 @@
 /* @var $form CActiveForm */
 
 Yii::app()->clientScript->registerCss('user-management-form','
-	div#content span#User_permissions input {
+	div#content span#User_role input {
 	    margin-left: 1em;
 	}
 
-	div#content span#User_permissions input:first-of-type {
+	div#content span#User_role input:first-of-type {
 	    margin-left: 0;
 	}
 	 
-	div#content span#User_permissions label,
-	div#content span#User_permissions input {
+	div#content span#User_role label,
+	div#content span#User_role input {
 	    display: inline-block;
 	}
 ');
@@ -55,8 +55,8 @@ Yii::app()->clientScript->registerCss('user-management-form','
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'permissions'); ?>
-		<?php echo $form->radioButtonList($model,'permissions',
+		<?php echo $form->labelEx($model,'role'); ?>
+		<?php echo $form->radioButtonList($model,'role',
 			array(
 				'subscriber'=>'Subscriber', 'user'=>'User', 'editor'=>'Editor', 'admin'=>'Admin'
 			),
@@ -64,7 +64,7 @@ Yii::app()->clientScript->registerCss('user-management-form','
 				'separator'=>'','template' => '{input} {label}',
 			)
 		); ?>
-		<?php echo $form->error($model,'permissions'); ?>
+		<?php echo $form->error($model,'role'); ?>
 	</div>
 
 	<div class="row buttons">

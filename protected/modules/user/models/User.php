@@ -8,7 +8,7 @@
  * @property string $email
  * @property string $oldEmail
  * @property string $password
- * @property string $permissions
+ * @property string $role
  * @property string $username
  * @property string $firstname
  * @property string $lastname
@@ -65,16 +65,16 @@ class User extends CActiveRecord
 			array('password1, password2', 'required', 'on'=>'register, passwordReset, updatePassword'),
 			array('currentPassword', 'required', 'on'=>'emailRevert, updateEmail, updatePassword'),
 			array('currentPassword', 'authenticate', 'on'=>'emailRevert, updateEmail, updatePassword'),
-			array('permissions', 'required', 'on'=>'adminUpdate'),
+			array('role', 'required', 'on'=>'adminUpdate'),
 			array('email, oldEmail, firstname, lastname', 'length', 'max'=>140),
 			array('password', 'length', 'max'=>60),
 			array('password2', 'compare', 'compareAttribute'=>'password1'),
-			array('permissions', 'length', 'max'=>6),
+			array('role', 'length', 'max'=>6),
 			array('username, activationCode', 'length', 'max'=>40),
 			array('searchTerm, currentPassword, dateUpdated, dateLastLogin, dateValidationEmailSent, dateEmailValidated, dateAccountExpire, dateRevert, dateReset, dateDeleted', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('searchTerm, id, email, oldEmail, password, password1, password2, permissions, username, firstname, lastname, fullname, dateTermsAgreed, dateUpdated, dateLastLogin, dateCreated, dateValidationEmailSent, activationCode, dateEmailValidated, dateAccountExpire, dateRevert, dateReset, dateDeleted', 'safe', 'on'=>'search'),
+			array('searchTerm, id, email, oldEmail, password, password1, password2, role, username, firstname, lastname, fullname, dateTermsAgreed, dateUpdated, dateLastLogin, dateCreated, dateValidationEmailSent, activationCode, dateEmailValidated, dateAccountExpire, dateRevert, dateReset, dateDeleted', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -102,7 +102,7 @@ class User extends CActiveRecord
 			'currentPassword' => 'Current Password',
 			'password1' => 'New Password',
 			'password2' => 'Confirm New Password',
-			'permissions' => 'Permissions',
+			'role' => 'role',
 			'username' => 'Username',
 			'firstname' => 'First Name',
 			'lastname' => 'Last Name',
@@ -132,7 +132,7 @@ class User extends CActiveRecord
 
 		$criteria->select = array('*', 'CONCAT(firstname, " ", lastname, " ", email) AS searchTerm');
 		$criteria->compare('CONCAT(firstname, " ", lastname, " ", email)', $this->searchTerm, true);
-		$criteria->compare('permissions', $this->permissions, true);
+		$criteria->compare('role', $this->role, true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -152,7 +152,7 @@ class User extends CActiveRecord
 
 	public function setPurgeRecord($value)
 	{
-		if(Yii::app()->user->permissions == 'admin')
+		if(Yii::app()->user->role == 'admin')
 			$this->purgeRecord = true;
 	}
 
@@ -204,7 +204,7 @@ class User extends CActiveRecord
 		{
 			$this->updatePassword();
 			$this->activationCode = $this->generateUniqueId();
-			$this->permissions = 'user';
+			$this->role = 'user';
 			$this->sendValidationEmail();
 			$this->dateValidationEmailSent = new CDbExpression('NOW()');
 		}

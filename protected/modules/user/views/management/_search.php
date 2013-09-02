@@ -19,8 +19,8 @@ Yii::app()->clientScript->registerScriptFile($this->module->getAssets().'/js/sea
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'permissions'); ?>
-		<?php echo $form->dropDownList($model,'permissions', array(
+		<?php echo $form->label($model,'role'); ?>
+		<?php echo $form->dropDownList($model,'role', array(
 			'subscriber'=>'Subscriber',
 			'user'=>'User',
 			'editor'=>'Editor',

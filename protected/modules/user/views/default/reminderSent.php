@@ -8,6 +8,8 @@ $this->breadcrumbs=array(
 	'Forgotten Credentials'=>array('/user/forgottenCredentials'),
 	'Sent'
 );
+
+$this->beginClip('content');
 ?>
 
 <h1>Reminder Sent</h1>
@@ -17,3 +19,4 @@ $this->breadcrumbs=array(
 	<br />
 	If you can not find it in your inbox please check your spam folder.
 </p>
+<?php $this->endClip(); ?>

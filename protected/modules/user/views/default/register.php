@@ -6,6 +6,8 @@
 $this->breadcrumbs=array(
 	'Register'=>array('/user/register'),
 );
+
+$this->beginClip('content');
 ?>
 
 <h1>New User Registration</h1>
@@ -62,3 +64,4 @@ $this->breadcrumbs=array(
 
 <?php $this->endWidget(); ?>
 </div>
+<?php $this->endClip(); ?>
