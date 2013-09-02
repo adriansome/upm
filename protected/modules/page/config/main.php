@@ -18,8 +18,19 @@ return array(
     'components' => array(
         'urlManager' => array(
             'rules' => array(
+                '<link:[\s\S]+>'=>array(
+                    'page/default/view',
+                    'type'=>'db',
+                    'fields'=>array(
+                        'link'=>array(
+                            'table'=>'page',
+                            'field'=>'link'
+                        ),
+                    ),
+                ),
                 $module_name . '/management' => $module_name . '/management/index',
-                $module_name . '/management/<activeId:\d+>' => $module_name . '/management/index', 
+                $module_name . '/management/<activeId:\d+>' => $module_name . '/management/index',
+                $module_name . '/management/<action:\w+>/<id:\d+>' => $module_name . '/management/<action>',
                 $module_name . '/<action:\w+>/<id:\d+>' => $module_name . '/' . $default_controller . '/<action>',
                 $module_name . '/<action:\w+>' => $module_name . '/' . $default_controller . '/<action>',
             ),
