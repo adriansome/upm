@@ -12,7 +12,14 @@
 		<?php endif; ?>
 	</div>
 	<div id="content" class="span-14">
-		<?php echo $content; ?>
+		<?php 
+		if(isset($this->clips['content'])):
+			echo $this->clips['content'];
+		else:	
+		?>
+			<h2>Main Content</h2>
+			Main content here
+		<?php endif; ?>
 	</div><!-- content -->
 	<div class="span-4">
 		<?php if(isset($this->clips['sidebar2'])):
