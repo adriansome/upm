@@ -20,8 +20,7 @@ class ManagementController extends Controller {
         );
     }
 
-    public function actionIndex() {
-        $activeId = isset($_GET['activeId']) ? $_GET['activeId'] : '';
+    public function actionIndex($activeId=null) {
         $items = Page::model()->findAll();
         $this->render('index', array(
             'items' => $items,
@@ -66,26 +65,34 @@ class ManagementController extends Controller {
     public function actionEdit() {
         $model = $this->loadModel(key($_GET));
         if (isset($_POST['Page'])) {
-            $model->setAttributes($_POST['Page']);
-            if (!isset($_POST['Page']['target'])) {
-                $model->target = NULL;
-            }
-            $model->parent_id = $_POST['Page']['parent'];
-
+            $model->name = $_POST['Page']['name'];
+            
+            if(!empty($_POST['Page']['parent_id']))
+                $model->parent_id = $_POST['Page']['parent_id'];
+            else
+                $model->parent_id = null;
+            
+            $model->layout = $_POST['Page']['layout'];
             $model->link = $_POST['Page']['link'];
-
+            
             if (isset($_POST['Page']['role']))
                 $model->role = $_POST['Page']['role'];
-            else
-                $model->role = '';
 
-            try {
-                if ($model->save()) {
-                    $this->redirect(array('/' . $this->module->id . '/management/index', 'activeId' => $model->id));
-                }
-            } catch (Exception $e) {
-                $model->addError('', $e->getMessage());
-            }
+            $model->meta_description = $_POST['Page']['meta_description'];
+
+            $model->meta_keywords = $_POST['Page']['meta_keywords'];
+
+            $model->active = $_POST['Page']['active'];
+            $model->visible = $_POST['Page']['visible'];
+            $model->allowSubpages = $_POST['Page']['allowSubpages'];
+
+            if (isset($_POST['Page']['target']))
+                $model->target = $_POST['Page']['target'];
+            else
+                $model->target = null;
+
+            if ($model->save())
+                $this->redirect(array('/page/management', 'activeId' => $model->id));
         }
 
         $this->render('edit', array(
@@ -117,7 +124,7 @@ class ManagementController extends Controller {
                 continue;
 
             if ($item['parent_id'] == "root") {
-                $item['parent_id'] = 0;
+                $item['parent_id'] = null;
             }
 
             $page = Page::model()->findByPk($item['item_id']);

@@ -55,7 +55,7 @@ class Page extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('lft, rgt, name, window_title, link, layout, date_created', 'required'),
+			array('name, window_title, link, layout', 'required'),
 			array('parent_id, depth, lft, rgt', 'numerical', 'integerOnly'=>true),
 			array('name, role, layout', 'length', 'max'=>128),
 			array('target', 'length', 'max'=>10),
@@ -182,5 +182,7 @@ class Page extends CActiveRecord
     	
     	if(!empty($this->date_subpages) && $this->allowSubpages === true)
     		$this->date_subpages = $now;
+
+    	return parent::beforeSave();
     }
 }

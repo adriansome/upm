@@ -18,7 +18,8 @@ return array(
     'components' => array(
         'urlManager' => array(
             'rules' => array(
-                $module_name . '/management' => $module_name . '/management/index', 
+                $module_name . '/management' => $module_name . '/management/index',
+                $module_name . '/management/<activeId:\d+>' => $module_name . '/management/index', 
                 $module_name . '/<action:\w+>/<id:\d+>' => $module_name . '/' . $default_controller . '/<action>',
                 $module_name . '/<action:\w+>' => $module_name . '/' . $default_controller . '/<action>',
             ),

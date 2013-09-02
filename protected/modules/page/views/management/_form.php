@@ -25,7 +25,7 @@
             if ($aModel->id == $model->id)
                 unset($allModels[$key]);
         }
-        echo $form->dropDownList($model, 'parent', CHtml::listData($allModels, 'id', 'name'), array('prompt' => 'None'));
+        echo $form->dropDownList($model, 'parent_id', CHtml::listData($allModels, 'id', 'name'), array('empty' => 'None'));
         ?>
         <?php echo $form->error($model, 'parent_id'); ?>
     </div><!-- row -->
@@ -73,25 +73,25 @@
 
     <div class="row">
         <?php echo $form->labelEx($model, 'date_active'); ?>
-        <?php echo CHtml::checkBox('Page[active]', !empty($model->date_active), array('value'=>true)) ; ?>
+        <?php echo $form->checkBox($model, 'active', !empty($model->date_active), array('value'=>true)) ; ?>
         <?php echo $form->error($model, 'date_active'); ?>
     </div><!-- row -->
 
     <div class="row">
         <?php echo $form->labelEx($model, 'date_visible'); ?>
-        <?php echo CHtml::checkBox('Page[visible]', !empty($model->date_visible), array('value'=>true)) ; ?>
+        <?php echo $form->checkBox($model, 'visible', !empty($model->date_visible), array('value'=>true)) ; ?>
         <?php echo $form->error($model, 'date_visible'); ?>
     </div><!-- row -->
 
     <div class="row">
         <?php echo $form->labelEx($model, 'date_subpages'); ?>
-        <?php echo CHtml::checkBox('Page[allowSubpages]', !empty($model->dateActive), array('value'=>true)) ; ?>
+        <?php echo $form->checkBox($model, 'allowSubpages', !empty($model->dateActive), array('value'=>true)) ; ?>
         <?php echo $form->error($model, 'date_subpages'); ?>
     </div><!-- row -->
 
     <div class="row">
         <?php echo $form->labelEx($model, 'Open in new tab'); ?>
-        <?php echo CHtml::checkBox('Page[target]', $model->target == '_blank', array('value' => '_blank')); ?>
+        <?php echo $form->checkBox($model, 'target', !empty($model->target), array('value' => '_blank')); ?>
         <?php echo $form->error($model, 'target'); ?>
     </div>
 
