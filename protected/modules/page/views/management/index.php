@@ -1,7 +1,7 @@
 <a class="button" href="<?php echo $this->createUrl('create'); ?>">Create New Page</a>
 <br/><br/>
 
-<?php Yii::app()->clientScript->registerScriptFile($this->module->assetsDirectory . "/libs/json/json2.min.js"); ?>
+<?php Yii::app()->clientScript->registerScriptFile($this->module->getAssets() . "/js/json/json2.min.js"); ?>
 
 <?php
 $this->widget('application.modules.page.extensions.ItemList', array('items' => $items, 'activeId' => $activeId));
@@ -21,13 +21,17 @@ $this->widget('application.modules.page.extensions.ItemList', array('items' => $
         placeholder: 'placeholder',
         update: function () {
             list = $(this).nestedSortable('toArray', {startDepthCount: 0});
-            $.post('<?php echo $this->createUrl('/' . $this->module->id . '/ajax/save') ?>',
-            {list: list },
-            function(data){
-                $("#result").hide().html(data).fadeIn('slow')
-            },
-            "html"
-        );
+            $.post(
+                '<?php echo $this->createUrl('/' . $this->module->id . '/management/save') ?>',
+                
+                {list: list },
+                
+                function(data){
+                    $("#result").hide().html(data).fadeIn('slow')
+                },
+                
+                "html"
+            );
         }
     });
 </script>
