@@ -55,8 +55,8 @@ class ManagementController extends Controller {
         $this->render('create', array('model' => $model, 'menuId' => key($_GET)));
     }
 
-    public function actionUpdate() {
-        $model = $this->loadModel(key($_GET));
+    public function actionUpdate($id) {
+        $model = $this->loadModel($id);
         if (isset($_POST['Page'])) {
             $model->name = $_POST['Page']['name'];
             $model->parent_id = $_POST['Page']['parent_id'];
