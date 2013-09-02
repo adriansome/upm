@@ -92,7 +92,7 @@ class ManagementController extends Controller {
                 $model->target = null;
 
             if ($model->save())
-                $this->redirect(array('/page/management', 'activeId' => $model->id));
+                $this->redirect(array('/page/management/index', 'activeId' => $model->id));
         }
 
         $this->render('edit', array(
