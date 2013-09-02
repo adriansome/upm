@@ -15,8 +15,8 @@ class ItemList extends CWidget {
             ";
             Yii::app()->clientScript->registerCoreScript('jquery');
             Yii::app()->clientScript->registerCoreScript('jquery.ui');
-            Yii::app()->clientScript->registerScriptFile(Yii::app()->getModule('page')->assetsDirectory . '/libs/nestedsortable/jquery.ui.nestedSortable.js');
-            Yii::app()->clientScript->registerCssFile(Yii::app()->getModule('page')->assetsDirectory . '/libs/nestedsortable/nestedSortable.css');
+            Yii::app()->clientScript->registerScriptFile(Yii::app()->getModule('page')->getAssets() . '/js/nestedsortable/jquery.ui.nestedSortable.js');
+            Yii::app()->clientScript->registerCssFile(Yii::app()->getModule('page')->getAssets() . '/js/nestedsortable/nestedSortable.css');
             Yii::app()->clientScript->registerCss('AtHerList', $css);
         }
     }
@@ -84,7 +84,7 @@ class ItemList extends CWidget {
         <div style="height:20px;" class="item-wrapper <?php echo ($this->activeId == $row->id) ? 'active' : ''; ?>">
             <b><label><?php echo $row->name; ?></label></b>
             <div class="right"><a href="<?php echo Yii::app()->createUrl(Yii::app()->getModule('page')->id . '/management/edit/' . $row->id); ?>">Edit</a></div>
-            <div class="right"><input type="checkbox" disabled="disabled" <?php echo($row->enabled) ? "checked" : ""; ?>/></div>
+            <div class="right"><input type="checkbox" disabled="disabled" <?php echo(!empty($row->dateActive)) ? "checked" : ""; ?>/></div>
         </div>
         <?php
     }
