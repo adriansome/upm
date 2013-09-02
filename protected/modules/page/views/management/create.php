@@ -1,3 +1,4 @@
+<?php $this->beginClip('content'); ?>
 <h1> Create Page</h1>
 <?php
 $this->renderPartial('_form', array(
@@ -5,3 +6,4 @@ $this->renderPartial('_form', array(
     'buttons' => 'create',
     'menuId' => $menuId));
 ?>
+<?php $this->endClip(); ?>

@@ -1,3 +1,5 @@
+<?php $this->beginClip('content'); ?>
+
 <a class="button" href="<?php echo $this->createUrl('create'); ?>">Create New Page</a>
 <br/><br/>
 
@@ -35,3 +37,4 @@ $this->widget('application.modules.page.extensions.ItemList', array('items' => $
         }
     });
 </script>
+<?php $this->endClip(); ?>
