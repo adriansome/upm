@@ -22,7 +22,7 @@ class ItemList extends CWidget {
     }
 
     public static function depthSort($a, $b) {
-        //return $a->depth > $b->depth;
+        return $a->depth > $b->depth;
     }
 
     public static function leftSort($a, $b) {
