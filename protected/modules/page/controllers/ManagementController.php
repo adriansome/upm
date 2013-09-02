@@ -23,10 +23,8 @@ class ManagementController extends Controller {
     public function actionIndex() {
         $activeId = isset($_GET['activeId']) ? $_GET['activeId'] : '';
         $items = Page::model()->findAll();
-        $id = null;
         $this->render('index', array(
             'items' => $items,
-            'id' => $id,
             'activeId' => $activeId
         ));
     }
@@ -35,13 +33,14 @@ class ManagementController extends Controller {
         $model = new Page;
         if (isset($_POST['Page'])) {
             $model->setAttributes($_POST['Page']);
+            
             if (isset($_POST['Page']['parent']))
-                $model->parent = $_POST['Page']['parent'];
+                $model->parent_id = $_POST['Page']['parent'];
 
             $model->link = $_POST['Page']['link'];
 
             if (isset($_POST['Page']['role']))
-                $model->role = implode(',', $_POST['Page']['role']);
+                $model->role = $_POST['Page']['role'];
             else
                 $model->role = '';
 
@@ -52,7 +51,7 @@ class ManagementController extends Controller {
 
             try {
                 if ($model->save()) {
-                    $this->redirect(array('/' . $this->module->id . '/management/index', 'id' => $model->menu_id, 'activeId' => $model->id));
+                    $this->redirect(array('/' . $this->module->id . '/management/index', 'activeId' => $model->id));
                 }
             } catch (Exception $e) {
                 $model->addError('', $e->getMessage());
@@ -71,12 +70,12 @@ class ManagementController extends Controller {
             if (!isset($_POST['Page']['target'])) {
                 $model->target = NULL;
             }
-            $model->parent = $_POST['Page']['parent'];
+            $model->parent_id = $_POST['Page']['parent'];
 
             $model->link = $_POST['Page']['link'];
 
             if (isset($_POST['Page']['role']))
-                $model->role = implode(',', $_POST['Page']['role']);
+                $model->role = $_POST['Page']['role'];
             else
                 $model->role = '';
 
@@ -109,15 +108,47 @@ class ManagementController extends Controller {
             }
         }
         else
-            throw new CHttpException(400,
-                    Yii::t('app', 'Invalid request.'));
+            throw new CHttpException(400, 'Invalid request.');
+    }
+
+    public function actionSave() {
+        foreach ($_POST['list'] as $item) {
+            if ($item['item_id'] == 'root')
+                continue;
+
+            if ($item['parent_id'] == "root") {
+                $item['parent_id'] = 0;
+            }
+
+            $page = Page::model()->findByPk($item['item_id']);
+            $page->parent_id = $item['parent_id'];
+            $page->depth = $item['depth'];
+            $page->lft = $item['left'];
+            $page->rgt = $item['right'];
+            $page->save();
+        }
     }
 
     public function loadModel($id) {
         $model = Page::model()->findByPk($id);
         if ($model === null)
-            throw new CHttpException(404, Yii::t('app', 'The requested page does not exist.'));
+            throw new CHttpException(404, 'The requested page does not exist.');
         return $model;
     }
 
+    public function getPageLayouts()
+    {
+        $directory = Yii::app()->theme->basePath."/views/layouts/";
+
+        $files = array();
+
+        foreach (scandir($directory) as $file) {
+            $filename = substr($file, 0, strrpos($file, '.'));
+
+            if ($filename!='.' && $filename!='..' && $filename!='head' && $filename!='body' && !empty($filename)) 
+                $files[$filename] = $filename;
+        }
+
+        return $files;
+    }
 }

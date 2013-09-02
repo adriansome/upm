@@ -6,7 +6,7 @@ class DefaultController extends PageController
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/righty';
+	public $layout=false;
 
 	/**
 	 * @return array action filters
@@ -51,8 +51,11 @@ class DefaultController extends PageController
 	 */
 	public function actionView($id)
 	{
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+		$model = Page::model()->findByPk($id);
+		$template = '//layouts/'.$model->layout;
+
+		$this->render($template, array(
+			'model'=>$model,
 		));
 	}
 
