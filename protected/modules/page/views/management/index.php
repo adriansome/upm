@@ -6,7 +6,7 @@
 <?php Yii::app()->clientScript->registerScriptFile($this->module->getAssets() . "/js/json/json2.min.js"); ?>
 
 <?php
-$this->widget('application.modules.page.extensions.ItemList', array('items' => $items, 'activeId' => $activeId));
+$this->widget('ItemList', array('items' => $items, 'activeId' => $activeId));
 ?>
 
 <script type="text/javascript">
