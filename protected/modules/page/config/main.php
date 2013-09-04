@@ -37,4 +37,17 @@ return array(
             ),
         ),
     ),
+    'params' => array(
+        'maxMenuDepth'=>3,
+        'menus'=>array(
+            1=>array(
+                'name'=>'Main',
+                'maxDepth'=>3,
+            ),
+            2=>array(
+                'name'=>'Footer',
+                'maxDepth'=>1,
+            ),
+        ),
+    ),
 );

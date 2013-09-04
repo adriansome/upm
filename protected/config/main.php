@@ -87,15 +87,6 @@ $config = array(
 	// using Yii::app()->params['paramName']
 	'params'=>array(
 		'adminEmail'=>'mail@mattbiddle.cc',
-		'maxMenuDepth'=>3,
-		'menus'=>array(
-			'main'=>array(
-				'maxDepth'=>3
-			),
-			'footer'=>array(
-				'maxDepth'=>1
-			),
-		),
 		'overlayAdmin'=>false,
 	),
 );
