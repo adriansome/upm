@@ -50,7 +50,7 @@ class DefaultController extends PageController
 		{
 			if($model->role === 'guest' && !Yii::app()->user->isGuest)
 			{
-				if(Yii::app()->user->role !== $model->role)
+				if(Yii::app()->user->role !== $model->role && Yii::app()->user->role !== 'editor' && Yii::app()->user->role !== 'admin')
 					throw new CHttpException(403, 'You are not authorized to perform this action.');
 			}
 		}
