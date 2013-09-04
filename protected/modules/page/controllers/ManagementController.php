@@ -14,6 +14,11 @@ class ManagementController extends Controller {
                 'users'=>array('@'),
                 'roles' => array('admin'),
             ),
+            array('allow',
+                'actions'=>array('index','create','update','delete'),
+                'users'=>array('@'),
+                'roles' => array('editor'),
+            ),
             array('deny',
                 'users' => array('*'),
             ),
@@ -61,17 +66,12 @@ class ManagementController extends Controller {
             $model->name = $_POST['Page']['name'];
             $model->parent_id = $_POST['Page']['parent_id'];
             $model->layout = $_POST['Page']['layout'];
-            
-            // var_dump($_POST['Page']['pageMenus']);
-            // exit;
-
             $model->pageMenus = $_POST['Page']['pageMenus'];
 
             if($_POST['Page']['link'] != $model->link)
                 $model->oldLink = $model->link;
 
             $model->link = $_POST['Page']['link'];
-            
             $model->role = $_POST['Page']['role'];
             $model->meta_description = $_POST['Page']['meta_description'];
             $model->meta_keywords = $_POST['Page']['meta_keywords'];
