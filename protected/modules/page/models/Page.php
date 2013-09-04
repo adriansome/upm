@@ -180,7 +180,7 @@ class Page extends CActiveRecord
     	{	
     		$_oldLink = new OldLink;
     		$_oldLink->page_id = $this->id;
-    		$_oldLink->link = $this->oldLink
+    		$_oldLink->link = $this->oldLink;
     		$_oldLink->save();
     	}
     	
