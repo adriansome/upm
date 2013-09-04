@@ -62,6 +62,11 @@ class ManagementController extends Controller {
             $model->parent_id = $_POST['Page']['parent_id'];
             $model->layout = $_POST['Page']['layout'];
             
+            // var_dump($_POST['Page']['pageMenus']);
+            // exit;
+
+            $model->pageMenus = $_POST['Page']['pageMenus'];
+
             if($_POST['Page']['link'] != $model->link)
                 $model->oldLink = $model->link;
 
@@ -141,5 +146,15 @@ class ManagementController extends Controller {
         }
 
         return $files;
+    }
+
+    public function getPageMenus()
+    {
+        $menus=array();
+
+        foreach (Yii::app()->params['menus'] as $key => $value)
+            $menus[$key]=ucfirst($value['name']);
+
+        return $menus;
     }
 }

@@ -1,5 +1,4 @@
-<div class="form">
-
+<div class="form"> 
     <?php
     $form = $this->beginWidget('CActiveForm', array(
         'id' => 'menu-item-form',
@@ -30,10 +29,18 @@
         <?php echo $form->error($model, 'parent_id'); ?>
     </div><!-- row -->
 
-        <div class="row">
+    <div class="row">
         <?php echo $form->labelEx($model, 'layout'); ?>
         <?php echo $form->dropDownList($model, 'layout', $this->pageLayouts, array('empty'=>' - ')); ?>
         <?php echo $form->error($model, 'layout'); ?>
+    </div>
+
+    <div class="row">
+        <?php echo $form->labelEx($model, 'pageMenus'); ?>
+        <?php echo $form->checkBoxList($model, 'pageMenus', $this->pageMenus, array(
+            'separator'=>'&nbsp;&nbsp;','template' => '{input} {label}',
+        )); ?>
+        <?php echo $form->error($model, 'pageMenus'); ?>
     </div>
 
     <div class="row">

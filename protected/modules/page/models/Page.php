@@ -29,6 +29,8 @@ class Page extends CActiveRecord
 	public $visible;
 	public $allowSubpages;
 	public $oldLink;
+	
+	private $_pageMenus;
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -60,7 +62,7 @@ class Page extends CActiveRecord
 			array('parent_id, depth, lft, rgt', 'numerical', 'integerOnly'=>true),
 			array('name, role, layout', 'length', 'max'=>128),
 			array('target', 'length', 'max'=>10),
-			array('meta_description, meta_keywords, date_updated, date_active, date_visible, date_subpages', 'safe'),
+			array('pageMenus, meta_description, meta_keywords, date_updated, date_active, date_visible, date_subpages', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, parent_id, depth, lft, rgt, name, target, window_title, meta_description, meta_keywords, link, role, layout, date_created, date_updated, date_active, date_visible, date_subpages', 'safe', 'on'=>'search'),
@@ -166,6 +168,27 @@ class Page extends CActiveRecord
         return $roles;
     }
 
+    public function getPageMenus()
+    {
+    	if(empty($this->_pageMenus))
+    	{
+    		$this->_pageMenus = array();
+
+    		foreach($this->menus as $pageMenu)
+    			$this->_pageMenus[] = $pageMenu->menu_id;
+    	}
+
+    	return $this->_pageMenus;
+    }
+
+    public function setPageMenus($value)
+    {
+    	if(!empty($value) && is_array($value))
+    		$this->_pageMenus = $value;
+    	else
+    		$this->_pageMenus = null;
+    }
+
     public function beforeSave()
     {
     	$now = new CDbExpression('NOW()');
@@ -191,6 +214,35 @@ class Page extends CActiveRecord
 
     	if(empty($this->parent_id))
     		$this->parent_id = null;
+
+    	if(is_array($this->_pageMenus))
+    	{
+    		foreach($this->menus as $record)
+    		{
+    			if(in_array($record->menu_id, $this->_pageMenus))
+    			{
+    				$key = array_search($record->menu_id, $this->_pageMenus);
+    				unset($this->_pageMenus[$key]);
+    			}
+    			else
+    				$pageMenu = PageMenu::model()->findByPk($record->id)->delete();
+    		}
+
+    		foreach($this->_pageMenus as $menu_id)
+    		{
+    			$pageMenu = new PageMenu;
+    			$pageMenu->page_id = $this->id;
+    			$pageMenu->menu_id = $menu_id;
+    			$pageMenu->save();
+    		}
+    	}
+    	else
+    	{
+    		$menus = PageMenu::model()->findAllByAttributes(array('page_id'=>$this->id));
+    		foreach ($menus as $record)
+    			$record->delete();
+    	}
+
 
     	if(empty($this->date_active) && $this->active)
     		$this->date_active = $now;
