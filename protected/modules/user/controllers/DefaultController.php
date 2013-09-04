@@ -389,7 +389,7 @@ class DefaultController extends UserController
 
 		$model=User::model()->findByPk($id);
 
-		if($model===null)
+		if(!isset($model))
 			throw new CHttpException(404,'The requested page does not exist.');
 
 		return $model;
@@ -402,7 +402,7 @@ class DefaultController extends UserController
 			'params'=>array(":$field"=>$uid),
 	    ));
 
-	    if($model===null)
+	    if(!isset($model))
 			throw new CHttpException(404,'The requested page does not exist.');
 
 		return $model;
