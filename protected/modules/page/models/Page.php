@@ -175,6 +175,14 @@ class Page extends CActiveRecord
     		$this->link = $slug;
     	elseif(empty($this->link) && !empty($this->parent_id))
     		$this->link = $this->parent->link.'/'.$slug;
+
+    	if(!empty($this->oldLink) && $this->oldLink != $this->link)
+    	{	
+    		$_oldLink = new OldLink;
+    		$_oldLink->page_id = $this->id;
+    		$_oldLink->link = $this->oldLink
+    		$_oldLink->save();
+    	}
     	
     	if($this->isNewRecord)
     		$this->date_created = $now;
