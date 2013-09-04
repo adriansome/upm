@@ -6,7 +6,6 @@ return array(
     'import' => array(
         'application.modules.' . $module_name . '.models.*',
         'application.modules.' . $module_name . '.components.*',
-        'application.modules.' . $module_name . '.extensions.*',
     ),
     
     'modules' => array(
