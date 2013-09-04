@@ -305,8 +305,20 @@ class EDbUrlRule extends CUrlRule {
 			$sql = "SELECT {$data['field']} FROM {$data['table']} WHERE {$data['field']}=:value LIMIT 1";
 			$command = $manager->getDbConnection()->createCommand($sql);
 			$command->bindValue(':value', $data['value'], PDO::PARAM_STR);
+			
+			// if ($command->queryScalar() === false)
+			// 	return false;
+			
+			// This section is a modification made by Matt Biddle @ Fanatic Design 2013-09-03
 			if ($command->queryScalar() === false)
-				return false;
+			{
+				$sql = "SELECT {$data['field']} FROM old_link WHERE {$data['field']}=:value LIMIT 1";
+				$command = $manager->getDbConnection()->createCommand($sql);
+				$command->bindValue(':value', $data['value'], PDO::PARAM_STR);
+				
+				if ($command->queryScalar() === false)
+					return false;
+			}
 		}
 		return true;
 	}

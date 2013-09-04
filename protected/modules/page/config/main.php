@@ -17,6 +17,7 @@ return array(
     
     'components' => array(
         'urlManager' => array(
+            'class'=>'EDbUrlManager',
             'rules' => array(
                 '<link:[\s\S]+>'=>array(
                     'page/default/view',

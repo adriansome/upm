@@ -61,7 +61,12 @@ class ManagementController extends Controller {
             $model->name = $_POST['Page']['name'];
             $model->parent_id = $_POST['Page']['parent_id'];
             $model->layout = $_POST['Page']['layout'];
+            
+            if($_POST['Page']['link'] != $model->link)
+                $model->oldLink = $model->link;
+
             $model->link = $_POST['Page']['link'];
+            
             $model->role = $_POST['Page']['role'];
             $model->meta_description = $_POST['Page']['meta_description'];
             $model->meta_keywords = $_POST['Page']['meta_keywords'];

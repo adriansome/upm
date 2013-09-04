@@ -28,6 +28,7 @@ class Page extends CActiveRecord
 	public $active;
 	public $visible;
 	public $allowSubpages;
+	public $oldLink;
 
 	/**
 	 * Returns the static model of the specified AR class.

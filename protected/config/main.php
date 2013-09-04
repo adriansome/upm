@@ -35,7 +35,6 @@ $config = array(
 	// application components
 	'components'=>array(
 		'urlManager'=>array(
-			'class'=>'EDbUrlManager',
 			'urlFormat'=>'path',
 			'showScriptName' => false,
 			'caseSensitive'=>false,
@@ -87,13 +86,17 @@ $config = array(
 	// application-level parameters that can be accessed
 	// using Yii::app()->params['paramName']
 	'params'=>array(
-		'adminEmail' => 'mail@mattbiddle.cc',
-		'maxNavLevel' => 3,
-		'overlayAdmin' =>false,
+		'adminEmail'=>'mail@mattbiddle.cc',
+		'maxMenuDepth'=>3,
 		'menus'=>array(
-			'main',
-			'footer',
-		)
+			'main'=>array(
+				'maxDepth'=>3
+			),
+			'footer'=>array(
+				'maxDepth'=>1
+			),
+		),
+		'overlayAdmin'=>false,
 	),
 );
 

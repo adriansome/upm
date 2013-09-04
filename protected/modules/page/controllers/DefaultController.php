@@ -61,8 +61,17 @@ class DefaultController extends PageController
 	public function loadModel($link)
 	{
 		$model=Page::model()->findByAttributes(array('link'=>$link));
+		
 		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
+		{
+			$model=OldLink::model()->findByAttributes(array('link'=>$link))->page;
+
+			if($model===null)
+				throw new CHttpException(404,'The requested page does not exist.');
+			else
+				$this->redirect(Yii::app()->baseUrl.'/'.$model->link, true, 301);
+		}
+		
 		return $model;
 	}
 
