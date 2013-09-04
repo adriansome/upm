@@ -57,7 +57,7 @@
         <?php echo $form->labelEx($model, 'role'); ?>
         <?php echo $form->radioButtonList($model,'role',
             array(
-                'all'=>'All', 'guest'=>'Guest', 'subscriber'=>'Subscriber', 'user'=>'User', 'editor'=>'Editor', 'admin'=>'Admin'
+                'all'=>'All', 'guest'=>'Guest', 'subscriber'=>'Subscriber', 'user'=>'User'
             ),
             array(
                 'separator'=>'&nbsp;&nbsp;','template' => '{input} {label}',
@@ -80,19 +80,19 @@
 
     <div class="row">
         <?php echo $form->labelEx($model, 'date_active'); ?>
-        <?php echo $form->checkBox($model, 'active', array('value'=>true)) ; ?>
+        <?php echo $form->checkBox($model, 'active', array('value'=>true, 'disabled'=>!Yii::app()->user->isAdmin())); ?>
         <?php echo $form->error($model, 'date_active'); ?>
     </div><!-- row -->
 
     <div class="row">
         <?php echo $form->labelEx($model, 'date_visible'); ?>
-        <?php echo $form->checkBox($model, 'visible', array('value'=>true)) ; ?>
+        <?php echo $form->checkBox($model, 'visible', array('value'=>true, 'disabled'=>!Yii::app()->user->isAdmin())); ?>
         <?php echo $form->error($model, 'date_visible'); ?>
     </div><!-- row -->
 
     <div class="row">
         <?php echo $form->labelEx($model, 'date_subpages'); ?>
-        <?php echo $form->checkBox($model, 'allowSubpages', array('value'=>true)) ; ?>
+        <?php echo $form->checkBox($model, 'allowSubpages', array('value'=>true, 'disabled'=>!Yii::app()->user->isAdmin())); ?>
         <?php echo $form->error($model, 'date_subpages'); ?>
     </div><!-- row -->
 
