@@ -44,6 +44,17 @@ class DefaultController extends PageController
 	public function actionView($link)
 	{
 		$model = $this->loadModel($link);
+
+		// Check if user has permission to view this page.
+		if($model->role !== 'all')
+		{
+			if($model->role === 'guest' && !Yii::app()->user->isGuest)
+			{
+				if(Yii::app()->user->role !== $model->role)
+					throw new CHttpException(403, 'You are not authorized to perform this action.');
+			}
+		}
+
 		$template = '//layouts/'.$model->layout;
 
 		$this->render($template, array(
