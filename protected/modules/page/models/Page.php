@@ -104,7 +104,7 @@ class Page extends CActiveRecord
 			'meta_description' => 'Meta Description',
 			'meta_keywords' => 'Meta Keywords',
 			'link' => 'URL / Path',
-			'role' => 'Role',
+			'role' => 'User Access',
 			'layout' => 'Layout',
 			'date_created' => 'Date Created',
 			'date_updated' => 'Date Updated',
