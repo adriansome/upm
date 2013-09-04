@@ -39,10 +39,6 @@ class ItemList extends CWidget {
         usort($this->items, 'self::depthSort');
         usort($this->items, 'self::leftSort');
 
-        echo '<div class="header-wrapper" style="height:20px">';
-        echo '<span style="padding-left:40px"></span><b>Title</b>';
-        echo '<div style="float:right;width:200px;text-align:center;"><b>Active</b></div>';
-        echo "</div>";
         echo '<ol id="' . $this->id . '" class="sortable ui-sortable menu-item-list">
             ';
         foreach ($this->items As $row):
@@ -83,8 +79,18 @@ class ItemList extends CWidget {
         ?>
         <div style="height:20px;" class="item-wrapper <?php echo ($this->activeId == $row->id) ? 'active' : ''; ?>">
             <b><label><?php echo $row->name; ?></label></b>
+            
+            <div class="right"><a href="<?php echo Yii::app()->createUrl(Yii::app()->getModule('page')->id . '/management/showInMenu/' . $row->id); ?>">Visible</a></div>
+            
+            <div class="right"><a href="<?php echo Yii::app()->createUrl(Yii::app()->getModule('page')->id . '/management/activateOnSite/' . $row->id); ?>">Activate</a></div>
+
+            <div class="right"><a href="<?php echo Yii::app()->createUrl(Yii::app()->getModule('page')->id . '/management/delete/' . $row->id); ?>">Delete</a></div>
+            
+            <?php if($row->allowSubpages): ?>
+            <div class="right"><a href="<?php echo Yii::app()->createUrl(Yii::app()->getModule('page')->id . '/management/create/' . $row->id); ?>">Add</a></div>
+            <?php endif; ?>
+
             <div class="right"><a href="<?php echo Yii::app()->createUrl(Yii::app()->getModule('page')->id . '/management/update/' . $row->id); ?>">Edit</a></div>
-            <div class="right"><input type="checkbox" disabled="disabled" <?php echo(!empty($row->dateActive)) ? "checked" : ""; ?>/></div>
         </div>
         <?php
     }
