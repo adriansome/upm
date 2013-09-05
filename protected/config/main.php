@@ -19,7 +19,7 @@ $config = array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
-		'application.extensions.mail.*',
+		'application.components.mail.*',
 	),
 
 	'modules'=>array(
