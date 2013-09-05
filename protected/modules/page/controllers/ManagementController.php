@@ -41,6 +41,7 @@ class ManagementController extends Controller {
             $model->layout = $_POST['Page']['layout'];
             $model->link = $_POST['Page']['link'];
             $model->role = $_POST['Page']['role'];
+            $model->window_title = $_POST['Page']['window_title'];
             $model->meta_description = $_POST['Page']['meta_description'];
             $model->meta_keywords = $_POST['Page']['meta_keywords'];
             $model->active = $_POST['Page']['active'];
@@ -73,6 +74,7 @@ class ManagementController extends Controller {
 
             $model->link = $_POST['Page']['link'];
             $model->role = $_POST['Page']['role'];
+            $model->window_title = $_POST['Page']['window_title'];
             $model->meta_description = $_POST['Page']['meta_description'];
             $model->meta_keywords = $_POST['Page']['meta_keywords'];
             $model->active = $_POST['Page']['active'];
@@ -132,16 +134,16 @@ class ManagementController extends Controller {
         return $model;
     }
 
-    public function getPageLayouts()
+    public function getPageTemplates()
     {
-        $directory = Yii::app()->theme->basePath."/views/layouts/";
+        $directory = Yii::app()->theme->basePath."/views/templates/";
 
         $files = array();
 
         foreach (scandir($directory) as $file) {
             $filename = substr($file, 0, strrpos($file, '.'));
 
-            if ($filename!='.' && $filename!='..' && $filename!='head' && $filename!='body' && !empty($filename)) 
+            if ($filename!='.' && $filename!='..' && !empty($filename)) 
                 $files[$filename] = $filename;
         }
 

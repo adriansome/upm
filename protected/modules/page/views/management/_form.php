@@ -31,7 +31,7 @@
 
     <div class="row">
         <?php echo $form->labelEx($model, 'layout'); ?>
-        <?php echo $form->dropDownList($model, 'layout', $this->pageLayouts, array('empty'=>' - ')); ?>
+        <?php echo $form->dropDownList($model, 'layout', $this->pageTemplates, array('empty'=>' - ')); ?>
         <?php echo $form->error($model, 'layout'); ?>
     </div>
 
@@ -64,6 +64,12 @@
             )
         ); ?>
         <?php echo $form->error($model, 'role'); ?>
+    </div><!-- row -->
+
+    <div class="row">
+        <?php echo $form->labelEx($model, 'window_title'); ?>
+        <?php echo $form->textField($model, 'window_title', array('size' => 60)); ?>
+        <?php echo $form->error($model, 'window_title'); ?>
     </div><!-- row -->
 
     <div class="row">
