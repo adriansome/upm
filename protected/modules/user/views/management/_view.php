@@ -6,7 +6,7 @@
 <div class="view">
 	<b><?php echo CHtml::encode($data->fullname); ?></b>
 	
-	<a class="btn edit" href="<?php echo $this->createUrl('view', array('id'=>$data->id)) ?>">
+	<a class="btn edit" href="<?php echo $this->createUrl('update', array('id'=>$data->id)) ?>">
 		<span>edit</span>
 	</a>
 	
@@ -15,7 +15,7 @@
 	</a>
 	
 	<a class="btn revertEmail" href="<?php echo $this->createUrl('revertEmailAddress', array('id'=>$data->id)) ?>">
-		<span>edit</span>
+		<span>revertEmail</span>
 	</a>
 	
 	<a class="btn reactivate" href="<?php echo $this->createUrl('reactivate', array('id'=>$data->id)) ?>">

@@ -6,6 +6,8 @@ $this->menu=array(
 	array('label'=>'Create User', 'url'=>array('create')),
 	array('label'=>'Manage User', 'url'=>array('admin')),
 );
+
+$this->beginClip('content');
 ?>
 
 <h1>Users</h1>
@@ -17,3 +19,5 @@ $this->menu=array(
 	'itemView'=>'_view',
 	'id'=>'user-list'
 )); ?>
+
+<?php $this->endClip(); ?>
