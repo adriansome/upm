@@ -12,6 +12,9 @@ $config = array(
 	// set site/app theme here
 	'theme'=>'new_fridge',
 
+	// set site home page
+	'defaultController' => 'home',
+
 	// preloading 'log' component
 	'preload'=>array('log'),
 
