@@ -84,6 +84,7 @@ class Page extends CActiveRecord
 			'parent' => array(self::BELONGS_TO, 'Page', 'parent_id'),
             'children' => array(self::HAS_MANY, 'Page', 'parent_id'),
             'menus' => array(self::HAS_MANY, 'PageMenu', 'page_id'),
+            'oldLinks' => array(self::HAS_MANY, 'OldLink', 'page_id')
 		);
 	}
 
@@ -162,9 +163,11 @@ class Page extends CActiveRecord
             'guest' => 'Guest',
             'loggedIn' => 'Logged In',
         );
+        
         if (Yii::app()->hasModule('role')) {
             return array_merge($roles, CHtml::listData(Role::model()->findAll(), 'name', 'name'));
         }
+
         return $roles;
     }
 
@@ -239,10 +242,9 @@ class Page extends CActiveRecord
     	else
     	{
     		$menus = PageMenu::model()->findAllByAttributes(array('page_id'=>$this->id));
-    		foreach ($menus as $record)
+    		foreach($menus as $record)
     			$record->delete();
     	}
-
 
     	if(empty($this->date_active) && $this->active)
     		$this->date_active = $now;
