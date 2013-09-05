@@ -3,12 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
-	<?php require_once(Yii::app()->theme->basepath.'/views/layouts/head.php'); ?>
+	<?php require_once(Yii::app()->theme->basepath.'/views/elements/head.php'); ?>
 	<?php echo "\n"; ?>
 </head>
 
 <body>
-	<?php require_once(Yii::app()->theme->basepath.'/views/layouts/body.php'); ?>
+	<?php require_once(Yii::app()->theme->basepath.'/views/elements/body.php'); ?>
 	<?php echo "\n"; ?>
 </body>
 
