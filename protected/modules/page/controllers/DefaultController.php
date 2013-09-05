@@ -55,7 +55,7 @@ class DefaultController extends PageController
 			}
 		}
 
-		$template = '//layouts/'.$model->layout;
+		$template = '//templates/'.$model->layout;
 
 		$this->render($template, array(
 			'model'=>$model,
