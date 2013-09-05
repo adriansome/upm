@@ -43,7 +43,6 @@ $config = array(
 			'caseSensitive'=>false,
 			'rules'=>array(
 				'setup'=>'site/setup',
-				'home'=>'site/index',
 			),
 		),
 		'mail' => array(
