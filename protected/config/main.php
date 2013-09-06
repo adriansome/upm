@@ -13,7 +13,7 @@ $config = array(
 	'theme'=>'new_fridge',
 
 	// set site home page
-	'defaultController' => 'home',
+	'defaultController' => 'page/default/view/link/home',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
