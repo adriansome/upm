@@ -1,4 +1,7 @@
-<?php $this->layout = '//layouts/righty'; ?>
+<?php 
+$this->layout = '//layouts/righty';
+$this->pageTitle = $model->window_title;
+?>
 
 <?php $this->beginClip('content'); ?>
    <h1><?php echo $model->name; ?></h1>
