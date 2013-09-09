@@ -41,6 +41,7 @@ $config = array(
 			'showScriptName' => false,
 			'caseSensitive'=>false,
 			'rules'=>array(
+				'welcome'=>'site/index',
 				'setup'=>'site/setup',
 			),
 		),
@@ -51,13 +52,6 @@ $config = array(
  			'logging' => true,
  			'dryRun' => false
  		),
-
-		// uncomment the following to use an SQLite database
-		/*
-		'db'=>array(
-			'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
-		),
-		*/
 
 		'db'=>array(
 			'connectionString' => 'mysql:host=localhost;dbname=fanatic',
