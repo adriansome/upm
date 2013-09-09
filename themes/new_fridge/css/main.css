@@ -52,18 +52,18 @@ body
 	background:white url(bg.gif) repeat-x left top;
 }
 
-#mainmenu ul
+ul#mainmenu
 {
 	padding:6px 20px 5px 20px;
 	margin:0px;
 }
 
-#mainmenu ul li
+ul#mainmenu li
 {
 	display: inline;
 }
 
-#mainmenu ul li a
+ul#mainmenu li a
 {
 	color:#ffffff;
 	background-color:transparent;
@@ -73,7 +73,7 @@ body
 	padding:5px 8px;
 }
 
-#mainmenu ul li a:hover, #mainmenu ul li.active a
+ul#mainmenu li a:hover, ul#mainmenu li.active a
 {
 	color: #6399cd;
 	background-color:#EFF4FA;
