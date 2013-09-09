@@ -6,7 +6,7 @@
 $this->breadcrumbs=array(
 	'Login'=>array('/user/login'),
 	'Forgotten Credentials'=>array('/user/forgottenCredentials'),
-	'Sent'
+	'Reminder Sent'
 );
 
 $this->beginClip('content');

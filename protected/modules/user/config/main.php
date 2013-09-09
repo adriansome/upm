@@ -24,6 +24,9 @@ return array(
         'urlManager' => array(
             'rules' => array(
                 $module_name . '/management' => $module_name . '/management/index', 
+                '<action:(register|login|profile|logout)>' => $module_name . '/'. $default_controller . '/<action>',
+                'login/forgotten-credentials' => $module_name . '/'. $default_controller . '/forgottenCredentials',
+                'login/forgotten-credentials/reminder-sent' => $module_name . '/'. $default_controller . '/reminderSent',
                 $module_name . '/<action:(validate|resetPassword|revertDelete|revertEmail)>/<uid:[a-zA-Z0-9]+>' => $module_name . '/' . $default_controller . '/<action>',
                 $module_name . '/<action:\w+>' => $module_name . '/' . $default_controller . '/<action>',
             ),

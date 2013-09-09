@@ -55,7 +55,7 @@ $this->beginClip('content');
 		<?php echo $form->label($model,'rememberMe'); ?>
 		<?php echo $form->error($model,'rememberMe'); ?>
 		<p class="hint">
-			<?php echo CHtml::link('Forgotten Username Or Password?', array('user/forgottenCredentials')); ?>
+			<?php echo CHtml::link('Forgotten Username Or Password?', $this->createUrl('/user/default/forgottenCredentials')); ?>
 		</p>
 	</div>
 

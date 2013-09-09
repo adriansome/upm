@@ -190,7 +190,7 @@ class DefaultController extends UserController
 			$model->attributes=$_POST['CredentialsForm'];
 			// validate user input and redirect to the previous page if valid
 			if($model->validate() && $model->sendEmail())
-				$this->redirect('reminderSent');
+				$this->redirect($this->createUrl('/user/default/reminderSent'));
 		}
 
 		$this->render('forgottenCredentials',array(
