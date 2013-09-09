@@ -59,7 +59,8 @@ class Page extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name, window_title, layout', 'required'),
-			array('parent_id, depth, lft, rgt', 'numerical', 'integerOnly'=>true),
+			array('link', 'unique', 'attributeName'=> 'link', 'caseSensitive' => 'false'),
+            array('parent_id, depth, lft, rgt', 'numerical', 'integerOnly'=>true),
 			array('name, role, layout', 'length', 'max'=>128),
 			array('target', 'length', 'max'=>10),
 			array('pageMenus, meta_description, meta_keywords, date_updated, date_active, date_visible, date_subpages', 'safe'),
@@ -201,6 +202,10 @@ class Page extends CActiveRecord
     		$this->link = $slug;
     	elseif(empty($this->link) && !empty($this->parent_id))
     		$this->link = $this->parent->link.'/'.$slug;
+
+        if($this->layout != 'default' && $this->layout != 'home')
+            //trim leading slash to enable matching by url manager.
+            $this->link = ltrim($this->link,'/');
 
     	if(!empty($this->oldLink) && $this->oldLink != $this->link)
     	{	
