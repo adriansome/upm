@@ -43,6 +43,9 @@ class DefaultController extends PageController
 	 */
 	public function actionView($link)
 	{
+		if($link == 'home')
+			$link = '/';
+		
 		$model = $this->loadModel($link);
 
 		// Check if user has permission to view this page.
