@@ -18,8 +18,10 @@ $this->widget('ItemList', array('items' => $items, 'activeId' => $activeId));
         tolerance: 'pointer',
         toleranceElement: '> div',
         disableNesting: 'no-nest',
+        protectRoot:true,
+        maxLevels: 3,
         forcePlaceholderSize: true,
-        items: 'li',
+        items: 'li:not(.pinned)',
         placeholder: 'placeholder',
         update: function () {
             list = $(this).nestedSortable('toArray', {startDepthCount: 0});

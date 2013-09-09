@@ -24,14 +24,14 @@
             if ($aModel->id == $model->id)
                 unset($allModels[$key]);
         }
-        echo $form->dropDownList($model, 'parent_id', CHtml::listData($allModels, 'id', 'name'), array('empty' => 'None'));
+        echo $form->dropDownList($model, 'parent_id', CHtml::listData($allModels, 'id', 'name'), array('empty' => 'None','disabled'=>($model->layout == 'default' || $model->layout == 'home')));
         ?>
         <?php echo $form->error($model, 'parent_id'); ?>
     </div><!-- row -->
 
     <div class="row">
         <?php echo $form->labelEx($model, 'layout'); ?>
-        <?php echo $form->dropDownList($model, 'layout', $this->pageTemplates, array('empty'=>' - ')); ?>
+        <?php echo $form->dropDownList($model, 'layout', $this->pageTemplates, array('empty'=>' - ','disabled'=>($model->layout == 'default' || $model->layout == 'home'))); ?>
         <?php echo $form->error($model, 'layout'); ?>
     </div>
 
@@ -45,7 +45,7 @@
 
     <div class="row">
         <?php echo $form->labelEx($model, 'link'); ?>
-        <?php echo $form->textField($model, 'link', array('size' => 60)); ?>
+        <?php echo $form->textField($model, 'link', array('size' => 60, 'readonly'=>($model->layout == 'default' || $model->layout == 'home'))); ?>
         <?php echo $form->error($model, 'link'); ?>
         <br/>
         <p class="hint">
@@ -61,6 +61,7 @@
             ),
             array(
                 'separator'=>'&nbsp;&nbsp;','template' => '{input} {label}',
+                'disabled'=>($model->layout == 'default')
             )
         ); ?>
         <?php echo $form->error($model, 'role'); ?>
@@ -86,7 +87,7 @@
 
     <div class="row">
         <?php echo $form->labelEx($model, 'date_active'); ?>
-        <?php echo $form->checkBox($model, 'active', array('value'=>true, 'disabled'=>!Yii::app()->user->isAdmin())); ?>
+        <?php echo $form->checkBox($model, 'active', array('value'=>true, 'disabled'=>(!Yii::app()->user->isAdmin() || $model->layout == 'default' || $model->layout == 'home'))); ?>
         <?php echo $form->error($model, 'date_active'); ?>
     </div><!-- row -->
 

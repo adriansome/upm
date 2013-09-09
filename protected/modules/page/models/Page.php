@@ -254,7 +254,7 @@ class Page extends CActiveRecord
     	if(empty($this->date_visible) && $this->visible)
     		$this->date_visible = $now;
     	elseif(!empty($this->date_visible) && !$this->visible)
-    		$this->date_active = null;
+    		$this->date_visible = null;
     	
     	if(empty($this->date_subpages) && $this->allowSubpages)
     		$this->date_subpages = $now;

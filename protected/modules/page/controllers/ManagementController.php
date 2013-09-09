@@ -35,6 +35,10 @@ class ManagementController extends Controller {
 
     public function actionCreate() {
         $model = new Page;
+
+        if(isset($_GET['id']))
+            $model->parent_id = $_GET['id'];
+
         if (isset($_POST['Page'])) {
             $model->name = $_POST['Page']['name'];
             $model->parent_id = $_POST['Page']['parent_id'];
@@ -63,24 +67,50 @@ class ManagementController extends Controller {
 
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
-        if (isset($_POST['Page'])) {
-            $model->name = $_POST['Page']['name'];
-            $model->parent_id = $_POST['Page']['parent_id'];
-            $model->layout = $_POST['Page']['layout'];
-            $model->pageMenus = $_POST['Page']['pageMenus'];
+        
+        if (isset($_POST['Page'])) {      
+            
+            if(!empty($_POST['Page']['name']))
+                $model->name = $_POST['Page']['name'];
+            
+            if(!empty($_POST['Page']['parent_id']))
+                $model->parent_id = $_POST['Page']['parent_id'];
+            
+            if(!empty($_POST['Page']['layout']))
+                $model->layout = $_POST['Page']['layout'];
+            
+            if(!empty($_POST['Page']['pageMenus']))
+                $model->pageMenus = $_POST['Page']['pageMenus'];
 
             if($_POST['Page']['link'] != $model->link)
+            {
                 $model->oldLink = $model->link;
+                $model->link = $_POST['Page']['link'];
+            }
 
-            $model->link = $_POST['Page']['link'];
-            $model->role = $_POST['Page']['role'];
-            $model->window_title = $_POST['Page']['window_title'];
-            $model->meta_description = $_POST['Page']['meta_description'];
-            $model->meta_keywords = $_POST['Page']['meta_keywords'];
-            $model->active = $_POST['Page']['active'];
-            $model->visible = $_POST['Page']['visible'];
-            $model->allowSubpages = $_POST['Page']['allowSubpages'];
-            $model->target = $_POST['Page']['target'];
+            if(!empty($_POST['Page']['role']))
+                $model->role = $_POST['Page']['role'];
+
+            if(!empty($_POST['Page']['window_title']))
+                $model->window_title = $_POST['Page']['window_title'];
+            
+            if(!empty($_POST['Page']['meta_description']))
+                $model->meta_description = $_POST['Page']['meta_description'];
+
+            if(!empty($_POST['Page']['meta_keywords']))
+                $model->meta_keywords = $_POST['Page']['meta_keywords'];
+            
+            if(isset($_POST['Page']['active']) && !empty($_POST['Page']['active']))
+                $model->active = $_POST['Page']['active'];
+            
+            if(isset($_POST['Page']['visible']))
+                $model->visible = $_POST['Page']['visible'];
+
+            if(isset($_POST['Page']['allowSubpages']))
+                $model->allowSubpages = $_POST['Page']['allowSubpages'];
+            
+            if(isset($_POST['Page']['target']))
+                $model->target = $_POST['Page']['target'];
 
             if ($model->save())
                 $this->redirect(array('/page/management/index', 'activeId' => $model->id));
@@ -93,7 +123,7 @@ class ManagementController extends Controller {
 
     public function actionDelete($id) {
         $model = $this->loadModel($id);
-        $menuId = $model->menu_id;
+
         if (Yii::app()->request->isPostRequest) {
             try {
                 $model->delete();
@@ -102,7 +132,7 @@ class ManagementController extends Controller {
             }
 
             if (!Yii::app()->getRequest()->getIsAjaxRequest()) {
-                $this->redirect(array('/' . $this->module->id . '/item?id=' . $menuId));
+                $this->redirect(array('/page/management'));
             }
         }
         else
@@ -138,7 +168,7 @@ class ManagementController extends Controller {
     {
         $directory = Yii::app()->theme->basePath."/views/templates/";
 
-        $files = array();
+        $files = array('default'=>'Default');
 
         foreach (scandir($directory) as $file) {
             $filename = substr($file, 0, strrpos($file, '.'));

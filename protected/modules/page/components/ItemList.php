@@ -75,7 +75,7 @@ class ItemList extends CWidget {
 
     public function getRender($row) {
         $this->_processed[] = $row->id;
-        echo '<li id="list_' . $row->id . '">';
+        echo '<li id="list_' . $row->id . '" class="' . (($row->layout == 'default' && !empty($row->parent) && $row->parent->layout == 'default') ? 'pinned':'') . ((($row->layout == 'default' && empty($row->parent)) || !$row->allowSubpages) ? ' no-nest':'') . '">';
         ?>
         <div style="height:20px;" class="item-wrapper <?php echo ($this->activeId == $row->id) ? 'active' : ''; ?>">
             <b><label><?php echo $row->name; ?></label></b>
