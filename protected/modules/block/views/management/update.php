@@ -14,8 +14,12 @@ $this->menu=array(
 	array('label'=>'View Block', 'url'=>array('view', 'id'=>$model->id)),
 	array('label'=>'Manage Block', 'url'=>array('admin')),
 );
+
+$this->beginClip('content');
 ?>
 
 <h1>Update Block <?php echo $model->id; ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+
+<?php $this->endClip(); ?>

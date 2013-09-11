@@ -6,7 +6,7 @@ class ManagementController extends BlockController
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/column2';
+	public $layout='//layouts/single';
 
 	/**
 	 * @return array action filters
@@ -43,17 +43,6 @@ class ManagementController extends BlockController
 				'users'=>array('*'),
 			),
 		);
-	}
-
-	/**
-	 * Displays a particular model.
-	 * @param integer $id the ID of the model to be displayed
-	 */
-	public function actionView($id)
-	{
-		$this->render('view',array(
-			'model'=>$this->loadModel($id),
-		));
 	}
 
 	/**
@@ -125,21 +114,6 @@ class ManagementController extends BlockController
 		$dataProvider=new CActiveDataProvider('Block');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
-		));
-	}
-
-	/**
-	 * Manages all models.
-	 */
-	public function actionAdmin()
-	{
-		$model=new Block('search');
-		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Block']))
-			$model->attributes=$_GET['Block'];
-
-		$this->render('admin',array(
-			'model'=>$model,
 		));
 	}
 

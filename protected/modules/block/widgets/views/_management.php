@@ -1,0 +1,1 @@
+<a class="adminzone edit" href="<?php echo Yii::app()->request->baseUrl; ?>/block/management/update/<?php echo $this->id; ?>">edit</a>

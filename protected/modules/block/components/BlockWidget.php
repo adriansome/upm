@@ -5,6 +5,7 @@ abstract class BlockWidget extends CWidget
 	public $page_id;
 	public $scope;
 	
+	protected $id;
 	private $contents;
 
 	abstract public function attributes();
@@ -36,6 +37,7 @@ abstract class BlockWidget extends CWidget
 		if(!isset($block))
 			$block = $this->createBlock();
 
+		$this->id = $block->id;
 		$this->loadContents($block->contents);
 	}
 
@@ -105,5 +107,11 @@ abstract class BlockWidget extends CWidget
 					throw new CHttpException(500, 'Unknown type "'.$definition['type'].'" for attribute "'.$attribute.'"');
 			}
 		}
+	}
+
+	public function run()
+	{
+		if(Yii::app()->user->isAdmin())
+			$this->render('_management');
 	}
 }
