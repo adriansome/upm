@@ -20,7 +20,7 @@ class Menu extends CMenu
 			}
 
 			// Find all the active/visible pages that belong to this menu.
-			$sql  = 'SELECT page.name AS label, page.link AS url ';
+			$sql  = 'SELECT page.name AS label, page.link AS url, page.role ';
 			$sql .= 'FROM page ';
 			$sql .= 'LEFT JOIN page_menu ON page.id = page_menu.page_id ';
 			$sql .= 'WHERE page.date_active IS NOT NULL ';
@@ -38,10 +38,12 @@ class Menu extends CMenu
 				foreach ($pages as $index => $page)
 				{
 					$page_uri = $page['url'];
+					
 					if($page_uri[0] != '/')
 						$page_uri = '/'.$page_uri;
 
 					$pages[$index]['active'] = ($_SERVER['REQUEST_URI'] == $page_uri);
+					$pages[$index]['visible'] = ($page['role'] == 'all' || (Yii::app()->user->isGuest && $page['role'] == 'guest') || ((!Yii::app()->user->isGuest && Yii::app()->user->role == $page['role']) || (($page['role'] == 'user' || $page['role'] == 'subscriber') && Yii::app()->user->isAdmin())));
 					$pages[$index]['url'] = Yii::app()->getBaseUrl(true).$page_uri;
 				}
 				
