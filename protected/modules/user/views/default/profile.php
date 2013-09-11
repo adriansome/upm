@@ -23,7 +23,7 @@ $this->beginClip('content');
 	'attributes'=>array(
 		'email',
 		'username',
-		'dateCreated',
+		'date_created',
 	),
 )); ?>
 

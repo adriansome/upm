@@ -76,18 +76,18 @@ class DefaultController extends UserController
 		if(isset($_POST['User']['email']))
 		{
 			$record=User::model()->find(array(
-			  'select'=>array('dateDeleted','dateEmailValidated','username'),
+			  'select'=>array('date_deleted','date_email_validated','username'),
 		      'condition'=>'email=:email',
 		      'params'=>array(':email'=>$_POST['User']['email']),
 		    ));
 
-		    if(isset($record) && !isset($record->dateDeleted) && !isset($record->dateEmailValidated))
+		    if(isset($record) && !isset($record->date_deleted) && !isset($record->date_email_validated))
 		    {
 		    	$model = $record;
 		    	unset($record);
 		    }
 
-			if(isset($record->dateEmailValidated))
+			if(isset($record->date_email_validated))
 				$this->redirect(array('login', 'username'=>$record->username));
 			else
 				$model=$this->saveModel($model, $_POST['User'], 'registrationSuccess');
@@ -123,10 +123,10 @@ class DefaultController extends UserController
 
 	public function actionValidate($uid)
 	{
-		$model=$this->loadByUid('activationCode', $uid);
+		$model=$this->loadByUid('activation_code', $uid);
 		$model->scenario = 'validate';
 
-		if(empty($model->dateEmailValidated))
+		if(empty($model->date_email_validated))
 		{
 			$model->save();
 			$this->setRefererSessionData($model->username);
@@ -205,7 +205,7 @@ class DefaultController extends UserController
 
 	public function actionResetPassword($uid)
 	{
-		$model=$this->loadByUid('resetCode', $uid);
+		$model=$this->loadByUid('reset_code', $uid);
 
 	    $model->scenario = 'updatePassword';
 
@@ -213,7 +213,7 @@ class DefaultController extends UserController
 		$command=Yii::app()->db->createCommand("SELECT NOW() as 'now';")->queryAll();
 		$now=strtotime($command[0]['now']);
 
-	    if($now < $model->resetCodeExpiryTime)
+	    if($now < $model->reset_codeExpiryTime)
 	    {
 			if(isset($_POST['User']))
 			{
@@ -303,7 +303,7 @@ class DefaultController extends UserController
 		if(isset($_POST['User']))
 		{
 			$model->currentPassword = $_POST['User']['currentPassword'];
-			$model->oldEmail = $model->email;
+			$model->old_email = $model->email;
 			$model->email = $_POST['User']['email'];
 			
 			if($model->save())
@@ -359,7 +359,7 @@ class DefaultController extends UserController
 
 	public function actionRevertDelete($uid)
 	{
-		$model = $this->loadByUid('revertCode', $uid);
+		$model = $this->loadByUid('revert_code', $uid);
 	    $model->scenario = 'revertDelete';
 	   	$model->save();
 	   	$this->setRefererSessionData($model->username, $model->id, $model->email);
@@ -368,7 +368,7 @@ class DefaultController extends UserController
 
 	public function actionRevertEmail($uid)
 	{
-		$model = $this->loadByUid('revertCode', $uid);
+		$model = $this->loadByUid('revert_code', $uid);
     	$model->scenario = 'revertEmail';
     	$model->save();
     	$this->setRefererSessionData($model->username, $model->id, $model->email);
@@ -412,7 +412,7 @@ class DefaultController extends UserController
 	{	
 		if(!empty($model->email) && $attributes['email'] !== $model->email)
 		{
-			$model->oldEmail = $model->email;
+			$model->old_email = $model->email;
 			$model->emailChanged = true;
 		}
 		

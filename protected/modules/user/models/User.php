@@ -6,23 +6,23 @@
  * The followings are the available columns in table 'user':
  * @property integer $id
  * @property string $email
- * @property string $oldEmail
+ * @property string $old_email
  * @property string $password
  * @property string $role
  * @property string $username
  * @property string $firstname
  * @property string $lastname
- * @property string $dateTermsAgreed
- * @property string $dateUpdated
- * @property string $dateLastLogin
- * @property string $dateCreated
- * @property string $dateValidationEmailSent
- * @property string $activationCode
- * @property string $dateEmailValidated
- * @property string $dateAccountExpire
- * @property string $dateRevert
+ * @property string $date_terms_agreed
+ * @property string $date_updated
+ * @property string $date_last_login
+ * @property string $date_created
+ * @property string $date_validation_email_sent
+ * @property string $activation_code
+ * @property string $date_email_validated
+ * @property string $date_account_expire
+ * @property string $date_revert
  * @property string $dateReset
- * @property string $dateDeleted
+ * @property string $date_deleted
  */
 class User extends CActiveRecord
 {
@@ -66,15 +66,15 @@ class User extends CActiveRecord
 			array('currentPassword', 'required', 'on'=>'emailRevert, updateEmail, updatePassword'),
 			array('currentPassword', 'authenticate', 'on'=>'emailRevert, updateEmail, updatePassword'),
 			array('role', 'required', 'on'=>'adminUpdate'),
-			array('email, oldEmail, firstname, lastname', 'length', 'max'=>140),
+			array('email, old_email, firstname, lastname', 'length', 'max'=>140),
 			array('password', 'length', 'max'=>60),
 			array('password2', 'compare', 'compareAttribute'=>'password1'),
 			array('role', 'length', 'max'=>6),
-			array('username, activationCode', 'length', 'max'=>40),
-			array('searchTerm, currentPassword, dateUpdated, dateLastLogin, dateValidationEmailSent, dateEmailValidated, dateAccountExpire, dateRevert, dateReset, dateDeleted', 'safe'),
+			array('username, activation_code', 'length', 'max'=>40),
+			array('searchTerm, currentPassword, date_updated, date_last_login, date_validation_email_sent, date_email_validated, date_account_expire, date_revert, dateReset, date_deleted', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('searchTerm, id, email, oldEmail, password, password1, password2, role, username, firstname, lastname, fullname, dateTermsAgreed, dateUpdated, dateLastLogin, dateCreated, dateValidationEmailSent, activationCode, dateEmailValidated, dateAccountExpire, dateRevert, dateReset, dateDeleted', 'safe', 'on'=>'search'),
+			array('searchTerm, id, email, old_email, password, password1, password2, role, username, firstname, lastname, fullname, date_terms_agreed, date_updated, date_last_login, date_created, date_validation_email_sent, activation_code, date_email_validated, date_account_expire, date_revert, dateReset, date_deleted', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -97,8 +97,7 @@ class User extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'email' => 'E-mail',
-			'oldEmail' => 'Old E-mail',
-			'password' => 'Password',
+			'old_email' => 'Old E-mail', 'password' => 'Password',
 			'currentPassword' => 'Current Password',
 			'password1' => 'New Password',
 			'password2' => 'Confirm New Password',
@@ -107,17 +106,17 @@ class User extends CActiveRecord
 			'firstname' => 'First Name',
 			'lastname' => 'Last Name',
 			'fullname' => 'Name',
-			'dateTermsAgreed' => 'Date Terms Agreed',
-			'dateUpdated' => 'Date Updated',
-			'dateLastLogin' => 'Date Last Login',
-			'dateCreated' => 'Date Joined',
-			'dateValidationEmailSent' => 'Date Validation Email Sent',
-			'activationCode' => 'Activation Code',
-			'dateEmailValidated' => 'Date Email Validated',
-			'dateAccountExpire' => 'Date Account Expire',
-			'dateRevert' => 'Date Revert',
+			'date_terms_agreed' => 'Date Terms Agreed',
+			'date_updated' => 'Date Updated',
+			'date_last_login' => 'Date Last Login',
+			'date_created' => 'Date Joined',
+			'date_validation_email_sent' => 'Date Validation Email Sent',
+			'activation_code' => 'Activation Code',
+			'date_email_validated' => 'Date Email Validated',
+			'date_account_expire' => 'Date Account Expire',
+			'date_revert' => 'Date Revert',
 			'dateReset' => 'Date Reset',
-			'dateDeleted' => 'Date Deleted',
+			'date_deleted' => 'Date Deleted',
 			'searchTerm' => 'Search Name or E-mail Address'
 		);
 	}
@@ -144,7 +143,7 @@ class User extends CActiveRecord
 		return $this->firstname.' '.$this->lastname;
 	}
 
-	public function getResetCodeExpiryTime()
+	public function getreset_codeExpiryTime()
 	{
 		// Return time 1 hour from when reset request was made.
 		return (strtotime($this->dateReset)+3600);
@@ -184,8 +183,8 @@ class User extends CActiveRecord
 			parent::delete();
 		else
 		{
-			$this->dateDeleted = new CDbExpression('NOW()');
-			$this->revertCode = $this->generateUniqueId();
+			$this->date_deleted = new CDbExpression('NOW()');
+			$this->revert_code = $this->generateUniqueId();
 			$this->sendRevertEmail('user.views.mail.deletionEmail');
 			$this->save();
 		}
@@ -196,61 +195,61 @@ class User extends CActiveRecord
 		if($this->isNewRecord)
 		{
 			$now = new CDbExpression('NOW()');
-			$this->dateTermsAgreed = $now;
-			$this->dateCreated = $now;
+			$this->date_terms_agreed = $now;
+			$this->date_created = $now;
 		}
 
 		if($this->scenario == 'register')
 		{
 			$this->updatePassword();
-			$this->activationCode = $this->generateUniqueId();
+			$this->activation_code = $this->generateUniqueId();
 			$this->role = 'user';
 			$this->sendValidationEmail();
-			$this->dateValidationEmailSent = new CDbExpression('NOW()');
+			$this->date_validation_email_sent = new CDbExpression('NOW()');
 		}
 
 		if($this->scenario == 'resendEmailVerification')
 		{
 			$this->sendValidationEmail();
-			$this->dateValidationEmailSent = new CDbExpression('NOW()');
+			$this->date_validation_email_sent = new CDbExpression('NOW()');
 		}
 
 		else if($this->scenario == 'update' || $this->scenario == 'updatePassword' || $this->scenario == 'updateEmail' || $this->scenario == 'adminUpdate')
 		{
-			$this->dateUpdated = new CDbExpression('NOW()');
+			$this->date_updated = new CDbExpression('NOW()');
 		}
 
 		if($this->scenario == 'updateEmail')
 		{
-			$this->dateRevert = new CDbExpression('NOW()');
-			$this->revertCode = $this->generateUniqueId();
+			$this->date_revert = new CDbExpression('NOW()');
+			$this->revert_code = $this->generateUniqueId();
 			$this->sendRevertEmail('user.views.mail.emailChangeEmail');
 		}
 
 		else if($this->scenario == 'updatePassword')
 		{
 			$this->updatePassword();
-			$this->resetCode = null;
+			$this->reset_code = null;
 			// $this->sendRevertEmail('user.views.mail.passwordChangeEmail');
 		}
 
 		else if($this->scenario == 'validate')
 		{
-			$this->dateEmailValidated = new CDbExpression('NOW()');
-			$this->activationCode = null;
+			$this->date_email_validated = new CDbExpression('NOW()');
+			$this->activation_code = null;
 		}
 
 		else if ($this->scenario == 'revertEmail')
 		{
-			$this->email = $this->oldEmail;
-			$this->oldEmail = null;
-			$this->revertCode = null;
+			$this->email = $this->old_email;
+			$this->old_email = null;
+			$this->revert_code = null;
 		}
 
 		else if ($this->scenario == 'revertDelete')
 		{
-			$this->dateDeleted = null;
-			$this->revertCode = null;
+			$this->date_deleted = null;
+			$this->revert_code = null;
 		}
 
 		return parent::beforeSave();
@@ -260,7 +259,7 @@ class User extends CActiveRecord
 	{
 		$validationEmail = new YiiMailMessage;
 		$validationEmail->view = 'user.views.mail.validationEmail';
-		$validationEmail->setBody(array('fullname'=>$this->fullname, 'uid'=>$this->activationCode), 'text/html');
+		$validationEmail->setBody(array('fullname'=>$this->fullname, 'uid'=>$this->activation_code), 'text/html');
 		$validationEmail->addTo($this->email);
 		$validationEmail->from = Yii::app()->params['adminEmail'];
 		Yii::app()->mail->send($validationEmail);
@@ -268,10 +267,10 @@ class User extends CActiveRecord
 
 	protected function sendCredentialsEmail()
 	{
-		$uidExpires = date('H:i:s', $this->resetCodeExpiryTime);
+		$uidExpires = date('H:i:s', $this->reset_codeExpiryTime);
 		$credentialsEmail = new YiiMailMessage;
 		$credentialsEmail->view = 'user.views.mail.credentialsEmail';
-		$credentialsEmail->setBody(array('fullname'=>$this->fullname, 'username'=>$this->username, 'uid'=>$this->resetCode, 'uidExpires'=>$uidExpires), 'text/html');
+		$credentialsEmail->setBody(array('fullname'=>$this->fullname, 'username'=>$this->username, 'uid'=>$this->reset_code, 'uidExpires'=>$uidExpires), 'text/html');
 		$credentialsEmail->addTo($this->email);
 		$credentialsEmail->from = Yii::app()->params['adminEmail'];
 		Yii::app()->mail->send($credentialsEmail);
@@ -281,8 +280,8 @@ class User extends CActiveRecord
 	{
 		$revertEmail = new YiiMailMessage;
 		$revertEmail->view = $message;
-		$revertEmail->setBody(array('fullname'=>$this->fullname, 'uid'=>$this->revertCode), 'text/html');
-		$revertEmail->addTo($this->oldEmail);
+		$revertEmail->setBody(array('fullname'=>$this->fullname, 'uid'=>$this->revert_code), 'text/html');
+		$revertEmail->addTo($this->old_email);
 		$revertEmail->from = Yii::app()->params['adminEmail'];
 		Yii::app()->mail->send($revertEmail);
 	}
@@ -294,14 +293,14 @@ class User extends CActiveRecord
 
 	public function recordSuccessfulLogin()
 	{
-		$this->dateLastLogin = new CDbExpression('NOW()');
+		$this->date_last_login = new CDbExpression('NOW()');
 		return $this->save();
 	}
 
 	public function resetCredentials()
 	{
 		$this->dateReset = new CDbExpression('NOW()');
-		$this->resetCode = $this->generateUniqueId();
+		$this->reset_code = $this->generateUniqueId();
 		$this->sendCredentialsEmail();
 		return $this->save();
 	}

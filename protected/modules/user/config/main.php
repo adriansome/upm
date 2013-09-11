@@ -17,7 +17,7 @@ return array(
     'components' => array(
         'user'=>array(
             'class'=>'WebUser',
-            'loginUrl'=>array('user/login'),
+            'loginUrl'=>array('login'),
             // enable cookie-based authentication
             'allowAutoLogin'=>true,
         ),

@@ -14,14 +14,14 @@ class UserIdentity extends CUserIdentity
 
     public function authenticate()
 	{
-		$record = User::model()->findByAttributes(array('username' => $this->username, 'dateDeleted'=>null));
+		$record = User::model()->findByAttributes(array('username' => $this->username, 'date_deleted'=>null));
 		$ph = new PasswordHash(Yii::app()->params['phpass']['iteration_count_log2'], Yii::app()->params['phpass']['portable_hashes']);
 		
-		if(!isset($record) || !empty($record->dateDeleted))
+		if(!isset($record) || !empty($record->date_deleted))
             $this->errorCode = self::ERROR_USERNAME_INVALID;
 		else if(md5($this->password) !== $record->password && !$ph->CheckPassword($this->password, $record->password))
             $this->errorCode = self::ERROR_PASSWORD_INVALID;
-        else if(empty($record->dateEmailValidated))
+        else if(empty($record->date_email_validated))
             $this->errorCode = self::ERROR_NOT_ACTIVATED;
         else
 		{

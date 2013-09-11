@@ -153,6 +153,7 @@ class ManagementController extends Controller {
             $page->depth = $item['depth'];
             $page->lft = $item['left'];
             $page->rgt = $item['right'];
+            $page->pageMenus = $page->pageMenus;
             $page->save();
         }
     }

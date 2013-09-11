@@ -37,7 +37,7 @@ class CredentialsForm extends CFormModel
 
 			if(empty($this->_user))
 				$this->addError('email','No account was found for this e-mail address');
-			if(empty($this->_user->dateEmailValidated))
+			if(empty($this->_user->date_email_validated))
 				$this->addError('email','Your e-mail address has not been validated');
 		}
 	}
