@@ -21,6 +21,7 @@ $config = array(
 		'application.models.*',
 		'application.components.*',
 		'application.components.mail.*',
+		'application.components.tinymce.*',
 		'application.widgets.*',
 	),
 

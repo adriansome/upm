@@ -13,5 +13,6 @@ class MultiLineText extends BlockWidget
 	public function run()
 	{
 		$this->render('text');
+		parent::run();
 	}
 }

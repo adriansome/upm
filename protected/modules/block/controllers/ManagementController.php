@@ -109,9 +109,9 @@ class ManagementController extends BlockController
 					break;
 
 				case 'date':
-					$fields[$content->name]['input']=$this->widget('zii.widgets.jui.CJuiDatePicker',array(
+					$fields[$content->name]['input']=$this->createWidget('zii.widgets.jui.CJuiDatePicker',array(
 					    'model'=>$content,
-					    'attribute'=>'date_value',
+					    'attribute'=>"[$index]date_value",
 					));
 					break;
 

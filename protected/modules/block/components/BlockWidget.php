@@ -36,7 +36,6 @@ abstract class BlockWidget extends CWidget
 		if(!isset($block))
 			$block = $this->createBlock();
 
-		$this->id = $block->id;
 		$this->loadContents($block->contents);
 	}
 
@@ -48,12 +47,7 @@ abstract class BlockWidget extends CWidget
 		if(!empty($this->page_id))
 			$block->page_id = $this->page_id;
 
-		if(!$block->save())
-		{
-			echo '<pre>'.print_r($block->getErrors(),1).'</pre>';
-			exit;
-		}
-
+		$block->save();
 		$this->createContents($block->id);
 
 		return $block;

@@ -15,7 +15,12 @@ $this->beginClip('content');
 <?php foreach($fields as $field): ?>
 	<div class="row">
 		<?php echo $field['label']; ?>
-		<?php echo $field['input']; ?>
+		<?php
+			if(is_object($field['input'])) 
+				$field['input']->run();
+			else
+				echo $field['input'];
+		?>
 		<?php echo $field['validation']; ?>
 	</div>
 <?php endforeach; ?>
