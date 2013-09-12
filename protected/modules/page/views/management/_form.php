@@ -99,7 +99,7 @@
 
     <div class="row">
         <?php echo $form->labelEx($model, 'date_subpages'); ?>
-        <?php echo $form->checkBox($model, 'allowSubpages', array('value'=>true, 'disabled'=>!Yii::app()->user->isAdmin())); ?>
+        <?php echo $form->checkBox($model, 'allowSubpages', array('value'=>true, 'disabled'=>(!Yii::app()->user->isAdmin() || isset($model->parent->parent)))); ?>
         <?php echo $form->error($model, 'date_subpages'); ?>
     </div><!-- row -->
 

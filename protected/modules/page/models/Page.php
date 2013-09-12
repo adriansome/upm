@@ -263,7 +263,7 @@ class Page extends CActiveRecord
     	
     	if(empty($this->date_subpages) && $this->allowSubpages)
     		$this->date_subpages = $now;
-    	elseif(!empty($this->date_subpages) && !$this->allowSubpages)
+    	elseif((!empty($this->date_subpages) && !$this->allowSubpages) || isset($this->parent->parent))
     		$this->date_subpages = null;
 
     	if(empty($this->target))
