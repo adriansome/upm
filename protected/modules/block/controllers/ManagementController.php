@@ -71,51 +71,52 @@ class ManagementController extends BlockController
 	 */
 	public function actionUpdate($id)
 	{
-		$model=$this->loadModel($id);
+		$block=$this->loadModel($id);
+		$contents = $block->contents;
 
-		if(isset($_POST['Block']))
+		if(isset($_POST['Content']))
 		{
-			$model->attributes=$_POST['Block'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+			foreach($_POST['Content'] as $index => $content)
+			{
+				$contents[$index]->attributes = $content;
+				$contents[$index]->save();
+			}
 		}
 
-		$inputs = array();
+		$form = new CActiveForm;
+		$fields = array();
 
-		 $form=$this->beginWidget('CActiveForm', array(
-			'id'=>'block-form',
-			'enableAjaxValidation'=>true,
-		));
-
-		foreach($model->contents as $content)
+		foreach($contents as $index=>$content)
 		{
-			switch ($content->type->name) {
+			$fields[$content->name] = array(
+				'label'=>CHtml::label(ucfirst($content->name), "Content[$index][string_value]"),
+				'validation'=>$form->error($content,"[$index]string_value"),
+			);
+
+			switch ($content->type->name)
+			{
 				case 'singleline':
-					$inputs[$content->name] = array(
-						'label'=>$form->labelEx($content,'string_value'),
-						'field'=>$form->textField($content,'string_value',array('size'=>60,'maxlength'=>140)),
-						'validation'=>$form->error($content,'string_value'),
-					);
+					$fields[$content->name]['input']=$form->textField($content,"[$index]string_value",array('size'=>60,'maxlength'=>140));
 					break;
 
 				case 'multiline':
-					$inputs[$content->name] = '';
-					break;
-
 				case 'html':
-					$inputs[$content->name] = '';
+					$fields[$content->name]['input']=$form->textArea($content,"[$index]string_value",array('rows' => 6, 'cols' => 50));
 					break;
 
 				case 'file':
-					$inputs[$content->name] = '';
+					$fields[$content->name]['input']=$form->fileField($content,"[$index]file_value");
 					break;
 
 				case 'date':
-					$inputs[$content->name] = '';
+					$fields[$content->name]['input']=$this->widget('zii.widgets.jui.CJuiDatePicker',array(
+					    'model'=>$content,
+					    'attribute'=>'date_value',
+					));
 					break;
 
 				case 'boolean':
-					$inputs[$content->name] = '';
+					$fields[$content->name]['input']=$form->checkBox($content,"[$index]boolean_value");
 					break;
 				
 				default:
@@ -123,11 +124,11 @@ class ManagementController extends BlockController
 			}
 		}
 
-		$this->performAjaxValidation($model);
+		$this->performAjaxValidation($block);
 
 		$this->render('update',array(
-			'models'=>$model->contents,
-			'inputs'=>$inputs,
+			'block'=>$block->name,
+			'fields'=>$fields,
 		));
 	}
 
