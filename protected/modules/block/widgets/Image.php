@@ -8,10 +8,10 @@ class Image extends BlockWidget
 				'type'=>'file',
 			),
 			'alt'=>array(
-				'type'=>'plaintext',
+				'type'=>'singleline',
 			),
 			'title'=>array(
-				'type'=>'plaintext'
+				'type'=>'singleline'
 			),
 		);
 	}

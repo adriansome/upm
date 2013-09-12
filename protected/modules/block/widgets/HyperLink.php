@@ -5,13 +5,13 @@ class HyperLink extends BlockWidget
 	{
 		return array(
 			'href'=>array(
-				'type'=>'plaintext',
+				'type'=>'singleline',
 			),
 			'title'=>array(
-				'type'=>'plaintext',
+				'type'=>'singleline',
 			),
 			'text'=>array(
-				'type'=>'plaintext'
+				'type'=>'singleline'
 			),
 			'target'=>array(
 				'type'=>'boolean'

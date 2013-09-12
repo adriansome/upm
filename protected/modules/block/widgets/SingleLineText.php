@@ -5,7 +5,7 @@ class SingleLineText extends BlockWidget
 	{
 		return array(
 			'text'=>array(
-				'type'=>'plaintext',
+				'type'=>'singleline',
 			),
 		);
 	}

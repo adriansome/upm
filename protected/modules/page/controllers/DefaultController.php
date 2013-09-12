@@ -47,7 +47,8 @@ class DefaultController extends PageController
 			$link = '/';
 		
 		$model = $this->loadModel($link);
-
+		Yii::app()->session['page_id'] = $model->id;
+		
 		// Check if user has permission to view this page.
 		if($model->role !== 'all')
 		{

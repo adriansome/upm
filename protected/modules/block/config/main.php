@@ -21,8 +21,6 @@ return array(
                 $module_name . '/management' => $module_name . '/management/index',
                 $module_name . '/management/<action:\w+>/<id:\d+>' => $module_name . '/management/<action>',
                 $module_name . '/management/<action:\w+>' => $module_name . '/management/<action>',
-                // $module_name . '/<action:\w+>/<id:\d+>' => $module_name . '/' . $default_controller . '/<action>',
-                // $module_name . '/<action:\w+>' => $module_name . '/' . $default_controller . '/<action>',
             ),
         ),
     ),

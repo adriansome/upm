@@ -5,9 +5,10 @@ $this->pageTitle = $model->window_title;
 
 <?php $this->beginClip('content'); ?>
    <h1><?php echo $model->name; ?></h1>
-   <p>
-		<?php echo $model->meta_description; ?>
-   </p>
+	   <?php $this->widget('SingleLineText',array(
+			'name'=>'page text',
+			'scope'=>'page',
+		)); ?>
 <?php $this->endClip(); ?>
 
 <?php $this->beginClip('sidebar1'); ?>

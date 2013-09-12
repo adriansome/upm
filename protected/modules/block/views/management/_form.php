@@ -6,10 +6,7 @@
 
 <div class="form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'block-form',
-	'enableAjaxValidation'=>false,
-)); ?>
+<?php ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 

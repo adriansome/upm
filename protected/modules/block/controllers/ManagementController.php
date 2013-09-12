@@ -24,26 +24,22 @@ class ManagementController extends BlockController
 	 * This method is used by the 'accessControl' filter.
 	 * @return array access control rules
 	 */
-	public function accessRules()
-	{
-		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
-			),
-			array('deny',  // deny all users
-				'users'=>array('*'),
-			),
-		);
-	}
+	public function accessRules() {
+        return array(
+            array('allow',
+                'users'=>array('@'),
+                'roles' => array('admin'),
+            ),
+            array('allow',
+                'actions'=>array('index','create','update','delete'),
+                'users'=>array('@'),
+                'roles' => array('editor'),
+            ),
+            array('deny',
+                'users' => array('*'),
+            ),
+        );
+    }
 
 	/**
 	 * Creates a new model.
@@ -77,9 +73,6 @@ class ManagementController extends BlockController
 	{
 		$model=$this->loadModel($id);
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
 		if(isset($_POST['Block']))
 		{
 			$model->attributes=$_POST['Block'];
@@ -87,8 +80,54 @@ class ManagementController extends BlockController
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
+		$inputs = array();
+
+		 $form=$this->beginWidget('CActiveForm', array(
+			'id'=>'block-form',
+			'enableAjaxValidation'=>true,
+		));
+
+		foreach($model->contents as $content)
+		{
+			switch ($content->type->name) {
+				case 'singleline':
+					$inputs[$content->name] = array(
+						'label'=>$form->labelEx($content,'string_value'),
+						'field'=>$form->textField($content,'string_value',array('size'=>60,'maxlength'=>140)),
+						'validation'=>$form->error($content,'string_value'),
+					);
+					break;
+
+				case 'multiline':
+					$inputs[$content->name] = '';
+					break;
+
+				case 'html':
+					$inputs[$content->name] = '';
+					break;
+
+				case 'file':
+					$inputs[$content->name] = '';
+					break;
+
+				case 'date':
+					$inputs[$content->name] = '';
+					break;
+
+				case 'boolean':
+					$inputs[$content->name] = '';
+					break;
+				
+				default:
+					throw new CHttpException(500, 'Unknown content type "'.$content->type->name.'"');
+			}
+		}
+
+		$this->performAjaxValidation($model);
+
 		$this->render('update',array(
-			'model'=>$model,
+			'models'=>$model->contents,
+			'inputs'=>$inputs,
 		));
 	}
 

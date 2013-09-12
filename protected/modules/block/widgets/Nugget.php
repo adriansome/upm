@@ -5,22 +5,22 @@ class Nugget extends BlockWidget
 	{
 		return array(
 			'title'=>array(
-				'type'=>'plaintext',
+				'type'=>'singleline',
 			),
 			'text'=>array(
-				'type'=>'plaintext',
+				'type'=>'smultiline',
 			),
 			'href'=>array(
-				'type'=>'plaintext',
+				'type'=>'singleline',
 			),
 			'target'=>array(
 				'type'=>'boolean',
 			),
 			'link_title'=>array(
-				'type'=>'plaintext',
+				'type'=>'singleline',
 			),
 			'link_text'=>array(
-				'type'=>'plaintext',
+				'type'=>'singleline',
 			),
 			'image_src'=>array(
 				'type'=>'file',

@@ -2,10 +2,10 @@
 abstract class BlockWidget extends CWidget
 {
 	public $name;
-	public $page_id;
 	public $scope;
 	
 	protected $id;
+	protected $page_id;
 	private $contents;
 
 	abstract public function attributes();
@@ -20,15 +20,14 @@ abstract class BlockWidget extends CWidget
 
 	public function init()
 	{
+		$this->page_id = Yii::app()->session['page_id'];
 		$this->loadBlock();
 	}
 
 	protected function loadBlock()
 	{
-		$params = array('name'=>$this->name);
+		$params = array('name'=>$this->name, 'page_id'=>$this->page_id);
 
-		if(!empty($this->page_id))
-			$params = array_merge($params, array('page_id'=>$this->page_id));
 		if(!empty($this->scope))
 			$params = array_merge($params, array('scope'=>$this->scope));
 
@@ -83,7 +82,8 @@ abstract class BlockWidget extends CWidget
 		{
 			switch($definition['type'])
 			{
-				case 'plaintext':
+				case 'singleline':
+				case 'multiline':
 					$this->$attribute = htmlspecialchars($values[$attribute]->string_value);
 					break;
 

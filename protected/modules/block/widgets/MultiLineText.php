@@ -5,7 +5,7 @@ class MultiLineText extends BlockWidget
 	{
 		return array(
 			'text'=>array(
-				'type'=>'plaintext',
+				'type'=>'multiline',
 			),
 		);
 	}
