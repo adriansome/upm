@@ -5,6 +5,7 @@
 <head>
 	<?php require_once(Yii::app()->theme->basepath.'/views/elements/head.php'); ?>
 	<?php echo "\n"; ?>
+	<?php Yii::app()->bootstrap->register(); ?>
 </head>
 
 <body>

@@ -23,6 +23,7 @@ $config = array(
 		'application.models.*',
 		'application.components.*',
 		'bootstrap.components.*',
+		'bootstrap.widgets.*',
 		'mail.*',
 	),
 
@@ -67,7 +68,7 @@ $config = array(
 		),
 
 		'bootstrap'=>array(
-            'class'=>'Bootstrap',
+            'class'=>'bootstrap.components.Bootstrap',
         ),
 
 		'errorHandler'=>array(
@@ -86,9 +87,9 @@ $config = array(
 
 				// uncomment the following to show log messages on web pages
 				
-				array(
+				/*array(
 					'class'=>'CWebLogRoute',
-				),
+				),*/
 				
 			),
 		),
@@ -98,7 +99,7 @@ $config = array(
 	// using Yii::app()->params['paramName']
 	'params'=>array(
 		'adminEmail'=>'mail@mattbiddle.cc',
-		'overlayAdmin'=>false,
+		'overlayAdmin'=>true,
 		'maxDepth'=>3,
         'menus'=>array(
             1=>array(

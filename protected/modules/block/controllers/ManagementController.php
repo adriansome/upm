@@ -85,10 +85,11 @@ class ManagementController extends BlockController
 				$contents[$index]->save();
 			}
 
-			$this->redirect(Yii::app()->user->returnUrl);
+			return json_encode(array('message'=>$block->name.' has been saved.'));
 		}
 
 		$form = new CActiveForm;
+
 		$fields = array();
 
 		foreach($contents as $index=>$content)
@@ -137,7 +138,7 @@ class ManagementController extends BlockController
 
 		$this->performAjaxValidation($block);
 
-		$this->render('update',array(
+		$this->renderPartial('update',array(
 			'block'=>$block,
 			'fields'=>$fields,
 		));
