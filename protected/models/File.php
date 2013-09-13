@@ -99,4 +99,14 @@ class File extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+	public function beforeSave()
+	{
+		return parent::beforeSave();
+	}
+
+	public function beforeDelete()
+	{
+		return parent::beforeDelete();
+	}
 }

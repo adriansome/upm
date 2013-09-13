@@ -1,6 +1,3 @@
- <?php Yii::app()->clientScript->registerCoreScript('jquery'); ?>
- <?php Yii::app()->clientScript->registerScriptFile($this->tinymce.'/tinymce.min.js'); ?>
-
 <?php
 if(isset($this->model))
 	echo CHtml::activeTextArea($this->model, $this->attribute, $this->htmlOptions);

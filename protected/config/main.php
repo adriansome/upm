@@ -1,10 +1,12 @@
 <?php
-
-// uncomment the following to define a path alias
-// Yii::setPathOfAlias('local','path/to/local-folder');
-
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
+
+Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../vendors/bootstrap');
+Yii::setPathOfAlias('tinymce', dirname(__FILE__).'/../vendors/tinymce');
+Yii::setPathOfAlias('filemanager', dirname(__FILE__).'/../vendors/filemanager');
+Yii::setPathOfAlias('mail', dirname(__FILE__).'/../vendors/mail');
+
 $config = array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	
@@ -20,8 +22,8 @@ $config = array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
-		'application.components.mail.*',
-		'application.components.tinymce.*',
+		'bootstrap.components.*',
+		'mail.*',
 	),
 
 	'modules'=>array(
@@ -29,6 +31,9 @@ $config = array(
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>'fanatic',
+			'generatorPaths'=>array(
+                'bootstrap.gii',
+            ),
 			// if removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','33.33.33.1','::1'),
 		),
@@ -60,6 +65,10 @@ $config = array(
 			'password' => 'fanatic',
 			'charset' => 'utf8',
 		),
+
+		'bootstrap'=>array(
+            'class'=>'Bootstrap',
+        ),
 
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors

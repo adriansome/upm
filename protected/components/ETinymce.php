@@ -25,18 +25,20 @@ class ETinymce extends CWidget
 
 	public function run()
 	{
+		Yii::app()->clientScript->registerCoreScript('jquery');
+		Yii::app()->clientScript->registerScriptFile($this->tinymce.'/tinymce.min.js');
 		$this->render('tinymce');
 	}
 
 	public function loadAssets()
 	{
 		$this->tinymce = Yii::app()->getAssetManager()->publish(
-                Yii::getPathOfAlias('application.vendors.tinymce'
+                Yii::getPathOfAlias('tinymce'
             )
         );
 
         $this->filemanager = Yii::app()->getAssetManager()->publish(
-                Yii::getPathOfAlias('application.vendors.filemanager'
+                Yii::getPathOfAlias('filemanager'
             )
         );
 	}
