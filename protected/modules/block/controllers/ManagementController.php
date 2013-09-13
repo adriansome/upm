@@ -100,14 +100,14 @@ class ManagementController extends BlockController
 					break;
 
 				case 'multiline':
+					$fields[$content->name]['input']=$form->textArea($content,"[$index]string_value",array('rows' => 6, 'cols' => 50));
+					break;
+
+				case 'html':
 					$fields[$content->name]['input']=$this->createWidget('ETinymce',array(
 					    'model'=>$content,
 					    'attribute'=>"[$index]string_value",
 					));
-					break;
-
-				case 'html':
-					$fields[$content->name]['input']=$form->textArea($content,"[$index]string_value",array('rows' => 6, 'cols' => 50));
 					break;
 
 				case 'file':
