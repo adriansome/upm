@@ -12,7 +12,7 @@ $this->pageTitle = $model->window_title;
 	</h1>
 
    <p>
-		<?php $this->widget('MultiLineText',array(
+		<?php $this->widget('RichText',array(
 			'name'=>'test text block',
 			'scope'=>'page',
 		)); ?>
@@ -31,4 +31,5 @@ $this->pageTitle = $model->window_title;
 			'scope'=>'page',
 		)); ?>
    </p>
+   
 <?php $this->endClip(); ?>
