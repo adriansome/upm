@@ -56,6 +56,11 @@ class Block extends CActiveRecord
 		);
 	}
 
+	public function __toString()
+	{
+        return (string) $this->name;
+    }
+
 	/**
 	 * @return array relational rules.
 	 */
