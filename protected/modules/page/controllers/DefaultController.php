@@ -48,6 +48,7 @@ class DefaultController extends PageController
 		
 		$model = $this->loadModel($link);
 		Yii::app()->session['page_id'] = $model->id;
+		Yii::app()->user->setReturnUrl(Yii::app()->request->urlReferrer);
 		
 		// Check if user has permission to view this page.
 		if($model->role !== 'all')

@@ -124,4 +124,14 @@ class Content extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+	public function beforeSave()
+	{
+		if($this->isNewRecord)
+			$this->date_created = new CDbExpression('NOW()');
+		else
+			$this->date_updated = new CDbExpression('NOW()');
+
+		return parent::beforeSave();
+	}
 }

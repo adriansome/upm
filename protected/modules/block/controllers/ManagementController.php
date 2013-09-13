@@ -71,6 +71,9 @@ class ManagementController extends BlockController
 	 */
 	public function actionUpdate($id)
 	{
+		if(Yii::app()->request->urlReferrer !== $this->currentUrl)
+			Yii::app()->user->setReturnUrl(Yii::app()->request->urlReferrer);
+
 		$block=$this->loadModel($id);
 		$contents = $block->contents;
 
@@ -81,7 +84,7 @@ class ManagementController extends BlockController
 				$contents[$index]->attributes = $content;
 				$contents[$index]->save();
 			}
-			
+
 			$this->redirect(Yii::app()->user->returnUrl);
 		}
 
