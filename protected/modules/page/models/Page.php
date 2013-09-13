@@ -70,7 +70,8 @@ class Page extends CActiveRecord
 		);
 	}
 
-	public function __toString() {
+	public function __toString()
+    {
         return (string) $this->name;
     }
 
@@ -151,14 +152,16 @@ class Page extends CActiveRecord
 		));
 	}
 
-	public function getMaxRight() {
+	public function getMaxRight()
+    {
         return Yii::app()->db->createCommand()
                         ->select('MAX(`rgt`)')
                         ->from($this->tableName())
                         ->queryScalar();
     }
 
-    public function getRoles() {
+    public function getRoles()
+    {
         $roles = array(
             'all' => 'All',
             'guest' => 'Guest',
