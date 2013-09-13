@@ -81,6 +81,8 @@ class ManagementController extends BlockController
 				$contents[$index]->attributes = $content;
 				$contents[$index]->save();
 			}
+			
+			$this->redirect(Yii::app()->user->returnUrl);
 		}
 
 		$form = new CActiveForm;
