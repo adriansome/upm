@@ -31,5 +31,9 @@ $this->pageTitle = $model->window_title;
 			'scope'=>'page',
 		)); ?>
    </p>
+
+   <?php $this->widget('ETinymce',array(
+   		'name'=>'test_tinymce',
+   )); ?>
    
 <?php $this->endClip(); ?>

@@ -1,10 +1,13 @@
 <?php 
 Yii::app()->clientScript->registerScript(
-    'block-'.$this->id.'-management-trigger',
+    'block-management-trigger',
     "$(document).ready(function() {
-        $('#edit-block-".$this->id."').click(function(e) {
+        $('[data-toggle=\"modal\"]').click(function(e) {
             e.preventDefault();
+            
             var url = $(this).attr('href');
+            var id = $(this).attr('id');
+            var target = $(this).attr('data-target');
 
             if (url.indexOf('#') == 0) {
                 $(url).modal('open');
@@ -12,8 +15,8 @@ Yii::app()->clientScript->registerScript(
                 $.get(url,function(response) {
                     $(response).modal();
                 }).success(function() {
-                    $('#block-".$this->id."-management').live('hidden',function() {
-                        $('#block-".$this->id."-management').remove();
+                    $(target).live('hidden',function() {
+                        $(target).remove();
                     });
                 });
             }

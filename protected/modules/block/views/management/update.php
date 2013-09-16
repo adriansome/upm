@@ -2,29 +2,30 @@
 /* @var $this ManagementController */
 /* @var $model Block */
 
+$this->beginWidget('TbModal', array('id'=>'block-'.$block->id.'-management'));
+
 Yii::app()->clientScript->registerScript(
 'block-management-bId-'.$this->id,
 "
  $('document').ready(function() {
-    $('#save-block-'".$this->id."').click(function(){
-        console.log('start');
+    $('#save-block-'".$this->id."').click(function(e){
+    	e.preventDefault();
+        console.log('form submitted');
         $.ajax({
             type: 'POST',
         	url: 'process.php',
         	data: $('#block-form').serialize(),
             success: function(response){
-            	console.log('here');
+            	console.log('success');
             },
         	error: function(){
-            	alert('failure');
+            	console.log('failure');
             }
         });
     });
 });
 "
 );
-
-$this->beginWidget('TbModal', array('id'=>'block-'.$block->id.'-management'));
 ?>
 
 <div class="modal-header">

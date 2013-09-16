@@ -13,8 +13,6 @@ class ETinymce extends CWidget
 
 	public function init()
 	{
-		$this->loadAssets();
-
 		if(isset($this->htmlOptions['id']))
 			$this->id = $this->htmlOptions['id'];
 		else
@@ -25,8 +23,7 @@ class ETinymce extends CWidget
 
 	public function run()
 	{
-		Yii::app()->clientScript->registerCoreScript('jquery');
-		Yii::app()->clientScript->registerScriptFile($this->tinymce.'/tinymce.min.js');
+		$this->loadAssets();
 		$this->render('tinymce');
 	}
 
