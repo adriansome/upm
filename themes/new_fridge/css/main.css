@@ -80,6 +80,40 @@ ul#mainmenu li a:hover, ul#mainmenu li.active a
 	text-decoration:none;
 }
 
+ul#mainmenu li ul{
+	display: none;
+	position: absolute;
+}
+
+ul#mainmenu > li:hover > ul{
+	display: block;
+}
+
+ul#mainmenu li ul li{
+	float: none;
+	display: block;
+}
+
+ul#mainmenu li ul li a
+{
+	color: #6399cd;
+	background-color:#EFF4FA;
+	text-decoration:none;
+}
+
+ul#mainmenu li ul li a:hover, ul#mainmenu li ul li.active a
+{
+	color: #fff;
+}
+
+ul#mainmenu li ul li ul{
+	display: none;
+}
+
+ul#mainmenu li ul li:hover ul{
+	display: block;
+}
+
 div.flash-error, div.flash-notice, div.flash-success
 {
 	padding:.8em;
