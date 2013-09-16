@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
+	<?php Yii::app()->bootstrap->register(); ?>
 	<?php require_once(Yii::app()->theme->basepath.'/views/elements/head.php'); ?>
 	<?php echo "\n"; ?>
-	<?php Yii::app()->bootstrap->register(); ?>
 </head>
 
 <body>

@@ -1,26 +1,27 @@
-<script>
-$( document ).ready(function() {
-	$('[data-toggle="modal"]').unbind().click(function(e) {
-        e.preventDefault();
-        var url = $(this).attr('href');
+<?php 
+Yii::app()->clientScript->registerScript(
+    'block-'.$this->id.'-management-trigger',
+    "$(document).ready(function() {
+        $('#edit-block-".$this->id."').click(function(e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
 
-        if (url.indexOf('#') == 0) {
-        	$(url).modal('open');
-        } else {
-            $.get(url,function(response) {
-                $(response).modal();
-            }).success(function() {
-                console.log('success');
-                $('[data-dismiss="modal"]').click(function(){
-				    console.log('closed');
-				});
-            });
-        }
-    });
-});
-</script>
+            if (url.indexOf('#') == 0) {
+                $(url).modal('open');
+            } else {
+                $.get(url,function(response) {
+                    $(response).modal();
+                }).success(function() {
+                    $('#block-".$this->id."-management').live('hidden',function() {
+                        $('#block-".$this->id."-management').remove();
+                    });
+                });
+            }
+        });
+    });"
+);
 
-<?php $this->widget('TbButton',array(
+$this->widget('TbButton',array(
     'type'=>'primary',
     'label' => 'edit',
     'size' => 'small',
@@ -28,6 +29,7 @@ $( document ).ready(function() {
 	'htmlOptions'=>array(
 		'data-toggle' => 'modal',
 		'data-target'=>'#block-'.$this->id.'-management',
+        'id'=>'edit-block-'.$this->id,
 	),
 ));
 ?>

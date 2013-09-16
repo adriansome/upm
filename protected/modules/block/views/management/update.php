@@ -2,6 +2,28 @@
 /* @var $this ManagementController */
 /* @var $model Block */
 
+Yii::app()->clientScript->registerScript(
+'block-management-bId-'.$this->id,
+"
+ $('document').ready(function() {
+    $('#save-block-'".$this->id."').click(function(){
+        console.log('start');
+        $.ajax({
+            type: 'POST',
+        	url: 'process.php',
+        	data: $('#block-form').serialize(),
+            success: function(response){
+            	console.log('here');
+            },
+        	error: function(){
+            	alert('failure');
+            }
+        });
+    });
+});
+"
+);
+
 $this->beginWidget('TbModal', array('id'=>'block-'.$block->id.'-management'));
 ?>
 
@@ -10,12 +32,11 @@ $this->beginWidget('TbModal', array('id'=>'block-'.$block->id.'-management'));
     <h4>Edit <?php echo $block; ?></h4>
 </div>
 
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'block-form',
-	'enableAjaxValidation'=>true,
-)); ?>
-
 <div class="modal-body">
+	<?php $form=$this->beginWidget('CActiveForm', array(
+		'id'=>'block-form',
+		'enableAjaxValidation'=>true,
+	)); ?>
 	<?php foreach($fields as $field): ?>
 		<div class="row">
 			<?php echo $field['label']; ?>
@@ -28,6 +49,7 @@ $this->beginWidget('TbModal', array('id'=>'block-'.$block->id.'-management'));
 			<?php echo $field['validation']; ?>
 		</div>
 	<?php endforeach; ?>
+	<?php $this->endWidget(); ?>
 </div>
 
 <div class="modal-footer">
@@ -36,13 +58,13 @@ $this->beginWidget('TbModal', array('id'=>'block-'.$block->id.'-management'));
         'type'=>'primary',
         'label'=>'Save',
         'url'=>'#',
-        'htmlOptions'=>array('data-dismiss'=>'modal'),
+        'htmlOptions'=>array('data-dismiss'=>'modal','id'=>'save-block-'.$this->id),
     )); ?>
+
     <?php $this->widget('TbButton', array(
         'label'=>'Close',
         'url'=>'#',
-        'htmlOptions'=>array('data-dismiss'=>'modal','id'=>'#btn-close-modal'),
+        'htmlOptions'=>array('data-dismiss'=>'modal','id'=>'close-block-'.$this->id),
     )); ?>
 </div>
-<?php $this->endWidget(); ?>
 <?php $this->endWidget(); ?>
