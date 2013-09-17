@@ -1,3 +1,1 @@
-<img src="<?php $this->image; ?>" 
-	 alt="<?php $this->alt; ?>" 
-	 title="<?php $this->title; ?>" />
+<?php echo CHtml::image($this->src, $this->alt, array('title'=>$this->title)); ?>

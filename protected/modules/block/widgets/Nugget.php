@@ -1,6 +1,9 @@
 <?php
 class Nugget extends BlockWidget
 {
+	public $headerLink = true;
+	public $contentLink = false;
+
 	public function attributes()
 	{
 		return array(
@@ -8,7 +11,7 @@ class Nugget extends BlockWidget
 				'type'=>'singleline',
 			),
 			'text'=>array(
-				'type'=>'smultiline',
+				'type'=>'multiline',
 			),
 			'href'=>array(
 				'type'=>'singleline',
@@ -25,12 +28,18 @@ class Nugget extends BlockWidget
 			'image_src'=>array(
 				'type'=>'file',
 			),
-			'image_'
+			'image_alt'=>array(
+				'type'=>'singleline',
+			),
+			'image_title'=>array(
+				'type'=>'singleline',
+			),
 		);
 	}
 
 	public function run()
 	{
-		
+		$this->render('nugget');
+		parent::run();
 	}
 }

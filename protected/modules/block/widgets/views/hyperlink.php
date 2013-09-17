@@ -1,3 +1,1 @@
-<a href="<?php echo $this->href; ?>" title="<?php $this->title; ?>">
-	<?php echo $this->label; ?>
-</a>
+<?php echo CHtml::link($this->text, $this->href, array('title'=>$this->title, 'target'=>($this->target ? '_blank':'_self'))); ?>
