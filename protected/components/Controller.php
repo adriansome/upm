@@ -24,6 +24,9 @@ class Controller extends CController
 
 	public function beforeAction($action)
 	{
+		if(YII_DEBUG)
+			Yii::app()->assetManager->forceCopy = true;
+		
 		if(parent::beforeAction($action))
 		{
 			if($this->id == 'management' && Yii::app()->params['overlayAdmin'])

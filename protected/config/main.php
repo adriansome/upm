@@ -99,7 +99,7 @@ $config = array(
 	// using Yii::app()->params['paramName']
 	'params'=>array(
 		'adminEmail'=>'mail@mattbiddle.cc',
-		'overlayAdmin'=>true,
+		'overlayAdmin'=>false,
 		'maxDepth'=>3,
         'menus'=>array(
             1=>array(

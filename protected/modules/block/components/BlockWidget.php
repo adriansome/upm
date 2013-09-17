@@ -91,7 +91,7 @@ abstract class BlockWidget extends CWidget
 					break;
 
 				case 'file':
-					$this->$attribute = $values[$attribute]->file->url;
+					$this->$attribute = $values[$attribute]->file_value;
 					break;
 
 				case 'boolean':
@@ -107,6 +107,13 @@ abstract class BlockWidget extends CWidget
 	public function run()
 	{
 		if(Yii::app()->user->isAdmin())
+		{
+			Yii::app()->clientScript->registerScriptFile(
+				Yii::app()->getAssetManager()->publish(
+                	Yii::getPathOfAlias('application.modules.block.assets')
+                ).'/js/blockManagement.js'
+			);
 			$this->render('_management');
+		}
 	}
 }

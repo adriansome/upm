@@ -45,7 +45,7 @@ class ManagementController extends BlockController
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
-	public function actionCreate()
+	public function actionCreate($type,$name)
 	{
 		$model=new Block;
 
@@ -79,17 +79,29 @@ class ManagementController extends BlockController
 
 		if(isset($_POST['Content']))
 		{
+			// Forever an optimist.. Presume everything will save without error.
+			$contentSaved = true;
+			$response = array();
+
 			foreach($_POST['Content'] as $index => $content)
 			{
 				$contents[$index]->attributes = $content;
-				$contents[$index]->save();
+				
+				// If any content cannot be saved set $contentSaved flag to false.
+				if(!$contents[$index]->save())
+					$contentSaved = false;
 			}
 
-			return json_encode(array('message'=>$block->name.' has been saved.'));
+			if($contentSaved)
+				$response['success'] = $block->name.' has been saved.';
+			else
+				$response['error'] = $block->name.' could not be saved.';
+			
+			echo json_encode($response);
+			exit;
 		}
 
 		$form = new CActiveForm;
-
 		$fields = array();
 
 		foreach($contents as $index=>$content)
@@ -110,14 +122,15 @@ class ManagementController extends BlockController
 					break;
 
 				case 'html':
-					$fields[$content->name]['input']=$this->createWidget('ETinymce',array(
-					    'model'=>$content,
-					    'attribute'=>"[$index]string_value",
-					));
+					$fields[$content->name]['input']=$form->textArea($content,"[$index]string_value",array('class'=>'wysihtml5-editor'));
 					break;
 
 				case 'file':
-					$fields[$content->name]['input']=$form->fileField($content,"[$index]file_value");
+					$fields[$content->name]['input']=$this->renderPartial('_fileField', array(
+						'form'=>$form,
+						'index'=>$index,
+						'content'=>$content,
+					), true, true);
 					break;
 
 				case 'date':

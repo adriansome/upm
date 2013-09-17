@@ -2,31 +2,7 @@
 /* @var $this ManagementController */
 /* @var $model Block */
 
-$this->beginWidget('TbModal', array('id'=>'block-'.$block->id.'-management'));
-
-Yii::app()->clientScript->registerScript(
-'block-management-bId-'.$this->id,
-"
- $('document').ready(function() {
-    $('#save-block-'".$this->id."').click(function(e){
-    	e.preventDefault();
-        console.log('form submitted');
-        $.ajax({
-            type: 'POST',
-        	url: 'process.php',
-        	data: $('#block-form').serialize(),
-            success: function(response){
-            	console.log('success');
-            },
-        	error: function(){
-            	console.log('failure');
-            }
-        });
-    });
-});
-"
-);
-?>
+$this->beginWidget('TbModal', array('id'=>'block-'.$block->id.'-management')); ?>
 
 <div class="modal-header">
     <a class="close" data-dismiss="modal">&times;</a>
@@ -35,7 +11,7 @@ Yii::app()->clientScript->registerScript(
 
 <div class="modal-body">
 	<?php $form=$this->beginWidget('CActiveForm', array(
-		'id'=>'block-form',
+		'id'=>'update-block-form',
 		'enableAjaxValidation'=>true,
 	)); ?>
 	<?php foreach($fields as $field): ?>
@@ -55,17 +31,24 @@ Yii::app()->clientScript->registerScript(
 
 <div class="modal-footer">
     <?php $this->widget('TbButton', array(
-    	'buttonType'=>'submitButton',
-        'type'=>'primary',
+        'type'=>'success',
         'label'=>'Save',
-        'url'=>'#',
-        'htmlOptions'=>array('data-dismiss'=>'modal','id'=>'save-block-'.$this->id),
+        'url'=>Yii::app()->createUrl('/block/management/update/id/'.$block->id),
+        'htmlOptions'=>array(
+            'data-dismiss'=>'modal',
+            'class'=>'save-block',
+            'id'=>$block->id
+        ),
     )); ?>
 
     <?php $this->widget('TbButton', array(
-        'label'=>'Close',
+        'type'=>'danger',
+        'label'=>'Discard',
         'url'=>'#',
-        'htmlOptions'=>array('data-dismiss'=>'modal','id'=>'close-block-'.$this->id),
+        'htmlOptions'=>array(
+            'data-dismiss'=>'modal',
+            'id'=>'discard-block',
+        ),
     )); ?>
 </div>
 <?php $this->endWidget(); ?>

@@ -18,6 +18,7 @@ class Image extends BlockWidget
 
 	public function run()
 	{
-		
+		$this->render('image');
+		parent::run();
 	}
 }

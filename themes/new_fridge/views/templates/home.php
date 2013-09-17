@@ -32,8 +32,11 @@ $this->pageTitle = $model->window_title;
 		)); ?>
    </p>
 
-   <?php $this->widget('ETinymce',array(
-   		'name'=>'test_tinymce',
-   )); ?>
+   <p>
+		<?php $this->widget('Image',array(
+			'name'=>'test image block',
+			'scope'=>'page',
+		)); ?>
+   </p>
    
 <?php $this->endClip(); ?>

@@ -5,14 +5,10 @@
 	</div><!-- header -->
 
 	<?php $this->widget('Menu',array(
-		'id'=>'mainmenu'
+		'id'=>'mainmenu',
+		'type'=>'pills', // '', 'tabs', 'pills' (or 'list')
+    	'stacked'=>false, // whether this is a stacked menu
 	)); ?><!-- mainmenu -->
-	
-	<?php if(isset($this->breadcrumbs)):?>
-		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
-			'links'=>$this->breadcrumbs,
-		)); ?><!-- breadcrumbs -->
-	<?php endif?>
 
 	<?php echo $content; ?>
 
