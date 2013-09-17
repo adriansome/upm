@@ -31,7 +31,7 @@ abstract class BlockWidget extends CWidget
 		if(!empty($this->scope))
 			$params = array_merge($params, array('scope'=>$this->scope));
 
-		$block = Block::model()->findByAttributes($params);
+		$block = Block::model()->with('contents')->findByAttributes($params);
 		
 		if(!isset($block))
 			$block = $this->createBlock();
@@ -47,6 +47,9 @@ abstract class BlockWidget extends CWidget
 
 		if(!empty($this->page_id))
 			$block->page_id = $this->page_id;
+
+		if(!empty($this->scope))
+			$block->scope= $this->scope;
 
 		$block->save();
 		$this->createContents($block->id);
