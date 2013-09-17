@@ -32,11 +32,20 @@ $this->pageTitle = $model->window_title;
 		)); ?>
    </p>
 
-   <p>
+   <div>
 		<?php $this->widget('Image',array(
 			'name'=>'test image block',
 			'scope'=>'page',
 		)); ?>
-   </p>
+   </div>
+
+   <div>
+		<?php $this->widget('Nugget',array(
+			'name'=>'test nugget block',
+			'scope'=>'page',
+			'headerLink'=>true,
+			'contentLink'=>false,
+		)); ?>
+   </div>
    
 <?php $this->endClip(); ?>
