@@ -39,12 +39,18 @@ $this->pageTitle = $model->window_title;
 		)); ?>
    </div>
 
+   <?php $this->widget('Nugget',array(
+		'name'=>'test nugget block',
+		'scope'=>'page',
+		'headerLink'=>true,
+		'contentLink'=>false,
+	)); ?>
+
    <div>
-		<?php $this->widget('Nugget',array(
-			'name'=>'test nugget block',
-			'scope'=>'page',
-			'headerLink'=>true,
-			'contentLink'=>false,
+		<?php $this->widget('ListWidget',array(
+			'type'=>'blog',
+			'name'=>'test blog',
+			'scenario'=>'list',
 		)); ?>
    </div>
    
