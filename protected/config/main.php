@@ -3,8 +3,6 @@
 // CWebApplication properties can be configured here.
 
 Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../vendors/bootstrap');
-Yii::setPathOfAlias('tinymce', dirname(__FILE__).'/../vendors/tinymce');
-Yii::setPathOfAlias('filemanager', dirname(__FILE__).'/../vendors/filemanager');
 Yii::setPathOfAlias('mail', dirname(__FILE__).'/../vendors/mail');
 
 $config = array(
@@ -69,6 +67,10 @@ $config = array(
 
 		'bootstrap'=>array(
             'class'=>'bootstrap.components.Bootstrap',
+        ),
+
+        'Utility'=>array(
+        	'class'=>'Utility',
         ),
 
 		'errorHandler'=>array(

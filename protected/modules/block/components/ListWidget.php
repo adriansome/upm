@@ -1,35 +1,63 @@
 <?php
-abstract class ListWidget extends BlockWidget
+class ListWidget extends CWidget
 {
 	public $name;
 	public $scope;
+	public $type;
+	public $scenario;
 	public $items;
-	public $itemView;
+	public $item_id;
+	public $maxItems;
 
 	protected $id;
 	protected $page_id;
 	protected $contents;
-
-	abstract public function itemAttributes();
-
-	public function attributes()
-	{
-		return array();
-	}
+	protected $config;
 
 	public function init()
 	{
 		if(!isset($this->scope))
 			$this->scope = 'site';
 
-		parent::init();
+		$this->configure();
+		
+		if(isset($this->item_id))
+			$this->loadItem();
+		else
+			$this->loadItems();
+	}
 
-		$this->loadItems();
+	public function getViewPath($checkTheme=false)
+	{
+		return Yii::app()->theme->basepath.'/views/lists/'.$this->type;
+	}
+
+	protected function configure()
+	{
+		$config = file_get_contents(
+			Yii::app()->theme->basepath.'/views/lists/'.$this->type.'.json'
+		);
+
+		$this->config = json_decode($config);
+	}
+
+	public function itemAttributes()
+	{
+		$attributes = Yii::app()->Utility->object_to_array($this->config->attributes);
+	    return $attributes;
 	}
 
 	protected function loadItems()
 	{
-		$items = Block::model()->with('contents')->findAllByAttributes(array('name'=>$this->name.' item'));
+		$params = array();
+		
+		if(isset($this->maxItems))
+			$params['limit'] = $this->maxItems;
+
+		$items = Block::model()->with('contents')->findAll(array(
+			'condition'=>'t.name LIKE "'.$this->name.' item%"'
+		), $params);
+		
 		$attributes = $this->itemAttributes();
 
 		foreach($items as $index=>$item) 
@@ -76,6 +104,8 @@ abstract class ListWidget extends BlockWidget
 
 	public function run()
 	{
+		$this->render($this->scenario);
+
 		if(Yii::app()->user->isAdmin())
 		{
 			/*Yii::app()->clientScript->registerScriptFile(
@@ -83,7 +113,7 @@ abstract class ListWidget extends BlockWidget
                 	Yii::getPathOfAlias('application.modules.block.assets')
                 ).'/js/blockManagement.js'
 			);*/
-			$this->render('_listManagement');
+			require_once(dirname(__FILE__).'/../widgets/views/_listManagement.php');
 		}
 	}
 }
