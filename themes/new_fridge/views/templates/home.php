@@ -51,6 +51,7 @@ $this->pageTitle = $model->window_title;
 			'type'=>'blog',
 			'name'=>'test blog',
 			'scenario'=>'list',
+			'pageSize'=>2,
 		)); ?>
    </div>
    

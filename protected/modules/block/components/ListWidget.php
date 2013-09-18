@@ -8,6 +8,7 @@ class ListWidget extends CWidget
 	public $items;
 	public $item_id;
 	public $maxItems;
+	public $pageSize;
 
 	protected $id;
 	protected $page_id;
@@ -57,7 +58,7 @@ class ListWidget extends CWidget
 		$items = Block::model()->with('contents')->findAll(array(
 			'condition'=>'t.name LIKE "'.$this->name.' item%"'
 		), $params);
-		
+
 		$attributes = $this->itemAttributes();
 
 		foreach($items as $index=>$item) 
@@ -97,7 +98,7 @@ class ListWidget extends CWidget
 		    'id'=>'title',
 		    'keyField'=>'title',
 		    'pagination'=>array(
-		        'pageSize'=>10,
+		        'pageSize'=>$this->pageSize,
 		    ),
 		));
 	}
