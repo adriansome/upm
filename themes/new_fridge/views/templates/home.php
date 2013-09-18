@@ -47,12 +47,12 @@ $this->pageTitle = $model->window_title;
 	)); ?>
 
    <!-- <div>
-		<?php $this->widget('ListWidget',array(
+		<?php /*$this->widget('ListWidget',array(
 			'type'=>'blog',
 			'name'=>'test blog',
 			'scenario'=>'list',
 			'pageSize'=>2,
-		)); ?>
+		));*/ ?>
    </div> -->
    
 <?php $this->endClip(); ?>
