@@ -11,12 +11,6 @@ $(function()
         console.log(content);
     }
 
-    function modalsExist()
-    {
-        var status = ($('.modal').get(0));
-        return status;
-    }
-
     $('[data-toggle=\"modal\"]').live('click',function(e) {
         e.preventDefault();
         
@@ -31,6 +25,7 @@ $(function()
             }).success(function() {
                 $(target).live('hidden',function() {
                     $(target).remove();
+                    window.location.reload(true);
                 });
             });
         }
@@ -65,18 +60,11 @@ $(function()
                 if(data.success)
                 {
                     flashMessage(data.success);
-            
-                    if(!modalsExist())
-                        window.location.reload(true);
                 }
                 else
                     flashMessage(data.error);
             }
         });
-    });
-
-    $('.close, .close-modal').live('click',function(e) {
-        window.location.reload(true);
     });
 
     $(document).live('DOMNodeInserted', function(e) {
