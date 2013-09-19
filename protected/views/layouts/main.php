@@ -12,6 +12,11 @@
 </head>
 
 <body>
+	<?php  if(!Yii::app()->user->isGuest && in_array(Yii::app()->user->role, array('admin', 'editor'))):?>
+		<!-- If admin or editor logged in display adminzone menu here -->
+		<?php require_once(Yii::app()->basepath.'/views/adminzone/menu.php'); ?>
+	<?php endif?>
+
 	<?php require_once(Yii::app()->theme->basepath.'/views/elements/body.php'); ?>
 	<?php echo "\n"; ?>
 </body>

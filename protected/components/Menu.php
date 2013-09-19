@@ -27,9 +27,9 @@ class Menu extends TbMenu
 				->leftJoin('page lv3', 'lv2.id = lv3.parent_id')
 				    
 				->where('lv1.date_active IS NOT NULL AND lv1.date_visible IS NOT NULL')
-				->where('((lv2.date_active IS NOT NULL AND lv2.date_visible IS NOT NULL) OR lv2.name IS NULL)')
-				->where('((lv3.date_active IS NOT NULL AND lv3.date_visible IS NOT NULL) OR lv3.name IS NULL)')
-				->where('menu.menu_id = :menu_id', array(':menu_id' => $_id))
+				->andWhere('((lv2.date_active IS NOT NULL AND lv2.date_visible IS NOT NULL) OR lv2.name IS NULL)')
+				->andWhere('((lv3.date_active IS NOT NULL AND lv3.date_visible IS NOT NULL) OR lv3.name IS NULL)')
+				->andWhere('menu.menu_id = :menu_id', array(':menu_id' => $_id))
 				    
 				->order('lv1.lft ASC, lv2.lft ASC, lv3.lft ASC')
 			;
