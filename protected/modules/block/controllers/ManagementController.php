@@ -174,13 +174,35 @@ class ManagementController extends BlockController
 	/**
 	 * Lists all models.
 	 */
-	public function actionIndex()
+	public function actionList($name)
 	{
-		$dataProvider=new CActiveDataProvider('Block');
-		$this->render('index',array(
+		$id = str_replace(' ', '-', $name);
+
+		$dataProvider=new CActiveDataProvider('Block', array(
+		    'criteria'=>array(
+		        'condition'=>'t.name LIKE "'.$name.' item%"',
+		        'with'=>array('contents'),
+		    ),
+		    'pagination'=>array(
+		        'pageSize'=>20,
+		    ),
+		));
+
+		$this->renderPartial('listItems',array(
 			'dataProvider'=>$dataProvider,
+			'name'=>$name,
+			'id'=>$id,
 		));
 	}
+
+	public function actionArea($id)
+    {
+    	$model = Area::model()->findByPk($id);
+    	$block = $model->blocks;
+
+    	$this->render('areaBlocks');
+    }
+    	
 
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.

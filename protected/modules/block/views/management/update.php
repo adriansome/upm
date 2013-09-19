@@ -2,7 +2,7 @@
 /* @var $this ManagementController */
 /* @var $model Block */
 
-$this->beginWidget('TbModal', array('id'=>'block-'.$block->id.'-management')); ?>
+$this->beginWidget('TbModal', array('id'=>'block-'.$block->id.'-management', 'htmlOptions'=>array('data-keyboard'=>'false', 'data-backdrop'=>'static'))); ?>
 
 <div class="modal-header">
     <a class="close" data-dismiss="modal">&times;</a>
@@ -11,7 +11,7 @@ $this->beginWidget('TbModal', array('id'=>'block-'.$block->id.'-management')); ?
 
 <div class="modal-body">
 	<?php $form=$this->beginWidget('CActiveForm', array(
-		'id'=>'update-block-form',
+		'id'=>'block-form',
 		'enableAjaxValidation'=>true,
 	)); ?>
 	<?php foreach($fields as $field): ?>
@@ -36,8 +36,7 @@ $this->beginWidget('TbModal', array('id'=>'block-'.$block->id.'-management')); ?
         'url'=>Yii::app()->createUrl('/block/management/update/id/'.$block->id),
         'htmlOptions'=>array(
             'data-dismiss'=>'modal',
-            'class'=>'save-block',
-            'id'=>$block->id
+            'class'=>'save',
         ),
     )); ?>
 
@@ -47,7 +46,7 @@ $this->beginWidget('TbModal', array('id'=>'block-'.$block->id.'-management')); ?
         'url'=>'#',
         'htmlOptions'=>array(
             'data-dismiss'=>'modal',
-            'id'=>'discard-block',
+            'class'=>'discard',
         ),
     )); ?>
 </div>

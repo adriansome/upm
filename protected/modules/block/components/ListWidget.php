@@ -1,36 +1,30 @@
 <?php
 class ListWidget extends CWidget
 {
-	public $name;
-	public $scope;
 	public $type;
+	public $name;
 	public $scenario;
-	public $items;
-	public $item_id;
-	public $maxItems;
 	public $pageSize;
+	public $maxItems;
+	public $item_id;
 
-	protected $id;
+	protected $config;
 	protected $page_id;
 	protected $contents;
-	protected $config;
+
+	public function getViewPath($checkTheme=false)
+	{
+		return Yii::app()->theme->basepath.'/views/lists/'.$this->type;
+	}
 
 	public function init()
 	{
-		if(!isset($this->scope))
-			$this->scope = 'site';
-
 		$this->configure();
 		
 		if(isset($this->item_id))
 			$this->loadItem();
 		else
 			$this->loadItems();
-	}
-
-	public function getViewPath($checkTheme=false)
-	{
-		return Yii::app()->theme->basepath.'/views/lists/'.$this->type;
 	}
 
 	protected function configure()
@@ -44,7 +38,7 @@ class ListWidget extends CWidget
 
 	public function itemAttributes()
 	{
-		$attributes = Yii::app()->Utility->object_to_array($this->config->attributes);
+		$attributes = Yii::app()->utility->object_to_array($this->config->attributes);
 	    return $attributes;
 	}
 
@@ -61,6 +55,8 @@ class ListWidget extends CWidget
 
 		$attributes = $this->itemAttributes();
 
+		$list = array();
+
 		foreach($items as $index=>$item) 
 		{
 			foreach($item->contents as $content)
@@ -69,23 +65,23 @@ class ListWidget extends CWidget
 				{
 					case 'singleline':
 					case 'multiline':
-						$this->items[$index][$content->name] = htmlspecialchars($content->string_value);
+						$list[$index][$content->name] = htmlspecialchars($content->string_value);
 						break;
 
 					case 'html':
-						$this->items[$index][$content->name] = $content->string_value;
+						$list[$index][$content->name] = $content->string_value;
 						break;
 
 					case 'date':
-						$this->items[$index][$content->name] = date($attributes[$content->name]['format'], strtotime($content->date_value));
+						$list[$index][$content->name] = date($attributes[$content->name]['format'], strtotime($content->date_value));
 						break;
 
 					case 'file':
-						$this->items[$index][$content->name] = $content->file_value;
+						$list[$index][$content->name] = $content->file_value;
 						break;
 
 					case 'boolean':
-						$this->items[$index][$content->name] = $content->boolean_value;
+						$list[$index][$content->name] = $content->boolean_value;
 						break;
 					
 					default:
@@ -94,7 +90,7 @@ class ListWidget extends CWidget
 			}
 		}
 
-		$this->contents = new CArrayDataProvider($this->items, array(
+		$this->contents = new CArrayDataProvider($list, array(
 		    'id'=>'title',
 		    'keyField'=>'title',
 		    'pagination'=>array(
@@ -108,13 +104,6 @@ class ListWidget extends CWidget
 		$this->render($this->scenario);
 
 		if(Yii::app()->user->isAdmin())
-		{
-			/*Yii::app()->clientScript->registerScriptFile(
-				Yii::app()->getAssetManager()->publish(
-                	Yii::getPathOfAlias('application.modules.block.assets')
-                ).'/js/blockManagement.js'
-			);*/
 			require_once(dirname(__FILE__).'/../widgets/views/_listManagement.php');
-		}
 	}
 }

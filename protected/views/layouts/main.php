@@ -13,7 +13,8 @@
 
 <body>
 	<?php  if(!Yii::app()->user->isGuest && in_array(Yii::app()->user->role, array('admin', 'editor'))):?>
-		<!-- If admin or editor logged in display adminzone menu here -->
+		<!-- If admin or editor logged in load the javascript component and display adminzone menu view here -->
+		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/adminzone.js'); ?>
 		<?php require_once(Yii::app()->basepath.'/views/adminzone/menu.php'); ?>
 	<?php endif?>
 

@@ -46,13 +46,11 @@ $this->pageTitle = $model->window_title;
 		'contentLink'=>false,
 	)); ?>
 
-   <!-- <div>
-		<?php /*$this->widget('ListWidget',array(
-			'type'=>'blog',
-			'name'=>'test blog',
-			'scenario'=>'list',
-			'pageSize'=>2,
-		));*/ ?>
-   </div> -->
+   <?php $this->widget('ListWidget',array(
+		'type'=>'blog',
+		'name'=>'test blog',
+		'scenario'=>'list',
+		'pageSize'=>2,
+	)); ?>
    
 <?php $this->endClip(); ?>

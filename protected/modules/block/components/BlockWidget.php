@@ -110,13 +110,6 @@ abstract class BlockWidget extends CWidget
 	public function run()
 	{
 		if(Yii::app()->user->isAdmin())
-		{
-			Yii::app()->clientScript->registerScriptFile(
-				Yii::app()->getAssetManager()->publish(
-                	Yii::getPathOfAlias('application.modules.block.assets')
-                ).'/js/blockManagement.js'
-			);
 			$this->render('_management');
-		}
 	}
 }

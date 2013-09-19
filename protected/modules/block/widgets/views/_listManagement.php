@@ -2,11 +2,11 @@
 $this->widget('TbButton',array(
     'type'=>'link',
     'label' => 'edit',
-    'url' => Yii::app()->createUrl('#'),
+    'url' => Yii::app()->createUrl('/block/management/list/'.$this->name),
 	'htmlOptions'=>array(
 		'data-toggle' => 'modal',
-		'data-target'=>'#block-'.$this->id.'-management',
-        'id'=>'edit-block-'.$this->id,
+		'data-target'=>'#'.str_replace(' ', '-', $this->name).'-list-management',
+        'id'=>'edit-block-'.str_replace(' ', '-', $this->name),
 	),
 ));
 ?>
