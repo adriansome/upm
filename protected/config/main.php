@@ -69,7 +69,7 @@ $config = array(
             'class'=>'bootstrap.components.Bootstrap',
         ),
 
-        'Utility'=>array(
+        'utility'=>array(
         	'class'=>'Utility',
         ),
 
@@ -89,9 +89,9 @@ $config = array(
 
 				// uncomment the following to show log messages on web pages
 				
-				/*array(
+				array(
 					'class'=>'CWebLogRoute',
-				),*/
+				),
 				
 			),
 		),
