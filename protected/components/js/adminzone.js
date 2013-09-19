@@ -25,6 +25,7 @@ $(function()
             }).success(function() {
                 $(target).live('hidden',function() {
                     $(target).remove();
+                    flashMessage('Reloading page...')
                     window.location.reload(true);
                 });
             });
@@ -48,6 +49,18 @@ $(function()
         });
     });
 
+    $(document).live('DOMNodeInserted', function(e) {
+        if($(e.target).is('.modal')) {
+            // Initiate any rich text editors in the modal.
+            initRichTextEditors();
+
+            // Make modal draggable.
+            $(e.target).draggable({
+                handle: '.modal-header'
+            });
+        }
+    });
+
     $('.save').live('click',function(e) {
         e.preventDefault();
 
@@ -58,19 +71,10 @@ $(function()
             url: $(this).attr('href'),
             success: function(data) {
                 if(data.success)
-                {
                     flashMessage(data.success);
-                }
                 else
                     flashMessage(data.error);
             }
         });
-    });
-
-    $(document).live('DOMNodeInserted', function(e) {
-        if ($(e.target).is('.modal')) {
-           // Initiate any rich text editors in the modal.
-           initRichTextEditors();
-        }
     });
 });
