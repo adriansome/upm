@@ -2,8 +2,28 @@ $(function()
 {
     function initRichTextEditors()
     {
-        // Initiate wysihtml5 for text areas.
-        $('.wysihtml5-editor').wysihtml5();
+        // Initiate tinyMCE for text areas.
+        tinymce.init({ 
+            selector: "textarea.tinymce-editor",
+            theme: "modern",
+            width: 680,
+            height: 300, 
+            plugins: [ 
+                "advlist autolink link image lists charmap print preview hr anchor pagebreak", 
+                "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking", 
+                "table contextmenu directionality emoticons paste textcolor responsivefilemanager" 
+            ],
+            menubar:false,
+            statusbar: false, 
+            toolbar1: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect", 
+            toolbar2: "| responsivefilemanager | link unlink anchor | image media | forecolor backcolor | print preview code ", 
+            image_advtab: true , 
+            external_filemanager_path: responsiveFileManager, 
+            filemanager_title:"File Manager", 
+            external_plugins: { 
+                "filemanager" : responsiveFileManager+"plugin.min.js"
+            } 
+        });
     }
 
     function flashMessage(content)
@@ -17,16 +37,21 @@ $(function()
         var url = $(this).attr('href');
         var target = $(this).attr('data-target')
 
-        if (url.indexOf('#') == 0) {
+        if (url.indexOf('#') == 0)
             $(url).modal('open');
-        } else {
+        else
+        {
             $.get(url,function(response) {
                 $(response).modal();
             }).success(function() {
                 $(target).live('hidden',function() {
                     $(target).remove();
-                    flashMessage('Reloading page...')
-                    window.location.reload(true);
+                    
+                    if(target != '#filemanager')
+                    {
+                        flashMessage('Reloading page...');
+                        window.location.reload(true);
+                    }
                 });
             });
         }
@@ -47,7 +72,7 @@ $(function()
             $(target+' > .item-form').html(jQuery(response).find('.modal-body').html());
             $(target+' > .item-buttons').html(jQuery(response).find('.modal-footer').html());
 
-            // Remove modal close button from item-header
+            // Remove modal cl0ose button from item-header
             $(target+' > .item-header > .close').remove();
 
             // Initiate any rich text editors in the modal.
@@ -55,18 +80,6 @@ $(function()
         }).success(function() {
             $(id).addClass('active');
         });
-    });
-
-    $(document).live('DOMNodeInserted', function(e) {
-        if($(e.target).is('.modal')) {
-            // Initiate any rich text editors in the modal.
-            initRichTextEditors();
-
-            // Make modal draggable.
-            $(e.target).draggable({
-                handle: '.modal-header'
-            });
-        }
     });
 
     $('.save').live('click',function(e) {

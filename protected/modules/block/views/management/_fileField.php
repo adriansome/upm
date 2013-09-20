@@ -1,13 +1,13 @@
-<?php echo $form->textField($content,"[$index]file_value",array('size'=>60,'maxlength'=>140));
+<?php echo $form->textField($content,"[$index]file_value",array('size'=>60,'maxlength'=>140)); ?>
 
-$this->widget('TbButton',array(
+<?php $this->widget('TbButton',array(
     'type'=>'success',
     'label' => 'Browse',
     'size' => 'small',
-    'url' => '#',
+    'url' => '/site/filemanager',
 	'htmlOptions'=>array(
 		'data-toggle' => 'modal',
+		'data-target'=>'#filemanager',
         'class'=>'launch-filemanager',
 	),
-));
-?>
+)); ?>

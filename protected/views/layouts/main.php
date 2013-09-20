@@ -15,6 +15,10 @@
 <body>
 	<?php  if(!Yii::app()->user->isGuest && in_array(Yii::app()->user->role, array('admin', 'editor'))):?>
 		<!-- If admin or editor logged in load the javascript component and display adminzone menu view here -->
+		<script>
+		    var responsiveFileManager = "<?php echo Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('filemanager')); ?>/";
+		</script>
+		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('tinymce')).'/tinymce.min.js'); ?>
 		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/adminzone.js'); ?>
 		<?php require_once(Yii::app()->basepath.'/views/adminzone/menu.php'); ?>
 	<?php endif?>

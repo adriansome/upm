@@ -46,4 +46,9 @@ class SiteController extends Controller
 		else
 			throw new CHttpException(404, 'Not Found.');
 	}
+
+	public function actionFilemanager()
+	{
+		$this->renderPartial('filemanager');
+	}
 }

@@ -122,7 +122,7 @@ class ManagementController extends BlockController
 					break;
 
 				case 'html':
-					$fields[$content->name]['input']=$form->textArea($content,"[$index]string_value",array('class'=>'wysihtml5-editor'));
+					$fields[$content->name]['input']=$form->textArea($content,"[$index]string_value",array('class'=>'tinymce-editor'));
 					break;
 
 				case 'file':
