@@ -1,5 +1,6 @@
 <?php
-class Menu extends TbMenu
+Yii::import('zii.widgets.CMenu');
+class Menu extends CMenu
 {
 	public function init()
 	{
