@@ -5,9 +5,7 @@
 	</div><!-- header -->
 
 	<?php $this->widget('Menu',array(
-		'id'=>'mainmenu',
-		'type'=>'pills', // '', 'tabs', 'pills' (or 'list')
-    	'stacked'=>false, // whether this is a stacked menu
+		'id'=>'mainmenu'
 	)); ?><!-- mainmenu -->
 
 	<?php echo $content; ?>
