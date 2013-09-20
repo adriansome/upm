@@ -17,10 +17,13 @@ $this->beginWidget('TbModal', array('id'=>$id.'-list-management', 'htmlOptions'=
 	)); ?>
 
     <div class="item-view">
-        <div class="form">
+        <div class="item-header">
+            <!-- List item header -->
+        </div>
+        <div class="item-form">
             <!-- List item form -->
         </div>
-        <div class="buttons">
+        <div class="item-buttons">
             <!-- Item form buttons -->
         </div>
     </div>
