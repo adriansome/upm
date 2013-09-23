@@ -18,9 +18,11 @@
 		<script>
 		    var responsiveFileManager = "<?php echo Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('filemanager')); ?>/";
 		</script>
+		
 		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('tinymce')).'/tinymce.min.js'); ?>
 		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/adminzone.js'); ?>
-		<?php require_once(Yii::app()->basepath.'/views/adminzone/menu.php'); ?>
+		
+		<?php $this->widget('AdminzoneMenu'); ?>
 	<?php endif?>
 
 	<?php require_once(Yii::app()->theme->basepath.'/views/elements/body.php'); ?>
