@@ -14,6 +14,7 @@ $this->beginWidget('TbModal', array('id'=>'block-'.$block->id.'-management', 'ht
 		'id'=>'block-form',
 		'enableAjaxValidation'=>true,
 	)); ?>
+	<div>
 	<?php foreach($fields as $field): ?>
 		<div class="row">
 			<?php echo $field['label']; ?>

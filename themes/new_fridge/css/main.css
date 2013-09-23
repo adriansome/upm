@@ -47,6 +47,48 @@ body
 	font-size: 200%;
 }
 
+ul#mainmenu
+{
+	list-style: none;
+}
+
+ul#mainmenu > li
+{
+	float: left;
+}
+
+ul#mainmenu li
+{
+	padding: 3px 5px;
+	position:relative;
+}
+
+ul#mainmenu > li ul 
+{
+	display:none;
+	list-style:none;
+	background:#fff;
+}
+
+ul#mainmenu > li > ul > li
+{
+	width: 100px;
+}
+
+ul#mainmenu > li:hover > ul 
+{
+	display:block;
+	position: absolute;
+}
+
+ul#mainmenu > li:hover > ul > li:hover > ul 
+{
+	display:block;
+	position: absolute;
+	left:100px;
+	top:0;
+}
+
 div.flash-error, div.flash-notice, div.flash-success
 {
 	padding:.8em;

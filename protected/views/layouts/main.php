@@ -21,7 +21,10 @@
 		
 		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('tinymce')).'/tinymce.min.js'); ?>
 		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/adminzone.js'); ?>
-		
+		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.css')); ?>/adminzone.css"></link>
+		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.css')); ?>/bootstrap-modal.css"></link>
+		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/bootstrap-modalmanager.js'); ?>
+		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/bootstrap-modal.js'); ?>
 		<?php $this->widget('AdminzoneMenu'); ?>
 	<?php endif?>
 

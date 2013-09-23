@@ -36,13 +36,13 @@ $(function()
         
         var url = $(this).attr('href');
         var target = $(this).attr('data-target')
-
+        
         if (url.indexOf('#') == 0)
             $(url).modal('open');
         else
         {
             $.get(url,function(response) {
-                $(response).modal();
+                $(response).modal({backdrop: false});
             }).success(function() {
                 $(target).live('hidden',function() {
                     $(target).remove();
