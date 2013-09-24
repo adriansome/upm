@@ -28,12 +28,7 @@ class Controller extends CController
 			Yii::app()->assetManager->forceCopy = true;
 		
 		if(parent::beforeAction($action))
-		{
-			if($this->id == 'management' && Yii::app()->params['overlayAdmin'])
-				$this->layout = false;
-			
 			return true;
-		}
 		
 		return false;
 	}
