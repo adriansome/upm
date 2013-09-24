@@ -27,7 +27,7 @@ class ManagementController extends Controller {
 
     public function actionIndex($activeId=null) {
         $items = Page::model()->findAll();
-        $this->render('index', array(
+        $this->renderPartial('index', array(
             'items' => $items,
             'activeId' => $activeId
         ));
@@ -62,7 +62,7 @@ class ManagementController extends Controller {
                 $this->redirect(array('/page/management/index', 'activeId' => $model->id));
         }
 
-        $this->render('create', array('model' => $model, 'menuId' => key($_GET)));
+        $this->renderPartial('create', array('model' => $model, 'menuId' => key($_GET)));
     }
 
     public function actionUpdate($id) {
@@ -116,7 +116,7 @@ class ManagementController extends Controller {
                 $this->redirect(array('/page/management/index', 'activeId' => $model->id));
         }
 
-        $this->render('update', array(
+        $this->renderPartial('update', array(
             'model' => $model,
         ));
     }
