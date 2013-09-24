@@ -72,7 +72,7 @@ $(function()
             $(target+' > .item-form').html(jQuery(response).find('.modal-body').html());
             $(target+' > .item-buttons').html(jQuery(response).find('.modal-footer').html());
 
-            // Remove modal cl0ose button from item-header
+            // Remove modal close button from item-header
             $(target+' > .item-header > .close').remove();
 
             // Initiate any rich text editors in the modal.
