@@ -1,6 +1,6 @@
 <?php
 
-class ContactModule extends CWebModule
+class MessagingModule extends CWebModule
 {
 	public function init()
 	{
