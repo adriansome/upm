@@ -5,7 +5,7 @@ $this->widget('TbButton',array(
     'url' => Yii::app()->createUrl('/block/management/update/id/'.$this->id),
 	'htmlOptions'=>array(
 		'data-toggle' => 'modal',
-		'data-target'=>'#block-'.$this->id.'-management',
+		'data-target'=>'#block-management',
         'id'=>'edit-block-'.$this->id,
 	),
 ));

@@ -53,8 +53,7 @@ class Content extends CActiveRecord
 			array('name', 'required'),
 			array('block_id, type_id, boolean_value', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>128),
-			array('file_value', 'length', 'max'=>10),
-			array('string_value, date_value, date_created, date_updated, date_active, date_deleted', 'safe'),
+			array('string_value, date_value, file_value, date_created, date_updated, date_active, date_deleted', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, name, block_id, type_id, string_value, date_value, boolean_value, file_value, date_created, date_updated, date_active, date_deleted', 'safe', 'on'=>'search'),

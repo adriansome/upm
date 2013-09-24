@@ -2,7 +2,7 @@
 /* @var $this ManagementController */
 /* @var $model Block */
 
-$this->beginWidget('TbModal', array('id'=>'block-'.$block->id.'-management', 'htmlOptions'=>array('data-keyboard'=>'false', 'data-backdrop'=>'static'))); ?>
+$this->beginWidget('TbModal', array('id'=>'block-management', 'htmlOptions'=>array('data-keyboard'=>'false', 'data-backdrop'=>'static'))); ?>
 
 <div class="modal-header">
     <a class="close" data-dismiss="modal">&times;</a>

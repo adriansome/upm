@@ -2,7 +2,7 @@
 /* @var $this ManagementController */
 /* @var $dataProvider CActiveDataProvider */
 
-$this->beginWidget('TbModal', array('id'=>$id.'-list-management', 'htmlOptions'=>array('data-keyboard'=>'false', 'data-backdrop'=>'static', 'data-locked'=>'true'))); ?>
+$this->beginWidget('TbModal', array('id'=>$id.'-management', 'htmlOptions'=>array('data-keyboard'=>'false', 'data-backdrop'=>'static', 'data-locked'=>'true'))); ?>
 
 <div class="modal-header">
     <a class="close" data-dismiss="modal">&times;</a>

@@ -109,7 +109,7 @@ abstract class BlockWidget extends CWidget
 
 	public function run()
 	{
-		if(Yii::app()->user->isAdmin())
+		if(Yii::app()->user->isAdmin() || Yii::app()->user->isEditor())
 			$this->render('_management');
 	}
 }

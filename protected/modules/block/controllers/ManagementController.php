@@ -59,7 +59,7 @@ class ManagementController extends BlockController
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
-		$this->render('create',array(
+		$this->renderPartial('create',array(
 			'model'=>$model,
 		));
 	}
@@ -174,13 +174,13 @@ class ManagementController extends BlockController
 	/**
 	 * Lists all models.
 	 */
-	public function actionList($name)
+	public function actionList($list)
 	{
-		$id = str_replace(' ', '-', $name);
+		$id = str_replace(' ', '-', $list);
 
 		$dataProvider=new CActiveDataProvider('Block', array(
 		    'criteria'=>array(
-		        'condition'=>'t.name LIKE "'.$name.' item%"',
+		        'condition'=>'t.name LIKE "'.$list.' item%"',
 		        'with'=>array('contents'),
 		    ),
 		    'pagination'=>array(
@@ -190,7 +190,7 @@ class ManagementController extends BlockController
 
 		$this->renderPartial('listItems',array(
 			'dataProvider'=>$dataProvider,
-			'name'=>$name,
+			'name'=>$list,
 			'id'=>$id,
 		));
 	}
@@ -200,7 +200,7 @@ class ManagementController extends BlockController
     	$model = Area::model()->findByPk($id);
     	$block = $model->blocks;
 
-    	$this->render('areaBlocks');
+    	$this->renderPartial('areaBlocks');
     }
     	
 

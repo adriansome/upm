@@ -103,7 +103,7 @@ class ListWidget extends CWidget
 	{
 		$this->render($this->scenario);
 
-		if(Yii::app()->user->isAdmin())
+		if(Yii::app()->user->isAdmin() || Yii::app()->user->isEditor())
 			require_once(dirname(__FILE__).'/../widgets/views/_listManagement.php');
 	}
 }
