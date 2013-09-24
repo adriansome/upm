@@ -21,7 +21,7 @@ if($_SESSION["verify"] != "RESPONSIVEfilemanager") die('forbidden');
 //    |   |   |   |   |- plugin.min.js
 
 $root = rtrim($_SERVER['DOCUMENT_ROOT'],'/'); // don't touch this parameter
-$base_url="http://".$_SERVER['HTTP_HOST'];  // base url of site (without final /). If you prefer relative urls leave empty
+$base_url=null;  // base url of site (without final /). If you prefer relative urls leave empty
 $upload_dir = '/assets/source/'; // path from base_url to base of upload folder (with start and final /)
 $current_path = '../source/'; // relative path from filemanager folder to upload folder (with final /)
 
