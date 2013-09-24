@@ -48,7 +48,7 @@ $this->pageTitle = $model->window_title;
 
    <?php $this->widget('ListWidget',array(
 		'type'=>'blog',
-		'name'=>'test blog',
+		'name'=>'blog',
 		'scenario'=>'list',
 		'pageSize'=>2,
 	)); ?>
