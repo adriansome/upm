@@ -6,9 +6,6 @@
 	<?php Yii::app()->bootstrap->register(); ?>
 	<?php Yii::app()->getClientScript()->registerCoreScript( 'jquery.ui' ); ?>
 	<?php require_once(Yii::app()->theme->basepath.'/views/elements/head.php'); ?>
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('bootstrap')); ?>/assets/css/bootstrap-wysihtml5.css"></link>
-	<script src="<?php echo Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('bootstrap')); ?>/assets/js/wysihtml5-0.3.0.js"></script>
-	<script src="<?php echo Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('bootstrap')); ?>/assets/js/bootstrap-wysihtml5.js"></script>
 	<?php echo "\n"; ?>
 </head>
 
@@ -20,11 +17,14 @@
 		</script>
 		
 		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('tinymce')).'/tinymce.min.js'); ?>
+		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('bootstrap.assets.js')).'/bootstrap-modal.js'); ?>
+		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('bootstrap.assets.js')).'/bootstrap-modalmanager.js'); ?>
+		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('bootstrap.assets.js')).'/bootstrap-wysihtml5.js'); ?>
+		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('bootstrap.assets.js')).'/wysihtml5-0.3.0.js'); ?>
+		<?php Yii::app()->clientScript->registerCssFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('bootstrap.assets.css')).'/bootstrap-wysihtml5.css'); ?>
 		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/adminzone.js'); ?>
-		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.css')); ?>/adminzone.css"></link>
-		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.css')); ?>/bootstrap-modal.css"></link>
-		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/bootstrap-modalmanager.js'); ?>
-		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/bootstrap-modal.js'); ?>
+		<?php Yii::app()->clientScript->registerCssFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.css')).'/adminzone.css'); ?>
+		
 		<?php $this->widget('AdminzoneMenu'); ?>
 	<?php endif?>
 
