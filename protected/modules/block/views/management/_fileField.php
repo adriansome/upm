@@ -9,6 +9,5 @@
 		'data-toggle' => 'modal',
 		'data-target'=>'#filemanager',
         'class'=>'launch-filemanager',
-        'width'=>'765px',
 	),
 )); ?>
