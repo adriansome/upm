@@ -8,7 +8,7 @@ $this->breadcrumbs=array(
 	'Successful'
 );
 
-$this->beginClip('content');
+
 ?>
 
 <h1>Registration Successful</h1>
@@ -18,4 +18,3 @@ $this->beginClip('content');
 	If the E-mail cannot be found in your inbox please also check your spam/junk mail folder.<br />
 	If you did not receive the message please request a resend by <?php echo CHtml::link('following this link', array('registrationSuccess', 'resend'=>true)); ?>.
 </p>
-<?php $this->endClip(); ?>

@@ -7,8 +7,6 @@ $this->pageTitle=Yii::app()->name . ' - Login';
 $this->breadcrumbs=array(
 	'Login',
 );
-
-$this->beginClip('content');
 ?>
 
 <h1>Login</h1>
@@ -65,4 +63,3 @@ $this->beginClip('content');
 
 <?php $this->endWidget(); ?>
 </div><!-- form -->
-<?php $this->endClip(); ?>

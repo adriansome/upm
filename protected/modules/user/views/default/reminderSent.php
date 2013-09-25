@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
 	'Reminder Sent'
 );
 
-$this->beginClip('content');
+
 ?>
 
 <h1>Reminder Sent</h1>
@@ -19,4 +19,3 @@ $this->beginClip('content');
 	<br />
 	If you can not find it in your inbox please check your spam folder.
 </p>
-<?php $this->endClip(); ?>

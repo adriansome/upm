@@ -6,7 +6,7 @@ $this->breadcrumbs=array(
 	'Forgotten Credentials'
 );
 
-$this->beginClip('content');
+
 ?>
 
 <h1>Forgotten Credentials</h1>
@@ -38,4 +38,3 @@ $this->beginClip('content');
 
 <?php $this->endWidget(); ?>
 </div><!-- form -->
-<?php $this->endClip(); ?>

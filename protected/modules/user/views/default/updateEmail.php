@@ -13,7 +13,7 @@ $this->menu=array(
 	array('label'=>'Delete Account', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete'),'confirm'=>'Are you sure you want to delete your account?')),
 );
 
-$this->beginClip('content');
+
 ?>
 
 <h1>Update E-mail Address</h1>
@@ -46,4 +46,3 @@ $this->beginClip('content');
 
 <?php $this->endWidget(); ?>
 </div>
-<?php $this->endClip(); ?>

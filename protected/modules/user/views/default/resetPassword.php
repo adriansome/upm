@@ -7,7 +7,7 @@ $this->breadcrumbs=array(
 	'Reset Password'=>array('/user/resetPassword'),
 );
 
-$this->beginClip('content');
+
 ?>
 
 <h1>New Password</h1>
@@ -42,4 +42,3 @@ $this->beginClip('content');
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
-<?php $this->endClip(); ?>
