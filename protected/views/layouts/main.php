@@ -9,7 +9,7 @@
 	<?php echo "\n"; ?>
 </head>
 
-<body>
+<body<?php if(isset($this->bodyId)): ?> id="<?php echo $this->bodyId; ?>"<?php endif; ?>>
 	<?php  if(!Yii::app()->user->isGuest && in_array(Yii::app()->user->role, array('admin', 'editor'))):?>
 		<!-- If admin or editor logged in load the javascript component and display adminzone menu view here -->
 		<script>
