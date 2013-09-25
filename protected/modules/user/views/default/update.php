@@ -1,19 +1,6 @@
 <?php
 /* @var $this UserController */
 /* @var $model User */
-
-$this->breadcrumbs=array(
-	'User Profile'=>array('/user/profile'),
-	'Update',
-);
-
-$this->menu=array(
-	array('label'=>'Change E-mail Address', 'url'=>array('updateEmail')),
-	array('label'=>'Change Password', 'url'=>array('updatePassword')),
-	array('label'=>'Delete Account', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete'),'confirm'=>'Are you sure you want to delete your account?')),
-);
-
-
 ?>
 
 <h1>Update Account Details</h1>

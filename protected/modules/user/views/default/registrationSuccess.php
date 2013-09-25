@@ -2,13 +2,6 @@
 /* @var $this UserController */
 /* @var $model User */
 /* @var $form CActiveForm */
-
-$this->breadcrumbs=array(
-	'Registration'=>array('/user/register'),
-	'Successful'
-);
-
-
 ?>
 
 <h1>Registration Successful</h1>

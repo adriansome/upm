@@ -2,12 +2,6 @@
 /* @var $this UserController */
 /* @var $model User */
 /* @var $form CActiveForm */
-
-$this->breadcrumbs=array(
-	'Reset Password'=>array('/user/resetPassword'),
-);
-
-
 ?>
 
 <h1>New Password</h1>

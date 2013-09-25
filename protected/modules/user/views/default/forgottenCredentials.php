@@ -1,12 +1,6 @@
 <?php
 /* @var $this UserController */
 $this->pageTitle=Yii::app()->name . ' - Forgotten Credentials';
-$this->breadcrumbs=array(
-	'Login'=>array('login'),
-	'Forgotten Credentials'
-);
-
-
 ?>
 
 <h1>Forgotten Credentials</h1>

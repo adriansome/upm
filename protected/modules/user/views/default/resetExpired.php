@@ -1,11 +1,6 @@
 <?php
 /* @var $this UserController */
 $this->pageTitle=Yii::app()->name . ' - Password Reset Expired';
-$this->breadcrumbs=array(
-	'Password Reset',
-);
-
-
 ?>
 
 <h1>Password Reset Expired</h1>
