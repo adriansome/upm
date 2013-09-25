@@ -37,7 +37,7 @@ return array(
         ),
     ),
 
-    // 'params'=>array(
-    //     'managementActions'=>$listManagementActions,
-    // ),
+    'params'=>array(
+        'managementActions'=>array(),
+    ),
 );
