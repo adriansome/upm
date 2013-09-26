@@ -13,7 +13,7 @@ $this->beginWidget('TbModal', array('id'=>$id.'-management', 'htmlOptions'=>arra
 	<?php $this->widget('zii.widgets.CListView', array(
 		'dataProvider'=>$dataProvider,
 		'itemView'=>'_listItem',
-		'id'=>$id,
+		'id'=>$id.'-listing',
 	)); ?>
 
     <div class="item-view">

@@ -1,14 +1,14 @@
 <?php
 class Nugget extends BlockWidget
 {
-	public $headerLink = true;
-	public $contentLink = false;
-
 	public function attributes()
 	{
 		return array(
 			'title'=>array(
 				'type'=>'singleline',
+			),
+			'title_is_link'=>array(
+				'type'=>'boolean',
 			),
 			'text'=>array(
 				'type'=>'multiline',
@@ -17,6 +17,9 @@ class Nugget extends BlockWidget
 				'type'=>'singleline',
 			),
 			'target'=>array(
+				'type'=>'boolean',
+			),
+			'link_in_body'=>array(
 				'type'=>'boolean',
 			),
 			'link_title'=>array(

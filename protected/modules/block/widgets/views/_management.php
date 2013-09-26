@@ -2,7 +2,7 @@
 $this->widget('TbButton',array(
     'type'=>'link',
     'label' => 'edit',
-    'url' => Yii::app()->createUrl('/block/management/update/id/'.$this->id),
+    'url' => Yii::app()->createUrl('/block/management/update/'.$this->dbID),
 	'htmlOptions'=>array(
 		'data-toggle' => 'modal',
 		'data-target'=>'#block-management',

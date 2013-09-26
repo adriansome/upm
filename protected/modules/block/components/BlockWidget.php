@@ -6,21 +6,26 @@ abstract class BlockWidget extends CWidget
 	
 	protected $id;
 	protected $page_id;
-	private $contents;
+	protected $contents;
+	protected $dbID;
 
 	abstract public function attributes();
 
-	public function __set($attribute, $value) {
+	public function __set($attribute, $value)
+	{
 		$this->contents[$attribute] = $value;
 	}
 
-	public function __get($attribute) {
+	public function __get($attribute)
+	{
 		return $this->contents[$attribute];
 	}
 
 	public function init()
 	{
 		$this->page_id = Yii::app()->session['page_id'];
+		$this->id = str_replace(' ', '-', $this->name);
+		
 		$this->loadBlock();
 	}
 
@@ -36,7 +41,7 @@ abstract class BlockWidget extends CWidget
 		if(!isset($block))
 			$block = $this->createBlock();
 
-		$this->id = $block->id;
+		$this->dbID = $block->id;
 		$this->loadContents($block->contents);
 	}
 

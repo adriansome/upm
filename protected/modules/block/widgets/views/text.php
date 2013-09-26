@@ -1,1 +1,1 @@
-<?php echo $this->text; ?>
+<span id="<?php echo $this->id; ?>"><?php echo $this->text; ?></span>

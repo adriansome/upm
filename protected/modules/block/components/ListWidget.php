@@ -11,14 +11,18 @@ class ListWidget extends CWidget
 	protected $config;
 	protected $page_id;
 	protected $contents;
+	protected $id;
 
 	public function getViewPath($checkTheme=false)
 	{
-		return Yii::app()->theme->basepath.'/views/lists/'.$this->type;
+		return Yii::app()->theme->basepath.'/views/lists/'.$this->name;
 	}
 
 	public function init()
 	{
+		$this->page_id = Yii::app()->session['page_id'];
+		$this->id = str_replace(' ', '-', $this->name);
+
 		$this->configure();
 		
 		if(isset($this->item_id))
@@ -30,7 +34,7 @@ class ListWidget extends CWidget
 	protected function configure()
 	{
 		$config = file_get_contents(
-			Yii::app()->theme->basepath.'/views/lists/'.$this->type.'.json'
+			Yii::app()->theme->basepath.'/views/lists/'.$this->name.'.json'
 		);
 
 		$this->config = json_decode($config);
@@ -89,13 +93,16 @@ class ListWidget extends CWidget
 				}
 			}
 		}
+		
+		if(isset($this->pageSize))
+			$pagination = array('pageSize'=>$this->pageSize);
+		else
+			$pagination = false;
 
 		$this->contents = new CArrayDataProvider($list, array(
 		    'id'=>'title',
 		    'keyField'=>'title',
-		    'pagination'=>array(
-		        'pageSize'=>$this->pageSize,
-		    ),
+		    'pagination'=>$pagination,
 		));
 	}
 
@@ -104,6 +111,6 @@ class ListWidget extends CWidget
 		$this->render($this->scenario);
 
 		if(Yii::app()->user->isAdmin() || Yii::app()->user->isEditor())
-			require_once(dirname(__FILE__).'/../widgets/views/_listManagement.php');
+			require(Yii::app()->basepath.'/modules/block/widgets/views/_listManagement.php');
 	}
 }

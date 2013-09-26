@@ -7,6 +7,7 @@
     'url' => '/site/filemanager',
 	'htmlOptions'=>array(
 		'data-toggle' => 'modal',
+		'data-index' => $index,
 		'data-target'=>'#filemanager',
         'class'=>'launch-filemanager',
 	),
