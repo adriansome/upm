@@ -46,6 +46,12 @@ $(function()
         {
             $.get(url,function(response) {
                 $(response).modal({backdrop: false});
+
+                // Make modal window draggable.
+                $(target).draggable({ handle: ".modal-header" });
+                
+                // Initiate any rich text editors in the modal.
+                initRichTextEditors();
             }).success(function() {
                 if(target == '#filemanager')
                 {
