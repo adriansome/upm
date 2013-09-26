@@ -32,6 +32,16 @@
 
 		constructor: Modal,
 
+		// Added by Matt Biddle for Fanatic CMS
+	    lock: function () {
+	        this.options.locked = true
+	    },
+
+	      // Added by Matt Biddle for Fanatic CMS
+	    unlock: function () {
+	        this.options.locked = false
+	    },
+
 		init: function (element, options) {
 			var that = this;
 
@@ -76,6 +86,10 @@
 
 		hide: function (e) {
 			e && e.preventDefault();
+
+			var that = this
+
+        	if (that.options.locked && ($(e.target).is('.save') || $(e.target).is('.discard'))) return
 
 			e = $.Event('hide');
 
@@ -338,6 +352,7 @@
 	$.fn.modal.defaults = {
 		keyboard: true,
 		backdrop: true,
+		locked: false,
 		loading: false,
 		show: true,
 		width: null,
