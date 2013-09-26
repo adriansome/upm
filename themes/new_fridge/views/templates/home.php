@@ -38,9 +38,8 @@ $this->pageTitle = $model->window_title;
 	)); ?>
 </div>
 
-<?php $this->widget('Nugget',array(
-	'name'=>'test nugget block',
-	'scope'=>'page',
+<?php $this->widget('NuggetArea',array(
+	'name'=>'home nugget area',
 )); ?>
 
 <?php $this->widget('ListWidget',array(
