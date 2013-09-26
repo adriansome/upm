@@ -6,7 +6,6 @@ Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../vendors/bootstrap');
 Yii::setPathOfAlias('mail', dirname(__FILE__).'/../vendors/mail');
 Yii::setPathOfAlias('tinymce', dirname(__FILE__).'/../vendors/tinymce');
 Yii::setPathOfAlias('filemanager', dirname(__FILE__).'/../vendors/filemanager');
-Yii::setPathOfAlias('caroufredsel', dirname(__FILE__).'/../vendors/caroufredsel');
 
 $config = array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
@@ -25,7 +24,6 @@ $config = array(
 		'application.components.*',
 		'bootstrap.components.*',
 		'bootstrap.widgets.*',
-		'caroufredsel.*',
 		'mail.*',
 	),
 
