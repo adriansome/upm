@@ -835,16 +835,6 @@
 
       constructor: Modal
 
-    // Added by Matt Biddle for Fanatic CMS
-    , lock: function () {
-        this.options.locked = true
-      }
-
-      // Added by Matt Biddle for Fanatic CMS
-    , unlock: function () {
-        this.options.locked = false
-      }
-
     , toggle: function () {
         return this[!this.isShown ? 'show' : 'hide']()
       }
@@ -891,8 +881,6 @@
         e && e.preventDefault()
 
         var that = this
-
-        if (that.options.locked && ($(e.target).is('.save') || $(e.target).is('.discard'))) return
 
         e = $.Event('hide')
 
@@ -1022,7 +1010,6 @@
       backdrop: true
     , keyboard: true
     , show: true
-    , locked: false
   }
 
   $.fn.modal.Constructor = Modal
