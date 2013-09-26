@@ -6,8 +6,8 @@
 </div>
 
 <div class="modal-body" style="max-height:none; padding:0; border-radius:0 0 6px 6px;">
-	<iframe  width="765" height="491" frameborder="0" scrolling="no" 
-		src="<?php echo Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('filemanager')); ?>/dialog.php?type=2&lang=eng&field_id=Content_0_file_value">
+	<iframe id="fm-iframe" width="765" height="491" frameborder="0" scrolling="no" 
+		src="<?php echo Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('filemanager')); ?>/dialog.php?type=2&lang=eng">
 	</iframe>
 </div>
 

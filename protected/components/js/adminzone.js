@@ -36,7 +36,10 @@ $(function()
         
         var url = $(this).attr('href');
         var target = $(this).attr('data-target')
-        
+
+        if($(this).is('[data-index]'))
+            var fileFieldID = $(this).attr('data-index');
+
         if (url.indexOf('#') == 0)
             $(url).modal('open');
         else
@@ -44,6 +47,12 @@ $(function()
             $.get(url,function(response) {
                 $(response).modal({backdrop: false});
             }).success(function() {
+                if(target == '#filemanager')
+                {
+                    var src = $('#fm-iframe').attr('src')+'&field_id=Content_'+fileFieldID+'_file_value';
+                    $('#fm-iframe').attr('src', src);
+                }
+
                 $(target).live('hidden',function() {
                     $(target).remove();
                     
@@ -63,8 +72,6 @@ $(function()
         var url = $(this).attr('href');
         var id = $(this).attr('id');
         var target = $(this).attr('data-target');
-
-        console.log(target);
         
         $.get(url,function(response) {
             // Pull modal content into side panel.
