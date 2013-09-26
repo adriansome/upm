@@ -145,7 +145,7 @@ class ManagementController extends BlockController
 
 		$this->performAjaxValidation($block);
 
-		$this->renderPartial('update',array(
+		$this->renderPartial('updateBlock',array(
 			'block'=>$block,
 			'fields'=>$fields,
 		));
@@ -182,7 +182,7 @@ class ManagementController extends BlockController
 		    ),
 		));
 
-		$this->renderPartial('listItems',array(
+		$this->renderPartial('updateList',array(
 			'dataProvider'=>$dataProvider,
 			'name'=>$list,
 			'id'=>$id,
@@ -191,10 +191,25 @@ class ManagementController extends BlockController
 
 	public function actionArea($id)
     {
-    	$model = Area::model()->findByPk($id);
-    	$block = $model->blocks;
+    	$area = Area::model()->findByPk($id)->name;
+    	$dbID = $id;
+    	$id = str_replace(' ', '-', $area);
 
-    	$this->renderPartial('areaBlocks');
+		$dataProvider=new CActiveDataProvider('Area', array(
+		    'criteria'=>array(
+		        'condition'=>'t.id = '.$dbID,
+		        'with'=>array('blocks'),
+		    ),
+		    'pagination'=>array(
+		        'pageSize'=>20,
+		    ),
+		));
+
+    	$this->renderPartial('updateArea',array(
+    		'dataProvider'=>$dataProvider,
+			'name'=>$area,
+			'id'=>$id,
+    	));
     }
     	
 

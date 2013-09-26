@@ -5,6 +5,8 @@
  *
  * The followings are the available columns in table 'area':
  * @property string $id
+ * @property string $page_id
+ * @property string $name
  *
  * The followings are the available model relations:
  * @property AreaBlock[] $areaBlocks
@@ -37,9 +39,12 @@ class Area extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+			array('page_id, name', 'required'),
+			array('page_id', 'length', 'max'=>11),
+			array('name', 'length', 'max'=>140),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id', 'safe', 'on'=>'search'),
+			array('id, page_id, name', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -51,7 +56,7 @@ class Area extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'areaBlocks' => array(self::HAS_MANY, 'AreaBlock', 'area_id'),
+			'blocks' => array(self::MANY_MANY, 'Block', 'area_block(area_id, block_id)'),
 		);
 	}
 
@@ -62,6 +67,8 @@ class Area extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
+			'page_id' => 'Page',
+			'name' => 'Name',
 		);
 	}
 
@@ -77,6 +84,8 @@ class Area extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id,true);
+		$criteria->compare('page_id',$this->page_id,true);
+		$criteria->compare('name',$this->name,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

@@ -1,6 +1,8 @@
 <?php
 class Nugget extends BlockWidget
 {
+	public $isManaged;
+
 	public function attributes()
 	{
 		return array(
@@ -43,6 +45,8 @@ class Nugget extends BlockWidget
 	public function run()
 	{
 		$this->render('nugget');
-		parent::run();
+		
+		if(!$this->isManaged)
+			parent::run();
 	}
 }
