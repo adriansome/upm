@@ -41,8 +41,6 @@ $this->pageTitle = $model->window_title;
 <?php $this->widget('Nugget',array(
 	'name'=>'test nugget block',
 	'scope'=>'page',
-	'headerLink'=>true,
-	'contentLink'=>false,
 )); ?>
 
 <?php $this->widget('ListWidget',array(
@@ -50,5 +48,13 @@ $this->pageTitle = $model->window_title;
 	'name'=>'blog',
 	'scenario'=>'list',
 	'pageSize'=>2,
+)); ?>
+
+<?php $this->widget('Carousel',array(
+	'type'=>'carousel',
+	'name'=>'home-carousel',
+	'options'=>array(
+
+	),
 )); ?>
 </div>
