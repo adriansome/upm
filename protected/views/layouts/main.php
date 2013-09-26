@@ -10,21 +10,26 @@
 </head>
 
 <body<?php if(isset($this->bodyId)): ?> id="<?php echo $this->bodyId; ?>"<?php endif; ?>>
+	<!-- If admin or editor logged in load the javascript component and display adminzone menu view here -->
 	<?php  if(!Yii::app()->user->isGuest && in_array(Yii::app()->user->role, array('admin', 'editor'))):?>
-		<!-- If admin or editor logged in load the javascript component and display adminzone menu view here -->
+		<!-- Set file path of the responsive filemanager component for use by tinymce -->
 		<script>
 		    var responsiveFileManager = "<?php echo Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('filemanager')); ?>/";
 		</script>
 		
+		<!-- Import 3rd party vendors js and css files. -->
 		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('tinymce')).'/tinymce.min.js'); ?>
-		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('bootstrap.assets.js')).'/bootstrap-modal.js'); ?>
-		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('bootstrap.assets.js')).'/bootstrap-modalmanager.js'); ?>
 		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('bootstrap.assets.js')).'/bootstrap-wysihtml5.js'); ?>
 		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('bootstrap.assets.js')).'/wysihtml5-0.3.0.js'); ?>
 		<?php Yii::app()->clientScript->registerCssFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('bootstrap.assets.css')).'/bootstrap-wysihtml5.css'); ?>
+
+		<!-- Import application components js and css files. -->
+		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/bootstrap-modal.js'); ?>
+		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/bootstrap-modalmanager.js'); ?>
 		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/adminzone.js'); ?>
 		<?php Yii::app()->clientScript->registerCssFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.css')).'/adminzone.css'); ?>
 		
+		<!-- Display the adminzone menu widget -->
 		<?php $this->widget('AdminzoneMenu'); ?>
 	<?php endif?>
 
