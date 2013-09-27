@@ -3,14 +3,15 @@
 /* @var $model User */
 ?>
 
-<h1><?php echo $model->fullname; ?></h1>
+<div id="content">
+	<h1><?php echo $model->fullname; ?></h1>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'email',
-		'username',
-		'date_created',
-	),
-)); ?>
-
+	<?php $this->widget('zii.widgets.CDetailView', array(
+		'data'=>$model,
+		'attributes'=>array(
+			'email',
+			'username',
+			'date_created',
+		),
+	)); ?>
+</div>

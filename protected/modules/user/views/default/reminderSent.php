@@ -4,10 +4,12 @@
 /* @var $form CActiveForm */
 ?>
 
-<h1>Reminder Sent</h1>
+<div id="content">
+	<h1>Reminder Sent</h1>
 
-<p>
-	Please check your e-mail for the account credentials reminder message.
-	<br />
-	If you can not find it in your inbox please check your spam folder.
-</p>
+	<p>
+		Please check your e-mail for the account credentials reminder message.
+		<br />
+		If you can not find it in your inbox please check your spam folder.
+	</p>
+</div>
