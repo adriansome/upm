@@ -17,14 +17,6 @@ $this->beginWidget('TbModal', array('id'=>'list-management', 'htmlOptions'=>arra
 	)); ?>
 
     <div class="item-view">
-        <?php $this->widget('TbAlert', array(
-            'block'=>true, // display a larger alert block?
-            'fade'=>true, // use transitions?
-            'closeText'=>'&times;', // close link text - if set to false, no close link is displayed
-            'alerts'=>array( // configurations per alert type
-                'success'=>array('block'=>true, 'fade'=>true, 'closeText'=>'&times;'), // success, info, warning, error or danger
-            ),
-        )); ?>
         <div class="item-header">
             <!-- List item header -->
         </div>

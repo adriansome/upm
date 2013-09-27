@@ -26,9 +26,13 @@ $(function()
         });
     }
 
-    function flashMessage(content)
+    function flashMessage(status,content)
     {
-        console.log(content);
+        $('#flashMessage').addClass('alert alert-'+status).html(content).fadeIn(function() {
+            setTimeout(function() {
+                $('#flashMessage').fadeOut();
+            }, 5000);
+        });
     }
 
     $('[data-toggle=\"modal\"]').live('click',function(e) {
@@ -105,9 +109,9 @@ $(function()
             url: $(this).attr('href'),
             success: function(data) {
                 if(data.success)
-                    flashMessage(data.success);
+                    flashMessage('success',data.success);
                 else
-                    flashMessage(data.error);
+                    flashMessage('danger',data.error);
             }
         });
     });

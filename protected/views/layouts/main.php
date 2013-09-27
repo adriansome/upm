@@ -29,10 +29,12 @@
 		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/adminzone.js'); ?>
 		<?php Yii::app()->clientScript->registerCssFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.css')).'/adminzone.css'); ?>
 		
+		<!-- Display the flash message element -->
+		<div id="flashMessage" display="none"></div>
+
 		<!-- Display the adminzone menu widget -->
 		<?php $this->widget('AdminzoneMenu'); ?>
 	<?php endif?>
-
 	<?php require_once(Yii::app()->theme->basepath.'/views/elements/body.php'); ?>
 	<?php echo "\n"; ?>
 </body>
