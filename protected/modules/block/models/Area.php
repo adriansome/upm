@@ -56,6 +56,7 @@ class Area extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'areaBlocks' => array(self::HAS_MANY, 'AreaBlock', 'area_id'),
 			'blocks' => array(self::MANY_MANY, 'Block', 'area_block(area_id, block_id)'),
 		);
 	}

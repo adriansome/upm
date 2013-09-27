@@ -192,13 +192,12 @@ class ManagementController extends BlockController
 	public function actionArea($id)
     {
     	$area = Area::model()->findByPk($id)->name;
-    	$dbID = $id;
-    	$id = str_replace(' ', '-', $area);
+    	$areaID = str_replace(' ', '-', $area);
 
-		$dataProvider=new CActiveDataProvider('Area', array(
+		$dataProvider=new CActiveDataProvider('Block', array(
 		    'criteria'=>array(
-		        'condition'=>'t.id = '.$dbID,
-		        'with'=>array('blocks'),
+		    	'join'=>'LEFT JOIN area_block AS a ON a.block_id = t.id',
+		        'condition'=>'a.area_id = '.$id,
 		    ),
 		    'pagination'=>array(
 		        'pageSize'=>20,
@@ -208,7 +207,7 @@ class ManagementController extends BlockController
     	$this->renderPartial('updateArea',array(
     		'dataProvider'=>$dataProvider,
 			'name'=>$area,
-			'id'=>$id,
+			'id'=>$areaID,
     	));
     }
     	
