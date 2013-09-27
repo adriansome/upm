@@ -8,7 +8,9 @@
 		'id'=>'mainmenu'
 	)); ?><!-- mainmenu -->
 
-	<?php echo $content; ?>
+	<div class="container" id="wrapper">
+		<?php echo $content; ?>
+	</div>
 
 	<div class="clear"></div>
 

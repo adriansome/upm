@@ -53,7 +53,7 @@ $this->pageTitle = $model->window_title;
 	'type'=>'carousel',
 	'name'=>'home-carousel',
 	'options'=>array(
-
+		
 	),
 )); ?>
 </div>

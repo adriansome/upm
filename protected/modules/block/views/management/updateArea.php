@@ -6,7 +6,7 @@ $this->beginWidget('TbModal', array('id'=>'area-management', 'htmlOptions'=>arra
 
 <div class="modal-header">
     <a class="close" data-dismiss="modal">&times;</a>
-    <h4><?php echo ucwords($name); ?> Items</h4>
+    <h4><?php echo ucwords($name); ?></h4>
 </div>
 
 <div class="modal-body">

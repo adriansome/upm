@@ -72,7 +72,6 @@ class Block extends CActiveRecord
 			'page' => array(self::BELONGS_TO, 'Page', 'page_id'),
 			'contents' => array(self::HAS_MANY, 'Content', 'block_id'),
 			'areas' => array(self::MANY_MANY, 'Area', 'area_block(area_id, block_id)'),
-
 		);
 	}
 
