@@ -1,13 +1,6 @@
 <?php
 /* @var $this DefaultController */
 /* @var $dataProvider CActiveDataProvider */
-
-$this->menu=array(
-	array('label'=>'Create User', 'url'=>array('create')),
-	array('label'=>'Manage User', 'url'=>array('admin')),
-);
-
-$this->beginClip('content');
 ?>
 
 <h1>Users</h1>
@@ -19,5 +12,3 @@ $this->beginClip('content');
 	'itemView'=>'_view',
 	'id'=>'user-list'
 )); ?>
-
-<?php $this->endClip(); ?>
