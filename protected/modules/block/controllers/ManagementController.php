@@ -35,7 +35,7 @@ class ManagementController extends BlockController
         );
     }
 
-    protected function create($name, $scope, $attributes, $data=false)
+    protected function create($name, $scope, $attributes, $data=false, $url=false)
     {
     	$block = new Block;
 		$block->name = $name;
@@ -138,6 +138,7 @@ class ManagementController extends BlockController
 		$this->renderPartial('createBlock',array(
 			'block'=>$block,
 			'fields'=>$fields,
+			'url'=>$url,
 		));
     }
 
@@ -296,8 +297,10 @@ class ManagementController extends BlockController
 			$data = $_POST;
 		else
 			$data = false;
+
+		$url = '/'.$list.'/management/item';
 		
-		$this->create($name, $scope, $attributes, $data);
+		$this->create($name, $scope, $attributes, $data, $url);
 	}
 
 	public function actionArea($id)
@@ -335,8 +338,10 @@ class ManagementController extends BlockController
 			$data = $_POST;
 		else
 			$data = false;
+
+		$url = '/block/management/nugget/area/'.$area;
 		
-		$this->create($name, $scope, $attributes, $data);
+		$this->create($name, $scope, $attributes, $data, $url);
 	}
     	
 	/**
