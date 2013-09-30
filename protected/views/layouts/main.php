@@ -5,7 +5,7 @@
 <head>
 	<?php Yii::app()->bootstrap->register(); ?>
 	<?php Yii::app()->getClientScript()->registerCoreScript( 'jquery.ui' ); ?>
-	<?php require_once(Yii::app()->theme->basepath.'/views/elements/head.php'); ?>
+	<?php require_once(Yii::app()->theme->basepath.'/views/elements/htmlHead.php'); ?>
 	<?php echo "\n"; ?>
 </head>
 
@@ -35,7 +35,9 @@
 		<!-- Display the adminzone menu widget -->
 		<?php $this->widget('AdminzoneMenu'); ?>
 	<?php endif?>
-	<?php require_once(Yii::app()->theme->basepath.'/views/elements/body.php'); ?>
+	
+	<?php echo $content; ?>
+	
 	<?php echo "\n"; ?>
 </body>
 

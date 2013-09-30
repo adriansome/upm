@@ -1,6 +1,6 @@
-<?php
-$this->pageTitle = $model->window_title;
-?>
+<?php $this->pageTitle = $model->window_title; ?>
+
+<?php require_once(Yii::app()->theme->basepath.'/views/elements/header.php'); ?>
 
 <div id="content">
 <h1>
@@ -54,6 +54,7 @@ $this->pageTitle = $model->window_title;
 )); ?>
 </div>
 
+<<<<<<< HEAD:themes/give_us_time/views/templates/home.php
 <script src="/themes/mps/js/jquery.magnific-popup.min.js"></script>
 <script>
 	$(document).ready(function() {
@@ -76,3 +77,6 @@ $this->pageTitle = $model->window_title;
 	});
 
 </script>
+=======
+<?php require_once(Yii::app()->theme->basepath.'/views/elements/footer.php'); ?>
+>>>>>>> refs/remotes/origin/master:themes/new_fridge/views/templates/home.php
