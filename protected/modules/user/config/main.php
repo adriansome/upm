@@ -38,5 +38,8 @@ return array(
             'iteration_count_log2'=>8,
             'portable_hashes'=>false,
         ),
+        'coreManagementActions'=>array(
+        	'User Management'=>array('/user/management')
+        ),
     ),
 );

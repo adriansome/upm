@@ -46,7 +46,7 @@ $(function()
         e.preventDefault();
         
         var url = $(this).attr('href');
-        var target = $(this).attr('data-target')
+        var target = $(this).attr('data-target');
 
         if($(this).is('[data-index]'))
             var fileFieldID = $(this).attr('data-index');
@@ -56,8 +56,7 @@ $(function()
         else
         {
             $.get(url,function(response) {
-                console.log(response);
-                $(response).modal({backdrop: false});
+                $(response).modal({backdrop: false, modalOverflow: true});
 
                 // Make modal window draggable.
                 $(target).draggable({ handle: ".modal-header" });

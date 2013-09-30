@@ -1,13 +1,18 @@
 <?php
 class AdminzoneMenu extends CWidget
 {
-	protected $items = array();
+	protected $listItems = array();
+	protected $coreItems = array();
 
 	public function init()
 	{
 		foreach (Yii::app()->params['managementActions'] as $label => $link)
 		{
-			$this->items[] = CHtml::link($label, $link, array('data-toggle' => 'modal', 'data-target'=>'#'.strtolower(str_replace(' ', '-', $label))));
+			$this->listItems[] = CHtml::link($label, $link, array('data-toggle' => 'modal', 'data-target'=>'#'.strtolower(str_replace(' ', '-', $label))));
+		}
+		foreach (Yii::app()->params['coreManagementActions'] as $label => $link)
+		{
+			$this->coreItems[] = CHtml::link($label, $link, array('data-toggle' => 'modal', 'data-target'=>'#'.strtolower(str_replace(' ', '-', $label))));
 		}
 	}
 

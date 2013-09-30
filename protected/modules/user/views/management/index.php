@@ -1,9 +1,16 @@
 <?php
 /* @var $this DefaultController */
 /* @var $dataProvider CActiveDataProvider */
+
+$this->beginWidget('TbModal', array('id'=>'user-management', 'htmlOptions'=>array('data-keyboard'=>'false', 'data-backdrop'=>'static', 'data-locked'=>'true', 'class'=>'wide')));
 ?>
 
-<h1>Users</h1>
+<div class="modal-header">
+    <a class="close" data-dismiss="modal">&times;</a>
+    <h4>Users</h4>
+</div>
+
+<div class="modal-body">
 
 <?php $this->renderPartial('_search', array('model'=>$model)); ?>
 
@@ -12,3 +19,17 @@
 	'itemView'=>'_view',
 	'id'=>'user-list'
 )); ?>
+</div>
+
+<div class="modal-footer">
+    <?php $this->widget('TbButton', array(
+        'type'=>'danger',
+        'label'=>'Close',
+        'url'=>'#',
+        'htmlOptions'=>array(
+            'data-dismiss'=>'modal',
+            'class'=>'close-modal',
+        ),
+    )); ?>
+</div>
+<?php $this->endWidget(); ?>

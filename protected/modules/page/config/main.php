@@ -40,4 +40,9 @@ return array(
             ),
         ),
     ),
+    'params'=>array(
+        'coreManagementActions'=>array(
+        	'Page Management'=>array('/page/management')
+        ),
+    ),
 );
