@@ -56,43 +56,21 @@
 	<div class="nugget">
 		<h2>View Our Holiday Stories</h2>
 		<div id="photo-slideshow">
-			<ul class="slides">	
-				<li>
-					<img src="example-content/nugget-stories.jpg" alt="Sergant Mike Richey &amp; Family Enjoyed a week in Madera in July" />
-					<div class="caption">
-						Sergant Mike Richey &amp; Family Enjoyed a week in Madera in July
-					</div>
-				</li>
-				<li>
-					<img src="example-content/nugget-stories.jpg" alt="Sergant Mike Richey &amp; Family Enjoyed a week in Madera in July" />
-					<div class="caption">
-						Slide two
-					</div>
-				</li>
-				<li>
-					<img src="example-content/nugget-stories.jpg" alt="Sergant Mike Richey &amp; Family Enjoyed a week in Madera in July" />
-					<div class="caption">
-						Slide three
-					</div>
-				</li>										
-			</ul>
-		</div>
-			<div class="slideshow-controls">
-				<a href="#" class="active">1</a>
-				<a href="#">2</a>
-				<a href="#">3</a>
-			</div>			
+			<?php $this->widget('Carousel',array(
+				'name'=>'holidays-carousel',
+				'options'=>array(
+					'items'	=> 1,
+					'auto' => 3000,
+				),
+			)); ?>
+		</div>	
 		<a href="#" class="button-link">Read holiday stories</a>
 	</div>
 
-	<div class="nugget">
-		<h2>Support Us</h2>
-		<div class="thumbnail"><img src="example-content/nugget-support.png" alt="" /></div>
-		<div class="text">
-			<p>Text about giving money to support the charity Text about giving money to support the charity Text about giving money to support the charity.</p>
-			<a href="#" class="button-link">Donate money</a>
-		</div>
-	</div>		
+	<?php $this->widget('Nugget',array(
+		'name'=>'nugget-support',
+		'scope'=>'page',
+	)); ?>		
 </section>
 <!-- End #home-nuggets -->
 
@@ -128,12 +106,6 @@
 
 <script>
 	$(document).ready(function() {
-
-		$("#photo-slideshow .slides").carouFredSel({
-			items	: 1,
-			auto	: 3000,
-			pagination: ".slideshow-controls"
-		});
 
 		$('.video-trigger').magnificPopup({
 			disableOn: 700,
