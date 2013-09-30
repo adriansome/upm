@@ -1,61 +1,131 @@
 <?php $this->pageTitle = $model->window_title; ?>
 
-<?php require_once(Yii::app()->theme->basepath.'/views/elements/header.php'); ?>
+<?php $this->bodyId = 'home'; ?>
 
-<div id="content">
-<h1>
-	<?php $this->widget('SingleLineText',array(
-		'name'=>'test text',
-		'scope'=>'page',
-	)); ?>
-</h1>
+<!-- Begin #home-upper-wrapper -->
+<div id="home-upper-wrapper">
+	<?php require_once(Yii::app()->theme->basepath.'/views/elements/header.php'); ?>
 
-<p>
-	<?php $this->widget('RichText',array(
-		'name'=>'test text block',
-		'scope'=>'page',
-	)); ?>
-</p>
+	<!-- Begin #home-upper -->
+	<section id="home-upper" class="constrained">
+		<div class="nugget" id="nugget-register">
+			<h2>Register</h2>
+			<p>You need to be registered and verified to use this site. Click below to begin. </p>
+			<a href="#" class="more">Register to use site</a>
+		</div>
 
-<h2>
-	<?php $this->widget('SingleLineText',array(
-		'name'=>'test heading',
-		'scope'=>'page',
-	)); ?>
-</h2>
+		<div class="nugget" id="nugget-search">
+			<h2>Holiday Search</h2>
+			<p>Once registered and verified, search here for a holiday.</p>
+			<div class="form-row">
+				<select>
+					<option>Choose When</option>
+				</select>
+			</div>
+			<div class="form-row">			
+				<select>
+					<option>Choose Where</option>
+				</select>
+			</div>
+			<div class="form-row">
+				<input type="submit" class="more" value="Search For Holiday" />
+			</div>
+		</div>
 
-<p>
-	<?php $this->widget('MultiLineText',array(
-		'name'=>'test text block 2',
-		'scope'=>'page',
-	)); ?>
-</p>
-
-<?php $this->widget('Image',array(
-	'name'=>'test image block',
-	'scope'=>'page',
-)); ?>
-
-<?php $this->widget('NuggetArea',array(
-	'name'=>'home nugget area',
-)); ?>
-
-<?php $this->widget('ListWidget',array(
-	'name'=>'blog',
-	'scenario'=>'list',
-	'pageSize'=>2,
-)); ?>
-
-<?php $this->widget('Carousel',array(
-	'name'=>'home-carousel',
-	'options'=>array(
-
-	),
-)); ?>
+		<div class="nugget" id="nugget-donate">
+			<h2>Donate Time</h2>
+			<p>If you would like to donate a week of holiday time, click below.</p>
+			<a href="#" class="more">Donate holiday time</a>			
+		</div>
+	</section>
+	<!-- End #home-upper -->
 </div>
+<!-- End #home-upper-wrapper -->
 
-<<<<<<< HEAD:themes/give_us_time/views/templates/home.php
+<!-- Begin #home-nuggets -->
+<section id="home-nuggets" class="constrained">
+	<div class="nugget nugget-2col">
+		<h2>Welcome to Give Us Time</h2>
+		<div class="thumbnail"><img src="example-content/nugget-family.jpg" alt="" /></div>
+		<div class="text">
+			<p>Give Us Time provides holidays to help families adjust to life after combat. This is possible thanks to generously donated week-long holidays in second homes, holiday homes and timeshares across the UK and beyond.</p>
+			<a href="#" class="button-link">More about us</a>
+		</div>
+	</div>
+
+	<div class="nugget">
+		<h2>View Our Holiday Stories</h2>
+		<div id="photo-slideshow">
+			<ul class="slides">	
+				<li>
+					<img src="example-content/nugget-stories.jpg" alt="Sergant Mike Richey &amp; Family Enjoyed a week in Madera in July" />
+					<div class="caption">
+						Sergant Mike Richey &amp; Family Enjoyed a week in Madera in July
+					</div>
+				</li>
+				<li>
+					<img src="example-content/nugget-stories.jpg" alt="Sergant Mike Richey &amp; Family Enjoyed a week in Madera in July" />
+					<div class="caption">
+						Slide two
+					</div>
+				</li>
+				<li>
+					<img src="example-content/nugget-stories.jpg" alt="Sergant Mike Richey &amp; Family Enjoyed a week in Madera in July" />
+					<div class="caption">
+						Slide three
+					</div>
+				</li>										
+			</ul>
+		</div>
+			<div class="slideshow-controls">
+				<a href="#" class="active">1</a>
+				<a href="#">2</a>
+				<a href="#">3</a>
+			</div>			
+		<a href="#" class="button-link">Read holiday stories</a>
+	</div>
+
+	<div class="nugget">
+		<h2>Support Us</h2>
+		<div class="thumbnail"><img src="example-content/nugget-support.png" alt="" /></div>
+		<div class="text">
+			<p>Text about giving money to support the charity Text about giving money to support the charity Text about giving money to support the charity.</p>
+			<a href="#" class="button-link">Donate money</a>
+		</div>
+	</div>		
+</section>
+<!-- End #home-nuggets -->
+
+<!-- Begin #message-from-liam -->
+<section id="message-from-liam" class="constrained">
+	<div class="column span4">
+		<div class="pictureframe">
+			<img src="example-content/liam-fox.jpg" alt="Photo of Liam Fox" />
+		</div>
+	</div>
+
+	<div class="text column span7">
+		<h1>A message from Liam Fox</h1>
+		<p>During my time as Secretary of State for Defence I was extremely heartened to see how we improved the treatment of those who had been physically injured in combat. Medical improvements in prosthetics, better physiotherapy and improved social attitudes all contributed to a better chance of rehabilitation. In terms of psychological trauma, the invisible scars of war, we are making progress though perhaps at a slower rate.</p>
+
+		<p>One of the areas where I think there remains room for improvement is the integration of service families into this equation. As a doctor working with the Armed Forces I learned the importance of seeing our personnel not as isolated individuals but as members of a wider family and community dynamic.</p>
+		<p><img src="images/liam-signature.png" alt="Signed Liam Fox" /></p>
+
+		<a href="#" class="button-link">Read more</a>
+	</div>
+
+	<div class="video column span5">
+		<a href="http://www.youtube.com/embed/4CVO2lRoL-Y?rel=0" class="video-trigger">
+			<img src="example-content/video.jpg" alt="" />
+		</a>
+	</div>
+</section>
+<!-- End #message-from-liam -->
+
+<?php require_once(Yii::app()->theme->basepath.'/views/elements/footer.php'); ?>
+
 <script src="/themes/mps/js/jquery.magnific-popup.min.js"></script>
+
 <script>
 	$(document).ready(function() {
 
@@ -77,6 +147,3 @@
 	});
 
 </script>
-=======
-<?php require_once(Yii::app()->theme->basepath.'/views/elements/footer.php'); ?>
->>>>>>> refs/remotes/origin/master:themes/new_fridge/views/templates/home.php
