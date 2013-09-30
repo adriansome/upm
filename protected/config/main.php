@@ -12,10 +12,10 @@ Yii::setPathOfAlias('filemanager', dirname(__FILE__).'/../vendors/filemanager');
 $config = array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	
-	'name'=>'The New Fridge',
+	'name'=>'Give Us Time',
 
 	// set site/app theme here
-	'theme'=>'new_fridge',
+	'theme'=>'give_us_time',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
