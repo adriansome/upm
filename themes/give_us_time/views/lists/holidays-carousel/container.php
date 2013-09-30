@@ -1,4 +1,4 @@
-<?php $this->widget('zii.widgets.CListView', array(
+<?php $this->widget('CarouselView', array(
 	'id'=>$this->name,
 	'dataProvider'=>$this->contents,
 	'itemView'=>'slide',
