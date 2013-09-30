@@ -21,6 +21,7 @@ class HyperLink extends BlockWidget
 
 	public function run()
 	{
-		
+		$this->render('hyperlink');
+		parent::run();
 	}
 }
