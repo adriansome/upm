@@ -158,9 +158,6 @@ $(function()
     $('.save').live('click',function(e) {
         e.preventDefault();
 
-        if($('form > .row > .tinymce-editor').length > 0)
-            tinyMCE.get($('form > .row > .tinymce-editor').attr('id')).save();
-
         $.ajax({
             type: 'POST',
             dataType: 'json',

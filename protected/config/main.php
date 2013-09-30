@@ -12,10 +12,10 @@ Yii::setPathOfAlias('filemanager', dirname(__FILE__).'/../vendors/filemanager');
 $config = array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	
-	'name'=>'Give Us Time',
+	'name'=>'The New Fridge',
 
 	// set site/app theme here
-	'theme'=>'give_us_time',
+	'theme'=>'new_fridge',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -62,10 +62,10 @@ $config = array(
  		),
 
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=give_us_time',
+			'connectionString' => 'mysql:host=localhost;dbname=fanatic',
 			'emulatePrepare' => true,
-			'username' => 'root',
-			'password' => 'root',
+			'username' => 'fanatic',
+			'password' => 'fanatic',
 			'charset' => 'utf8',
 		),
 
