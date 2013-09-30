@@ -1,0 +1,45 @@
+{
+	"attributes":
+	{
+		"title": 
+		{
+			"type": "singleline"
+		},
+
+		"text": 
+		{
+			"type": "html"
+		},
+
+		"image":
+		{
+			"type": "file"
+		},
+
+		"image_alt":
+		{
+			"type": "singleline"
+		},
+
+		"image_title":
+		{
+			"type": "singleline"
+		},
+
+		"link_text":
+		{
+			"type": "singleline"
+		},
+
+		"author":
+		{
+			"type": "singleline"
+		},
+
+		"date_published":
+		{
+			"type": "date",
+			"format": "d/m/Y"
+		}
+	}	
+}
