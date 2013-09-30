@@ -6,8 +6,6 @@ $this->pageTitle=Yii::app()->name . ' - Error';
 $this->breadcrumbs=array(
 	'Error',
 );
-
-$this->beginClip('content');
 ?>
 
 <h2>Error <?php echo $code; ?></h2>
@@ -15,4 +13,3 @@ $this->beginClip('content');
 <div class="error">
 <?php echo CHtml::encode($message); ?>
 </div>
-<?php $this->endClip(); ?>

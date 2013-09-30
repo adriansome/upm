@@ -326,16 +326,17 @@ class ManagementController extends BlockController
 	{
 		$nugget = new Nugget;
 		$attributes = $nugget->attributes();
-		exit('<pre>'.print_r($attributes,true).'</pre>');
+		unset($nugget);
+
+		$name = 'New Nugget';
+		$scope = 'site';
 		
-		// $block = new Block;
-
-		// if(isset($_POST['Block']))
-		// {
-		// 	$block->name = $_POST['Block']['name'];
-		// 	$block->scope = $_POST['Block']['scope'];
-
-		// }
+		if(isset($_POST['Block']) && isset($_POST['Content']))
+			$data = $_POST;
+		else
+			$data = false;
+		
+		$this->create($name, $scope, $attributes, $data);
 	}
     	
 	/**
