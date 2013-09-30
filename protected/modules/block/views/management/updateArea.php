@@ -10,6 +10,18 @@ $this->beginWidget('TbModal', array('id'=>'area-management', 'htmlOptions'=>arra
 </div>
 
 <div class="modal-body">
+    <?php $this->widget('TbButton', array(
+        'type'=>'link',
+        'label'=>'add',
+        'url'=>Yii::app()->createUrl('/block/management/nugget/area/1'),
+        'htmlOptions'=>array(
+            'data-toggle' => 'add-item',
+            'data-target'=>'.item-view',
+            'id'=>'add-root-item',
+            'class'=>'add',
+        ),
+    )); ?>
+
 	<?php $this->widget('zii.widgets.CListView', array(
 		'dataProvider'=>$dataProvider,
 		'itemView'=>'_areaItem',

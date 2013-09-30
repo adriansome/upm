@@ -1,4 +1,15 @@
+.modal.fade.in
+{
+	top: 10%;
+}
+
 .modal#filemanager
+{
+	width: 765px;
+	left: 40%;
+}
+
+.modal.wide
 {
 	width: 765px;
 	left: 40%;
@@ -7,4 +18,68 @@
 #adminzone-menu
 {
 	position:absolute;
+	width: 240px;
+	background: #000;
+	top: 0;
+	left: 0;
+	-moz-opacity: 0.80;
+	opacity: 0.80;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha"(Opacity=80);
+	z-index:999999;
 }
+
+#adminzone-menu h3
+{
+	margin: 0;
+	padding: 0 10px;
+	font-weight: normal;
+	font-size: 1.2em;
+}
+
+#adminzone-menu a
+{
+	color: #fff;
+	text-decoration: none;
+}
+
+#adminzone-menu a:hover
+{
+	color: #fff;
+	text-decoration: none;
+}
+
+#adminzone-menu a h3 b.caret
+{
+	display: inline-block;
+	width: 0;
+	height: 0;
+	margin-left: 2px;
+	border: none;
+	border-top: 5px solid #fff;
+	border-right: 5px solid transparent;
+	border-bottom: 0 dotted;
+	border-left: 5px solid transparent;
+	content: "";
+	position: absolute;
+	top: 18px;
+	right: 20px;
+}
+
+#adminzone-menu.open a h3 b.caret
+{
+	border: none;
+	border-bottom: 5px solid #fff;
+	border-left: 5px solid transparent;
+	border-top: 0 dotted;
+	border-right: 5px solid transparent;
+}
+
+#adminzone-menu ul
+{
+	position: relative;
+	border: none;
+	border-radius: 0;
+	background: none;
+	margin-left:5px;
+}
+

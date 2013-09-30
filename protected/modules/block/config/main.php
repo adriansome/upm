@@ -7,15 +7,17 @@ $handle = opendir($listsDir);
 $listManagementActions = array();
 $lists = array();
 
-while(false !== ($file = readdir($handle)))
+foreach(glob($listsDir.'*') as $file)
+// while(false !== ($file = readdir($handle)))
 {
-    if ($file != "." && $file != ".." && is_dir($listsDir . $file))
+    if ($file != "." && $file != ".." && is_dir($file))
     {
-        $listManagementActions[ucfirst($file).' Management'] = array('/'.$file.'/management');
+    	$file = end(explode(DIRECTORY_SEPARATOR, $file));
+    	$listManagementActions[ucwords($file).' Management'] = array('/'.$file.'/management');
         $lists[] = $file;
     }
 }
- 
+
 return array(
     'import' => array(
         'application.modules.' . $module_name . '.models.*',

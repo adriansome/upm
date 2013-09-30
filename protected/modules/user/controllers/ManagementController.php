@@ -49,7 +49,7 @@ class ManagementController extends UserController
 				$this->redirect(array('index'));
 		}
 
-		$this->render('create',array(
+		$this->renderPartial('create',array(
 			'model'=>$model,
 		));
 	}
@@ -73,7 +73,7 @@ class ManagementController extends UserController
 				$this->redirect(array('index'));
 		}
 
-		$this->render('update',array(
+		$this->renderPartial('update',array(
 			'model'=>$model,
 		));
 	}
@@ -103,7 +103,7 @@ class ManagementController extends UserController
 		if(isset($_GET['User']))
 	 		$model->attributes=$_GET['User'];
 
-		$this->render('index',array(
+		$this->renderPartial('index',array(
 			'model'=>$model,
 			'dataProvider'=>$model->search(),
 		));
