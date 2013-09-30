@@ -1,0 +1,19 @@
+{
+	"attributes":
+	{
+		"Image":
+		{
+			"type": "file"
+		},
+
+		"Image Alternative Text":
+		{
+			"type": "singleline"
+		},
+
+		"Caption": 
+		{
+			"type": "multiline"
+		}
+	}	
+}
