@@ -12,7 +12,8 @@ foreach(glob($listsDir.'*') as $file)
 {
     if ($file != "." && $file != ".." && is_dir($file))
     {
-    	$file = end(explode(DIRECTORY_SEPARATOR, $file));
+    	$path = explode(DIRECTORY_SEPARATOR, $file);
+        $file = end($path);
     	$listManagementActions[ucwords($file).' Management'] = array('/'.$file.'/management');
         $lists[] = $file;
     }
