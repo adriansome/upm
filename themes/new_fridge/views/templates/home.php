@@ -1,6 +1,6 @@
-<?php
-$this->pageTitle = $model->window_title;
-?>
+<?php $this->pageTitle = $model->window_title; ?>
+
+<?php require_once(Yii::app()->theme->basepath.'/views/elements/header.php'); ?>
 
 <div id="content">
 <h1>
@@ -53,3 +53,5 @@ $this->pageTitle = $model->window_title;
 	),
 )); ?>
 </div>
+
+<?php require_once(Yii::app()->theme->basepath.'/views/elements/footer.php'); ?>
