@@ -14,6 +14,7 @@ class CarouselView extends CListView
             echo CHtml::openTag('ul',array('class'=>'slides'))."\n"; 
             
             $data=$this->dataProvider->getData();
+            
             if(($n=count($data))>0)
             {
                 $owner=$this->getOwner();
@@ -30,8 +31,6 @@ class CarouselView extends CListView
                         echo $this->separator;
                 }
             }
-            else
-                $this->renderEmptyText();
             
             echo CHtml::closeTag('ul');;
     }
