@@ -1,7 +1,6 @@
 <?php
 class ListWidget extends CWidget
 {
-	public $type;
 	public $name;
 	public $scenario;
 	public $pageSize;

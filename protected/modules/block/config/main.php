@@ -31,6 +31,9 @@ return array(
         'urlManager' => array(
             'rules' => array(
                 '<list:('.implode('|', $lists).')>/management' => $module_name . '/management/list',
+                '<list:('.implode('|', $lists).')>/management/item' => $module_name . '/management/item',
+                'area/management' => $module_name . '/management/area',
+                'area/management/nugget' => $module_name . '/management/nugget',
                 $module_name . '/management/<action:\w+>/<id:\d+>' => $module_name . '/management/<action>',
                 $module_name . '/management/<action:\w+>' => $module_name . '/management/<action>',
             ),

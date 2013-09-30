@@ -26,9 +26,16 @@ $(function()
         });
     }
 
+    function updateList()
+    {
+        jQuery('#listing').yiiListView({'ajaxUpdate':['listing'],'ajaxVar':'ajax','pagerClass':'pager','loadingClass':'list-view-loading','sorterClass':'sorter','enableHistory':false});
+        $.fn.yiiListView.update('listing',{});
+        return false;
+    }
+
     function flashMessage(status,content)
     {
-        $('#flashMessage').addClass('alert alert-'+status).html(content).fadeIn(function() {
+        $('#flashMessage').removeClass().addClass('alert alert-'+status).html(content).fadeIn(function() {
             setTimeout(function() {
                 $('#flashMessage').fadeOut();
             }, 5000);
@@ -49,6 +56,7 @@ $(function()
         else
         {
             $.get(url,function(response) {
+                console.log(response);
                 $(response).modal({backdrop: false});
 
                 // Make modal window draggable.
@@ -68,7 +76,9 @@ $(function()
                     
                     if(target != '#filemanager')
                     {
-                        flashMessage('Reloading page...');
+                        setTimeout(function() {
+                            flashMessage('warning','Reloading page...');
+                        }, 2500);
                         window.location.reload(true);
                     }
                 });
@@ -76,7 +86,7 @@ $(function()
         }
     });
 
-    $('[data-toggle=\"list-item\"]').live('click',function(e) {
+    $('[data-toggle=\"edit-item\"]').live('click',function(e) {
         e.preventDefault();
         
         var url = $(this).attr('href');
@@ -99,6 +109,53 @@ $(function()
         });
     });
 
+    $('[data-toggle=\"add-item\"]').live('click',function(e) {
+        e.preventDefault();
+        
+        var url = $(this).attr('href');
+        var id = $(this).attr('id');
+        var target = $(this).attr('data-target');
+        
+        $.get(url,function(response) {
+            // Pull modal content into side panel.
+            $(target+' > .item-header').html(jQuery(response).find('.modal-header').html());
+            $(target+' > .item-form').html(jQuery(response).find('.modal-body').html());
+            $(target+' > .item-buttons').html(jQuery(response).find('.modal-footer').html());
+
+            // Remove modal close button from item-header
+            $(target+' > .item-header > .close').remove();
+
+            // Initiate any rich text editors in the modal.
+            initRichTextEditors();
+        }).success(function() {
+            $(id).addClass('active');
+        });
+    });
+
+    $('[data-toggle=\"delete-item\"]').live('click',function(e) {
+        e.preventDefault();
+        
+        var url = $(this).attr('href');
+        var id = $(this).attr('data-id');
+        var target = $(this).attr('data-target');
+        
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            data: {id: id, ajax: true},
+            url: url,
+            success: function(data) {
+                if(data.success)
+                {
+                    flashMessage('success',data.success);
+                    updateList();
+                }
+                else
+                    flashMessage('danger',data.error);
+            }
+        });
+    });
+
     $('.save').live('click',function(e) {
         e.preventDefault();
 
@@ -109,7 +166,10 @@ $(function()
             url: $(this).attr('href'),
             success: function(data) {
                 if(data.success)
+                {
                     flashMessage('success',data.success);
+                    updateList();
+                }
                 else
                     flashMessage('danger',data.error);
             }

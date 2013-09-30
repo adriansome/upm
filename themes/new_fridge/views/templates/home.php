@@ -31,29 +31,25 @@ $this->pageTitle = $model->window_title;
 	)); ?>
 </p>
 
-<div>
-	<?php $this->widget('Image',array(
-		'name'=>'test image block',
-		'scope'=>'page',
-	)); ?>
-</div>
+<?php $this->widget('Image',array(
+	'name'=>'test image block',
+	'scope'=>'page',
+)); ?>
 
 <?php $this->widget('NuggetArea',array(
 	'name'=>'home nugget area',
 )); ?>
 
 <?php $this->widget('ListWidget',array(
-	'type'=>'blog',
 	'name'=>'blog',
 	'scenario'=>'list',
 	'pageSize'=>2,
 )); ?>
 
 <?php $this->widget('Carousel',array(
-	'type'=>'carousel',
 	'name'=>'home-carousel',
 	'options'=>array(
-		
+
 	),
 )); ?>
 </div>
