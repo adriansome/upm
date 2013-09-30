@@ -11,7 +11,7 @@ class Controller extends CController
 	 */
 	public $layout='//layouts/single';
 
-	public $bodyID;
+	public $bodyId;
 	
 	public $breadcrumbs=array();
 
