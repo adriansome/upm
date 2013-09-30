@@ -439,7 +439,7 @@ nav:after,
 }
 */
 #home-upper-wrapper {
-	background: transparent url(../example-content/home-banner.jpg) center top no-repeat;
+	background: transparent url(../images/home-banner.jpg) center top no-repeat;
 	background-size: cover;
 	border-bottom: 1px solid #d6d6d6;
 }
