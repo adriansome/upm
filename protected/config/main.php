@@ -62,10 +62,10 @@ $config = array(
  		),
 
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=fanatic',
+			'connectionString' => 'mysql:host=localhost;dbname=give_us_time',
 			'emulatePrepare' => true,
-			'username' => 'fanatic',
-			'password' => 'fanatic',
+			'username' => 'root',
+			'password' => 'root',
 			'charset' => 'utf8',
 		),
 
