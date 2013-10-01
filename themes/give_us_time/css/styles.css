@@ -176,8 +176,21 @@ input[type=submit],
 	text-decoration: none;	
 }
 
+.button-link:hover {
+	border-color: #c4c4c4;
+}
+
 .button-link:active {
-	background-color: #eee;
+	background: #eee;
+	background: #f6f6f6;
+	background: -moz-linear-gradient(top,  #e6e6e6 0%, #f2f2f2 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e6e6e6), color-stop(100%,#f2f2f2));
+	background: -webkit-linear-gradient(top,  #e6e6e6 0%,#f2f2f2 100%);
+	background: -o-linear-gradient(top,  #e6e6e6 0%,#f2f2f2 100%);
+	background: -ms-linear-gradient(top,  #e6e6e6 0%,#f2f2f2 100%);
+	background: linear-gradient(to bottom,  #e6e6e6 0%,#f2f2f2 100%);
+	border-color: #c4c4c4;
+	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
 .back {
@@ -899,24 +912,36 @@ ul > li.provisionally-booked,
 	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.75);
 	color: #fff;
 	cursor: pointer;
-	font-size: 14px;
-	font-size: 1.4rem;
-	line-height: 1;
+
+	line-height: 12px;
+	font-size: 11px;
+	font-size: 1.1rem;	
 	overflow: hidden;
-	text-decoration: none;
-	text-indent: -9999px;
+	text-align: center;
+	text-decoration: none;	
+	text-indent: -9999px;	
+}
+
+.remove:active {
+	margin-top: 1px;
+	background-color: #c10000;
+	border-color: #f4f4f4;
+	color: #f4f4f4;
+	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.8);
 }
 
 .remove:after {
 	position: absolute;
-	border: 1px solid yellow;
 	top: 0;
 	right: 0;
 	bottom: 0;
 	left: 0;
+	display: block;
+
 	content: "x";
-	text-indent: 0;
-	background: yellow;
+	font-family: Verdana, Geneva, sans-serif;
+
+	text-indent: 0px;	
 }
 
 .resort-listing .status + p {
@@ -1101,7 +1126,7 @@ label {
 	line-height: 1;
 	text-decoration: none;
 }
-.action-butto.accept {
+.action-button.accept {
 	padding-right: 24px;	
 	background: #7c933e url(../images/icon-next-small.png) 90% 50% no-repeat;
 }
