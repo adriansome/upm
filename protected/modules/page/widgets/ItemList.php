@@ -39,7 +39,7 @@ class ItemList extends CWidget {
         usort($this->items, 'self::depthSort');
         usort($this->items, 'self::leftSort');
 
-        echo '<ol id="' . $this->id . '" class="sortable ui-sortable menu-item-list">
+        echo '<ol id="' . $this->id . '" class="sortable ui-sortable menu-item-list list-view">
             ';
         foreach ($this->items As $row):
             if (in_array($row->id, $this->_processed))
@@ -77,22 +77,35 @@ class ItemList extends CWidget {
         $this->_processed[] = $row->id;
         echo '<li id="list_' . $row->id . '" class="' . (($row->layout == 'default' && !empty($row->parent) && $row->parent->layout == 'default') ? 'pinned':'') . ((($row->layout == 'default' && empty($row->parent)) || !$row->allowSubpages) ? ' no-nest':'') . '">';
         ?>
-        <div style="height:20px;" class="item-wrapper <?php echo ($this->activeId == $row->id) ? 'active' : ''; ?>">
+        <div style="height:20px;" class="view item-wrapper <?php echo ($this->activeId == $row->id) ? 'active' : ''; ?>">
             <b><label><?php echo $row->name; ?></label></b>
             
-            <div class="right"><a href="<?php echo Yii::app()->createUrl(Yii::app()->getModule('page')->id . '/management/showInMenu/' . $row->id); ?>">Visible</a></div>
-            
-            <div class="right"><a href="<?php echo Yii::app()->createUrl(Yii::app()->getModule('page')->id . '/management/activateOnSite/' . $row->id); ?>">Activate</a></div>
-
-            <div class="right"><a href="<?php echo Yii::app()->createUrl(Yii::app()->getModule('page')->id . '/management/delete/' . $row->id); ?>">Delete</a></div>
-            
+			<div class="buttons">
             <?php if($row->allowSubpages): ?>
-            <div class="right"><a href="<?php echo Yii::app()->createUrl(Yii::app()->getModule('page')->id . '/management/create/' . $row->id); ?>">Add</a></div>
+				<a data-toggle="toggle-action" data-id="<?php echo $row->id?>" data-target="menu-item-list" href="<?php echo Yii::app()->createUrl(Yii::app()->getModule('page')->id . '/management/create/' . $row->id); ?>">
+					<i class="icon-plus"></i>
+				</a>
             <?php endif; ?>
 
-            <div class="right"><a href="<?php echo Yii::app()->createUrl(Yii::app()->getModule('page')->id . '/management/update/' . $row->id); ?>">Edit</a></div>
+				<a data-toggle="default-action" data-id="<?php echo $row->id?>" data-target=".item-view" href="<?php echo Yii::app()->createUrl(Yii::app()->getModule('page')->id . '/management/update/' . $row->id); ?>">
+					<i class="icon-edit"></i>
+				</a>
+				<a data-toggle="toggle-action" data-id="<?php echo $row->id?>" data-target="menu-item-list" href="<?php echo Yii::app()->createUrl(Yii::app()->getModule('page')->id . '/management/showInMenu/' . $row->id); ?>">
+					<i class="icon-align-justify"></i>
+				</a>
+            
+				<a data-toggle="toggle-action" data-id="<?php echo $row->id?>" data-target="menu-item-list" href="<?php echo Yii::app()->createUrl(Yii::app()->getModule('page')->id . '/management/activateOnSite/' . $row->id); ?>">
+					<i class="icon-ok"></i>
+				</a>
+            
+				<a data-toggle="toggle-action" data-id="<?php echo $row->id?>" data-target="menu-item-list" href="<?php echo Yii::app()->createUrl(Yii::app()->getModule('page')->id . '/management/delete/' . $row->id); ?>">
+					<i class="icon-off"></i>
+				</a>
+            
+			</div>
         </div>
         <?php
+        echo '</li>';
     }
 
 }

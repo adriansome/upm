@@ -29,6 +29,12 @@
 		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/adminzone.js'); ?>
 		<?php Yii::app()->clientScript->registerCssFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.css')).'/adminzone.css'); ?>
 		
+		<?php Yii::app()->clientScript->registerScriptFile($this->module->getAssets() . "/js/json/json2.min.js"); ?>
+		<?php Yii::app()->clientScript->registerCoreScript('jquery');?>
+		<?php Yii::app()->clientScript->registerCoreScript('jquery.ui');?>
+		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getModule('page')->getAssets() . '/js/nestedsortable/jquery.ui.nestedSortable.js');?>
+		<?php Yii::app()->clientScript->registerCssFile(Yii::app()->getModule('page')->getAssets() . '/js/nestedsortable/nestedSortable.css');?>
+
 		<!-- Display the flash message element -->
 		<div id="flashMessage" display="none"></div>
 

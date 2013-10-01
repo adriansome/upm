@@ -31,21 +31,28 @@
 	)); ?>
 </p>
 
+<div>
 <?php $this->widget('Image',array(
 	'name'=>'test image block',
 	'scope'=>'page',
 )); ?>
+</div>
 
+<div>
 <?php $this->widget('NuggetArea',array(
 	'name'=>'home nugget area',
 )); ?>
+</div>
 
+<div>
 <?php $this->widget('ListWidget',array(
 	'name'=>'blog',
 	'scenario'=>'list',
 	'pageSize'=>2,
 )); ?>
+</div>
 
+<div>
 <?php $this->widget('Carousel',array(
 	'name'=>'home-carousel',
 	'options'=>array(
@@ -54,4 +61,8 @@
 )); ?>
 </div>
 
+<<<<<<< Updated upstream
 <?php require_once(Yii::app()->theme->basepath.'/views/elements/footer.php'); ?>
+=======
+</div>
+>>>>>>> Stashed changes

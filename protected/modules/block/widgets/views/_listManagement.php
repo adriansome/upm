@@ -7,6 +7,7 @@ $this->widget('TbButton',array(
 		'data-toggle' => 'modal',
 		'data-target'=>'#list-management',
         'id'=>'edit-'.$this->id,
+        'class'=>'in-page-edit',
 	),
 ));
 ?>

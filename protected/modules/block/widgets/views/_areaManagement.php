@@ -7,6 +7,7 @@ $this->widget('TbButton',array(
 		'data-toggle' => 'modal',
 		'data-target'=>'#area-management',
         'id'=>'edit-nugget-area',
+        'class'=>'in-page-edit',
 	),
 ));
 ?>

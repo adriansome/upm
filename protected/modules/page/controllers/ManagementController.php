@@ -59,7 +59,12 @@ class ManagementController extends Controller {
             $model->rgt = $maxRight + 2;
 
             if ($model->save())
-                $this->redirect(array('/page/management/index', 'activeId' => $model->id));
+				$response['success'] = $model->name.' has been saved.';
+			else
+				$response['error'] = $model->name.' could not be saved.';
+			
+			echo json_encode($response);
+			exit;
         }
 
         $this->renderPartial('create', array('model' => $model, 'menuId' => key($_GET)));
@@ -113,7 +118,12 @@ class ManagementController extends Controller {
                 $model->target = $_POST['Page']['target'];
 
             if ($model->save())
-                $this->redirect(array('/page/management/index', 'activeId' => $model->id));
+				$response['success'] = $model->name.' has been saved.';
+			else
+				$response['error'] = $model->name.' could not be saved.';
+			
+			echo json_encode($response);
+			exit;
         }
 
         $this->renderPartial('update', array(
@@ -126,13 +136,17 @@ class ManagementController extends Controller {
 
         if (Yii::app()->request->isPostRequest) {
             try {
-                $model->delete();
+                if($model->delete())
+					$response['success'] = 'User has been deleted.';
+				else
+					$response['error'] = 'Unable to delete user.';
             } catch (Exception $e) {
                 throw new CHttpException(500, $e->getMessage());
             }
 
             if (!Yii::app()->getRequest()->getIsAjaxRequest()) {
-                $this->redirect(array('/page/management'));
+				echo json_encode($response);
+				exit;
             }
         }
         else
