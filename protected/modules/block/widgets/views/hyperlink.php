@@ -1,1 +1,9 @@
-<?php echo CHtml::link($this->text, $this->href, array('title'=>$this->title, 'target'=>($this->target ? '_blank':'_self'))); ?>
+<?php $this->widget('TbButton', array(
+	'type'=>'link',
+    'label'=>$this->text,
+    'url'=>$this->href,
+    'htmlOptions'=>array(
+    	'id'=>$this->id,
+        'target'=>($this->target ? '_blank':'_self')
+    ),
+)); ?>

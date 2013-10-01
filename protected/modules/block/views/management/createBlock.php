@@ -33,7 +33,7 @@ $this->beginWidget('TbModal', array('id'=>'block-management', 'htmlOptions'=>arr
     <?php $this->widget('TbButton', array(
         'type'=>'success',
         'label'=>'Save',
-        'url'=>Yii::app()->createUrl('/blog/management/item'),
+        'url'=>Yii::app()->createUrl($url),
         'htmlOptions'=>array(
             'data-dismiss'=>'modal',
             'class'=>'save',

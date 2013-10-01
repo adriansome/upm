@@ -44,14 +44,10 @@
 
 <!-- Begin #home-nuggets -->
 <section id="home-nuggets" class="constrained">
-	<div class="nugget nugget-2col">
-		<h2>Welcome to Give Us Time</h2>
-		<div class="thumbnail"><img src="example-content/nugget-family.jpg" alt="" /></div>
-		<div class="text">
-			<p>Give Us Time provides holidays to help families adjust to life after combat. This is possible thanks to generously donated week-long holidays in second homes, holiday homes and timeshares across the UK and beyond.</p>
-			<a href="#" class="button-link">More about us</a>
-		</div>
-	</div>
+	<?php $this->widget('Nugget',array(
+		'name'=>'nugget-2col',
+		'scope'=>'page',
+	)); ?>
 
 	<div class="nugget">
 		<h2>View Our Holiday Stories</h2>
@@ -77,19 +73,29 @@
 <!-- Begin #message-from-liam -->
 <section id="message-from-liam" class="constrained">
 	<div class="column span4">
-		<div class="pictureframe">
-			<img src="example-content/liam-fox.jpg" alt="Photo of Liam Fox" />
-		</div>
+		<?php $this->widget('Image', array(
+			'name'=>'message-from-liam-image',
+			'scope'=>'page',
+		)); ?>
 	</div>
 
 	<div class="text column span7">
-		<h1>A message from Liam Fox</h1>
-		<p>During my time as Secretary of State for Defence I was extremely heartened to see how we improved the treatment of those who had been physically injured in combat. Medical improvements in prosthetics, better physiotherapy and improved social attitudes all contributed to a better chance of rehabilitation. In terms of psychological trauma, the invisible scars of war, we are making progress though perhaps at a slower rate.</p>
+		<h1>
+			<?php $this->widget('SingleLineText', array(
+				'name'=>'message-from-liam-heading',
+				'scope'=>'page',
+			)); ?>
+		</h1>
 
-		<p>One of the areas where I think there remains room for improvement is the integration of service families into this equation. As a doctor working with the Armed Forces I learned the importance of seeing our personnel not as isolated individuals but as members of a wider family and community dynamic.</p>
-		<p><img src="images/liam-signature.png" alt="Signed Liam Fox" /></p>
+		<?php $this->widget('RichText', array(
+			'name'=>'message-from-liam-text',
+			'scope'=>'page',
+		)); ?>
 
-		<a href="#" class="button-link">Read more</a>
+		<?php $this->widget('HyperLink', array(
+			'name'=>'message-from-liam-more-link',
+			'scope'=>'page',
+		)); ?>
 	</div>
 
 	<div class="video column span5">
@@ -102,20 +108,17 @@
 
 <?php require_once(Yii::app()->theme->basepath.'/views/elements/footer.php'); ?>
 
-<script src="/themes/mps/js/jquery.magnific-popup.min.js"></script>
+<script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.magnific-popup.min.js"></script>
 
 <script>
 	$(document).ready(function() {
-
 		$('.video-trigger').magnificPopup({
 			disableOn: 700,
 			type: 'iframe',
 			mainClass: 'mfp-fade',
 			removalDelay: 160,
 			preloader: false,
-
 			fixedContentPos: false
 		});			
 	});
-
 </script>
