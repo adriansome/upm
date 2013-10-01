@@ -26,10 +26,24 @@ $(function()
         });
     }
 
-    function updateList()
+//    function updateList()
+//    {
+//        jQuery('#listing').yiiListView({'ajaxUpdate':['listing'],'ajaxVar':'ajax','pagerClass':'pager','loadingClass':'list-view-loading','sorterClass':'sorter','enableHistory':false});
+//        $.fn.yiiListView.update('listing',{});
+//        return false;
+//    }
+
+    function updateList(target)
     {
-        jQuery('#listing').yiiListView({'ajaxUpdate':['listing'],'ajaxVar':'ajax','pagerClass':'pager','loadingClass':'list-view-loading','sorterClass':'sorter','enableHistory':false});
-        $.fn.yiiListView.update('listing',{});
+        jQuery('#' + target).yiiListView({
+			'ajaxUpdate':[target],
+			'ajaxVar':'ajax',
+			'pagerClass':'pager',
+			'loadingClass':'list-view-loading',
+			'sorterClass':'sorter',
+			'enableHistory':false
+		});
+        $.fn.yiiListView.update(target,{});
         return false;
     }
 
@@ -83,6 +97,59 @@ $(function()
                 });
             });
         }
+    });
+
+	/**
+	 * defaultAction: Inject response into target
+	 */
+    $('[data-toggle=\"default-action\"]').live('click',function(e) {
+        e.preventDefault();
+
+        var url = $(this).attr('href');
+        var id = $(this).attr('id');
+        var target = $(this).attr('data-target');
+        
+        $.get(url,function(response) {
+            // Pull modal content into side panel.
+            $(target+' > .item-header').html(jQuery(response).find('.modal-header').html());
+            $(target+' > .item-form').html(jQuery(response).find('.modal-body').html());
+            $(target+' > .item-buttons').html(jQuery(response).find('.modal-footer').html());
+
+            // Remove modal close button from item-header
+            $(target+' > .item-header > .close').remove();
+
+            // Initiate any rich text editors in the modal.
+            initRichTextEditors();
+        }).success(function() {
+            $(id).addClass('active');
+        });
+    });
+
+	/**
+	 * toggleAction: Perform action return success/failure
+	 */
+    $('[data-toggle=\"toggle-action\"]').live('click',function(e) {
+        e.preventDefault();
+        
+        var url = $(this).attr('href');
+        var id = $(this).attr('data-id');
+        var target = $(this).attr('data-target');
+        
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            data: {id: id, ajax: true},
+            url: url,
+            success: function(data) {
+                if(data.success)
+                {
+                    flashMessage('success',data.success);
+                    updateList(target);
+                }
+                else
+                    flashMessage('danger',data.error);
+            }
+        });
     });
 
     $('[data-toggle=\"edit-item\"]').live('click',function(e) {
@@ -158,8 +225,15 @@ $(function()
     $('.save').live('click',function(e) {
         e.preventDefault();
 
+<<<<<<< Updated upstream
         if($('form > .row > .tinymce-editor').length > 0)
             tinyMCE.get($('form > .row > .tinymce-editor').attr('id')).save();
+=======
+        var target = $(this).data('target');
+        if(!target){
+			target='listing';
+		}
+>>>>>>> Stashed changes
 
         $.ajax({
             type: 'POST',
@@ -170,11 +244,17 @@ $(function()
                 if(data.success)
                 {
                     flashMessage('success',data.success);
-                    updateList();
+                    updateList(target);
                 }
                 else
                     flashMessage('danger',data.error);
             }
         });
     });
+    
+    /**
+     * Set all containers with an edit button in to position:relative for reliable edit button placement
+     */
+    $(".in-page-edit").parent().css({position: 'relative'});
+
 });
