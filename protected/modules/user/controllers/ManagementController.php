@@ -70,8 +70,15 @@ class ManagementController extends UserController
 		{
 			$model->attributes=$_POST['User'];
 			if($model->save())
-				$this->redirect(array('index'));
+				$response['success'] = $model->username.' has been saved.';
+			else
+				$response['error'] = $model->username.' could not be saved.';
+			
+			echo json_encode($response);
+			exit;
 		}
+
+		$this->performAjaxValidation($model);
 
 		$this->renderPartial('update',array(
 			'model'=>$model,
@@ -85,11 +92,19 @@ class ManagementController extends UserController
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+		if(isset($_POST['ajax']))
+		{
+			$response =array();
 
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			if($this->loadModel($id)->delete())
+				$response['success'] = 'User has been deleted.';
+			else
+				$response['error'] = 'Unable to delete user.';
+		}
+		else
+			$response['error'] = 'Invalid request';
+
+		echo json_encode($response);
 	}
 
 	/**
@@ -111,34 +126,78 @@ class ManagementController extends UserController
 
 	public function actionResendEmailVerification($id)
 	{
-		$model = $this->loadModel($id);
-		$model->scenario = 'resendEmailVerification';
-		$model->save();
-		$this->redirect(array('registrationSuccess'));
+		if(isset($_POST['ajax']))
+		{
+			$response =array();
+
+			$model = $this->loadModel($id);
+			$model->scenario = 'resendEmailVerification';
+			if($model->save())
+				$response['success'] = 'Email sent.';
+			else
+				$response['error'] = 'Could not send email.';
+		}
+		else
+			$response['error'] = 'Invalid request';
+
+		echo json_encode($response);
 	}
 
 	public function actionSendCredentialsReminder($id)
 	{
-		$model = $this->loadModel($id);
-		$model->scenario = 'credentialsReminder';
-		$model->save();
-		$this->redirect(array('view', 'id'=>$id));
+		if(isset($_POST['ajax']))
+		{
+			$response =array();
+
+			$model = $this->loadModel($id);
+			$model->scenario = 'credentialsReminder';
+			if($model->save())
+				$response['success'] = 'Email sent.';
+			else
+				$response['error'] = 'Could not send email.';
+		}
+		else
+			$response['error'] = 'Invalid request';
+
+		echo json_encode($response);
 	}
 
 	public function actionRevertEmailAddress($id)
 	{
-		$model = $this->loadModel($id);
-		$model->scenario = 'revertEmailAddress';
-		$model->save();
-		$this->redirect(array('view', 'id'=>$id));
+		if(isset($_POST['ajax']))
+		{
+			$response =array();
+
+			$model = $this->loadModel($id);
+			$model->scenario = 'revertEmailAddress';
+			if($model->save())
+				$response['success'] = 'Email sent.';
+			else
+				$response['error'] = 'Could not send email.';
+		}
+		else
+			$response['error'] = 'Invalid request';
+
+		echo json_encode($response);
 	}
 
 	public function actionReactivate($id)
 	{
-		$model = $this->loadModel($id);
-		$model->scenario = 'revertDeletion';
-		$model->save();
-		$this->redirect(array('view', 'id'=>$id));
+		if(isset($_POST['ajax']))
+		{
+			$response =array();
+
+			$model = $this->loadModel($id);
+			$model->scenario = 'revertDeletion';
+			if($model->save())
+				$response['success'] = 'User reactivated.';
+			else
+				$response['error'] = 'Could not reactivate user.';
+		}
+		else
+			$response['error'] = 'Invalid request';
+
+		echo json_encode($response);
 	}
 
 	/**

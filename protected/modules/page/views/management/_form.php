@@ -109,13 +109,6 @@
         <?php echo $form->error($model, 'target'); ?>
     </div>
 
-    <div class="row buttons">
-        <?php
-        echo CHtml::submitButton('Save');
-        echo CHtml::Button('Cancel', array(
-            'submit' => 'javascript:history.go(-1)'));
-        ?>
-    </div>
     <?php
     $this->endWidget();
     ?>

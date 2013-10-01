@@ -19,6 +19,18 @@ $this->beginWidget('TbModal', array('id'=>'user-management', 'htmlOptions'=>arra
 	'itemView'=>'_view',
 	'id'=>'user-list'
 )); ?>
+
+    <div class="item-view">
+        <div class="item-header">
+            <!-- List item header -->
+        </div>
+        <div class="item-form">
+            <!-- List item form -->
+        </div>
+        <div class="item-buttons">
+            <!-- Item form buttons -->
+        </div>
+    </div>
 </div>
 
 <div class="modal-footer">

@@ -11,8 +11,20 @@
 
 .modal.wide
 {
-	width: 765px;
-	left: 40%;
+	width: 965px;
+	left: 35%;
+}
+
+.modal .list-view,
+.modal .item-view
+{
+	float:left;
+	width: 49%;
+}
+
+.modal .item-view
+{
+	margin-left:10px;
 }
 
 #adminzone-menu
@@ -81,5 +93,22 @@
 	border-radius: 0;
 	background: none;
 	margin-left:5px;
+}
+
+.view label
+{
+	display:inline-block;
+}
+
+.view .buttons
+{
+	float:right;
+}
+
+#content .in-page-edit
+{
+	position:absolute;
+	top:0;
+	left:0;
 }
 

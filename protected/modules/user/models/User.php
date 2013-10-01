@@ -132,6 +132,8 @@ class User extends CActiveRecord
 		$criteria->select = array('*', 'CONCAT(firstname, " ", lastname, " ", email) AS searchTerm');
 		$criteria->compare('CONCAT(firstname, " ", lastname, " ", email)', $this->searchTerm, true);
 		$criteria->compare('role', $this->role, true);
+		
+		$criteria->addCondition('date_deleted IS NULL');
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -180,13 +182,14 @@ class User extends CActiveRecord
 	public function delete()
 	{
 		if($this->purgeRecord)
-			parent::delete();
+			return parent::delete();
 		else
 		{
 			$this->date_deleted = new CDbExpression('NOW()');
 			$this->revert_code = $this->generateUniqueId();
 			$this->sendRevertEmail('user.views.mail.deletionEmail');
-			$this->save();
+			return $this->save();
+			
 		}
 	}
 
@@ -281,7 +284,7 @@ class User extends CActiveRecord
 		$revertEmail = new YiiMailMessage;
 		$revertEmail->view = $message;
 		$revertEmail->setBody(array('fullname'=>$this->fullname, 'uid'=>$this->revert_code), 'text/html');
-		$revertEmail->addTo($this->old_email);
+		$revertEmail->addTo($this->old_email ? $this->old_email : $this->email);
 		$revertEmail->from = Yii::app()->params['adminEmail'];
 		Yii::app()->mail->send($revertEmail);
 	}
