@@ -59,7 +59,8 @@
 					'auto' => 3000,
 				),
 			)); ?>
-		</div>	
+		</div>
+		<div class="slideshow-controls"></div>	
 		<a href="#" class="button-link">Read holiday stories</a>
 	</div>
 
@@ -100,7 +101,10 @@
 
 	<div class="video column span5">
 		<a href="http://www.youtube.com/embed/4CVO2lRoL-Y?rel=0" class="video-trigger">
-			<img src="example-content/video.jpg" alt="" />
+			<?php $this->widget('Image', array(
+				'name'=>'video-thumbnail',
+				'scope'=>'page',
+			)); ?>
 		</a>
 	</div>
 </section>
@@ -120,5 +124,14 @@
 			preloader: false,
 			fixedContentPos: false
 		});			
+	});
+</script>
+<script>
+	$(document).ready(function() {
+		$("#photo-slideshow .slides").carouFredSel({
+			items	: 1,
+			auto	: 3000,
+			pagination: ".slideshow-controls"
+		});
 	});
 </script>

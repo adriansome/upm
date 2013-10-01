@@ -1,7 +1,7 @@
 <!-- Begin #page-header -->
 <header id="page-header">
 	<div class="constrained">
-		<a href="index.html"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/logo.png" class="logo" alt="Give Us Time" /></a>
+		<a href="/"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/logo.png" class="logo" alt="Give Us Time" /></a>
 
 		<div class="login">
 			<input type="email" placeholder="Email" />

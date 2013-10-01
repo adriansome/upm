@@ -16,7 +16,7 @@ $(function()
             menubar:false,
             statusbar: false, 
             toolbar1: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect", 
-            toolbar2: "| responsivefilemanager | link unlink anchor | image media | forecolor backcolor | print preview code ", 
+            toolbar2: "| responsivefilemanager | link unlink anchor | image media | preview code ", 
             image_advtab: true , 
             external_filemanager_path: responsiveFileManager, 
             filemanager_title:"File Manager", 

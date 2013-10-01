@@ -65,7 +65,7 @@ $config = array(
 			'connectionString' => 'mysql:host=localhost;dbname=give_us_time',
 			'emulatePrepare' => true,
 			'username' => 'root',
-			'password' => 'root',
+			'password' => '',
 			'charset' => 'utf8',
 		),
 
@@ -115,6 +115,10 @@ $config = array(
                 'name'=>'footer',
                 'maxDepth'=>1,
             ),
+            3=>array(
+                'name'=>'submenu',
+                'maxDepth'=>3,
+            ),            
         ),
 	),
 );

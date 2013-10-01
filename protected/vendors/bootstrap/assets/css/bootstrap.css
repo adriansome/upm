@@ -279,7 +279,7 @@ body {
 	clear: both;
 }
 
-[class*="span"] {
+.modal-scrollable [class*="span"] {
 	float: left;
 	min-height: 1px;
 	margin-left: 20px;
@@ -3576,37 +3576,37 @@ table th[class*="span"],
 	*padding-bottom: 1px;
 }
 
-.btn-link,
-.btn-link:active,
-.btn-link[disabled] {
-	background-color: transparent;
-	background-image: none;
-	-webkit-box-shadow: none;
-		 -moz-box-shadow: none;
-					box-shadow: none;
-}
+.modal-scrollable	.btn-link,
+.modal-scrollable	.btn-link:active,
+.modal-scrollable	.btn-link[disabled] {
+		background-color: transparent;
+		background-image: none;
+		-webkit-box-shadow: none;
+			 -moz-box-shadow: none;
+						box-shadow: none;
+	}
 
-.btn-link {
-	color: #0088cc;
-	cursor: pointer;
-	border-color: transparent;
-	-webkit-border-radius: 0;
-		 -moz-border-radius: 0;
-					border-radius: 0;
-}
+.modal-scrollable	.btn-link {
+		color: #0088cc;
+		cursor: pointer;
+		border-color: transparent;
+		-webkit-border-radius: 0;
+			 -moz-border-radius: 0;
+						border-radius: 0;
+	}
 
-.btn-link:hover,
-.btn-link:focus {
-	color: #005580;
-	text-decoration: underline;
-	background-color: transparent;
-}
+	.modal-scrollable .btn-link:hover,
+	.modal-scrollable .btn-link:focus {
+		color: #005580;
+		text-decoration: underline;
+		background-color: transparent;
+	}
 
-.btn-link[disabled]:hover,
-.btn-link[disabled]:focus {
-	color: #333333;
-	text-decoration: none;
-}
+	.modal-scrollable .btn-link[disabled]:hover,
+	.modal-scrollable .btn-link[disabled]:focus {
+		color: #333333;
+		text-decoration: none;
+	}
 
 .btn-group {
 	position: relative;

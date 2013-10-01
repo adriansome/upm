@@ -122,51 +122,51 @@
   .row:after {
     clear: both;
   }
-  [class*="span"] {
+  .modal-scrollable [class*="span"] {
     float: left;
     min-height: 1px;
     margin-left: 30px;
   }
-  .container,
+.modal-scrollable   .container,
   .navbar-static-top .container,
   .navbar-fixed-top .container,
   .navbar-fixed-bottom .container {
     width: 1170px;
   }
-  .span12 {
+.modal-scrollable   .span12 {
     width: 1170px;
   }
-  .span11 {
+  .modal-scrollable .span11 {
     width: 1070px;
   }
-  .span10 {
+ .modal-scrollable  .span10 {
     width: 970px;
   }
-  .span9 {
+ .modal-scrollable  .span9 {
     width: 870px;
   }
-  .span8 {
+.modal-scrollable   .span8 {
     width: 770px;
   }
-  .span7 {
+.modal-scrollable   .span7 {
     width: 670px;
   }
-  .span6 {
+.modal-scrollable   .span6 {
     width: 570px;
   }
-  .span5 {
+.modal-scrollable   .span5 {
     width: 470px;
   }
-  .span4 {
+ .modal-scrollable  .span4 {
     width: 370px;
   }
-  .span3 {
+ .modal-scrollable  .span3 {
     width: 270px;
   }
-  .span2 {
+ .modal-scrollable  .span2 {
     width: 170px;
   }
-  .span1 {
+ .modal-scrollable  .span1 {
     width: 70px;
   }
   .offset12 {
