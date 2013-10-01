@@ -105,10 +105,16 @@
 	float:right;
 }
 
-#content .in-page-edit
+.in-page-edit.btn-link
 {
 	position:absolute;
 	top:0;
 	left:0;
+	height:16px;
+	width:16px;
+	border:none;
+	box-shadow:none;
+	border-radius:0;
+	padding:0;
 }
 

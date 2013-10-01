@@ -12,9 +12,11 @@
 			)); ?><!-- mainmenu -->
 			</nav>
 
+			<div>
 			<?php $this->widget('NuggetArea',array(
 				'name'=>'nugget area',
 			)); ?>
+			</div>
 
 		</div>
 		<!-- End #sidebar -->

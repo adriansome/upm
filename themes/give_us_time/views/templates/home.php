@@ -44,10 +44,12 @@
 
 <!-- Begin #home-nuggets -->
 <section id="home-nuggets" class="constrained">
+	<div>
 	<?php $this->widget('Nugget',array(
 		'name'=>'nugget-2col',
 		'scope'=>'page',
 	)); ?>
+	</div>
 
 	<div class="nugget">
 		<h2>View Our Holiday Stories</h2>
@@ -64,10 +66,12 @@
 		<a href="#" class="button-link">Read holiday stories</a>
 	</div>
 
+	<div>
 	<?php $this->widget('Nugget',array(
 		'name'=>'nugget-support',
 		'scope'=>'page',
-	)); ?>		
+	)); ?>
+	</div>		
 </section>
 <!-- End #home-nuggets -->
 
@@ -88,15 +92,19 @@
 			)); ?>
 		</h1>
 
+		<div>
 		<?php $this->widget('RichText', array(
 			'name'=>'message-from-liam-text',
 			'scope'=>'page',
 		)); ?>
+		</div>
 
+		<div>
 		<?php $this->widget('HyperLink', array(
 			'name'=>'message-from-liam-more-link',
 			'scope'=>'page',
 		)); ?>
+		</div>
 	</div>
 
 	<div class="video column span5">
