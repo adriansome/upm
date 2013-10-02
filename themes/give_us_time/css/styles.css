@@ -1140,10 +1140,72 @@ label {
 	background: #993333 url(../images/icon-cancel.png) 90% 50% no-repeat;
 }
 
-/* Tweak styles to match PSDs: */
+/* Remove the following styles for improved consistency: */
 
 body {
 	background: #f4f4f4;
+}
+
+#main-navigation {
+	margin-top: -115px;
+	padding-top: 55px;
+	background: #f4f4f4;
+}
+
+#home #main-navigation {
+	background: transparent;
+}
+
+#main-navigation li {
+	margin-left: 14px;
+}
+
+#main-navigation a,
+#sub-navigation a {
+	padding: 7px 16px;
+	background: #fff;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	border-radius: 7px;
+	color: #005030;
+	font-size: 14px;
+	font-size: 1.4rem;
+}
+
+#main-navigation a:hover,
+#sub-navigation a:hover {
+	background: #fff;
+	border-color: rgba(0, 0, 0, 0.3);
+}
+
+#main-navigation li.active a,
+#sub-navigation li.active a {
+	background: #f1f5e5;
+}
+
+#sub-navigation li {
+	margin-bottom: 4px;
+	border-bottom: none;
+}
+
+#sub-navigation a {
+	display: inline-block;
+}
+
+#home-upper p {
+	margin-bottom: 24px;
+	margin-bottom: 2.4rem;
+	font-style: italic;
+}
+
+#home-upper #nugget-search p {
+	margin-bottom: 18px;
+	margin-bottom: 1.8rem;	
+}
+
+#nugget-register .more,
+#nugget-donate .more {
+	/* absolute position these */
+	white-space: nowrap;
 }
 
 #sidebar .nugget,
@@ -1159,6 +1221,7 @@ body {
 	height: 4rem;
 	margin-left: 14px;	
 	margin-bottom: 0;
+	font-weight: bold;
 }
 
 .resort-listing h2 + p {
@@ -1167,10 +1230,50 @@ body {
 	font-size: 1.7rem;
 }
 
+#message-from-liam h1 {
+	font-size: 20px;
+	font-size: 2.0rem;	
+	font-style: italic;
+	font-weight: bold;
+}
 
+#message-from-liam p {
+	max-width: 660px;
+}
 
+#message-from-liam .button-link,
+#message-from-liam-more-link {
+	position: absolute;
+	right: 20px;
+	top: 310px;
+}
 
+#message-from-liam .text .picture-frame img {
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+}
 
+#message-from-liam .video-trigger {
+	float: right;
+	width: 320px;
+	margin: 0 0 18px 18px;
+}
+
+#home-nuggets h2 {
+	font-weight: bold;
+}
+
+.button-link,
+.more,
+#message-from-liam-more-link,
+.nugget .btn-link {
+	font-style: italic;
+}
+
+h2 {
+	font-weight: bold;
+}
 
 /* ----- Temporary Styles during CMS integration ----- */
 

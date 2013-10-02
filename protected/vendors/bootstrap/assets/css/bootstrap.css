@@ -746,22 +746,22 @@ a.text-success:focus {
 	text-rendering: optimizelegibility;
 }
 
-h1 small,
-h2 small,
-h3 small,
-h4 small,
-h5 small,
-h6 small {
-	font-weight: normal;
-	line-height: 1;
-	color: #999999;
-}
+ .modal-scrollable 	h1 small,
+ .modal-scrollable 	h2 small,
+ .modal-scrollable 	h3 small,
+ .modal-scrollable 	h4 small,
+ .modal-scrollable 	h5 small,
+ .modal-scrollable 	h6 small {
+		font-weight: normal;
+		line-height: 1;
+		color: #999999;
+	}
 
-h1,
-h2,
-h3 {
-	line-height: 40px;
-}
+ .modal-scrollable 	h1,
+ .modal-scrollable 	h2,
+ .modal-scrollable 	h3 {
+		line-height: 40px;
+	}
 
  .modal-scrollable  h1 {
   	font-size: 38.5px;

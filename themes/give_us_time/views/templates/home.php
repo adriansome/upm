@@ -80,14 +80,19 @@
 		)); ?>
 	</div>
 
-	<div class="text column span7">
+	<div class="text column span12">
 		<h1>
 			<?php $this->widget('SingleLineText', array(
 				'name'=>'message-from-liam-heading',
 				'scope'=>'page',
 			)); ?>
 		</h1>
-
+		<a href="http://www.youtube.com/embed/4CVO2lRoL-Y?rel=0" class="video-trigger">
+			<?php $this->widget('Image', array(
+				'name'=>'video-thumbnail',
+				'scope'=>'page',
+			)); ?>
+		</a>
 		<?php $this->widget('RichText', array(
 			'name'=>'message-from-liam-text',
 			'scope'=>'page',
@@ -99,14 +104,6 @@
 		)); ?>
 	</div>
 
-	<div class="video column span5">
-		<a href="http://www.youtube.com/embed/4CVO2lRoL-Y?rel=0" class="video-trigger">
-			<?php $this->widget('Image', array(
-				'name'=>'video-thumbnail',
-				'scope'=>'page',
-			)); ?>
-		</a>
-	</div>
 </section>
 <!-- End #message-from-liam -->
 

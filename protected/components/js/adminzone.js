@@ -128,7 +128,7 @@ $(function()
 	/**
 	 * toggleAction: Perform action return success/failure
 	 */
-    $('[data-toggle=\"toggle-action\"]').live('click',function(e) {
+    $('[data-toggle=\"modal\"]').live('click',function(e) {
         e.preventDefault();
         
         var url = $(this).attr('href');
