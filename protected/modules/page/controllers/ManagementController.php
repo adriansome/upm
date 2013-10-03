@@ -152,10 +152,12 @@ class ManagementController extends Controller {
 					$response['success'] = 'User has been deleted.';
 				else
 					$response['error'] = 'Unable to delete user.';
+				echo json_encode($response);
+				exit;
             } catch (Exception $e) {
                 throw new CHttpException(500, $e->getMessage());
             }
-
+            
             if (!Yii::app()->getRequest()->getIsAjaxRequest()) {
 				echo json_encode($response);
 				exit;
