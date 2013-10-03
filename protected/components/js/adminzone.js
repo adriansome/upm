@@ -225,15 +225,13 @@ $(function()
     $('.save').live('click',function(e) {
         e.preventDefault();
 
-<<<<<<< Updated upstream
         if($('form > .row > .tinymce-editor').length > 0)
             tinyMCE.get($('form > .row > .tinymce-editor').attr('id')).save();
-=======
+
         var target = $(this).data('target');
         if(!target){
 			target='listing';
 		}
->>>>>>> Stashed changes
 
         $.ajax({
             type: 'POST',
