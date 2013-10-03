@@ -19,7 +19,7 @@
 .modal .item-view
 {
 	float:left;
-	width: 49%;
+	width: 48%;
 }
 
 .modal .item-view
@@ -110,5 +110,12 @@
 	position:absolute;
 	top:0;
 	left:0;
+	background: transparent url(images/admin-icons-v3.png) no-repeat;
+	cursor: pointer;
+	display: block;
+	height: 16px;
+	width: 16px;
+	overflow: hidden;
+	z-index: 9999;
 }
 

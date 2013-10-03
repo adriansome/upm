@@ -33,17 +33,15 @@ $(function()
 //        return false;
 //    }
 
-    function updateList(target)
+    function updateList(target,id)
     {
-        jQuery('#' + target).yiiListView({
-			'ajaxUpdate':[target],
-			'ajaxVar':'ajax',
-			'pagerClass':'pager',
-			'loadingClass':'list-view-loading',
-			'sorterClass':'sorter',
-			'enableHistory':false
-		});
-        $.fn.yiiListView.update(target,{});
+//		try{
+			jQuery('#' + target).yiiListView({'ajaxUpdate':[target],'ajaxVar':'ajax','pagerClass':'pager','loadingClass':'list-view-loading','sorterClass':'sorter','enableHistory':false});
+			$.fn.yiiListView.update(target,{});
+//		}catch(e){
+//			console.log(e);
+//		}
+
         return false;
     }
 
@@ -144,7 +142,7 @@ $(function()
                 if(data.success)
                 {
                     flashMessage('success',data.success);
-                    updateList(target);
+                    updateList(target,id);
                 }
                 else
                     flashMessage('danger',data.error);
