@@ -38,7 +38,7 @@ class ManagementController extends Controller {
 
         if(isset($_GET['id']))
             $model->parent_id = $_GET['id'];
-
+			
         if (isset($_POST['Page'])) {
             $model->name = $_POST['Page']['name'];
             $model->parent_id = $_POST['Page']['parent_id'];
@@ -58,8 +58,20 @@ class ManagementController extends Controller {
             $model->lft = $maxRight + 1;
             $model->rgt = $maxRight + 2;
 
-            if ($model->save())
+            if ($model->save()) {
 				$response['success'] = $model->name.' has been saved.';
+				// Update page menus after record has been inserted
+				// Check for page menu
+				if (isset($_POST['Page']['pageMenus']) && is_array($_POST['Page']['pageMenus'])) {
+					$pageId = $model->primaryKey;
+					$pageMenuModel = new PageMenu;
+					foreach ($_POST['Page']['pageMenus'] as $menuId) {
+						$pageMenuModel->menu_id = $menuId;
+						$pageMenuModel->page_id = $pageId;
+						$pageMenuModel->insert();
+					}
+				}
+            }
 			else
 				$response['error'] = $model->name.' could not be saved.';
 			
