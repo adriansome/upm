@@ -59,18 +59,9 @@ class ManagementController extends Controller {
             $model->rgt = $maxRight + 2;
 
             if ($model->save()) {
+				$this->refreshMenus($model);
 				$response['success'] = $model->name.' has been saved.';
-				// Update page menus after record has been inserted
-				// Check for page menu
-				if (isset($_POST['Page']['pageMenus']) && is_array($_POST['Page']['pageMenus'])) {
-					$pageId = $model->primaryKey;
-					$pageMenuModel = new PageMenu;
-					foreach ($_POST['Page']['pageMenus'] as $menuId) {
-						$pageMenuModel->menu_id = $menuId;
-						$pageMenuModel->page_id = $pageId;
-						$pageMenuModel->insert();
-					}
-				}
+				$response['id'] = $model->id;
             }
 			else
 				$response['error'] = $model->name.' could not be saved.';
@@ -148,8 +139,10 @@ class ManagementController extends Controller {
 
         if (Yii::app()->request->isPostRequest) {
             try {
-                if($model->delete())
+                if($model->delete()) {
+					$this->refreshMenus($model);
 					$response['success'] = 'User has been deleted.';
+				}
 				else
 					$response['error'] = 'Unable to delete user.';
 				echo json_encode($response);
@@ -218,4 +211,19 @@ class ManagementController extends Controller {
 
         return $menus;
     }
+    
+    public function refreshMenus($model)
+    {
+		// Update page menus after record has been inserted
+		// Check for page menu
+		if (isset($_POST['Page']['pageMenus']) && is_array($_POST['Page']['pageMenus'])) {
+			$pageId = $model->primaryKey;
+			$pageMenuModel = new PageMenu;
+			foreach ($_POST['Page']['pageMenus'] as $menuId) {
+				$pageMenuModel->menu_id = $menuId;
+				$pageMenuModel->page_id = $pageId;
+				$pageMenuModel->insert();
+			}
+		}
+	}
 }
