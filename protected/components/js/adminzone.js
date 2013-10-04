@@ -33,14 +33,33 @@ $(function()
 //        return false;
 //    }
 
-    function updateList(target,id)
+    function updateList(target,id,url)
     {
-//		try{
+		try{
 			jQuery('#' + target).yiiListView({'ajaxUpdate':[target],'ajaxVar':'ajax','pagerClass':'pager','loadingClass':'list-view-loading','sorterClass':'sorter','enableHistory':false});
 			$.fn.yiiListView.update(target,{});
-//		}catch(e){
+		}catch(e){
 //			console.log(e);
-//		}
+//			var url = $(this).attr('href');
+//			var id = $(this).attr('id');
+//			var target = $(this).attr('data-target');
+			
+			$.get(url,function(response) {
+				// Pull modal content into side panel.
+				console.log(target);
+				$('#' + target+' .modal-header').html(jQuery(response).find('.modal-header').html());
+				$('#' + target+' .modal-body').html(jQuery(response).find('.modal-body').html());
+				$('#' + target+' .modal-footer').html(jQuery(response).find('.modal-footer').html());
+
+				// Remove modal close button from item-header
+//				$(target+' > .item-header > .close').remove();
+
+				// Initiate any rich text editors in the modal.
+				initRichTextEditors();
+			}).success(function() {
+				$(id).addClass('active');
+			});
+		}
 
         return false;
     }
@@ -130,8 +149,9 @@ $(function()
         e.preventDefault();
         
         var url = $(this).attr('href');
-        var id = $(this).attr('data-id');
-        var target = $(this).attr('data-target');
+        var refreshUrl = $(this).data('href');
+        var id = $(this).data('id');
+        var target = $(this).data('target');
         
         $.ajax({
             type: 'POST',
@@ -142,7 +162,7 @@ $(function()
                 if(data.success)
                 {
                     flashMessage('success',data.success);
-                    updateList(target,id);
+                    updateList(target,id,refreshUrl);
                 }
                 else
                     flashMessage('danger',data.error);
@@ -230,6 +250,7 @@ $(function()
         if(!target){
 			target='listing';
 		}
+		var refreshUrl = $(this).data('href');
 
         $.ajax({
             type: 'POST',
@@ -240,7 +261,7 @@ $(function()
                 if(data.success)
                 {
                     flashMessage('success',data.success);
-                    updateList(target);
+                    updateList(target,data.id,refreshUrl);
                 }
                 else
                     flashMessage('danger',data.error);

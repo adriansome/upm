@@ -107,9 +107,13 @@ class ListWidget extends CWidget
 
 	public function run()
 	{
-		$this->render($this->scenario);
-
-		if(Yii::app()->user->isAdmin() || Yii::app()->user->isEditor())
+		if(Yii::app()->user->isAdmin() || Yii::app()->user->isEditor()){
+			echo '<div>';
+			$this->render($this->scenario);
 			require(Yii::app()->basepath.'/modules/block/widgets/views/_listManagement.php');
+			echo '</div>';
+		}
+		else
+			$this->render($this->scenario);
 	}
 }
