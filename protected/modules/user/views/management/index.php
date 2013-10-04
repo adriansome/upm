@@ -1,4 +1,4 @@
-	<?php
+<?php
 /* @var $this DefaultController */
 /* @var $dataProvider CActiveDataProvider */
 
