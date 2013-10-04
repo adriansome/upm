@@ -60,9 +60,13 @@ class NuggetArea extends CWidget
 
 	public function run()
 	{
-		$this->render('nuggetArea');
-
-		if(Yii::app()->user->isAdmin() || Yii::app()->user->isEditor())
+		if(Yii::app()->user->isAdmin() || Yii::app()->user->isEditor()){
+			echo '<div>';
+			$this->render('nuggetArea');
 			$this->render('_areaManagement');
+			echo '</div>';
+		}
+		else
+			$this->render('nuggetArea');
 	}
 }

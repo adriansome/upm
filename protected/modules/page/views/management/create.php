@@ -24,7 +24,8 @@ $this->renderPartial('_form', array(
         'url'=>Yii::app()->createUrl('/page/management/create/'),
         'htmlOptions'=>array(
             'data-dismiss'=>'modal',
-            'data-target'=>'menu-item-list',
+            'data-target'=>'page-management',
+            'data-href'=>'/page/management',
             'class'=>'save list',
         ),
     )); ?>
