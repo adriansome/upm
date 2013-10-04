@@ -18,8 +18,13 @@ $this->beginWidget('TbModal', array('id'=>'page-management', 'htmlOptions'=>arra
 	<?php Yii::app()->clientScript->registerScriptFile($this->module->getAssets() . "/js/json/json2.min.js"); ?>
 
 	<?php
-	$this->widget('ItemList', array('items' => $items, 'activeId' => $activeId));
+//	$this->widget('ItemList', array('items' => $items, 'activeId' => $activeId));
 	?>
+	<?php $this->widget('zii.widgets.CListView', array(
+		'dataProvider'=>$dataProvider,
+		//'itemView'=>'_view',
+		'id'=>'menu-item-list'
+	)); ?>
 
 	<script type="text/javascript">
 		$('ol.sortable').nestedSortable({
