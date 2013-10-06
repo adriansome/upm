@@ -4,7 +4,10 @@
 	'id'=>$this->id,
 	'dataProvider'=>$this->contents,
 	'itemView'=>'summary',
-	'summaryText'=> 'News {page} of {pages}',
+	'htmlOptions' => array(
+		'class' => 'constrained'					   
+	),
+	'summaryText'=> 'News',
 	'template'=>'{summary} {items} {pager}',
 	'pager'=>array(
             'class'=>'CLinkPager',
