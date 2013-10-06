@@ -1,0 +1,49 @@
+{
+	"attributes":
+	{
+		"title": 
+		{
+			"type": "singleline"
+		},
+        
+        
+        "short_headline":
+        {
+            "type": "singleline",
+            "rules":
+            {
+                "maxlength" : 30
+            }
+        },
+        
+        "summary":
+        {
+            "type": "multiline",
+            "rules":
+            {
+                "maxlength" : 30
+            }
+        },
+        
+        "full_story":
+        {
+            "type": "html"
+        },
+        
+        "full_image":
+        {
+            "type": "file"
+        },
+        
+        "date":
+        {
+            "type": "date",
+            "format": "d/m/Y"
+        },
+        
+        "live_on_site":
+        {
+            "type": "boolean"
+        }
+	}	
+}

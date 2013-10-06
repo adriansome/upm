@@ -61,8 +61,8 @@
 )); ?>
 </div>
 
-<<<<<<< Updated upstream
+
 <?php require_once(Yii::app()->theme->basepath.'/views/elements/footer.php'); ?>
-=======
+
 </div>
->>>>>>> Stashed changes
+
