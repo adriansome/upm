@@ -63,6 +63,58 @@ class DefaultController extends UserController
 	{
 		$model=new User;
 		$model->scenario = 'register';
+	
+		// Get the type of registration form to output
+		$regType = Yii::app()->request->getQuery('type', 'user');
+
+		// Define form fields required for different registration user types
+		$formFields = array(
+			'time_donor' => array(
+				
+			),
+			'user' => array(
+				'steps' => array(
+					'service' => array(
+						'title' => 'Service Details',
+						'desc'	=> 'Please Enter Your Service Details Below',
+						'fields' => 4
+					),
+					'details' => array(
+						'title' => 'Your Details',
+						'desc'	=> 'Please Enter Your Details Below',
+						'fields' => 9
+					),
+					'confirmation' => array(
+						'title' => 'Confirmation',
+						'desc'	=> 'Please confirm your details and agree to the terms and conditions'
+					)
+				),
+				'fields' => array(
+					'personnel_type' => array('type' => 'dropdown'),
+					'personnel_rank' => array('type' => 'dropdown'),
+					'personnel_service_number' => array(),
+					'personnel_unit' => array(
+						'tooltip' => "<p>Please enter the name of the last unit or ship you were on or were based in</p>"
+					),
+					'title' => array(),
+					'initial' => array(),
+					'lastname' => array(),
+					'phone_number' => array(),
+					'email' => array(),
+					'email_confirm' => array(
+						'tooltip' => '<p>Your Email address will become your username.</p>'
+						. '<p>It is important you have frequent access to this email address as '
+						. 'it will be the main means for us to communicate with you.</p>'
+					),
+					'password1' => array('type' => 'password'),
+					'password2' => array('type' => 'password'),
+					'accessibility' => array('type' => 'textarea')
+				)
+			)
+		);
+		
+		// Default to the user registration form if no (or invalid) type specified
+		$outputFields = isset($formFields[$regType]) ? $formFields[$regType] : $formFields['user'];
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -89,6 +141,9 @@ class DefaultController extends UserController
 
 		$this->render('register',array(
 			'model'=>$model,
+			'reg_type' => $regType,
+			'form_fields' => $outputFields['fields'],
+			'steps' => $outputFields['steps']
 		));
 	}
 

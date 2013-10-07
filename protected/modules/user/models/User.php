@@ -12,6 +12,7 @@
  * @property string $username
  * @property string $firstname
  * @property string $lastname
+ * @property string $address1
  * @property string $date_terms_agreed
  * @property string $date_updated
  * @property string $date_last_login
@@ -26,12 +27,54 @@
  */
 class User extends CActiveRecord
 {
+	public $email_confirm;
 	public $password1;
   	public $password2;
   	public $currentPassword;
   	public $emailChanged = false;
   	public $searchTerm;
-
+	
+	public $personnel_type_dropdown = array(
+		'serving' => 'Serving in the Armed Forces',
+		'veteran' => 'A Veteran discharged since 2001 through injury',
+		'widow' => 'I am a widow of a member of the Armed Forces in receipt of an attributable pension'
+	);
+	public $personnel_rank_dropdown = array(
+		'Able Seaman' => 'Able Seaman',
+		'Airman' => 'Airman',
+		'Captain' => 'Captain',
+		'Chief Petty Officer' => 'Chief Petty Officer',
+		'Chief Technician' => 'Chief Technician',
+		'Colonel or Above' => 'Colonel or Above',
+		'Colour Sergeant' => 'Colour Sergeant',
+		'Corporal' => 'Corporal',
+		'Flight Lieutenant' => 'Flight Lieutenant',
+		'Flight Sergeant' => 'Flight Sergeant',
+		'Flying Officer' => 'Flying Officer',
+		'Junior Technician' => 'Junior Technician',
+		'Lance Corporal' => 'Lance Corporal',
+		'Leading Seaman' => 'Leading Seaman',
+		'Lieutenant Colonel' => 'Lieutenant Colonel',
+		'Lieutenant or above' => 'Lieutenant or above',
+		'Major' => 'Major',
+		'Marine' => 'Marine',
+		'Midshipman' => 'Midshipman',
+		'Officer Cadet' => 'Officer Cadet',
+		'Petty Officer' => 'Petty Officer',
+		'Private' => 'Private',
+		'Regimental Sergeant Major' => 'Regimental Sergeant Major',
+		'Second Lieutenant' => 'Second Lieutenant',
+		'Senior Aircraftman' => 'Senior Aircraftman',
+		'Sergeant' => 'Sergeant',
+		'Squadron Leader' => 'Squadron Leader',
+		'Staff Sergeant' => 'Staff Sergeant',
+		'Sub-Lieutenant' => 'Sub-Lieutenant',
+		'Warrant Officer' => 'Warrant Officer',
+		'Wing Commander and above' => 'Wing Commander and above',
+		'WO2' => 'WO2',
+		'Other' => 'Other'
+	);
+	
   	private $purgeRecord = false;
 
 	/**
@@ -63,6 +106,7 @@ class User extends CActiveRecord
 			array('email, username, firstname, lastname', 'required', 'on'=>'insert, register, update, adminUpdate'),
 			array('fullname', 'safe'),
 			array('password1, password2', 'required', 'on'=>'register, passwordReset, updatePassword'),
+			array('personnel_type, personnel_rank, personnel_service_number, personnel_unit', 'required', 'on' => 'register'),
 			array('currentPassword', 'required', 'on'=>'emailRevert, updateEmail, updatePassword'),
 			array('currentPassword', 'authenticate', 'on'=>'emailRevert, updateEmail, updatePassword'),
 			array('role', 'required', 'on'=>'adminUpdate'),
@@ -97,15 +141,31 @@ class User extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'email' => 'E-mail',
+			'email_confirm' => 'Confirm E-mail address',
 			'old_email' => 'Old E-mail', 'password' => 'Password',
 			'currentPassword' => 'Current Password',
 			'password1' => 'New Password',
 			'password2' => 'Confirm New Password',
 			'role' => 'role',
 			'username' => 'Username',
+			'personnel_type' => 'I am Currently',
+			'personnel_rank' => 'Rank / Rating',
+			'personnel_service_number' => 'Service Number',
+			'personnel_unit' => 'Unit / Station / Ship',
+			'title' => 'Title',
+			'initial' => 'Initial',
 			'firstname' => 'First Name',
 			'lastname' => 'Last Name',
 			'fullname' => 'Name',
+			'address1' => 'Address1',
+			'address2' => 'Address2',
+			'area' => 'Area',
+			'city' => 'City',
+			'county' => 'County',
+			'postcode' => 'Postcode',
+			'country' => 'Country',
+			'phone_number' => 'Telephone number',
+			'accessibility' => 'Please tell us about any accessibility considerations you have when booking a holiday',
 			'date_terms_agreed' => 'Date Terms Agreed',
 			'date_updated' => 'Date Updated',
 			'date_last_login' => 'Date Last Login',

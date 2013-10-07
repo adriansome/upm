@@ -61,7 +61,8 @@ body {
 }
 
 a {
-
+	color: #333;	
+	color: inherit;
 }
 
 img {
@@ -80,6 +81,12 @@ h2 {
 	color: #295e2d;
 	font-size: 18px;
 	font-size: 1.8rem;
+}
+
+h3 {
+	font-size: 14px;
+	font-size: 1.4rem;
+	font-weight: bold;
 }
 
 p {
@@ -114,8 +121,16 @@ select {
 	font-size: 1.4rem;
 }
 
+input[type=file] {
+	margin-bottom: 10px;
+}
+
 textarea {
 	resize: vertical;
+}
+
+em {
+	font-style: italic;
 }
 
 input[type=submit],
@@ -141,21 +156,6 @@ input[type=submit],
 
 .button-row input[type=submit] {
 	float: right;	/* makes it block level instead of inline-block, which means the preceding .form-row's bottom margin appears as expected */
-}
-
-.constrained {
-	position: relative;
-	max-width: 1138px;
-	max-width: 1152px; /* room for 7px padding either side */
-	width: 1152px;
-	margin: 0 auto;
-}
-
-#home .more {
-	background: #fff;
-	border-radius: 5px;
-	color: #333;
-	text-decoration: none;
 }
 
 .button-link {
@@ -266,28 +266,18 @@ nav:after,
 	content: ""
 }
 
-.column { /*outline: 1px dashed rgba(30, 30, 130, 0.4);*/}
+.constrained {
+	position: relative;
+	max-width: 1152px; /* room for 1138px with 7px padding either side */
+	width: 1152px;
+	margin: 0 auto;
+}
+
 .column {
 	float: left;
-/*	
-	box-sizing: border-box;	
-	padding: 0 1%;
-	padding: 0 7px;
-*/
-	margin: 0 7px;	
+	margin: 0 7px;
+	/*margin: 0 0.6076388%;*/
 }
-
-.one-half {
-	width: 50%;
-	width: 562px;
-}
-
-.one-quarter {
-	width: 25%;
-	width: 274px;
-}
-
-/* The following development classes are temporary */
 
 .column:first-child {
 	margin-left: 0px;
@@ -297,41 +287,59 @@ nav:after,
 	margin-right: 0px;
 }
 
+.one-half {
+	width: 562px;
+	/*width: 50%; */	
+}
+
+.one-quarter {
+	width: 274px;
+	/*width: 25%; */	
+}
+
 .span2 {
-	width: 130px !important;
+	width: 130px;
+	/*width: 11.284722%;*/
 }
 
 .span3 {
-	width: 202px !important;
+	width: 202px;
+	/*width: 17.534722%;*/
 }
 
 .span4 {
-	width: 274px !important;
+	width: 274px;
+	/*width: 23.784722%;*/
 }
 
 .span5 {
-	width: 346px !important;
+	width: 346px;
+	/*width: 30.034722%;*/
 }
 
 .span6 {
-	width: 418px !important;	
+	width: 418px;
+	/*width: 36.284722%;*/
 }
 
 .span7 {
-	width: 490px !important;	
+	width: 490px;
+	/*width: 42.534722%;*/
 }
 
-
 .span8 {
-	width: 562px !important;
+	width: 562px;
+	/*width: 48.784722%;*/
 }
 
 .span12 {
-	width: 850px !important;
+	width: 850px;
+	/*width: 73.784722%;*/
 }
 
 .span13 {
-	width: 922px !important;	
+	width: 922px;
+	/*width: 80.034722%;*/
 }
 
 /* ----- Page header ----- */
@@ -446,21 +454,17 @@ nav:after,
 	margin-bottom: 70px;
 	background: transparent;
 }
-/*
-#home #main-navigation {
-	background: transparent;
-}
-*/
+
+/* ----- Upper Section ----- */
+
 #home-upper-wrapper {
 	background: transparent url(../images/home-banner.jpg) center top no-repeat;
 	background-size: cover;
 	border-bottom: 1px solid #d6d6d6;
 }
 
-/* ----- Upper Section ----- */
-
 #home-upper h2 {
-	margin-bottom: 10px;
+	margin-bottom: 15px;
 	padding-top: 70px;
 	background: transparent center top no-repeat;
 	color: #fff;
@@ -469,12 +473,17 @@ nav:after,
 
 #home-upper p {
 	color: #fff;
+	font-size: 14px;
+	font-size: 1.4rem;
 }
 
 #home-upper .more {
 	padding: 7px 11px;
+	background: #fff;
+	border-radius: 5px;	
 	color: #4d592d;
 	font-size: 22px;
+	text-decoration: none;
 }
 
 #home .nugget {
@@ -484,11 +493,11 @@ nav:after,
 	box-sizing: border-box;
 	width: 31.634%;
 	margin-left: 2.548%;
-	padding: 20px;
+	padding: 20px 35px;
 }
 
 #home-upper .nugget {
-	min-height: 320px;
+	min-height: 350px;
 	text-align: center;
 }
 
@@ -504,8 +513,10 @@ nav:after,
 }
 
 #nugget-search {
+	padding: 20px 30px; 
 	background: rgba(41, 94, 45, 0.65);
 }
+
 #nugget-search h2 {
 	background-image: url(../images/icon-search.png);
 }
@@ -530,10 +541,9 @@ nav:after,
 }
 
 #home-nuggets h2 {
-	margin-bottom:  25px;
-
-	font-size: 25px;
-	font-size: 2.5rem;
+	margin-bottom:  24px;
+	font-size: 24px;
+	font-size: 2.4rem;
 }
 
 #home-nuggets .button-link {
@@ -559,10 +569,12 @@ nav:after,
 	background: transparent url(../images/photo-bg.png) 0 0 no-repeat;
 }
 
-.slides {
+#photo-slideshow .slides {
 	position: relative;
 	left: 19px;
 	top: 21px;
+	height: 200px;
+	overflow: hidden;
 }
 
 .slides .caption {
@@ -615,8 +627,6 @@ nav:after,
 	font-size: 1.6rem;
 }
 
-/* 4 cols */
-
 #message-from-liam .picture-frame img {
 	border-radius: 139px;
 	overflow: hidden;
@@ -627,17 +637,6 @@ nav:after,
 	box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
 }
 
-
-/* 7 cols */
-#message-from-liam .text {
-
-}
-
-/* 5 cols */
-#message-from-liam .video {
-
-}
-
 .video-trigger {
 	position: relative;	
 	display: block;
@@ -645,6 +644,10 @@ nav:after,
 	border: 1px solid #d6d6d6;
 	border-radius: 5px;
 	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.video-trigger img {
+	display: block;
 }
 
 .video-trigger:after {
@@ -722,9 +725,26 @@ nav:after,
 
 }
 
+#main-content ul,
+#main-content ol {
+	margin-left: 20px;
+	margin-bottom: 18px;
+	margin-bottom: 1.8rem;
+	font-size: 12px;
+	font-size: 1.2rem;
+	line-height: 1.5;	
+}
+
+#main-content ul {
+	list-style-type: disc;
+}
+
+#main-content ol {
+	list-style-type: decimal;
+}
+
 .inner-content {
 	margin-bottom: 40px;
-	padding: 14px;
 }
 
 /* ----- SEARCH RESULTS ------------------------------------------ */
@@ -916,7 +936,12 @@ ul > li.provisionally-booked,
 	overflow: hidden;
 	text-align: center;
 	text-decoration: none;	
-	text-indent: -9999px;	
+	text-indent: -9999px;
+
+	-moz-transition: all 0.1s ease;
+	-o-transition: all 0.1s ease;
+	-webkit-transition: all 0.1s ease;
+	transition: all 0.1s ease;
 }
 
 .remove:active {
@@ -963,8 +988,9 @@ label {
 	font-size: 1.4rem;
 }
 
-.form-steps {
-	margin-bottom: 14px;
+#main-content ol.form-steps {
+	margin: 0 0 14px 0;
+	
 }
 
 .form-steps li {
@@ -993,8 +1019,13 @@ label {
 }
 
 .form-steps a {
+	cursor: default;
 	color: #fff;
 	text-decoration: none;
+}
+
+.form-steps li.complete a {
+	cursor: pointer;
 }
 
 .form-steps li.active {
@@ -1035,6 +1066,11 @@ label {
 	padding: 6px 0;
 }
 
+.standard-form .validation {
+	margin-left: 34%;
+	padding-left: 12px;
+}
+
 .standard-form input[type=text],
 .standard-form input[type=password],
 .standard-form textarea,
@@ -1059,6 +1095,14 @@ label {
 .standard-form .form-column-wrapper select {
 	float: none;
 	width: 100%;
+}
+
+.form-wrapper .step {
+	display: none;
+}
+
+.form-wrapper .step.active {
+	display: block;
 }
 
 /* ----- LANDLORD PAGES ------------------------------------------ */
@@ -1140,6 +1184,18 @@ label {
 	background: #993333 url(../images/icon-cancel.png) 90% 50% no-repeat;
 }
 
+/* ----- CONTACT ------------------------------------------------- */
+
+#contact-form {
+	width: 60%;
+	padding-top: 0px;
+	border: none;
+}
+
+.validation.error {
+	color: #b22;
+}
+
 /* ----- NEWS ITEMS ---------------------------------------------- */
 #news {
 	overflow: hidden;
@@ -1196,15 +1252,10 @@ label {
 	text-align: left;
 }
 
-/* Tweak styles to match PSDs: */
-
+/* ----- Remove the following styles for improved consistency: ----*/
+/*
 body {
 	background: #f4f4f4;
-}
-
-#sidebar .nugget,
-.inner-content {
-	background-color: #fff;
 }
 
 #sidebar {
@@ -1215,6 +1266,91 @@ body {
 	height: 4rem;
 	margin-left: 14px;	
 	margin-bottom: 0;
+	font-weight: bold;
+}
+
+.inner-content {
+	padding: 14px;	
+}
+
+#main-navigation {
+	margin-top: -115px;
+	padding-top: 55px;
+	background: #f4f4f4;
+}
+
+#home #main-navigation {
+	background: transparent;
+}
+
+#main-navigation li {
+	margin-left: 14px;
+}
+
+#main-navigation a,
+#sub-navigation a {
+	padding: 7px 16px;
+	background: #fff;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	border-radius: 7px;
+	color: #005030;
+	font-size: 14px;
+	font-size: 1.4rem;
+}
+
+#main-navigation a:hover,
+#sub-navigation a:hover {
+	background: #fff;
+	border-color: rgba(0, 0, 0, 0.3);
+}
+
+#main-navigation li.active a,
+#sub-navigation li.active a {
+	background: #f1f5e5;
+}
+
+#sub-navigation li {
+	margin-bottom: 4px;
+	border-bottom: none;
+}
+
+#sub-navigation a {
+	display: inline-block;
+}
+
+#home-upper .nugget {
+	min-height: 353px;
+}
+
+#home-upper h2 {
+	line-height: 1.1;
+}
+
+#home-upper p {
+	margin-bottom: 24px;
+	margin-bottom: 2.4rem;
+	font-size: 14px;
+	font-size: 1.4rem;	
+	font-style: italic;
+}
+
+#home-upper #nugget-search p {
+	margin-bottom: 18px;
+	margin-bottom: 1.8rem;	
+}
+
+#nugget-register .more,
+#nugget-donate .more {
+	white-space: nowrap;
+}
+
+#home-nuggets p {
+	color: #767f5f;
+}
+
+#sidebar .nugget,
+.inner-content {
+	background-color: #fff;
 }
 
 .resort-listing h2 + p {
@@ -1223,11 +1359,95 @@ body {
 	font-size: 1.7rem;
 }
 
+#message-from-liam h1 {
+	font-size: 20px;
+	font-size: 2.0rem;	
+	font-style: italic;
+	font-weight: bold;
+}
 
+#message-from-liam p {
+	max-width: 660px;
+}
 
+#message-from-liam .button-link,
+#message-from-liam-more-link {
+	position: absolute;
+	right: 20px;
+	top: 310px;
+}
 
+#message-from-liam .text .picture-frame img {
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+}
 
+#message-from-liam .video-trigger {
+	float: right;
+	width: 320px;
+	margin: 0 0 18px 18px;
+}
 
+#home-nuggets h2 {
+	font-size: 20px;
+	font-size: 2.0rem;
+	font-weight: bold;
+}
+
+#home-nuggets p {
+	font-size: 13px;
+}
+
+.button-link,
+.more,
+#message-from-liam-more-link,
+.nugget .btn-link {
+	font-style: italic;
+}
+
+h2 {
+	font-weight: bold;
+}
+
+#page-footer,
+#page-footer h2,
+#page-footer p,
+#page-footer a,
+#footer-navigation a {
+	color: #909979;
+}
+
+#page-footer h2 {
+	font-size: 22px;
+	font-size: 2.2rem;
+	font-style: italic;
+	font-weight: bold;
+}
+
+#page-footer p {
+	font-size: 15px;
+	font-size: 1.5rem;
+}
+
+#page-footer nav li {
+	margin-bottom: 4px;
+}
+
+#page-footer nav a {
+	display: inline-block;
+	padding: 4px 9px;
+	background: #fff;
+	border-radius: 5px;
+	font-size: 14px;
+	font-size: 1.4rem;
+	text-align: right;
+}
+
+#footer-navigation ul ul {
+	display: none;
+}
+*/
 /* ----- Temporary Styles during CMS integration ----- */
 
 #message-from-liam-more-link,
@@ -1283,7 +1503,7 @@ body {
   height: 100%;
   z-index: 503;
   position: fixed;
-  outline: none !important;
+  outline: none;
   -webkit-backface-visibility: hidden; }
 
 .mfp-container {
@@ -1351,7 +1571,7 @@ body {
   display: none; }
 
 .mfp-hide {
-  display: none !important; }
+  display: none; }
 
 .mfp-preloader {
   color: #cccccc;
