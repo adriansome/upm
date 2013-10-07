@@ -1,7 +1,7 @@
 <?php
 /* @var $this ManagmentController */
 /* @var $model User */
-$this->beginWidget('TbModal', array('id'=>'update-user-management', 'htmlOptions'=>array('data-keyboard'=>'false', 'data-backdrop'=>'static', 'data-locked'=>'true'))); ?>
+$this->beginWidget('TbModal', array('id'=>'update-page-management', 'htmlOptions'=>array('data-keyboard'=>'false', 'data-backdrop'=>'static', 'data-locked'=>'true'))); ?>
 
 <div class="modal-header">
     <h4>Create Page</h4>
@@ -24,7 +24,8 @@ $this->renderPartial('_form', array(
         'url'=>Yii::app()->createUrl('/page/management/create/'),
         'htmlOptions'=>array(
             'data-dismiss'=>'modal',
-            'data-target'=>'user-list',
+            'data-target'=>'page-management',
+            'data-href'=>'/page/management',
             'class'=>'save list',
         ),
     )); ?>

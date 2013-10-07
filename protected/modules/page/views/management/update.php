@@ -26,7 +26,8 @@ $this->renderPartial('_form', array('model' => $model));
         'url'=>Yii::app()->createUrl('/page/management/update/id/'.$model->id),
         'htmlOptions'=>array(
             'data-dismiss'=>'modal',
-            'data-target'=>'menu-item-list',
+            'data-target'=>'page-management',
+            'data-href'=>'/page/management',
             'class'=>'save list',
         ),
     )); ?>

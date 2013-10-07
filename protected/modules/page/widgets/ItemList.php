@@ -82,7 +82,7 @@ class ItemList extends CWidget {
             
 			<div class="buttons">
             <?php if($row->allowSubpages): ?>
-				<a data-toggle="toggle-action" data-id="<?php echo $row->id?>" data-target="menu-item-list" href="<?php echo Yii::app()->createUrl(Yii::app()->getModule('page')->id . '/management/create/' . $row->id); ?>">
+				<a data-toggle="toggle-action" data-id="<?php echo $row->id?>" data-target="menu-item-list" data-href="/page/management" href="<?php echo Yii::app()->createUrl(Yii::app()->getModule('page')->id . '/management/create/' . $row->id); ?>">
 					<i class="icon-plus"></i>
 				</a>
             <?php endif; ?>
@@ -90,15 +90,15 @@ class ItemList extends CWidget {
 				<a data-toggle="default-action" data-id="<?php echo $row->id?>" data-target=".item-view" href="<?php echo Yii::app()->createUrl(Yii::app()->getModule('page')->id . '/management/update/' . $row->id); ?>">
 					<i class="icon-edit"></i>
 				</a>
-				<!--<a data-toggle="toggle-action" data-id="<?php echo $row->id?>" data-target="menu-item-list" href="<?php echo Yii::app()->createUrl(Yii::app()->getModule('page')->id . '/management/showInMenu/' . $row->id); ?>">
+				<!--<a data-toggle="toggle-action" data-id="<?php echo $row->id?>" data-target="menu-item-list" data-href="/page/management" href="<?php echo Yii::app()->createUrl(Yii::app()->getModule('page')->id . '/management/showInMenu/' . $row->id); ?>">
 					<i class="icon-align-justify"></i>
 				</a>
             
-				<a data-toggle="toggle-action" data-id="<?php echo $row->id?>" data-target="menu-item-list" href="<?php echo Yii::app()->createUrl(Yii::app()->getModule('page')->id . '/management/activateOnSite/' . $row->id); ?>">
+				<a data-toggle="toggle-action" data-id="<?php echo $row->id?>" data-target="menu-item-list" data-href="/page/management" href="<?php echo Yii::app()->createUrl(Yii::app()->getModule('page')->id . '/management/activateOnSite/' . $row->id); ?>">
 					<i class="icon-ok"></i>
 				</a>-->
             
-				<a data-toggle="toggle-action" data-id="<?php echo $row->id?>" data-target="menu-item-list" href="<?php echo Yii::app()->createUrl(Yii::app()->getModule('page')->id . '/management/delete/' . $row->id); ?>">
+				<a data-toggle="toggle-action" data-id="<?php echo $row->id?>" data-target="page-management" data-href="/page/management" href="<?php echo Yii::app()->createUrl(Yii::app()->getModule('page')->id . '/management/delete/' . $row->id); ?>">
 					<i class="icon-off"></i>
 				</a>
             
