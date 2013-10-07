@@ -42,6 +42,7 @@ abstract class BlockWidget extends CWidget
 			$block = $this->createBlock();
 
 		$this->dbID = $block->id;
+		$this->loadContents($block->contents);
 	}
 
 	protected function createBlock()
