@@ -9,14 +9,14 @@
 	<!-- Begin #home-upper -->
 	<section id="home-upper" class="constrained">
 		<div class="nugget" id="nugget-register">
-			<h2>Register</h2>
-			<p>You need to be registered and verified to use this site. Click below to begin. </p>
+			<h2>Service Personnel Registration</h2>
+			<p>You need to be registered and verified<br/> to use this site. Click below to begin. </p>
 			<a href="#" class="more">Register to use site</a>
 		</div>
 
 		<div class="nugget" id="nugget-search">
 			<h2>Holiday Search</h2>
-			<p>Once registered and verified, search here for a holiday.</p>
+			<p>Once registered and verified,<br/> search here for a holiday.</p>
 			<div class="form-row">
 				<select>
 					<option>Choose When</option>
@@ -34,7 +34,7 @@
 
 		<div class="nugget" id="nugget-donate">
 			<h2>Donate Time</h2>
-			<p>If you would like to donate a week of holiday time, click below.</p>
+			<p>If you would like to donate a week<br/> of holiday time, click below.</p>
 			<a href="#" class="more">Donate holiday time</a>			
 		</div>
 	</section>

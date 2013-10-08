@@ -6,7 +6,14 @@
 .modal#filemanager
 {
 	width: 765px;
+	width: 786px; /* remove horizontal scrollbar */
 	left: 40%;
+}
+
+/* Temporary hack for WYSIWYG blocks. SHould probably give them the 'wide' class */
+.modal {
+	width: 730px;
+	margin-left: -365px;
 }
 
 .modal.wide
@@ -19,7 +26,7 @@
 .modal .item-view
 {
 	float:left;
-	width: 49%;
+	width: 48%;
 }
 
 .modal .item-view
@@ -36,14 +43,14 @@
 	left: 0;
 	-moz-opacity: 0.80;
 	opacity: 0.80;
-	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha"(Opacity=80);
+	font-size: 14px;
 	z-index:999999;
 }
 
 #adminzone-menu h3
 {
 	margin: 0;
-	padding: 0 10px;
+	padding: 5px 10px;
 	font-weight: normal;
 	font-size: 1.2em;
 }
@@ -92,7 +99,6 @@
 	border: none;
 	border-radius: 0;
 	background: none;
-	margin-left:5px;
 }
 
 .view label
@@ -105,10 +111,16 @@
 	float:right;
 }
 
-#content .in-page-edit
+.in-page-edit.btn-link
 {
 	position:absolute;
 	top:0;
 	left:0;
+	height:16px;
+	width:16px;
+	border:none;
+	box-shadow:none;
+	border-radius:0;
+	padding:0;
+	text-indent: -9999px;
 }
-

@@ -114,8 +114,16 @@ select {
 	font-size: 1.4rem;
 }
 
+input[type=file] {
+	margin-bottom: 10px;
+}
+
 textarea {
 	resize: vertical;
+}
+
+em {
+	font-style: italic;
 }
 
 input[type=submit],
@@ -141,21 +149,6 @@ input[type=submit],
 
 .button-row input[type=submit] {
 	float: right;	/* makes it block level instead of inline-block, which means the preceding .form-row's bottom margin appears as expected */
-}
-
-.constrained {
-	position: relative;
-	max-width: 1138px;
-	max-width: 1152px; /* room for 7px padding either side */
-	width: 1152px;
-	margin: 0 auto;
-}
-
-#home .more {
-	background: #fff;
-	border-radius: 5px;
-	color: #333;
-	text-decoration: none;
 }
 
 .button-link {
@@ -266,14 +259,15 @@ nav:after,
 	content: ""
 }
 
-.column { /*outline: 1px dashed rgba(30, 30, 130, 0.4);*/}
+.constrained {
+	position: relative;
+	max-width: 1152px; /* room for 1138px with 7px padding either side */
+	width: 1152px;
+	margin: 0 auto;
+}
+
 .column {
 	float: left;
-/*	
-	box-sizing: border-box;	
-	padding: 0 1%;
-	padding: 0 7px;
-*/
 	margin: 0 7px;	
 }
 
@@ -446,21 +440,17 @@ nav:after,
 	margin-bottom: 70px;
 	background: transparent;
 }
-/*
-#home #main-navigation {
-	background: transparent;
-}
-*/
+
+/* ----- Upper Section ----- */
+
 #home-upper-wrapper {
 	background: transparent url(../images/home-banner.jpg) center top no-repeat;
 	background-size: cover;
 	border-bottom: 1px solid #d6d6d6;
 }
 
-/* ----- Upper Section ----- */
-
 #home-upper h2 {
-	margin-bottom: 10px;
+	margin-bottom: 15px;
 	padding-top: 70px;
 	background: transparent center top no-repeat;
 	color: #fff;
@@ -469,12 +459,17 @@ nav:after,
 
 #home-upper p {
 	color: #fff;
+	font-size: 14px;
+	font-size: 1.4rem;
 }
 
 #home-upper .more {
 	padding: 7px 11px;
+	background: #fff;
+	border-radius: 5px;	
 	color: #4d592d;
 	font-size: 22px;
+	text-decoration: none;
 }
 
 #home .nugget {
@@ -484,11 +479,11 @@ nav:after,
 	box-sizing: border-box;
 	width: 31.634%;
 	margin-left: 2.548%;
-	padding: 20px;
+	padding: 20px 35px;
 }
 
 #home-upper .nugget {
-	min-height: 320px;
+	min-height: 350px;
 	text-align: center;
 }
 
@@ -504,8 +499,10 @@ nav:after,
 }
 
 #nugget-search {
+	padding: 20px 30px; 
 	background: rgba(41, 94, 45, 0.65);
 }
+
 #nugget-search h2 {
 	background-image: url(../images/icon-search.png);
 }
@@ -530,10 +527,9 @@ nav:after,
 }
 
 #home-nuggets h2 {
-	margin-bottom:  25px;
-
-	font-size: 25px;
-	font-size: 2.5rem;
+	margin-bottom:  24px;
+	font-size: 24px;
+	font-size: 2.4rem;
 }
 
 #home-nuggets .button-link {
@@ -559,10 +555,12 @@ nav:after,
 	background: transparent url(../images/photo-bg.png) 0 0 no-repeat;
 }
 
-.slides {
+#photo-slideshow .slides {
 	position: relative;
 	left: 19px;
 	top: 21px;
+	height: 200px;
+	overflow: hidden;
 }
 
 .slides .caption {
@@ -615,8 +613,6 @@ nav:after,
 	font-size: 1.6rem;
 }
 
-/* 4 cols */
-
 #message-from-liam .picture-frame img {
 	border-radius: 139px;
 	overflow: hidden;
@@ -627,17 +623,6 @@ nav:after,
 	box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
 }
 
-
-/* 7 cols */
-#message-from-liam .text {
-
-}
-
-/* 5 cols */
-#message-from-liam .video {
-
-}
-
 .video-trigger {
 	position: relative;	
 	display: block;
@@ -645,6 +630,10 @@ nav:after,
 	border: 1px solid #d6d6d6;
 	border-radius: 5px;
 	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.video-trigger img {
+	display: block;
 }
 
 .video-trigger:after {
@@ -916,7 +905,12 @@ ul > li.provisionally-booked,
 	overflow: hidden;
 	text-align: center;
 	text-decoration: none;	
-	text-indent: -9999px;	
+	text-indent: -9999px;
+
+	-moz-transition: all 0.1s ease;
+	-o-transition: all 0.1s ease;
+	-webkit-transition: all 0.1s ease;
+	transition: all 0.1s ease;
 }
 
 .remove:active {
@@ -963,8 +957,9 @@ label {
 	font-size: 1.4rem;
 }
 
-.form-steps {
-	margin-bottom: 14px;
+#main-content ol.form-steps {
+	margin: 0 0 14px 0;
+	
 }
 
 .form-steps li {
@@ -1033,6 +1028,11 @@ label {
 	float: left;
 	width: 34%;
 	padding: 6px 0;
+}
+
+.standard-form .validation {
+	margin-left: 34%;
+	padding-left: 12px;
 }
 
 .standard-form input[type=text],
@@ -1140,7 +1140,19 @@ label {
 	background: #993333 url(../images/icon-cancel.png) 90% 50% no-repeat;
 }
 
-/* Remove the following styles for improved consistency: */
+/* ----- CONTACT ------------------------------------------------- */
+
+#contact-form {
+	width: 60%;
+	padding-top: 0px;
+	border: none;
+}
+
+.validation.error {
+	color: #b22;
+}
+
+/* ----- Remove the following styles for improved consistency: ----*/
 
 body {
 	background: #f4f4f4;
@@ -1191,9 +1203,19 @@ body {
 	display: inline-block;
 }
 
+#home-upper .nugget {
+	min-height: 353px;
+}
+
+#home-upper h2 {
+	line-height: 1.1;
+}
+
 #home-upper p {
 	margin-bottom: 24px;
 	margin-bottom: 2.4rem;
+	font-size: 14px;
+	font-size: 1.4rem;	
 	font-style: italic;
 }
 
@@ -1204,8 +1226,11 @@ body {
 
 #nugget-register .more,
 #nugget-donate .more {
-	/* absolute position these */
 	white-space: nowrap;
+}
+
+#home-nuggets p {
+	color: #767f5f;
 }
 
 #sidebar .nugget,
@@ -1261,7 +1286,13 @@ body {
 }
 
 #home-nuggets h2 {
+	font-size: 20px;
+	font-size: 2.0rem;
 	font-weight: bold;
+}
+
+#home-nuggets p {
+	font-size: 13px;
 }
 
 .button-link,
@@ -1273,6 +1304,44 @@ body {
 
 h2 {
 	font-weight: bold;
+}
+
+#page-footer,
+#page-footer h2,
+#page-footer p,
+#page-footer a,
+#footer-navigation a {
+	color: #909979;
+}
+
+#page-footer h2 {
+	font-size: 22px;
+	font-size: 2.2rem;
+	font-style: italic;
+	font-weight: bold;
+}
+
+#page-footer p {
+	font-size: 15px;
+	font-size: 1.5rem;
+}
+
+#page-footer nav li {
+	margin-bottom: 4px;
+}
+
+#page-footer nav a {
+	display: inline-block;
+	padding: 4px 9px;
+	background: #fff;
+	border-radius: 5px;
+	font-size: 14px;
+	font-size: 1.4rem;
+	text-align: right;
+}
+
+#footer-navigation ul ul {
+	display: none;
 }
 
 /* ----- Temporary Styles during CMS integration ----- */
