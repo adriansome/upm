@@ -275,16 +275,7 @@ nav:after,
 .one-quarter {
 	width: 25%;
 	width: 274px;
-}
-
-/* The following development classes are temporary */
-
-.column:first-child {
-	margin-left: 0px;
-}
-
-.column:last-child {
-	margin-right: 0px;
+	/*width: 25%; */	
 }
 
 .span2 {

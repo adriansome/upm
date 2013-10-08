@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 
 /**
@@ -10,8 +11,23 @@
  * @property string $password
  * @property string $role
  * @property string $username
+ * @property string $title
+ * @property string $initial
  * @property string $firstname
  * @property string $lastname
+ * @property string $address1
+ * @property string $address2
+ * @property string $area
+ * @property string $city
+ * @property string $county
+ * @property string $postcode
+ * @property string $country
+ * @property string $phone_number
+ * @property string $personnel_type
+ * @property string $personnel_rank
+ * @property string $personnel_service_number
+ * @property string $personnel_unit
+ * @property string $accessibility
  * @property string $date_terms_agreed
  * @property string $date_updated
  * @property string $date_last_login
@@ -21,17 +37,62 @@
  * @property string $date_email_validated
  * @property string $date_account_expire
  * @property string $date_revert
- * @property string $dateReset
+ * @property string $date_reset
  * @property string $date_deleted
+ * @property string $reset_code
+ * @property string $revert_code
  */
 class User extends CActiveRecord
 {
+	public $email_confirm;
+	public $captcha_code;
 	public $password1;
   	public $password2;
   	public $currentPassword;
   	public $emailChanged = false;
   	public $searchTerm;
-
+	
+	public $personnel_type_dropdown = array(
+		'serving' => 'Serving in the Armed Forces',
+		'veteran' => 'A Veteran discharged since 2001 through injury',
+		'widow' => 'I am a widow of a member of the Armed Forces in receipt of an attributable pension'
+	);
+	public $personnel_rank_dropdown = array(
+		'Able Seaman' => 'Able Seaman',
+		'Airman' => 'Airman',
+		'Captain' => 'Captain',
+		'Chief Petty Officer' => 'Chief Petty Officer',
+		'Chief Technician' => 'Chief Technician',
+		'Colonel or Above' => 'Colonel or Above',
+		'Colour Sergeant' => 'Colour Sergeant',
+		'Corporal' => 'Corporal',
+		'Flight Lieutenant' => 'Flight Lieutenant',
+		'Flight Sergeant' => 'Flight Sergeant',
+		'Flying Officer' => 'Flying Officer',
+		'Junior Technician' => 'Junior Technician',
+		'Lance Corporal' => 'Lance Corporal',
+		'Leading Seaman' => 'Leading Seaman',
+		'Lieutenant Colonel' => 'Lieutenant Colonel',
+		'Lieutenant or above' => 'Lieutenant or above',
+		'Major' => 'Major',
+		'Marine' => 'Marine',
+		'Midshipman' => 'Midshipman',
+		'Officer Cadet' => 'Officer Cadet',
+		'Petty Officer' => 'Petty Officer',
+		'Private' => 'Private',
+		'Regimental Sergeant Major' => 'Regimental Sergeant Major',
+		'Second Lieutenant' => 'Second Lieutenant',
+		'Senior Aircraftman' => 'Senior Aircraftman',
+		'Sergeant' => 'Sergeant',
+		'Squadron Leader' => 'Squadron Leader',
+		'Staff Sergeant' => 'Staff Sergeant',
+		'Sub-Lieutenant' => 'Sub-Lieutenant',
+		'Warrant Officer' => 'Warrant Officer',
+		'Wing Commander and above' => 'Wing Commander and above',
+		'WO2' => 'WO2',
+		'Other' => 'Other'
+	);
+	
   	private $purgeRecord = false;
 
 	/**
@@ -60,15 +121,20 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('email, username, firstname, lastname', 'required', 'on'=>'insert, register, update, adminUpdate'),
+			array('personnel_type, personnel_rank, personnel_service_number, personnel_unit,
+					email, email_confirm, lastname, title, initial, phone_number',
+					'required',
+					'on'=>'insert, register, update, adminUpdate'),
 			array('fullname', 'safe'),
 			array('password1, password2', 'required', 'on'=>'register, passwordReset, updatePassword'),
 			array('currentPassword', 'required', 'on'=>'emailRevert, updateEmail, updatePassword'),
 			array('currentPassword', 'authenticate', 'on'=>'emailRevert, updateEmail, updatePassword'),
 			array('role', 'required', 'on'=>'adminUpdate'),
 			array('email, old_email, firstname, lastname', 'length', 'max'=>140),
+			array('captcha_code', 'captcha', 'on' => 'register'),
 			array('password', 'length', 'max'=>60),
 			array('password2', 'compare', 'compareAttribute'=>'password1'),
+			array('email_confirm', 'compare', 'compareAttribute' => 'email'),
 			array('role', 'length', 'max'=>10),
 			array('username, activation_code', 'length', 'max'=>40),
 			array('searchTerm, currentPassword, date_updated, date_last_login, date_validation_email_sent, date_email_validated, date_account_expire, date_revert, dateReset, date_deleted', 'safe'),
@@ -97,16 +163,32 @@ class User extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'email' => 'E-mail',
+			'email_confirm' => 'Confirm E-mail address',
 			'old_email' => 'Old E-mail', 'password' => 'Password',
 			'currentPassword' => 'Current Password',
 			'password1' => 'New Password',
 			'password2' => 'Confirm New Password',
 			'role' => 'role',
 			'username' => 'Username',
+			'personnel_type' => 'I am Currently',
+			'personnel_rank' => 'Rank / Rating',
+			'personnel_service_number' => 'Service Number',
+			'personnel_unit' => 'Unit / Station / Ship',
+			'title' => 'Title',
+			'initial' => 'Initial',
 			'firstname' => 'First Name',
 			'lastname' => 'Last Name',
 			'fullname' => 'Name',
-			'date_terms_agreed' => 'Date Terms Agreed',
+			'address1' => 'Address1',
+			'address2' => 'Address2',
+			'area' => 'Area',
+			'city' => 'City',
+			'county' => 'County',
+			'postcode' => 'Postcode',
+			'country' => 'Country',
+			'phone_number' => 'Telephone number',
+			'accessibility' => 'Please tell us about any accessibility considerations you have when booking a holiday',
+			'date_terms_agreed' => 'I agree to the Terms and Conditions',
 			'date_updated' => 'Date Updated',
 			'date_last_login' => 'Date Last Login',
 			'date_created' => 'Date Joined',
