@@ -35,6 +35,12 @@
 		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getModule('page')->getAssets() . '/js/nestedsortable/jquery.ui.nestedSortable.js');?>
 		<?php Yii::app()->clientScript->registerCssFile(Yii::app()->getModule('page')->getAssets() . '/js/nestedsortable/nestedSortable.css');?>
 
+		<style>
+		.in-page-edit.btn-link
+		{
+			background:transparent url(<?php echo Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.img')).'/admin-icons-v3.png';?>) no-repeat;
+		}
+		</style>
 		<!-- Display the flash message element -->
 		<div id="flashMessage" display="none"></div>
 

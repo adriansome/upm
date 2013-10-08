@@ -121,10 +121,7 @@
 			preloader: false,
 			fixedContentPos: false
 		});			
-	});
-</script>
-<script>
-	$(document).ready(function() {
+
 		$("#photo-slideshow .slides").carouFredSel({
 			items	: 1,
 			auto	: 3000,

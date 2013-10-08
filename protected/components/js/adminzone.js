@@ -16,7 +16,7 @@ $(function()
             menubar:false,
             statusbar: false, 
             toolbar1: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect", 
-            toolbar2: "| responsivefilemanager | link unlink anchor | image media | preview code ", 
+            toolbar2: "| responsivefilemanager | link unlink anchor | image media | forecolor backcolor | print preview code ", 
             image_advtab: true , 
             external_filemanager_path: responsiveFileManager, 
             filemanager_title:"File Manager", 
@@ -33,17 +33,34 @@ $(function()
 //        return false;
 //    }
 
-    function updateList(target)
+    function updateList(target,id,url)
     {
-        jQuery('#' + target).yiiListView({
-			'ajaxUpdate':[target],
-			'ajaxVar':'ajax',
-			'pagerClass':'pager',
-			'loadingClass':'list-view-loading',
-			'sorterClass':'sorter',
-			'enableHistory':false
-		});
-        $.fn.yiiListView.update(target,{});
+		try{
+			jQuery('#' + target).yiiListView({'ajaxUpdate':[target],'ajaxVar':'ajax','pagerClass':'pager','loadingClass':'list-view-loading','sorterClass':'sorter','enableHistory':false});
+			$.fn.yiiListView.update(target,{});
+		}catch(e){
+//			console.log(e);
+//			var url = $(this).attr('href');
+//			var id = $(this).attr('id');
+//			var target = $(this).attr('data-target');
+			
+			$.get(url,function(response) {
+				// Pull modal content into side panel.
+				console.log(target);
+				$('#' + target+' .modal-header').html(jQuery(response).find('.modal-header').html());
+				$('#' + target+' .modal-body').html(jQuery(response).find('.modal-body').html());
+				$('#' + target+' .modal-footer').html(jQuery(response).find('.modal-footer').html());
+
+				// Remove modal close button from item-header
+//				$(target+' > .item-header > .close').remove();
+
+				// Initiate any rich text editors in the modal.
+				initRichTextEditors();
+			}).success(function() {
+				$(id).addClass('active');
+			});
+		}
+
         return false;
     }
 
@@ -132,8 +149,9 @@ $(function()
         e.preventDefault();
         
         var url = $(this).attr('href');
-        var id = $(this).attr('data-id');
-        var target = $(this).attr('data-target');
+        var refreshUrl = $(this).data('href');
+        var id = $(this).data('id');
+        var target = $(this).data('target');
         
         $.ajax({
             type: 'POST',
@@ -144,7 +162,7 @@ $(function()
                 if(data.success)
                 {
                     flashMessage('success',data.success);
-                    updateList(target);
+                    updateList(target,id,refreshUrl);
                 }
                 else
                     flashMessage('danger',data.error);
@@ -225,15 +243,14 @@ $(function()
     $('.save').live('click',function(e) {
         e.preventDefault();
 
-<<<<<<< Updated upstream
         if($('form > .row > .tinymce-editor').length > 0)
             tinyMCE.get($('form > .row > .tinymce-editor').attr('id')).save();
-=======
+
         var target = $(this).data('target');
         if(!target){
 			target='listing';
 		}
->>>>>>> Stashed changes
+		var refreshUrl = $(this).data('href');
 
         $.ajax({
             type: 'POST',
@@ -244,7 +261,7 @@ $(function()
                 if(data.success)
                 {
                     flashMessage('success',data.success);
-                    updateList(target);
+                    updateList(target,data.id,refreshUrl);
                 }
                 else
                     flashMessage('danger',data.error);
@@ -258,3 +275,4 @@ $(function()
     $(".in-page-edit").parent().css({position: 'relative'});
 
 });
+

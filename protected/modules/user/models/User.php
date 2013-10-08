@@ -60,7 +60,7 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('email, username, firstname, lastname', 'required', 'on'=>'register, update, adminUpdate'),
+			array('email, username, firstname, lastname', 'required', 'on'=>'insert, register, update, adminUpdate'),
 			array('fullname', 'safe'),
 			array('password1, password2', 'required', 'on'=>'register, passwordReset, updatePassword'),
 			array('currentPassword', 'required', 'on'=>'emailRevert, updateEmail, updatePassword'),
@@ -69,7 +69,7 @@ class User extends CActiveRecord
 			array('email, old_email, firstname, lastname', 'length', 'max'=>140),
 			array('password', 'length', 'max'=>60),
 			array('password2', 'compare', 'compareAttribute'=>'password1'),
-			array('role', 'length', 'max'=>6),
+			array('role', 'length', 'max'=>10),
 			array('username, activation_code', 'length', 'max'=>40),
 			array('searchTerm, currentPassword, date_updated, date_last_login, date_validation_email_sent, date_email_validated, date_account_expire, date_revert, dateReset, date_deleted', 'safe'),
 			// The following rule is used by search().

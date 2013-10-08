@@ -46,7 +46,11 @@ class ManagementController extends UserController
 		{
 			$model->attributes=$_POST['User'];
 			if($model->save())
-				$this->redirect(array('index'));
+				$response['success'] = "User added";
+			else
+				$response['error'] = "Could not add user";
+			echo json_encode($response);
+			exit;
 		}
 
 		$this->renderPartial('create',array(
