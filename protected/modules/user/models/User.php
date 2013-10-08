@@ -10,9 +10,23 @@
  * @property string $password
  * @property string $role
  * @property string $username
+ * @property string $title
+ * @property string $initial
  * @property string $firstname
  * @property string $lastname
  * @property string $address1
+ * @property string $address2
+ * @property string $area
+ * @property string $city
+ * @property string $county
+ * @property string $postcode
+ * @property string $country
+ * @property string $phone_number
+ * @property string $personnel_type
+ * @property string $personnel_rank
+ * @property string $personnel_service_number
+ * @property string $personnel_unit
+ * @property string $accessibility
  * @property string $date_terms_agreed
  * @property string $date_updated
  * @property string $date_last_login
@@ -22,12 +36,15 @@
  * @property string $date_email_validated
  * @property string $date_account_expire
  * @property string $date_revert
- * @property string $dateReset
+ * @property string $date_reset
  * @property string $date_deleted
+ * @property string $reset_code
+ * @property string $revert_code
  */
 class User extends CActiveRecord
 {
 	public $email_confirm;
+	public $captcha_code;
 	public $password1;
   	public $password2;
   	public $currentPassword;
@@ -103,16 +120,20 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('email, username, firstname, lastname', 'required', 'on'=>'insert, register, update, adminUpdate'),
+			array('personnel_type, personnel_rank, personnel_service_number, personnel_unit,
+					email, email_confirm, lastname, title, initial, phone_number',
+					'required',
+					'on'=>'insert, register, update, adminUpdate'),
 			array('fullname', 'safe'),
 			array('password1, password2', 'required', 'on'=>'register, passwordReset, updatePassword'),
-			array('personnel_type, personnel_rank, personnel_service_number, personnel_unit', 'required', 'on' => 'register'),
 			array('currentPassword', 'required', 'on'=>'emailRevert, updateEmail, updatePassword'),
 			array('currentPassword', 'authenticate', 'on'=>'emailRevert, updateEmail, updatePassword'),
 			array('role', 'required', 'on'=>'adminUpdate'),
 			array('email, old_email, firstname, lastname', 'length', 'max'=>140),
+			array('captcha_code', 'captcha', 'on' => 'register'),
 			array('password', 'length', 'max'=>60),
 			array('password2', 'compare', 'compareAttribute'=>'password1'),
+			array('email_confirm', 'compare', 'compareAttribute' => 'email'),
 			array('role', 'length', 'max'=>10),
 			array('username, activation_code', 'length', 'max'=>40),
 			array('searchTerm, currentPassword, date_updated, date_last_login, date_validation_email_sent, date_email_validated, date_account_expire, date_revert, dateReset, date_deleted', 'safe'),
@@ -166,7 +187,7 @@ class User extends CActiveRecord
 			'country' => 'Country',
 			'phone_number' => 'Telephone number',
 			'accessibility' => 'Please tell us about any accessibility considerations you have when booking a holiday',
-			'date_terms_agreed' => 'Date Terms Agreed',
+			'date_terms_agreed' => 'I agree to the Terms and Conditions',
 			'date_updated' => 'Date Updated',
 			'date_last_login' => 'Date Last Login',
 			'date_created' => 'Date Joined',

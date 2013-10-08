@@ -5,7 +5,8 @@
 
 require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
 
-Yii::app()->clientScript->registerScriptFile($this->module->getAssets() . "/js/register.js");
+Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/register.js');
+//Yii::app()->clientScript->registerScriptFile("/js/register.js");
 
 ?>
 <div class="constrained">
@@ -65,7 +66,9 @@ Yii::app()->clientScript->registerScriptFile($this->module->getAssets() . "/js/r
 				'enableAjaxValidation'=>false,
 			)); ?>			
 			<?php
-			echo $form->errorSummary($model);
+			if ($step_name !== 'confirmation') {
+				echo $form->errorSummary($model);
+			}
 			$labels = $model->attributeLabels();
 		
 			CHtml::$afterRequiredLabel = ' <span>(required)</span>';
@@ -81,7 +84,7 @@ Yii::app()->clientScript->registerScriptFile($this->module->getAssets() . "/js/r
 					<?php echo $form->labelEx($model, $name); ?>
 					<div class="form-column-wrapper">
 					<?php
-					if ($step_name !== 'confirmation') {
+					if ($step_name !== 'confirmation' || $name == 'date_terms_agreed' || $name == 'captcha_code') {
 						if (!isset($properties['type'])) {
 							// Default to text if no type set
 							$properties['type'] = 'text';
@@ -90,9 +93,12 @@ Yii::app()->clientScript->registerScriptFile($this->module->getAssets() . "/js/r
 							case 'dropdown':
 								$list = $name . '_dropdown';
 								$listArray = $model->$list;
-								$none = array('none' => 'Please select...');
+								$none = array('' => 'Please select...');
 								$listArray = $none + $listArray;
-								echo $form->dropDownList($model, $list, $listArray);
+								echo $form->dropDownList($model, $name, $listArray);
+								break;
+							case 'checkbox':
+								echo $form->checkBox($model, $name);
 								break;
 							case 'textarea':
 								echo $form->textArea($model, $name);
@@ -100,34 +106,43 @@ Yii::app()->clientScript->registerScriptFile($this->module->getAssets() . "/js/r
 							case 'password':
 								echo $form->passwordField($model, $name);
 								break;
+							case 'email':
+								echo $form->emailField($model, $name);
+								break;
+							case 'captcha':
+								$form->widget('CCaptcha');
+								echo $form->textField($model, $name);
+								break;
 							default:
 								echo $form->textField($model, $name);
 								break;
 						}
 						echo (isset($properties['tooltip'])) ? $properties['tooltip'] : '';
+						echo $form->error($model, $name);
 					} else {
 						echo "<span></span>";
 					}				
-					echo $form->error($model, $name); ?>
+					?>
 					</div>
 				</div>
 				<?php
 				unset($fields[$name]);
 				$x++;
 			}
-
+			
 			$this->endWidget();
 			?>
 			<div class="form-row button-row">
+				<form method="post">
 				<?php
 				if ($step_count >= 1) {
 					echo "<a class='back' href='#'>Back</a>";
 				}
 				if ($total_steps == ($step_count + 1)) {
 					?>
-					<form method="post">
+					
 					<?php echo CHtml::submitButton('Submit'); ?>
-					</form>
+					
 					<?php
 				} else {
 					?>
@@ -135,6 +150,8 @@ Yii::app()->clientScript->registerScriptFile($this->module->getAssets() . "/js/r
 					<?php
 				}
 				?>
+				<div class="hidden"></div>
+				</form>
 			</div>				
 			<?php
 			echo '</div>';

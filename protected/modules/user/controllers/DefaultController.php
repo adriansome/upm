@@ -2,6 +2,74 @@
 
 class DefaultController extends UserController
 {
+	// Define form fields required for different registration user types
+	private $_formFields = array(
+		'landlord' => array(
+			'steps' => array(
+				'details' => array(
+					'title' => 'Your Details',
+					'desc' => 'Please Enter Your Service Details Below',
+					'fields' => -1
+				)
+			),
+			'fields' => array(
+				'firstname' => array(),
+				'lastname' => array(),
+				'email' => array('type' => 'email'),
+				'address1' => array(),
+				'address2' => array(),
+				'area' => array(),
+				'city' => array(),
+				'county' => array(),
+				'postcode' => array(),
+				'country' => array(),
+				'phone_number' => array(),
+				'date_terms_agreed' => array('type' => 'checkbox'),
+				'captcha_code' => array('type' => 'captcha')
+			)
+		),
+		'user' => array(
+			'steps' => array(
+				'service' => array(
+					'title' => 'Service Details',
+					'desc'	=> 'Please Enter Your Service Details Below',
+					'fields' => 4
+				),
+				'details' => array(
+					'title' => 'Your Details',
+					'desc'	=> 'Please Enter Your Details Below',
+					'fields' => 9
+				),
+				'confirmation' => array(
+					'title' => 'Confirmation',
+					'desc'	=> 'Please confirm your details and agree to the terms and conditions'
+				)
+			),
+			'fields' => array(
+				'personnel_type' => array('type' => 'dropdown'),
+				'personnel_rank' => array('type' => 'dropdown'),
+				'personnel_service_number' => array(),
+				'personnel_unit' => array(
+					'tooltip' => "<p>Please enter the name of the last unit or ship you were on or were based in</p>"
+				),
+				'title' => array(),
+				'initial' => array(),
+				'lastname' => array(),
+				'phone_number' => array(),
+				'email' => array('type' => 'email'),
+				'email_confirm' => array(
+					'type' => 'email',
+					'tooltip' => '<p>Your Email address will become your username.</p><p>It is important you have frequent access to this email address as it will be the main means for us to communicate with you.</p>'
+				),
+				'password1' => array('type' => 'password'),
+				'password2' => array('type' => 'password'),
+				'accessibility' => array('type' => 'textarea'),
+				'date_terms_agreed' => array('type' => 'checkbox'),
+				'captcha_code' => array('type' => 'captcha')
+			)
+		)
+	);	
+	
 	/**
 	 * @return array action filters
 	 */
@@ -13,6 +81,17 @@ class DefaultController extends UserController
 		);
 	}
 
+    public function actions()
+    {
+        return array(
+            'captcha' => array(
+                'class' => 'CCaptchaAction',
+                'backColor' => 0xFFFFFF,
+            ),
+        );
+    }
+	
+	
 	/**
 	 * Specifies the access control rules.
 	 * This method is used by the 'accessControl' filter.
@@ -35,7 +114,8 @@ class DefaultController extends UserController
 					'registrationSuccess',
 					'revertDelete',
 					'revertPassword',
-					'revertEmail'
+					'revertEmail',
+					'captcha'
 				),
 				'users'=>array('*'),
 			),
@@ -66,56 +146,14 @@ class DefaultController extends UserController
 	
 		// Get the type of registration form to output
 		$regType = Yii::app()->request->getQuery('type', 'user');
-
-		// Define form fields required for different registration user types
-		$formFields = array(
-			'time_donor' => array(
-				
-			),
-			'user' => array(
-				'steps' => array(
-					'service' => array(
-						'title' => 'Service Details',
-						'desc'	=> 'Please Enter Your Service Details Below',
-						'fields' => 4
-					),
-					'details' => array(
-						'title' => 'Your Details',
-						'desc'	=> 'Please Enter Your Details Below',
-						'fields' => 9
-					),
-					'confirmation' => array(
-						'title' => 'Confirmation',
-						'desc'	=> 'Please confirm your details and agree to the terms and conditions'
-					)
-				),
-				'fields' => array(
-					'personnel_type' => array('type' => 'dropdown'),
-					'personnel_rank' => array('type' => 'dropdown'),
-					'personnel_service_number' => array(),
-					'personnel_unit' => array(
-						'tooltip' => "<p>Please enter the name of the last unit or ship you were on or were based in</p>"
-					),
-					'title' => array(),
-					'initial' => array(),
-					'lastname' => array(),
-					'phone_number' => array(),
-					'email' => array(),
-					'email_confirm' => array(
-						'tooltip' => '<p>Your Email address will become your username.</p>'
-						. '<p>It is important you have frequent access to this email address as '
-						. 'it will be the main means for us to communicate with you.</p>'
-					),
-					'password1' => array('type' => 'password'),
-					'password2' => array('type' => 'password'),
-					'accessibility' => array('type' => 'textarea')
-				)
-			)
-		);
 		
-		// Default to the user registration form if no (or invalid) type specified
-		$outputFields = isset($formFields[$regType]) ? $formFields[$regType] : $formFields['user'];
-
+		// Default to user type registration if not a defined reg type
+		if (!isset($this->_formFields[$regType])) {
+			$regType = 'user';
+		}
+		
+		$outputFields = $this->_formFields[$regType];
+		
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -135,8 +173,9 @@ class DefaultController extends UserController
 
 			if(isset($record->date_email_validated))
 				$this->redirect(array('login', 'username'=>$record->username));
-			else
-				$model=$this->saveModel($model, $_POST['User'], 'registrationSuccess');
+			else {
+				$model=$this->saveModel($model, $_POST['User'], 'registrationSuccess', $regType);
+			}
 		}
 
 		$this->render('register',array(
@@ -457,20 +496,29 @@ class DefaultController extends UserController
 		return $model;
 	}
 
-	protected function saveModel($model, $attributes, $action)
-	{	
+	protected function saveModel($model, $attributes, $action, $regType='user')
+	{
+
 		if(!empty($model->email) && $attributes['email'] !== $model->email)
 		{
 			$model->old_email = $model->email;
 			$model->emailChanged = true;
 		}
+
+		// Save fields dependent on registration type
+		if (isset($this->_formFields[$regType])) {
+			$fields = $this->_formFields[$regType]['fields'];
+			foreach ($fields as $field_name => $properties) {
+				$model->$field_name = $attributes[$field_name];
+			}
+		}
+
 		
-		$model->email = $attributes['email'];
-		$model->firstname = $attributes['firstname'];
+		/*$model->email = $attributes['email'];
+		$model->personnel_rank = $attributes['personnel_rank'];
 		$model->lastname = $attributes['lastname'];
-		$model->username = $attributes['username'];
 		$model->password1 = $attributes['password1'];
-		$model->password2 = $attributes['password2'];	
+		$model->password2 = $attributes['password2'];*/
 
 		if($model->save())
 		{
