@@ -472,51 +472,51 @@
   .row:after {
     clear: both;
   }
-  [class*="span"] {
+  .modal-scrollable [class*="span"] {
     float: left;
     min-height: 1px;
     margin-left: 20px;
   }
-  .container,
-  .navbar-static-top .container,
-  .navbar-fixed-top .container,
-  .navbar-fixed-bottom .container {
+  .modal-scrollable .container,
+  .modal-scrollable .navbar-static-top .container,
+  .modal-scrollable .navbar-fixed-top .container,
+  .modal-scrollable .navbar-fixed-bottom .container {
     width: 724px;
   }
-  .span12 {
+  .modal-scrollable .span12 {
     width: 724px;
   }
-  .span11 {
+  .modal-scrollable .span11 {
     width: 662px;
   }
-  .span10 {
+  .modal-scrollable .span10 {
     width: 600px;
   }
-  .span9 {
+  .modal-scrollable .span9 {
     width: 538px;
   }
-  .span8 {
+  .modal-scrollable .span8 {
     width: 476px;
   }
-  .span7 {
+  .modal-scrollable .span7 {
     width: 414px;
   }
-  .span6 {
+ .modal-scrollable  .span6 {
     width: 352px;
   }
-  .span5 {
+ .modal-scrollable  .span5 {
     width: 290px;
   }
-  .span4 {
+ .modal-scrollable  .span4 {
     width: 228px;
   }
-  .span3 {
+ .modal-scrollable  .span3 {
     width: 166px;
   }
-  .span2 {
+  .modal-scrollable .span2 {
     width: 104px;
   }
-  .span1 {
+ .modal-scrollable  .span1 {
     width: 42px;
   }
   .offset12 {
@@ -800,10 +800,12 @@
 }
 
 @media (max-width: 767px) {
+/*  
   body {
     padding-right: 20px;
     padding-left: 20px;
   }
+*/
   .navbar-fixed-top,
   .navbar-fixed-bottom,
   .navbar-static-top {
@@ -836,7 +838,7 @@
     float: none;
     margin-left: 0;
   }
-  [class*="span"],
+  .modal-scrollable [class*="span"],
   .uneditable-input[class*="span"],
   .row-fluid [class*="span"] {
     display: block;
@@ -847,14 +849,14 @@
        -moz-box-sizing: border-box;
             box-sizing: border-box;
   }
-  .span12,
-  .row-fluid .span12 {
+  .modal-scrollable .span12,
+ .modal-scrollable .row-fluid .span12 {
     width: 100%;
     -webkit-box-sizing: border-box;
        -moz-box-sizing: border-box;
             box-sizing: border-box;
   }
-  .row-fluid [class*="offset"]:first-child {
+  .modal-scrollable .row-fluid [class*="offset"]:first-child {
     margin-left: 0;
   }
   .input-large,

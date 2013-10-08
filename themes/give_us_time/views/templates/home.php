@@ -9,14 +9,14 @@
 	<!-- Begin #home-upper -->
 	<section id="home-upper" class="constrained">
 		<div class="nugget" id="nugget-register">
-			<h2>Register</h2>
-			<p>You need to be registered and verified to use this site. Click below to begin. </p>
+			<h2>Service Personnel Registration</h2>
+			<p>You need to be registered and verified<br/> to use this site. Click below to begin. </p>
 			<a href="#" class="more">Register to use site</a>
 		</div>
 
 		<div class="nugget" id="nugget-search">
 			<h2>Holiday Search</h2>
-			<p>Once registered and verified, search here for a holiday.</p>
+			<p>Once registered and verified,<br/> search here for a holiday.</p>
 			<div class="form-row">
 				<select>
 					<option>Choose When</option>
@@ -34,7 +34,7 @@
 
 		<div class="nugget" id="nugget-donate">
 			<h2>Donate Time</h2>
-			<p>If you would like to donate a week of holiday time, click below.</p>
+			<p>If you would like to donate a week<br/> of holiday time, click below.</p>
 			<a href="#" class="more">Donate holiday time</a>			
 		</div>
 	</section>
@@ -44,12 +44,10 @@
 
 <!-- Begin #home-nuggets -->
 <section id="home-nuggets" class="constrained">
-	<div>
 	<?php $this->widget('Nugget',array(
 		'name'=>'nugget-2col',
 		'scope'=>'page',
 	)); ?>
-	</div>
 
 	<div class="nugget">
 		<h2>View Our Holiday Stories</h2>
@@ -66,12 +64,10 @@
 		<a href="#" class="button-link">Read holiday stories</a>
 	</div>
 
-	<div>
 	<?php $this->widget('Nugget',array(
 		'name'=>'nugget-support',
 		'scope'=>'page',
-	)); ?>
-	</div>		
+	)); ?>		
 </section>
 <!-- End #home-nuggets -->
 
@@ -84,37 +80,30 @@
 		)); ?>
 	</div>
 
-	<div class="text column span7">
+	<div class="text column span12">
 		<h1>
 			<?php $this->widget('SingleLineText', array(
 				'name'=>'message-from-liam-heading',
 				'scope'=>'page',
 			)); ?>
 		</h1>
-
-		<div>
-		<?php $this->widget('RichText', array(
-			'name'=>'message-from-liam-text',
-			'scope'=>'page',
-		)); ?>
-		</div>
-
-		<div>
-		<?php $this->widget('HyperLink', array(
-			'name'=>'message-from-liam-more-link',
-			'scope'=>'page',
-		)); ?>
-		</div>
-	</div>
-
-	<div class="video column span5">
 		<a href="http://www.youtube.com/embed/4CVO2lRoL-Y?rel=0" class="video-trigger">
 			<?php $this->widget('Image', array(
 				'name'=>'video-thumbnail',
 				'scope'=>'page',
 			)); ?>
 		</a>
+		<?php $this->widget('RichText', array(
+			'name'=>'message-from-liam-text',
+			'scope'=>'page',
+		)); ?>
+
+		<?php $this->widget('HyperLink', array(
+			'name'=>'message-from-liam-more-link',
+			'scope'=>'page',
+		)); ?>
 	</div>
+
 </section>
 <!-- End #message-from-liam -->
 

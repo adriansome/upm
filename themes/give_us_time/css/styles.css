@@ -61,8 +61,7 @@ body {
 }
 
 a {
-	color: #333;	
-	color: inherit;
+
 }
 
 img {
@@ -81,12 +80,6 @@ h2 {
 	color: #295e2d;
 	font-size: 18px;
 	font-size: 1.8rem;
-}
-
-h3 {
-	font-size: 14px;
-	font-size: 1.4rem;
-	font-weight: bold;
 }
 
 p {
@@ -119,10 +112,6 @@ select {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
 	font-size: 1.4rem;
-}
-
-input[type=file] {
-	margin-bottom: 10px;
 }
 
 textarea {
@@ -275,71 +264,55 @@ nav:after,
 
 .column {
 	float: left;
-	margin: 0 7px;
-	/*margin: 0 0.6076388%;*/
-}
-
-.column:first-child {
-	margin-left: 0px;
-}
-
-.column:last-child {
-	margin-right: 0px;
+	margin: 0 7px;	
 }
 
 .one-half {
+	width: 50%;
 	width: 562px;
-	/*width: 50%; */	
 }
 
 .one-quarter {
+	width: 25%;
 	width: 274px;
 	/*width: 25%; */	
 }
 
 .span2 {
-	width: 130px;
-	/*width: 11.284722%;*/
+	width: 130px !important;
 }
 
 .span3 {
-	width: 202px;
-	/*width: 17.534722%;*/
+	width: 202px !important;
 }
 
 .span4 {
-	width: 274px;
-	/*width: 23.784722%;*/
+	width: 274px !important;
 }
 
 .span5 {
-	width: 346px;
-	/*width: 30.034722%;*/
+	width: 346px !important;
 }
 
 .span6 {
-	width: 418px;
-	/*width: 36.284722%;*/
+	width: 418px !important;	
 }
 
 .span7 {
-	width: 490px;
-	/*width: 42.534722%;*/
+	width: 490px !important;	
 }
 
+
 .span8 {
-	width: 562px;
-	/*width: 48.784722%;*/
+	width: 562px !important;
 }
 
 .span12 {
-	width: 850px;
-	/*width: 73.784722%;*/
+	width: 850px !important;
 }
 
 .span13 {
-	width: 922px;
-	/*width: 80.034722%;*/
+	width: 922px !important;	
 }
 
 /* ----- Page header ----- */
@@ -725,26 +698,9 @@ nav:after,
 
 }
 
-#main-content ul,
-#main-content ol {
-	margin-left: 20px;
-	margin-bottom: 18px;
-	margin-bottom: 1.8rem;
-	font-size: 12px;
-	font-size: 1.2rem;
-	line-height: 1.5;	
-}
-
-#main-content ul {
-	list-style-type: disc;
-}
-
-#main-content ol {
-	list-style-type: decimal;
-}
-
 .inner-content {
 	margin-bottom: 40px;
+	padding: 14px;
 }
 
 /* ----- SEARCH RESULTS ------------------------------------------ */
@@ -1019,13 +975,8 @@ label {
 }
 
 .form-steps a {
-	cursor: default;
 	color: #fff;
 	text-decoration: none;
-}
-
-.form-steps li.complete a {
-	cursor: pointer;
 }
 
 .form-steps li.active {
@@ -1095,14 +1046,6 @@ label {
 .standard-form .form-column-wrapper select {
 	float: none;
 	width: 100%;
-}
-
-.form-wrapper .step {
-	display: none;
-}
-
-.form-wrapper .step.active {
-	display: block;
 }
 
 /* ----- LANDLORD PAGES ------------------------------------------ */
@@ -1184,18 +1127,6 @@ label {
 	background: #993333 url(../images/icon-cancel.png) 90% 50% no-repeat;
 }
 
-/* ----- CONTACT ------------------------------------------------- */
-
-#contact-form {
-	width: 60%;
-	padding-top: 0px;
-	border: none;
-}
-
-.validation.error {
-	color: #b22;
-}
-
 /* ----- NEWS ITEMS ---------------------------------------------- */
 #news {
 	overflow: hidden;
@@ -1252,25 +1183,10 @@ label {
 	text-align: left;
 }
 
-/* ----- Remove the following styles for improved consistency: ----*/
-/*
+/* Tweak styles to match PSDs: */
+
 body {
 	background: #f4f4f4;
-}
-
-#sidebar {
-	padding-top: 4rem;
-}
-
-#main-content > h1 {
-	height: 4rem;
-	margin-left: 14px;	
-	margin-bottom: 0;
-	font-weight: bold;
-}
-
-.inner-content {
-	padding: 14px;	
 }
 
 #main-navigation {
@@ -1351,6 +1267,17 @@ body {
 #sidebar .nugget,
 .inner-content {
 	background-color: #fff;
+}
+
+#sidebar {
+	padding-top: 4rem;
+}
+
+#main-content > h1 {
+	height: 4rem;
+	margin-left: 14px;	
+	margin-bottom: 0;
+	font-weight: bold;
 }
 
 .resort-listing h2 + p {
@@ -1447,7 +1374,7 @@ h2 {
 #footer-navigation ul ul {
 	display: none;
 }
-*/
+
 /* ----- Temporary Styles during CMS integration ----- */
 
 #message-from-liam-more-link,
@@ -1503,7 +1430,7 @@ h2 {
   height: 100%;
   z-index: 503;
   position: fixed;
-  outline: none;
+  outline: none !important;
   -webkit-backface-visibility: hidden; }
 
 .mfp-container {
@@ -1571,7 +1498,7 @@ h2 {
   display: none; }
 
 .mfp-hide {
-  display: none; }
+  display: none !important; }
 
 .mfp-preloader {
   color: #cccccc;
