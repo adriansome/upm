@@ -6,7 +6,7 @@
 .modal#filemanager
 {
 	width: 765px;
-	width: 786px; /* remove horizontal scrollbar */
+	width: 786px; /* remove horizontal scrollbar */	
 	left: 40%;
 }
 
@@ -25,44 +25,86 @@
 .modal .list-view,
 .modal .item-view
 {
-	float:left;
-	width: 48%;
+	width: 49%;
 }
 
+.modal .list-view {
+	float: left;
+	clear: left;
+	padding-top: 0px;
+}
+
+.modal .item-view {
+	float: right;
+}
+
+/*
 .modal .item-view
 {
 	margin-left:10px;
 }
+*/  
+.modal .row {
+	margin-bottom: 3px;
+}
+
+.item-buttons {
+	text-align: right;
+}
+
+/* ----- Admin Menu ----- */
 
 #adminzone-menu
 {
 	position:absolute;
 	width: 240px;
-	background: #000;
+	background: rgba(0, 0, 0, 0.85);
 	top: 0;
 	left: 0;
-	-moz-opacity: 0.80;
-	opacity: 0.80;
 	font-size: 14px;
 	z-index:999999;
+}
+
+#admin-menu-toggle {
+	text-decoration: none;
 }
 
 #adminzone-menu h3
 {
 	margin: 0;
-	padding: 5px 10px;
+	padding: 12px 8px;
+	background: #252525;
+	background: -moz-linear-gradient(top,  #252525 1%, #171717 50%, #080808 51%, #050606 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#252525), color-stop(50%,#171717), color-stop(51%,#080808), color-stop(100%,#050606));
+	background: -webkit-linear-gradient(top,  #252525 1%,#171717 50%,#080808 51%,#050606 100%);
+	background: -o-linear-gradient(top,  #252525 1%,#171717 50%,#080808 51%,#050606 100%);
+	background: -ms-linear-gradient(top,  #252525 1%,#171717 50%,#080808 51%,#050606 100%);
+	background: linear-gradient(to bottom,  #252525 1%,#171717 50%,#080808 51%,#050606 100%);
+	border-bottom: 1px solid #1e1f1f;	
+	color: #fff;
+	font-size: 16px;
 	font-weight: normal;
-	font-size: 1.2em;
 }
 
-#adminzone-menu a
+#admin-menu {
+	float: none;
+}
+
+#admin-menu a
 {
+	padding: 8px;
 	color: #fff;
 	text-decoration: none;
+
+	-moz-transition: background 0.1s ease;
+	-o-transition: background 0.1s ease;
+	-webkit-transition: background 0.1s ease;
+	transition: background 0.1s ease;	
 }
 
-#adminzone-menu a:hover
+#admin-menu a:hover
 {
+	background: rgba(255, 255, 255, 0.25);
 	color: #fff;
 	text-decoration: none;
 }
@@ -99,7 +141,17 @@
 	border: none;
 	border-radius: 0;
 	background: none;
+/*	margin-left:5px;*/
 }
+
+#adminzone-menu .divider {
+	margin: 9px 1px;
+	overflow: hidden;
+	background-color: black;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* ----- Form Elements ----- */
 
 .view label
 {
@@ -124,3 +176,367 @@
 	padding:0;
 	text-indent: -9999px;
 }
+
+
+.modal .row label {
+	float: left;
+	width: 35%;
+}
+
+.modal .row input[type=text],
+.modal .row input[type=password],
+.modal .row input[type=email],
+.modal .row select,
+.modal .row textarea {
+	float: left;
+	width: 65%;
+}
+
+.modal .upload-row input[type=text] {
+	width: 48%;
+
+}
+
+.modal .upload-row .btn {
+	position: relative;
+	top: -2px;
+	margin-left: 5px;
+}
+
+
+/* Clearfix */
+.menu-item-list .item-wrapper:before,
+.list-view .view:before,
+.menu-item-list .item-wrapper:after,
+.list-view .view:after {
+	display: table;
+	clear: both;
+	content: "";
+}
+
+/* ----- Black styles for Bootstrap ----- */
+
+.modal {
+	background-color: #000;
+	border-radius: 0;
+	border: 6px solid rgba(255, 255, 255, 0.3);
+	/*box-shadow: none; */
+	color: #fff;
+	font-size: 12px;
+}
+
+.modal-scrollable select, .modal-scrollable textarea, .modal-scrollable input[type="text"], .modal-scrollable input[type="password"], .modal-scrollable input[type="datetime"], .modal-scrollable input[type="datetime-local"], .modal-scrollable input[type="date"], .modal-scrollable input[type="month"], .modal-scrollable input[type="time"], .modal-scrollable input[type="week"], .modal-scrollable input[type="number"], .modal-scrollable input[type="email"], .modal-scrollable input[type="url"], .modal-scrollable input[type="search"], .modal-scrollable input[type="tel"], .modal-scrollable input[type="color"], .uneditable-input {
+	padding: 2px;
+	height: auto;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;	
+	border-radius: 1px;
+	font-size: 12px;
+	line-height: 1;
+}
+
+.modal-scrollable ul, .modal-scrollable ol {
+	margin-left: 0px;
+}
+
+.modal-header {
+	padding-top: 1px;
+	padding-bottom: 1px;
+	background: #373737;
+	background: -moz-linear-gradient(top,  #373737 0%, #292929 49%, #0e0e0e 51%, #010101 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#373737), color-stop(49%,#292929), color-stop(51%,#0e0e0e), color-stop(100%,#010101));
+	background: -webkit-linear-gradient(top,  #373737 0%,#292929 49%,#0e0e0e 51%,#010101 100%);
+	background: -o-linear-gradient(top,  #373737 0%,#292929 49%,#0e0e0e 51%,#010101 100%);
+	background: -ms-linear-gradient(top,  #373737 0%,#292929 49%,#0e0e0e 51%,#010101 100%);
+	background: linear-gradient(to bottom,  #373737 0%,#292929 49%,#0e0e0e 51%,#010101 100%);
+
+	border-color: #212121;
+}
+
+.modal-header h4 {
+	font-size: 16px;
+}
+
+.modal-footer {
+	background-color: transparent;
+	border: 1px solid #212121 !important;
+	box-shadow: none;
+}
+/*
+.modal-scrollable .row {
+	margin-bottom: 5px;
+}
+*/
+.modal-scrollable h4 {
+	font-weight: normal;
+	font-size: 16px;
+}
+
+.modal label {
+	margin-bottom: 2px;
+	color: #fff;
+	font-size: 12px;
+}
+
+.modal-scrollable a,
+.modal-scrollable .btn-link,
+.modal-scrollable .btn-link:hover {
+	color: #fff;
+	text-shadow: none;
+}
+
+/* ----- Listings ----- */
+.menu-item-list .item-wrapper,
+.list-view .view {
+	margin-bottom: 3px;
+	padding: 5px;
+	background: #444343;
+	background: -moz-linear-gradient(top,  #444343 0%, #262628 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#444343), color-stop(100%,#262628));
+	background: -webkit-linear-gradient(top,  #444343 0%,#262628 100%);
+	background: -o-linear-gradient(top,  #444343 0%,#262628 100%);
+	background: -ms-linear-gradient(top,  #444343 0%,#262628 100%);
+	background: linear-gradient(to bottom,  #444343 0%,#262628 100%);
+
+	border: 1px solid #2e2e2f;
+	border-top-color: #646464;
+	border-bottom-color: #0a0a0a;
+	border-radius: 3px;
+}
+
+.menu-item-list .item-wrapper:hover,
+.list-view .view:hover {
+	background: #656669;
+	background: -moz-linear-gradient(top,  #656669 0%, #414146 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#656669), color-stop(100%,#414146));
+	background: -webkit-linear-gradient(top,  #656669 0%,#414146 100%);
+	background: -o-linear-gradient(top,  #656669 0%,#414146 100%);
+	background: -ms-linear-gradient(top,  #656669 0%,#414146 100%);
+	background: linear-gradient(to bottom,  #656669 0%,#414146 100%);
+
+	border-color: #303133;
+	border-top-color: #8b8d8f;
+	border-bottom-color: #171718;
+}
+
+.menu-item-list .item-wrapper b,
+.list-view .view b {
+	float: left;
+}
+
+.view .buttons {
+	margin-top: -1px;
+}
+
+.list-view .view .btn {
+	padding-top: 0px;
+	padding-bottom: 0px;
+	font-size: 12px;
+}
+/*
+.modal .btn {
+	color: #fff;
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+	background-color: #f5f5f5;
+	*background-color: #e6e6e6;
+	background-image: -moz-linear-gradient(top, #2d2d2d, #1a1a1a);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2d2d2d), to(#1a1a1a));
+	background-image: -webkit-linear-gradient(top, #2d2d2d, #1a1a1a);
+	background-image: -o-linear-gradient(top, #2d2d2d, #1a1a1a);
+	background-image: linear-gradient(to bottom, #2d2d2d, #1a1a1a);
+	background-repeat: repeat-x;
+	border: 1px solid #cccccc;
+	*border: 0;
+	border-color: #222222 #222222 #222222;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	border-bottom-color: #222222;
+}
+*/
+
+.modal .btn.add {
+	color: #fff;
+
+	background: #444343;
+	background: -moz-linear-gradient(top,  #444343 0%, #262628 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#444343), color-stop(100%,#262628));
+	background: -webkit-linear-gradient(top,  #444343 0%,#262628 100%);
+	background: -o-linear-gradient(top,  #444343 0%,#262628 100%);
+	background: -ms-linear-gradient(top,  #444343 0%,#262628 100%);
+	background: linear-gradient(to bottom,  #444343 0%,#262628 100%);
+
+	border: 1px solid #313131;
+	border-top-color: #646464;
+	border-bottom-color: #0a0a0a;
+
+	box-shadow: none;
+	text-shadow: none;
+}
+
+/* ----- Icons ----- */
+
+.modal-scrollable .close {
+	display: block;
+	width: 21px;
+	height: 21px;
+	margin-top: 9px;
+	line-height: 21px;
+	background: #000;
+	border-radius: 10px;
+	box-shadow: inset 0px -1px 2px rgba(255, 255, 255, 0.3);
+/*	border: 1px solid #222;*/
+	color: #eee;
+	cursor: pointer;
+	font-size: 16px;
+	font-weight: normal;
+	text-align: center;
+}
+
+.modal-scrollable .close:hover {
+	color: #ccc;
+	text-decoration: none !important;
+}
+
+.modal .btn.add {
+	position: relative;;
+}
+
+.modal .btn.add:before {
+	position: relative;
+	left: -6px;
+}
+
+.modal-body .btn.add:first-child {
+	float: left;
+	margin-bottom: 5px;
+}
+
+
+[class^="icon-"], [class*=" icon-"],
+.modal .btn.add:before { /* maybe make this selector more generic: create .icon-btn class? */
+	position: relative;
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	line-height: 15px;
+	background: #eee;
+	border-radius: 8px;
+	box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);	
+	font-size: 14px;
+	text-align: center;
+	text-shadow: none;
+	vertical-align: text-top;
+	-moz-transition: all 0.05s ease;
+	-o-transition: all 0.05s ease;
+	-webkit-transition: all 0.05s ease;
+	transition: all 0.05s ease;
+}
+
+[class^="icon-"]:hover, [class*=" icon-"]:hover {
+	color: #fff;
+	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.6);	
+}
+
+[class^="icon-"]:hover:after, [class*=" icon-"]:hover:after {
+	background: rgba(255, 255, 255, 0.12);
+}
+
+[class^="icon-"]:active, [class*=" icon-"]:active {
+	top: 1px;
+	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.4), inset 0 -1px 0px rgba(255, 255, 255, 0.3), inset 0 1px 0px rgba(0, 0, 0, 0.5);	
+	color: #ddd;
+}
+
+[class^="icon-"]:after,
+[class*=" icon-"]:after {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+	background: rgba(255, 255, 255, 0.0);
+	border-radius: 8px;
+	content: #fff;	
+	content: "e";
+	-moz-transition: all 0.05s ease;
+	-o-transition: all 0.05s ease;
+	-webkit-transition: all 0.05s ease;
+	transition: all 0.05s ease;	
+}
+
+[class^="icon-"]:active:after,
+[class*=" icon-"]:active:after {
+	background-color: rgba(0, 0, 0, 0.12);
+}
+
+.icon-plus,
+.modal .btn.add:before {
+	background-color: #87b02e;
+	line-height: 17px;
+}
+.icon-plus:after,
+.modal .btn.add:before {
+	color: #000;
+	content: "+";
+}
+
+.icon-edit {
+	background-color: #248a06;
+}
+.icon-edit:after {
+	content: "e";
+}
+
+.icon-off {
+	background-color: #ac0707;
+	line-height: 17px;	
+}
+.icon-off:after {
+	content: "×";
+}
+
+/* ----- File manager ----- */
+
+.navbar-inner {
+	background: black; /* change to gradient? */
+}
+
+/* ----- User Management ----- */
+
+#user-search-form {
+	margin-bottom: 0px;
+}
+
+#user-search-form .row {
+	display: inline-block;
+}
+
+#user-search-form .row:first-child {
+	margin-right: 10px;
+}
+
+#user-search-form label,
+#user-search-form input,
+#user-search-form select {
+	float: none;
+	width: 220px;
+}
+
+.row span label,
+.row span input {
+
+	float: none !important;
+	width: auto !important;
+	display: inline-block !important;
+	vertical-align: top !important;
+}
+
+.row span label {
+	margin-left: 2px;
+	margin-right: 12px;
+}
+/*
+#user-form .inline-options label:first-child {
+	display: block;
+}
+*/

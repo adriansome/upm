@@ -61,7 +61,8 @@ body {
 }
 
 a {
-
+	color: #333;	
+	color: inherit;
 }
 
 img {
@@ -80,6 +81,12 @@ h2 {
 	color: #295e2d;
 	font-size: 18px;
 	font-size: 1.8rem;
+}
+
+h3 {
+	font-size: 14px;
+	font-size: 1.4rem;
+	font-weight: bold;
 }
 
 p {
@@ -112,6 +119,10 @@ select {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 14px;
 	font-size: 1.4rem;
+}
+
+input[type=file] {
+	margin-bottom: 10px;
 }
 
 textarea {
@@ -264,55 +275,71 @@ nav:after,
 
 .column {
 	float: left;
-	margin: 0 7px;	
+	margin: 0 7px;
+	/*margin: 0 0.6076388%;*/
+}
+
+.column:first-child {
+	margin-left: 0px;
+}
+
+.column:last-child {
+	margin-right: 0px;
 }
 
 .one-half {
-	width: 50%;
 	width: 562px;
+	/*width: 50%; */	
 }
 
 .one-quarter {
-	width: 25%;
 	width: 274px;
 	/*width: 25%; */	
 }
 
 .span2 {
-	width: 130px !important;
+	width: 130px;
+	/*width: 11.284722%;*/
 }
 
 .span3 {
-	width: 202px !important;
+	width: 202px;
+	/*width: 17.534722%;*/
 }
 
 .span4 {
-	width: 274px !important;
+	width: 274px;
+	/*width: 23.784722%;*/
 }
 
 .span5 {
-	width: 346px !important;
+	width: 346px;
+	/*width: 30.034722%;*/
 }
 
 .span6 {
-	width: 418px !important;	
+	width: 418px;
+	/*width: 36.284722%;*/
 }
 
 .span7 {
-	width: 490px !important;	
+	width: 490px;
+	/*width: 42.534722%;*/
 }
 
-
 .span8 {
-	width: 562px !important;
+	width: 562px;
+	/*width: 48.784722%;*/
 }
 
 .span12 {
-	width: 850px !important;
+	width: 850px;
+	/*width: 73.784722%;*/
 }
 
 .span13 {
-	width: 922px !important;	
+	width: 922px;
+	/*width: 80.034722%;*/
 }
 
 /* ----- Page header ----- */
@@ -698,9 +725,26 @@ nav:after,
 
 }
 
+#main-content ul,
+#main-content ol {
+	margin-left: 20px;
+	margin-bottom: 18px;
+	margin-bottom: 1.8rem;
+	font-size: 12px;
+	font-size: 1.2rem;
+	line-height: 1.5;	
+}
+
+#main-content ul {
+	list-style-type: disc;
+}
+
+#main-content ol {
+	list-style-type: decimal;
+}
+
 .inner-content {
 	margin-bottom: 40px;
-	padding: 14px;
 }
 
 /* ----- SEARCH RESULTS ------------------------------------------ */
@@ -1134,16 +1178,31 @@ label {
 	background: #993333 url(../images/icon-cancel.png) 90% 50% no-repeat;
 }
 
+/* ----- CONTACT ------------------------------------------------- */
+
+#contact-form {
+	width: 60%;
+	padding-top: 0px;
+	border: none;
+}
+
+.validation.error {
+	color: #b22;
+}
+
 /* ----- NEWS ITEMS ---------------------------------------------- */
+
 #news {
 	overflow: hidden;
 	margin: 0 auto;
 }
+
 #news .summary:first-child {
 	font-size: 1.8em;
 	font-weight: bold;
 	float: left;
 }
+
 .news-item {
 	margin-top: 1em;
 	margin-bottom: 2em;
@@ -1152,6 +1211,7 @@ label {
 	overflow: hidden;
 	width: 100%;
 }
+
 .news-item .headline {
 	font-size: 1.6em;
 	display: block;
@@ -1159,20 +1219,25 @@ label {
 	font-weight: bold;
 	border-bottom: 1px solid #333;
 }
+
 .news-item .image {
 	width: 20%;
 	float: left;
 }
+
 .news-item .image img {
 	max-width: 100%;
 }
+
 .news-item .text  {
 	width: 80%;
 	float: left;
 }
+
 .news-item .text.fullwidth {
 	width: 100%;
 }
+
 .news-item .headline .read-more {
 	float: right;
 	text-transform: uppercase;
@@ -1180,6 +1245,7 @@ label {
 	padding: 0.2em;
 	background: #DDD;
 }
+
 .news-item .text .inner {
 	padding-left: 2em;
 }
@@ -1194,6 +1260,21 @@ label {
 
 body {
 	background: #f4f4f4;
+}
+
+#sidebar {
+	padding-top: 4rem;
+}
+
+#main-content > h1 {
+	height: 4rem;
+	margin-left: 14px;	
+	margin-bottom: 0;
+	font-weight: bold;
+}
+
+.inner-content {
+	padding: 14px;	
 }
 
 #main-navigation {
@@ -1274,17 +1355,6 @@ body {
 #sidebar .nugget,
 .inner-content {
 	background-color: #fff;
-}
-
-#sidebar {
-	padding-top: 4rem;
-}
-
-#main-content > h1 {
-	height: 4rem;
-	margin-left: 14px;	
-	margin-bottom: 0;
-	font-weight: bold;
 }
 
 .resort-listing h2 + p {
