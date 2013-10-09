@@ -8,7 +8,7 @@ class DefaultController extends UserController
 			'steps' => array(
 				'details' => array(
 					'title' => 'Your Details',
-					'desc' => 'Please Enter Your Service Details Below',
+					'desc' => 'Thank you for signing up to Give Us Time as a time donor. Please enter your details below.',
 					'fields' => -1
 				)
 			),
@@ -187,7 +187,8 @@ class DefaultController extends UserController
 	}
 
 	public function actionRegistrationSuccess()
-	{ 
+	{
+
 		$model=$this->loadModel(Yii::app()->session['referer']['id']);
 
 		if(isset($_GET['resend']) && $_GET['resend'] == 1)
@@ -512,18 +513,15 @@ class DefaultController extends UserController
 				$model->$field_name = $attributes[$field_name];
 			}
 		}
-
 		
-		/*$model->email = $attributes['email'];
-		$model->personnel_rank = $attributes['personnel_rank'];
-		$model->lastname = $attributes['lastname'];
-		$model->password1 = $attributes['password1'];
-		$model->password2 = $attributes['password2'];*/
+		if ($regType == 'landlord') {
+			$model->scenario = 'register_landlord';
+		}
 
 		if($model->save())
 		{
 			if($action == 'registrationSuccess')
-				$this->setRefererSessionData($model->username, $model->id);
+				$this->setRefererSessionData($model->email, $model->id, $model->email);
 
 			$this->redirect(array($action));
 		}

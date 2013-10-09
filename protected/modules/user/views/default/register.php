@@ -1,3 +1,4 @@
+
 <?php
 /* @var $this UserController */
 /* @var $model User */
@@ -15,7 +16,10 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
 		<h1>Registration for Give Us Time</h1>
 	
 		<div class="inner-content form-wrapper">
-			
+		<?php
+		
+		if (count($steps) > 1) {
+		?>
 		<ol class="form-steps">
 			<?php
 			$x = 0;
@@ -29,6 +33,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
 			?>
 		</ol>	
 		<?php
+		}
 		
 		// If steps have not been specified, output all fields in one step
 		if (!isset($steps)) {
@@ -64,10 +69,13 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
 					'class' => 'standard-form'
 				),
 				'enableAjaxValidation'=>false,
-			)); ?>			
+				'enableClientValidation' => true
+			));
+			?>
+
 			<?php
 			if ($step_name !== 'confirmation') {
-				echo $form->errorSummary($model);
+				//echo $form->errorSummary($model);
 			}
 			$labels = $model->attributeLabels();
 		

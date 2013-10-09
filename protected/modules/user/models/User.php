@@ -121,9 +121,10 @@ class User extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('personnel_type, personnel_rank, personnel_service_number, personnel_unit,
-					email, email_confirm, lastname, title, initial, phone_number',
+					email, email_confirm, lastname, title, initial, phone_number, date_terms_agreed',
 					'required',
 					'on'=>'insert, register, update, adminUpdate'),
+			array('firstname, lastname, email, phone_number, date_terms_agreed', 'required', 'on' => 'register_landlord'),
 			array('fullname', 'safe'),
 			array('password1, password2', 'required', 'on'=>'register, passwordReset, updatePassword'),
 			array('currentPassword', 'required', 'on'=>'emailRevert, updateEmail, updatePassword'),
@@ -133,7 +134,7 @@ class User extends CActiveRecord
 			array('captcha_code', 'captcha', 'on' => 'register'),
 			array('password', 'length', 'max'=>60),
 			array('password2', 'compare', 'compareAttribute'=>'password1'),
-			array('email_confirm', 'compare', 'compareAttribute' => 'email'),
+			array('email_confirm', 'compare', 'compareAttribute' => 'email', 'on' => 'register'),
 			array('role', 'length', 'max'=>10),
 			array('username, activation_code', 'length', 'max'=>40),
 			array('searchTerm, currentPassword, date_updated, date_last_login, date_validation_email_sent, date_email_validated, date_account_expire, date_revert, dateReset, date_deleted', 'safe'),
@@ -290,6 +291,14 @@ class User extends CActiveRecord
 			$this->role = 'user';
 			$this->sendValidationEmail();
 			$this->date_validation_email_sent = new CDbExpression('NOW()');
+		}
+		
+		if ($this->scenario == 'register_landlord') {
+			$this->updatePassword();
+			$this->activation_code = $this->generateUniqueId();
+			$this->role = 'landlord';
+			$this->sendValidationEmail();
+			$this->date_validation_email_sent = new CDbExpression('NOW()');			
 		}
 
 		if($this->scenario == 'resendEmailVerification')

@@ -147,6 +147,7 @@ input[type=submit],
 }
 
 .form-row {
+	margin-top: 7px;
 	margin-bottom: 5px;
 }
 
@@ -1090,6 +1091,19 @@ label {
 .standard-form .form-column-wrapper select {
 	float: none;
 	width: 100%;
+}
+
+.form-wrapper .errorMessage {
+	margin-top: 8px;
+	color: red;
+}
+
+.form-wrapper img#yw0 {
+	float: left;
+}
+
+.form-wrapper #User_captcha_code {
+	width: 60%;
 }
 
 .form-wrapper .step {

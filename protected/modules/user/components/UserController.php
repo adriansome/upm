@@ -7,11 +7,10 @@ class UserController extends Controller
 {
 	protected function setRefererSessionData($username = null, $id = null, $email = null)
 	{
-		if(Yii::app()->controller->action->id == 'register')
+		if(in_array(Yii::app()->controller->action->id, array('register', 'register_landlord')))
 			$action = 'registrationSuccess';
 		else
 			$action = Yii::app()->controller->action->id;
-
 
 		Yii::app()->session['referer'] = array(
 			'action'=>$action,
