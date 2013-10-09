@@ -1,0 +1,119 @@
+{
+	"attributes":
+	{
+		"name": 
+		{
+			"type": "singleline"
+		},
+        
+        
+        "location":
+        {
+            "type": "list",
+            "values":
+            {
+				1: "North",
+				2: "South",
+				3: "East",
+				4: "West"
+            }
+        },
+        
+        "type":
+        {
+            "type": "list",
+            "values":
+            {
+				1: "House",
+				2: "Appartment"
+            }
+        },
+        
+        "area":
+        {
+            "type": "singleline"
+        },
+        
+        "city":
+        {
+            "type": "singleline"
+        },
+        
+        "county":
+        {
+            "type": "singleline"
+        },
+        
+        "country":
+        {
+            "type": "singleline"
+        },
+        
+        "description":
+        {
+            "type": "multiline",
+            "rules":
+            {
+                "maxlength" : 300
+            }
+        },
+
+        "additional_info":
+        {
+            "type": "multiline",
+            "rules":
+            {
+				"maxlength" : 300
+			}
+        },
+
+        "facilities":
+        {
+            "type": "multiline",
+            "rules":
+            {
+				"maxlength" : 300
+			}
+        },
+
+        "accessibility":
+        {
+            "type": "multiline",
+            "rules":
+            {
+				"maxlength" : 300
+			}
+        },
+        
+        "image":
+        {
+            "type": "file"
+        },
+        
+        "welcome_pack":
+        {
+            "type": "file"
+        },
+        
+        "extras":
+        {
+            "type": "multiline",
+            "rules":
+            {
+				"maxlength" : 300
+			}
+        },
+
+        "date":
+        {
+            "type": "date",
+            "format": "d/m/Y"
+        },
+        
+        "live_on_site":
+        {
+            "type": "boolean"
+        }
+        
+	}	
+}
