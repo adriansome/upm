@@ -1048,6 +1048,13 @@ label {
 	width: 100%;
 }
 
+.form-wrapper .step {
+	display: none;
+}
+.form-wrapper .step.active {
+	display: block;
+}
+
 /* ----- LANDLORD PAGES ------------------------------------------ */
 
 
