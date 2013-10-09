@@ -82,6 +82,11 @@ $(document).ready( function() {
           trigger_validation($(this).find('form'));
         });
         
+        // Check for error labels (don't submit if errors appear)
+        if (form.find('.errorMessage:visible').length) {
+            return false;
+        }        
+        
         var form = $(this).parents('form').find('div.hidden');
         var data = '';
 
