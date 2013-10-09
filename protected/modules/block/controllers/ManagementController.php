@@ -124,6 +124,10 @@ class ManagementController extends BlockController
 					));
 					break;
 
+				case 'list':
+					$fields[$content->name]['input']=$form->listBox($content,"[$index]string_value",'',array());
+					break;
+
 				case 'boolean':
 					$fields[$content->name]['input']=$form->checkBox($content,"[$index]boolean_value");
 					break;
