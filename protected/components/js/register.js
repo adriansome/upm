@@ -83,7 +83,7 @@ $(document).ready( function() {
         });
         
         // Check for error labels (don't submit if errors appear)
-        if (form.find('.errorMessage:visible').length) {
+        if ($(this).parents('.step').find('.errorMessage:visible').length) {
             return false;
         }        
         
