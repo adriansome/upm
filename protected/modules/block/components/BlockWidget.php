@@ -76,6 +76,7 @@ abstract class BlockWidget extends CWidget
 
 	protected function loadContents($contents)
 	{
+
 		$values = array();
 
 		foreach ($contents as $content)
@@ -104,6 +105,9 @@ abstract class BlockWidget extends CWidget
 
 				case 'boolean':
 					$this->$attribute = $values[$attribute]->boolean_value;
+					break;
+				case 'hidden':
+					$this->$attribute = $values[$attribute]->string_value;
 					break;
 				
 				default:

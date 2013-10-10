@@ -1,6 +1,7 @@
 <?php /* @var $this ListWidget */ ?>
 
-<?php $this->widget('zii.widgets.CListView', array(
+<?php
+$this->widget('zii.widgets.CListView', array(
 	'id'=>$this->id,
 	'dataProvider'=>$this->contents,
 	'itemView'=>'summary',

@@ -98,7 +98,8 @@ class ManagementController extends BlockController
 			switch ($content->type->name)
 			{
 				case 'singleline':
-					$fields[$content->name]['input']=$form->textField($content,"[$index]string_value",array('size'=>60,'maxlength'=>140));
+					$fields[$content->name]['input']=$form->textField($content,"[$index]string_value",
+							array('size'=>60,'maxlength'=>140, 'data-name'=>$content->name));
 					break;
 
 				case 'multiline':
@@ -131,6 +132,13 @@ class ManagementController extends BlockController
 				case 'boolean':
 					$fields[$content->name]['input']=$form->checkBox($content,"[$index]boolean_value");
 					break;
+
+				case 'hidden':
+					// Don't display a label for a hidden field
+					$fields[$content->name]['label'] = '';
+					$fields[$content->name]['input']=$form->hiddenField($content,"[$index]string_value",
+						array('data-name' => $content->name));
+					break;				
 				
 				default:
 					throw new CHttpException(500, 'Unknown content type "'.$content->type->name.'"');
@@ -164,6 +172,18 @@ class ManagementController extends BlockController
 			// Forever an optimist.. Presume everything will save without error.
 			$contentSaved = true;
 			$response = array();
+			// Parse slug field and alter value
+			if (isset($_POST['slug']) && isset($_POST['slug_field'])) {
+				$slugParts = explode('[', $_POST['slug_field']);
+				$x = 0;
+				foreach ($slugParts as $key) {
+					if ($x > 0) {
+						$slugParts[$x] = substr($key, 0, -1);
+					}
+					$x++;
+				}
+				$_POST[$slugParts[0]][$slugParts[1]][$slugParts[2]] = $this->getSlug($_POST['slug'], $block->name);
+			}			
 
 			foreach($_POST['Content'] as $index => $content)
 			{
@@ -196,7 +216,8 @@ class ManagementController extends BlockController
 			switch ($content->type->name)
 			{
 				case 'singleline':
-					$fields[$content->name]['input']=$form->textField($content,"[$index]string_value",array('size'=>60,'maxlength'=>140));
+					$fields[$content->name]['input']=$form->textField($content,"[$index]string_value",
+							array('size'=>60,'maxlength'=>140,'data-name'=>$content->name));
 					break;
 
 				case 'multiline':
@@ -225,6 +246,13 @@ class ManagementController extends BlockController
 				case 'boolean':
 					$fields[$content->name]['input']=$form->checkBox($content,"[$index]boolean_value");
 					break;
+				
+				case 'hidden':
+					// Don't display a label for a hidden field
+					$fields[$content->name]['label'] = '';
+					$fields[$content->name]['input']=$form->hiddenField($content,"[$index]string_value",
+						array('data-name' => $content->name));
+					break;					
 				
 				default:
 					throw new CHttpException(500, 'Unknown content type "'.$content->type->name.'"');
@@ -296,11 +324,25 @@ class ManagementController extends BlockController
 		
 		$attributes = $listWidget->itemAttributes();
 		unset($listWidget);
-
-		if(isset($_POST['Content']))
+		
+		if(isset($_POST['Content'])) {
 			$data = $_POST;
-		else
+			// Parse slug field and alter value
+			if (isset($_POST['slug']) && isset($_POST['slug_field'])) {
+				$slugParts = explode('[', $_POST['slug_field']);
+				$x = 0;
+				foreach ($slugParts as $key) {
+					if ($x > 0) {
+						$slugParts[$x] = substr($key, 0, -1);
+					}
+					$x++;
+				}
+				$data[$slugParts[0]][$slugParts[1]][$slugParts[2]] = $this->getSlug($_POST['slug'], $list);
+			}
+		}
+		else {
 			$data = false;
+		}
 
 		$url = '/'.$list.'/management/item';
 		
@@ -374,5 +416,52 @@ class ManagementController extends BlockController
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+	
+	/**
+	 * Generate a slug for this item
+	 * Checks for an existing item with the same slug and updates if clashing
+	 *
+	 * @param $rawSlug
+	 * 		The text to be transformed
+	 * @param $list
+	 * 		The list this item applies to
+	 * @param int $iteration
+	 * 		How many times has this method been called?
+	 * @return string
+	 * 		The transformed slug text
+	 */
+	protected function getSlug($rawSlug, $list, $iteration = 0)
+	{
+
+		// Firstly convert text to slug
+		$slugText = Yii::app()->utility->string_to_slug($rawSlug);
+		
+		$sql = "SELECT COUNT(b.`id`) AS slug_count "
+			. "FROM block AS b "
+			. "LEFT JOIN content AS c "
+			. "ON c.`block_id` = b.`id` "
+			. "WHERE b.`name` LIKE '{$list}%' "
+			. "AND c.`name` = 'slug' "
+			. "AND c.`string_value` = '{$slugText}'";
+			
+		
+		$command = Yii::app()->db->createCommand($sql);
+
+		$row = $command->queryRow();
+		
+		if (isset($row['slug_count']) && $row['slug_count'] >= 1) {
+			if ($iteration == 1) {
+				$slugText .= $iteration;
+			} else if ($iteration > 1) {
+				// Remove last character and replace with next iteration
+				$slugText = substr($slugText, 0, -1);
+				$slugText .= $iteration;
+			}
+			$slugText = $this->getSlug($slugText, $list, $iteration + 1);
+		}
+		
+		return $slugText;
+		
 	}
 }

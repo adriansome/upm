@@ -6,6 +6,10 @@ class Utility extends CApplicationComponent {
 
         return is_array($d) ? array_map(__METHOD__, $d) : $d;
     }
+	
+	public function string_to_slug($str) {
+		return strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $str)));
+	}
 
     public function array_to_object($d) {
         return is_array($d) ? (object) array_map(__METHOD__, $d) : $d;

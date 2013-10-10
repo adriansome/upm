@@ -251,11 +251,35 @@ $(function()
 			target='listing';
 		}
 		var refreshUrl = $(this).data('href');
-
+		
+		var form = $('#block-form');
+		
+		var slugField = form.find('input[type=hidden][data-name=slug]');
+		
+		var formData = '';
+		
+		// Check for a slug field and copy values if needed
+		if (slugField.length) {
+			// Find title / name fields
+			var title = form.find('input[data-name=title]');
+			var name = form.find('input[data-name=name]');
+			// Check for a title to use as a slug initially, use name if not found, omit slug if no fields available
+			if (title.length) {
+				slugField.val(title.val());
+			} else if (name.length) {
+				slugField.val(name.val());
+			}
+			if (slugField.val() != '') {
+				formData += 'slug=' + encodeURIComponent(slugField.val()) + '&slug_field=' + encodeURIComponent(slugField.attr('name')) +'&';
+			}
+		}
+		
+		formData += $('form').serialize();
+		
         $.ajax({
             type: 'POST',
             dataType: 'json',
-            data: $('form').serialize(),
+            data: formData,
             url: $(this).attr('href'),
             success: function(data) {
                 if(data.success)

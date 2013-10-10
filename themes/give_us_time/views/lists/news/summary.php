@@ -12,6 +12,7 @@
 			$fullwidth = FALSE;
 		}
 	}
+
 	?>
 	</div>
 	<div class='text<?php echo ($fullwidth) ? ' fullwidth' : ''; ?>'>
@@ -19,7 +20,7 @@
 			<div class='headline'>
 				<?php echo (isset($data['short_headline']) && !empty($data['short_headline']))
 				? $data['short_headline'] : $data['title']; ?>
-				<div class='read-more'>Read more</div>
+				<div class='read-more'><a href='?slug=<?php echo $data['slug']; ?>'>Read more</a></div>
 			</div>
 			<div class='summary'>
 				<p><?php echo Yii::app()->utility->truncate_text($data['summary'], 200); ?></p>	

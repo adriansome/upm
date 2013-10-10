@@ -34,13 +34,17 @@ class DefaultController extends PageController
 	/**
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
+	 * @param string $slug
+	 * 		A slug used for the item (e.g. item-title)
 	 */
-	public function actionView($link)
+	public function actionView($link, $id=null, $slug=null)
 	{
+
 		if($link == 'home')
 			$link = '/';
 		
 		$model = $this->loadModel($link);
+
 		Yii::app()->session['page_id'] = $model->id;
 		Yii::app()->user->setReturnUrl(Yii::app()->request->urlReferrer);
 		
@@ -58,6 +62,8 @@ class DefaultController extends PageController
 
 		$this->render($template, array(
 			'model'=>$model,
+			'id' => $id,
+			'slug' => $slug
 		));
 	}
 
