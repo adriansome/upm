@@ -17,7 +17,7 @@
 	<div class='text<?php echo ($fullwidth) ? ' fullwidth' : ''; ?>'>
 		<div class='inner'>
 			<div class='headline'>
-				<?php echo $data['name']; ?>
+				<?php echo $data['title']; ?>
 				<div class='read-more'>Read more</div>
 			</div>
 			<div class='summary'>

@@ -126,7 +126,8 @@ class ManagementController extends BlockController
 					break;
 
 				case 'list':
-					$fields[$content->name]['input']=$form->listBox($content,"[$index]string_value",'',array());
+// 					$fields[$content->name]['input']=$form->listBox($content,"[$index]string_value",'',$attributes[$content->name]['values']);
+					$fields[$content->name]['input']=CHtml::dropDownList('Content['.$index.'][string_value]','', $attributes[$content->name]['values']);
 					break;
 
 				case 'boolean':
@@ -159,7 +160,7 @@ class ManagementController extends BlockController
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
-	public function actionUpdate($id)
+	public function actionUpdate($id,$list)
 	{
 		if(Yii::app()->request->urlReferrer !== $this->currentUrl)
 			Yii::app()->user->setReturnUrl(Yii::app()->request->urlReferrer);
@@ -205,7 +206,7 @@ class ManagementController extends BlockController
 
 		$form = new CActiveForm;
 		$fields = array();
-
+		
 		foreach($contents as $index=>$content)
 		{
 			$fields[$content->name] = array(
@@ -234,6 +235,18 @@ class ManagementController extends BlockController
 						'index'=>$index,
 						'content'=>$content,
 					), true, true);
+					break;
+					
+				case 'list':
+					$listWidget = new ListWidget();
+					$listWidget->name = $list;
+					$listWidget->init();
+			
+					$attributes = $listWidget->itemAttributes();
+					unset($listWidget);
+		
+					$fields[$content->name]['input']=CHtml::dropDownList('Content['.$index.'][string_value]',$content->string_value, $attributes[$content->name]['values']);
+// 					$fields[$content->name]['input']='<select><option>Test</option></select>';
 					break;
 
 				case 'date':
