@@ -6,6 +6,28 @@
 			"type": "singleline"
 		},
         
+        "location":
+        {
+            "type": "list",
+            "values":
+            {
+				"1": "North",
+				"2": "South",
+				"3": "East",
+				"4": "West"
+            }
+        },
+        
+        "type":
+        {
+            "type": "list",
+            "values":
+            {
+				"1": "House",
+				"2": "Appartment"
+            }
+        },
+		
         "area":
         {
             "type": "singleline"

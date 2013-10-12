@@ -26,6 +26,7 @@ $this->beginWidget('TbModal', array('id'=>'list-management', 'htmlOptions'=>arra
 	$this->widget('zii.widgets.CListView', array(
 		'dataProvider'=>$dataProvider,
 		'itemView'=>'_listItem',
+		'viewData'=>array('listName'=>$name),
 		'id'=>'listing',
 	)); ?>
 

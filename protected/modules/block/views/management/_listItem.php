@@ -9,7 +9,7 @@
 	<?php $this->widget('TbButton', array(
 		'type'=>'link',
         'label'=>'edit',
-        'url'=>Yii::app()->createUrl('/block/management/update/id/'.$data->id),
+        'url'=>Yii::app()->createUrl('/block/management/update/id/'.$data->id.'/list/'.$listName),
         'htmlOptions'=>array(
             'data-id' => $data->id,
             'data-toggle' => 'edit-item',
