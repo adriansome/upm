@@ -68,39 +68,6 @@ class ListWidget extends CWidget
 		{
 			$list[$index] = $this->loadContents($item);
 			$list[$index]['block_id'] = $item->id;
-			foreach($item->contents as $content)
-			{
-				switch($attributes[$content->name]['type'])
-				{
-					case 'singleline':
-					case 'multiline':
-						$list[$index][$content->name] = htmlspecialchars($content->string_value);
-						break;
-
-					case 'html':
-						$list[$index][$content->name] = $content->string_value;
-						break;
-
-					case 'date':
-						$list[$index][$content->name] = date($attributes[$content->name]['format'], strtotime($content->date_value));
-						break;
-
-					case 'file':
-						$list[$index][$content->name] = $content->file_value;
-						break;
-
-					case 'list':
-						$list[$index][$content->name] = $content->file_value;
-						break;
-
-					case 'boolean':
-						$list[$index][$content->name] = $content->boolean_value;
-						break;
-					
-					default:
-						throw new CHttpException(500, 'Unknown type "'.$attributes[$content->name]['type'].'" for attribute "'.$content->name.'"');
-				}
-			}
 		}
 		
 		if(isset($this->pageSize))
