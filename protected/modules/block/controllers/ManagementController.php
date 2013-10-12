@@ -29,6 +29,11 @@ class ManagementController extends BlockController
                 'users'=>array('@'),
                 'roles' => array('editor'),
             ),
+            array('allow',
+                'actions'=>array('index','create','update','delete','list', 'item'),
+                'users'=>array('@'),
+                'roles' => array('landlord'),
+            ),
             array('deny',
                 'users' => array('*'),
             ),
@@ -51,22 +56,51 @@ class ManagementController extends BlockController
 			$contents[$i]->type_id = ContentType::model()->findByAttributes(array('name'=>$definition['type']))->id;
 			$i++;
 		}
-
+		
 		if(isset($data['Content']))
 		{
 			// Forever an optimist.. Presume everything will validate without error.
 			$contentValidates = true;
 			$response = array();
-
+				
 			foreach($data['Content'] as $index => $content)
 			{
-				$contents[$index]->attributes = $content;
+				$fieldName = $contents[$index]->getAttribute('name');
 				
+				// Use field as slug
+				if ($fieldName == 'title') {
+					$fieldType = array_keys($content);
+					$value = array_values($content);
+					$slugValue = array($fieldType[0] => Yii::app()->utility->string_to_slug($value[0]));
+					// Modify slug data
+					$slugContent = array(
+						'field_type' 	=> $fieldType[0],
+						'value'			=> Yii::app()->utility->string_to_slug($value[0]));
+				} else if ($fieldName == 'user_id') {
+					// Get field type
+					$fieldType = array_keys($content);
+					// Alter user ID value
+					$content = array($fieldType[0] => Yii::app()->user->id);
+				}
+				
+				$contents[$index]->attributes = $content;
 				// If any content is not valid set $contentSaved flag to false.
 				if(!$contents[$index]->validate())
 					$contentValidates = false;
 			}
-
+			
+			// Add slug field to content
+			if (isset($slugValue) && isset($slugContent)) {
+				$index = count($contents);
+				$contents[$index] = new Content;
+				$contents[$index]->name = 'slug';
+				$contents[$index]->block_id = $block->id;
+				$contents[$index]->attributes = $slugValue;
+				$contents[$index]->type_id = ContentType::model()->findByAttributes(array('name'=>'hidden'))->id;
+				$data['Content'][$index][$slugContent['field_type']] = $slugContent['value'];
+				
+			}
+			
 			if($contentValidates)
 			{
 				$block->save();
@@ -166,29 +200,29 @@ class ManagementController extends BlockController
 
 		$block=$this->loadModel($id);
 		$contents = $block->contents;
-
+		
 		if(isset($_POST['Content']))
 		{
 			// Forever an optimist.. Presume everything will save without error.
 			$contentSaved = true;
 			$response = array();
-			// Parse slug field and alter value
-			if (isset($_POST['slug']) && isset($_POST['slug_field'])) {
-				$slugParts = explode('[', $_POST['slug_field']);
-				$x = 0;
-				foreach ($slugParts as $key) {
-					if ($x > 0) {
-						$slugParts[$x] = substr($key, 0, -1);
-					}
-					$x++;
-				}
-				$_POST[$slugParts[0]][$slugParts[1]][$slugParts[2]] = $this->getSlug($_POST['slug'], $block->name);
-			}			
-
+			
 			foreach($_POST['Content'] as $index => $content)
 			{
-				$contents[$index]->attributes = $content;
 				
+				if ($contents[$index]->name == 'title') {
+					// Take title field and convert to slug
+					$fieldType = array_keys($content);
+					$value = array_values($content);
+					// Update the slug field from title
+					$slugValue = array($fieldType[0] => Yii::app()->utility->string_to_slug($value[0]));
+				}
+				if ($contents[$index]->name == 'slug') {
+					if (isset($slugValue)) {
+						$content = $slugValue;
+					}
+				}
+				$contents[$index]->attributes = $content;
 				// If any content cannot be saved set $contentSaved flag to false.
 				if(!$contents[$index]->save())
 					$contentSaved = false;
@@ -292,7 +326,7 @@ class ManagementController extends BlockController
 	/**
 	 * Lists all models.
 	 */
-	public function actionList($list)
+	public function actionList($list, $themeView = null)
 	{	
 		$id = str_replace(' ', '-', $list);
 
@@ -305,8 +339,14 @@ class ManagementController extends BlockController
 		        'pageSize'=>20,
 		    ),
 		));
-
-		$this->renderPartial('updateList',array(
+		
+		$view = 'updateList';
+		if ($themeView) {
+			$themeName = Yii::app()->theme->getName();
+			$view = 'webroot.themes.' . $themeName . '.views.templates.'. $list;		
+		}
+		
+		$this->renderPartial($view, array(
 			'dataProvider'=>$dataProvider,
 			'name'=>$list,
 			'id'=>$id,
@@ -327,18 +367,6 @@ class ManagementController extends BlockController
 		
 		if(isset($_POST['Content'])) {
 			$data = $_POST;
-			// Parse slug field and alter value
-			if (isset($_POST['slug']) && isset($_POST['slug_field'])) {
-				$slugParts = explode('[', $_POST['slug_field']);
-				$x = 0;
-				foreach ($slugParts as $key) {
-					if ($x > 0) {
-						$slugParts[$x] = substr($key, 0, -1);
-					}
-					$x++;
-				}
-				$data[$slugParts[0]][$slugParts[1]][$slugParts[2]] = $this->getSlug($_POST['slug'], $list);
-			}
 		}
 		else {
 			$data = false;

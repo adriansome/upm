@@ -14,7 +14,7 @@ class UserIdentity extends CUserIdentity
 
     public function authenticate()
 	{
-		$record = User::model()->findByAttributes(array('username' => $this->username, 'date_deleted'=>null));
+		$record = User::model()->findByAttributes(array('email' => $this->username, 'date_deleted'=>null));
 		$ph = new PasswordHash(Yii::app()->params['phpass']['iteration_count_log2'], Yii::app()->params['phpass']['portable_hashes']);
 		
 		if(!isset($record) || !empty($record->date_deleted))
@@ -49,4 +49,5 @@ class UserIdentity extends CUserIdentity
     {
         return $this->_user;
     }
+	
 }

@@ -1,31 +1,14 @@
 <?php /* @var $data CArrayDataProvider */ ?>
-
-<div class="property-item">
-	<div class="image">
-	<?php
-	$fullwidth = TRUE;
-	if (isset($data['image']) && !empty($data['image'])) {
-		$img_src = $data['image'];
-		$img_path = Yii::app()->basePath . '/..' . $img_src;
-		if (is_file($img_path)) {
-			echo "<img src='{$img_src}' />";
-			$fullwidth = FALSE;
-		}
-	}
-	?>
-	</div>
-	<div class='text<?php echo ($fullwidth) ? ' fullwidth' : ''; ?>'>
-		<div class='inner'>
-			<div class='headline'>
-				<?php echo $data['name']; ?>
-				<div class='read-more'>Read more</div>
-			</div>
-			<div class='summary'>
-				<p><?php echo Yii::app()->utility->truncate_text($data['description'], 200); ?></p>	
-			</div>
-		</div>
-	</div>
-
-	
-	
-</div>
+<ul class="booking-listing">
+	<li>
+		<span class="title"><?php echo $data['title'] . ", " . $data['area'];  ?></span>
+		<span class="actions">
+			<a id="edit-block-<?php echo $data['block_id'] ?>" class="action-button edit" data-id="<?php echo $data['block_id']; ?>"
+				data-target=".item-view" data-toggle="edit-item"
+			   href="<?php echo Yii::app()->createUrl('/block/management/update/id/'.$data['block_id']); ?>">Edit Property / Availability</a>
+			<a id="edit-block-<?php echo $data['block_id'] ?>" class="action-button delete" data-id="<?php echo $data['block_id']; ?>"
+				data-target=".item-view" data-toggle="delete-item"
+			   href="<?php echo Yii::app()->createUrl('/block/management/delete/id/'.$data['block_id']); ?>" >Delete Property</a>				
+		</span>	
+	</li>
+</ul>

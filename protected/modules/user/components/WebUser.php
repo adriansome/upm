@@ -41,13 +41,25 @@ class WebUser extends CWebUser
 
     public function isAdmin()
     {
-        $role = $this->getState("roles");
-        return ($role === 'admin');
+        return $this->_checkUser('admin');
     }
 
     public function isEditor()
     {
+        return $this->_checkUser('editor');
+    }
+    
+    public function isLandlord()
+    {
+        return $this->_checkUser('landlord');
+    }
+    
+    /**
+     * Check the user against a role type
+     */
+    protected function _checkUser($type)
+    {
         $role = $this->getState("roles");
-        return ($role === 'editor');
+        return ($type === $role);
     }
 }

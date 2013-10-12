@@ -1,18 +1,13 @@
-<?php $this->pageTitle = $model->window_title; ?>
-
-<?php require_once(Yii::app()->theme->basepath.'/views/elements/header.php'); ?>
-
-<div id="content">
-    
-<div>
-<?php $this->widget('ListWidget',array(
+<?php
+$this->widget('ListWidget',array(
 	'name'=>'properties',
 	'scenario'=>'list',
-    'pageSize' => 4
+	'filters' => array(
+		'user_id' => array(
+			'field_type' => 'string_value',
+			'value' => Yii::app()->user->id
+		)
+	)
 )); ?>
-</div>
 
-<?php require_once(Yii::app()->theme->basepath.'/views/elements/footer.php'); ?>
-
-</div>
 

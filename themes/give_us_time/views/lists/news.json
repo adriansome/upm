@@ -44,11 +44,6 @@
         "live_on_site":
         {
             "type": "boolean"
-        },
-		
-		"slug":
-		{
-			"type": "hidden"
-		}
+        }
 	}	
 }

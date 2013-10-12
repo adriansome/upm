@@ -5,6 +5,7 @@ class ListWidget extends CWidget
 	public $scenario;
 	public $pageSize;
 	public $maxItems;
+	public $filters;
 	public $item_id;
 	public $item_slug;
 
@@ -21,6 +22,7 @@ class ListWidget extends CWidget
 
 	public function init()
 	{
+
 		$this->page_id = Yii::app()->session['page_id'];
 		$this->id = str_replace(' ', '-', $this->name);
 
@@ -28,10 +30,12 @@ class ListWidget extends CWidget
 		
 		$this->attributes = $this->itemAttributes();
 		
-		if(isset($this->item_id) || isset($this->item_slug))
+		if(isset($this->item_id) || isset($this->item_slug)) {
 			$this->loadItem();
-		else
+		}
+		else {
 			$this->loadItems();
+		}
 	}
 
 	protected function configure()
@@ -46,6 +50,10 @@ class ListWidget extends CWidget
 	public function itemAttributes()
 	{
 		$attributes = Yii::app()->utility->object_to_array($this->config->attributes);
+		// Add slug to fields
+		$attributes['slug'] = array(
+			'type' => 'hidden'
+		);
 	    return $attributes;
 	}
 
@@ -55,10 +63,24 @@ class ListWidget extends CWidget
 		
 		if(isset($this->maxItems))
 			$params['limit'] = $this->maxItems;
-
-		$items = Block::model()->with('contents')->findAll(array(
-			'condition'=>'t.name LIKE "'.$this->name.' item%"'
-		), $params);
+		
+		if ($this->filters) {
+			$sql = "SELECT b.* "
+				. "FROM block AS b "
+				. "LEFT JOIN content AS c "
+				. "ON c.`block_id` = b.`id` "
+				. "WHERE b.`name` LIKE '{$this->name} item%' ";
+			foreach ($this->filters as $field => $fieldData) {
+				$fieldType = $fieldData['field_type'];
+				$value = $fieldData['value'];
+				$sql .= "AND c.`name` = '{$field}' AND `{$fieldType}` = '{$value}'";
+			}
+			$items = Block::model()->findAllBySql($sql, $params);
+		} else {
+			$items = Block::model()->with('contents')->findAll(array(
+				'condition'=>'t.name LIKE "'.$this->name.' item%"'
+			), $params);
+		}
 
 		$attributes = $this->itemAttributes();
 
@@ -158,7 +180,7 @@ class ListWidget extends CWidget
 				default:
 					throw new CHttpException(500, 'Unknown type "'.$this->attributes[$content->name]['type'].'" for attribute "'.$content->name.'"');
 			}
-		}		
+		}
 		return $contents;
 	}
 

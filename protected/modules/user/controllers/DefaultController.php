@@ -24,8 +24,10 @@ class DefaultController extends UserController
 				'postcode' => array(),
 				'country' => array(),
 				'phone_number' => array(),
-				'date_terms_agreed' => array('type' => 'checkbox'),
-				'captcha_code' => array('type' => 'captcha')
+				'password1' => array('type' => 'password'),
+				'password2' => array('type' => 'password'),
+				'date_terms_agreed' => array('type' => 'checkbox', 'on' => array('register')),
+				'captcha_code' => array('type' => 'captcha', 'on' => array('register'))
 			)
 		),
 		'user' => array(
@@ -253,10 +255,17 @@ class DefaultController extends UserController
 		// collect user input data
 		if(isset($_POST['LoginForm']))
 		{
+
 			$model->attributes=$_POST['LoginForm'];
+
 			// validate user input and redirect to the previous page if valid
-			if($model->validate() && $model->login())
-				$this->redirect(Yii::app()->user->returnUrl);
+			if($model->validate() && $model->login()) {
+				$returnUrl = Yii::app()->user->returnUrl;
+				if (Yii::app()->user->isLandlord()) {
+					$returnUrl = '/profile';
+				}
+				$this->redirect($returnUrl);
+			}
 		}
 
 		// display the login form
@@ -339,10 +348,27 @@ class DefaultController extends UserController
 	 */
 	public function actionProfile()
 	{
-		$this->layout='//layouts/righty';
-
-		$this->render('profile',array(
+		
+		$role = Yii::app()->user->role;
+		
+		if (isset($this->_formFields[$role]['fields'])) {
+			$fields = $this->_formFields[$role]['fields'];
+		} else {
+			$fields = array();
+		}
+		
+		$view = 'profile';
+		
+		$themeView = 'webroot.themes.' . Yii::app()->theme->getName() . '.views.templates.profile';		
+		
+		if ($this->getViewFile($themeView)) {
+			$view = $themeView;
+			
+		}		
+		
+		$this->render($themeView ,array(
 			'model'=>$this->loadModel(),
+			'fields' => $fields
 		));
 	}
 
