@@ -47,7 +47,7 @@ class ManagementController extends BlockController
 		$block->scope = $scope;
 
 		$contents = array(); $i = 0;
-
+		
 		foreach($attributes as $attribute=>$definition)
 		{
 			$contents[$i] = new Content;
@@ -62,7 +62,7 @@ class ManagementController extends BlockController
 			// Forever an optimist.. Presume everything will validate without error.
 			$contentValidates = true;
 			$response = array();
-				
+			
 			foreach($data['Content'] as $index => $content)
 			{
 				$fieldName = $contents[$index]->getAttribute('name');
@@ -91,13 +91,13 @@ class ManagementController extends BlockController
 			
 			// Add slug field to content
 			if (isset($slugValue) && isset($slugContent)) {
-				$index = count($contents);
-				$contents[$index] = new Content;
-				$contents[$index]->name = 'slug';
-				$contents[$index]->block_id = $block->id;
-				$contents[$index]->attributes = $slugValue;
-				$contents[$index]->type_id = ContentType::model()->findByAttributes(array('name'=>'hidden'))->id;
-				$data['Content'][$index][$slugContent['field_type']] = $slugContent['value'];
+				foreach ($contents as $i => $content) {
+					// Find the slug content part of the array
+					if ($contents[$i]->name == 'slug') {
+						$contents[$i]->attributes = $slugValue;
+						$data['Content'][$i][$slugContent['field_type']] = $slugContent['value'];
+					}
+				}
 				
 			}
 			

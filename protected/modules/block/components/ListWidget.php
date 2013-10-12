@@ -173,9 +173,13 @@ class ListWidget extends CWidget
 					$contents[$content->name] = $content->boolean_value;
 					break;
 				
-				case 'hidden';
+				case 'list':
 					$contents[$content->name] = $content->string_value;
 					break;
+				
+				case 'hidden';
+					$contents[$content->name] = $content->string_value;
+					break;				
 				
 				default:
 					throw new CHttpException(500, 'Unknown type "'.$this->attributes[$content->name]['type'].'" for attribute "'.$content->name.'"');
