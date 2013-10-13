@@ -346,9 +346,9 @@ class DefaultController extends UserController
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
-	public function actionProfile()
+	public function actionProfile($id=null)
 	{
-		
+
 		$role = Yii::app()->user->role;
 		
 		if (isset($this->_formFields[$role]['fields'])) {
@@ -365,10 +365,11 @@ class DefaultController extends UserController
 			$view = $themeView;
 			
 		}		
-		
+
 		$this->render($themeView ,array(
-			'model'=>$this->loadModel(),
-			'fields' => $fields
+                    'model'=>$this->loadModel(),
+                    'fields' => $fields,
+                    'id' => $id
 		));
 	}
 

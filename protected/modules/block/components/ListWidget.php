@@ -14,6 +14,7 @@ class ListWidget extends CWidget
 	protected $contents;
 	protected $attributes;
 	protected $id;
+        protected $_userList = array();
 
 	public function getViewPath($checkTheme=false)
 	{
@@ -29,6 +30,10 @@ class ListWidget extends CWidget
 		$this->configure();
 		
 		$this->attributes = $this->itemAttributes();
+                
+                if ($this->name == 'holidays') {
+                    $this->_userList = $this->_getUsers();
+                }
 		
 		if(isset($this->item_id) || isset($this->item_slug)) {
 			$this->loadItem();
@@ -49,11 +54,14 @@ class ListWidget extends CWidget
 
 	public function itemAttributes()
 	{
-		$attributes = Yii::app()->utility->object_to_array($this->config->attributes);
-		// Add slug to fields
-		$attributes['slug'] = array(
-			'type' => 'hidden'
-		);
+            $attributes = Yii::app()->utility->object_to_array($this->config->attributes);
+            // Add a slug if a title field is present
+            if (isset($attributes['title'])) {
+                $attributes['slug'] = array(
+                    'type' => 'hidden'
+                );
+            }
+
 	    return $attributes;
 	}
 
@@ -82,8 +90,6 @@ class ListWidget extends CWidget
 			), $params);
 		}
 
-		$attributes = $this->itemAttributes();
-
 		$list = array();
 
 		foreach($items as $index=>$item) 
@@ -91,7 +97,7 @@ class ListWidget extends CWidget
 			$list[$index] = $this->loadContents($item);
 			$list[$index]['block_id'] = $item->id;
 		}
-		
+                
 		if(isset($this->pageSize))
 			$pagination = array('pageSize'=>$this->pageSize);
 		else
@@ -117,15 +123,15 @@ class ListWidget extends CWidget
 				'condition'=>'t.name LIKE "'.$this->name.' item%" AND t.id = "' . $this->item_id . '"',
 			));						
 		} else {
-			$sql = "SELECT b.* "
-				. "FROM block AS b "
-				. "LEFT JOIN content AS c "
-				. "ON c.`block_id` = b.`id` "
-				. "WHERE b.`name` LIKE '{$this->name} item%' "
-				. "AND c.`name` = 'slug' "
-				. "AND c.`string_value` = '{$this->item_slug}'";
+                    $sql = "SELECT b.* "
+                            . "FROM block AS b "
+                            . "LEFT JOIN content AS c "
+                            . "ON c.`block_id` = b.`id` "
+                            . "WHERE b.`name` LIKE '{$this->name} item%' "
+                            . "AND c.`name` = 'slug' "
+                            . "AND c.`string_value` = '{$this->item_slug}'";
 
-			$item = Block::model()->findBySql($sql);
+                    $item = Block::model()->findBySql($sql);
 		}
 		
 		// Make sure we have the record
@@ -147,7 +153,7 @@ class ListWidget extends CWidget
 	protected function loadContents(Block $item) {
 
 		$contents = array();
-		
+                
 		foreach($item->contents as $content)
 		{
 			switch($this->attributes[$content->name]['type'])
@@ -177,8 +183,15 @@ class ListWidget extends CWidget
 					$contents[$content->name] = $content->string_value;
 					break;
 				
-				case 'hidden';
-					$contents[$content->name] = $content->string_value;
+				case 'hidden':
+                                        if ($this->name == 'holidays' && $content->name == 'booked_by') {
+                                            if (isset($this->_userList[$content->string_value])) {
+                                                // Replace user ID with a User object
+                                                $contents[$content->name] = $this->_userList[$content->string_value];
+                                            }
+                                        } else {
+                                            $contents[$content->name] = $content->string_value;
+                                        }
 					break;				
 				
 				default:
@@ -199,4 +212,15 @@ class ListWidget extends CWidget
 		else
 			$this->render($this->scenario);
 	}
+        
+        protected function _getUsers()
+        {
+            // Load users list for holiday items
+            $userList = array();
+            $users = User::model()->findAll();
+            foreach ($users as $user) {
+                $userList[$user->id] = $user;
+            }
+            return $userList;
+        }
 }

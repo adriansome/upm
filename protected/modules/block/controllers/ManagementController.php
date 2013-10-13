@@ -47,7 +47,7 @@ class ManagementController extends BlockController
 		$block->scope = $scope;
 
 		$contents = array(); $i = 0;
-		
+
 		foreach($attributes as $attribute=>$definition)
 		{
 			$contents[$i] = new Content;
@@ -124,6 +124,7 @@ class ManagementController extends BlockController
 
 		foreach($contents as $index=>$content)
 		{
+
 			$fields[$content->name] = array(
 				'label'=>CHtml::label(ucfirst($content->name), "Content[$index][string_value]"),
 				'validation'=>$form->error($content,"[$index]string_value"),
@@ -169,10 +170,12 @@ class ManagementController extends BlockController
 					break;
 
 				case 'hidden':
+                                        $default = (isset($attributes[$content->name]['default'])) ? $attributes[$content->name]['default'] : '';
 					// Don't display a label for a hidden field
 					$fields[$content->name]['label'] = '';
 					$fields[$content->name]['input']=$form->hiddenField($content,"[$index]string_value",
-						array('data-name' => $content->name));
+						array('data-name' => $content->name,
+                                                    'value' => $default));
 					break;				
 				
 				default:
@@ -196,6 +199,7 @@ class ManagementController extends BlockController
 	 */
 	public function actionUpdate($id,$list)
 	{
+
 		if(Yii::app()->request->urlReferrer !== $this->currentUrl)
 			Yii::app()->user->setReturnUrl(Yii::app()->request->urlReferrer);
 
@@ -311,6 +315,7 @@ class ManagementController extends BlockController
 		$this->renderPartial('updateBlock',array(
 			'block'=>$block,
 			'fields'=>$fields,
+                        'list' => $list
 		));
 	}
 
@@ -339,7 +344,7 @@ class ManagementController extends BlockController
 	/**
 	 * Lists all models.
 	 */
-	public function actionList($list, $themeView = null)
+	public function actionList($list, $themeView = null, array $params = array())
 	{	
 		$id = str_replace(' ', '-', $list);
 
@@ -355,14 +360,15 @@ class ManagementController extends BlockController
 		
 		$view = 'updateList';
 		if ($themeView) {
-			$themeName = Yii::app()->theme->getName();
-			$view = 'webroot.themes.' . $themeName . '.views.templates.'. $list;		
+                    $themeName = Yii::app()->theme->getName();
+                    $view = 'webroot.themes.' . $themeName . '.views.templates.'. $list;		
 		}
 		
 		$this->renderPartial($view, array(
-			'dataProvider'=>$dataProvider,
-			'name'=>$list,
-			'id'=>$id,
+                    'dataProvider'=>$dataProvider,
+                    'params'=>$params,
+                    'name'=>$list,
+                    'id'=>$id,
 		));
 	}
 

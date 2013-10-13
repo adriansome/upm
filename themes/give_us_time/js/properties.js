@@ -1,6 +1,22 @@
 $(document).ready( function() {
     
-    updateList();
+    var type, params;
+    
+    // Check for different DOM elements to determine what type of page we're on
+    if ($('.properties-container').length) {
+        type = 'properties';
+    } else if ($('.holidays-container').length) {
+        type = 'holidays';
+    }
+    
+    // Load any GET params that might be useful for this request
+    if ($('#get-params').length) {
+        params = $('#get-params').data();
+    }    
+    
+    if (type) {
+        updateList();
+    }
     
     function initRichTextEditors()
     {
@@ -35,17 +51,43 @@ $(document).ready( function() {
         var url = $(this).attr('href');
         
         $.get(url,function(response) {
-            $(response).modal();
+            // Wait for the modal to appear and then amend property ID
+            $(response).on("shown.bs.modal", function() {
+                // Only do this if we're on the holidays page
+                if (type === 'holidays') {
+                    // Check for an ID param
+                    if (params.hasOwnProperty('id')) {
+                        $('input[data-name="property_id"]').val(params.id);
+                    }
+                }
+            }).modal();
+                     
             initRichTextEditors();
         });
         
     });
     
+    $('[data-toggle=\"edit-item\"]').live('click',function(e) {
+        e.preventDefault();
+        
+        var url = $(this).attr('href');
+        
+        $.get(url,function(response) 
+        {
+            $(response).modal();             
+            initRichTextEditors();
+        });
+        
+    });    
+    
     
     $('[data-toggle=\"delete-item\"]').live('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        var conf = confirm("Are you sure you want to delete this property?");
+        
+        var text = (type == 'properties') ? 'property' : 'holiday';
+        
+        var conf = confirm("Are you sure you want to delete this " + text + "?");
         // Delete has to be an AJAX request
         if (conf) {
             $.post($(this).attr('href'), {
@@ -81,15 +123,20 @@ $(document).ready( function() {
         });
     });
     
+    // Update the list for the specified type
     function updateList()
     {
+        
+        var url = type + '/management';
+
         $.ajax({
-            url : 'properties/management',
+            url : url,
             data : {
-                    'themeView' : true
+                'themeView' : true,
+                'params' : params
             },
             success: function(r) {
-                $('.properties-container').html(r);
+                $('.' + type + '-container').html(r);
             }
         });
     }

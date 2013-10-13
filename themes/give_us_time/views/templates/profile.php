@@ -7,15 +7,32 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
 ?>
 
 <div class="constrained">
-	<section id="main-content" class="column span12">
-		<h1>Welcome to Give Us Time - <?php echo $model->fullname; ?></h1>
-		
+	<section id="main-content" class="column span12">		
 		<?php
 		// Render properties if this is a landlord
 		if (Yii::app()->user->isLandlord()) {
-			?>
-            <div class="properties-container"></div>
-            <?php
+                    // Display properties list if not editing an existing property
+                    if (isset($id) && (int)$id) {
+                        ?>
+                        <input type="hidden" id="get-params" data-id="<?php echo $id; ?>"/>
+                        <?php
+                        $this->widget('ListWidget',array(
+                            'name'=>'properties',
+                            'scenario'=>'edit',
+                            'item_id' => $id,
+                            'filters' => array(
+                                'user_id' => array(
+                                    'field_type' => 'string_value',
+                                    'value' => Yii::app()->user->id
+                                )
+                            )
+                        ));
+                    } else {
+                        ?>
+                        <h1>Welcome to Give Us Time - <?php echo $model->fullname; ?></h1>
+                        <div class="properties-container"></div>
+                        <?php
+                    }
 		}
 		?>
 			<?php /*$form=$this->beginWidget('CActiveForm', array(
@@ -90,3 +107,7 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
 <?php //Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/adminzone.js'); ?>	
 <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('tinymce')).'/tinymce.min.js'); ?>
 <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/properties.js"></script>
+
+<?php
+require_once(Yii::app()->theme->basepath.'/views/elements/footer.php');
+?>

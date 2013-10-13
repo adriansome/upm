@@ -1,0 +1,61 @@
+{
+    "attributes": {
+        
+        "arrival_date": 
+        {
+            
+            "type" : "date",
+            "format": "d/m/Y"
+            
+        },
+                
+        "departure_date":
+        {
+            
+            "type": "date",
+            "format": "d/m/Y"
+        },
+        
+        "type": 
+        {
+            "type": "list",
+            "values":
+            {
+                "1": "House",
+                "2": "Appartment"
+            }        
+        },
+                
+        "status":
+        {
+            "type": "hidden",
+            "default": "available" 
+        },
+                
+        "number_of_bedrooms":
+        {
+            "type": "singleline"
+        },
+                
+        "sleeps_number":
+        {
+            "type": "singleline"
+        },
+        
+        "property_id":
+        {
+            "type": "hidden"
+        },
+                
+        "booked_by":
+        {
+            "type": "hidden"
+        },
+                
+        "title":
+        {
+            "type": "hidden"
+        }
+        
+    }
+}

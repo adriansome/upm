@@ -18,6 +18,7 @@ foreach(glob($listsDir.'*') as $file)
         $lists[] = $file;
     }
 }
+
 return array(
     'import' => array(
         'application.modules.' . $module_name . '.models.*',
