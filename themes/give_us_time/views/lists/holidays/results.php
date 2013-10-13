@@ -1,5 +1,6 @@
 <?php /* @var $this ListWidget */ ?>
-			<h1>Results&ndash; March 4, <?php echo $this->viewData['attributes']['location']['values'][$_POST['Search']['location']]?></h1>
+<?php print_r($this->contents)?>
+			<h1>Results&ndash; March 4, <?php //echo $this->viewData['attributes']['location']['values'][$_POST['Search']['location']]?></h1>
 			<p>We have 4 matches for Gran Caneria beginning in the week of March 4, 2014</p>
 			<ul class="resort-listing search-listing">
 				<?php

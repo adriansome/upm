@@ -21,8 +21,10 @@
             "type": "list",
             "values":
             {
-                "1": "House",
-                "2": "Appartment"
+                "1": "Single",
+                "2": "Double",
+                "3": "Twin",
+                "4": "Whole house"
             }        
         },
                 

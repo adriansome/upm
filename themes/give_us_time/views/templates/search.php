@@ -18,7 +18,7 @@
 							$attributes = $listWidget->itemAttributes();
 							unset($listWidget);
 				
-							echo CHtml::dropDownList('Search[location]','', $attributes['location']['values']);
+							echo CHtml::dropDownList('Search[location]',$_POST['Search']['location'], $attributes['location']['values']);
 						?>
 					</div>
 					<div class="form-row">
@@ -41,6 +41,10 @@
 				'name'=>'properties',
 				'scenario'=>'results',
 				'filters' => array(
+//					'id' => array(
+//						'field_type' => 'string_value',
+//						'value' => $_POST['Search']['holiday']
+//					),
 					'location' => array(
 						'field_type' => 'string_value',
 						'value' => $_POST['Search']['location']

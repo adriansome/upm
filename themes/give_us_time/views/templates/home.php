@@ -19,9 +19,11 @@
 			<p>Once registered and verified,<br/> search here for a holiday.</p>
 			<form id="search-form" action="/search" method="post">
 			<div class="form-row">
-				<select>
-					<option>Choose When</option>
-				</select>
+				<?php
+				$this->widget('ListWidget',array(
+					'name'=>'holidays',
+					'scenario'=>'select',
+				)); ?>
 			</div>
 			<div class="form-row">			
 				<?php
@@ -32,6 +34,7 @@
 					$attributes = $listWidget->itemAttributes();
 					unset($listWidget);
 		
+					array_unshift($attributes['location']['values'],'Choose Where');
 					echo CHtml::dropDownList('Search[location]','', $attributes['location']['values']);
 				?>
 			</div>

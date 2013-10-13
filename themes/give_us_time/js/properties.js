@@ -43,7 +43,50 @@ $(document).ready( function() {
             } 
         });
     }    
-    
+
+    $('[data-toggle=\"modal\"]').live('click',function(e) {
+        e.preventDefault();
+        
+        var url = $(this).attr('href');
+        var target = $(this).attr('data-target');
+
+        if($(this).is('[data-index]'))
+            var fileFieldID = $(this).attr('data-index');
+
+        if (url.indexOf('#') == 0)
+            $(url).modal('open');
+        else
+        {
+            $.get(url,function(response) {
+                $(response).modal({backdrop: false, modalOverflow: true});
+
+                // Make modal window draggable.
+                $(target).draggable({ handle: ".modal-header" });
+                
+                // Initiate any rich text editors in the modal.
+                initRichTextEditors();
+            }).success(function() {
+                if(target == '#filemanager')
+                {
+                    var src = $('#fm-iframe').attr('src')+'&field_id=Content_'+fileFieldID+'_file_value';
+                    $('#fm-iframe').attr('src', src);
+                }
+
+                $(target).live('hidden',function() {
+                    $(target).remove();
+                    
+                    if(target != '#filemanager')
+                    {
+                        setTimeout(function() {
+                            flashMessage('warning','Reloading page...');
+                        }, 2500);
+                        window.location.reload(true);
+                    }
+                });
+            });
+        }
+    });
+
     // Handle modal actions
     $('[data-toggle=\"add-item\"]').live('click',function(e) {
         e.preventDefault();
