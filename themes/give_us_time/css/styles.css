@@ -84,6 +84,7 @@ h2 {
 }
 
 h3 {
+	color: #295e2d;
 	font-size: 14px;
 	font-size: 1.4rem;
 	font-weight: bold;
@@ -203,6 +204,42 @@ input[type=submit],
 	text-decoration: none;
 }
 
+/* CSS Tooltips */
+
+*[data-tooltip] {
+	position: relative;
+}
+
+*[data-tooltip]:before {
+	content: "";
+	position: absolute;
+	border-top: 20px solid #909979;
+	border-left: 15px solid transparent;
+	border-right: 15px solid transparent;
+	visibility: hidden;
+	top: -18px;
+	left: -5px;
+}
+
+*[data-tooltip]:after {
+	content: attr(data-tooltip);
+	position: absolute;
+	color: white;
+	top: -35px;
+	left: -26px;
+	background: #909979;
+	color: #fff;
+	padding: 5px 15px;
+	border-radius: 2px;
+	white-space: nowrap;
+	visibility: hidden;
+}
+
+*[data-tooltip]:hover:before, 
+*[data-tooltip]:hover:after {
+	visibility: visible;
+}
+
 /* Hover state overlays */
 
 input[type=submit],
@@ -256,6 +293,8 @@ nav:after,
 .inner-content:after,
 .constrained:before,
 .constrained:after,
+.news-item:before,
+.news-item:after,
 .form-row:before,
 .form-row:after,
 .nugget:before,
@@ -750,6 +789,11 @@ nav:after,
 
 /* ----- SEARCH RESULTS ------------------------------------------ */
 
+#main-content .resort-listing {
+	margin-left: 0px;
+	list-style-type: none;
+}
+
 .resort-listing > li {
 	position: relative;
 	margin-bottom: 14px;
@@ -870,6 +914,40 @@ ul > li.provisionally-booked,
 	line-height: 1;
 	text-align: right;
 }
+
+#main-content .facilities {
+	margin: 0;
+	list-style-type: none;
+}
+
+.facilities li {
+	display: inline-block;
+	width: 21px;
+	height: 20px;
+
+	background: transparent url(../images/icons-facilities.png) no-repeat;
+}
+
+.facilities li span {
+	display: none;
+}
+
+.facilities .disabled-access {
+	background-position: 0 0;
+}
+
+.facilities .beach {
+	background-position: -25px 0;
+}
+
+.facilities .child-friendly {
+	background-position: -50px 0;
+}
+
+.facilities .cancellation-fee {
+	background-position: -75px 0;
+}
+
 
 /* ----- RESORT DETAILS ------------------------------------------ */
 
@@ -1218,22 +1296,25 @@ label {
 }
 
 .news-item {
-	margin-top: 1em;
-	margin-bottom: 2em;
-	float: left;
-	clear: left;
-	overflow: hidden;
-	width: 100%;
+	margin-bottom: 3em;
 }
 
-.news-item .headline {
-	font-size: 1.6em;
-	display: block;
+.news-item .headline-wrapper {
+	margin-bottom: 1em;	
 	padding-bottom: 0.5em;
-	font-weight: bold;
-	border-bottom: 1px solid #333;
+	border-bottom: 1px solid #b9beae;
+
+	overflow: hidden;
 }
 
+.news-item .headline-wrapper h2 {
+	float: left;
+}
+
+.news-item .more {
+	float: right;
+}
+/*
 .news-item .image {
 	width: 20%;
 	float: left;
@@ -1247,21 +1328,9 @@ label {
 	width: 80%;
 	float: left;
 }
-
+*/
 .news-item .text.fullwidth {
 	width: 100%;
-}
-
-.news-item .headline .read-more {
-	float: right;
-	text-transform: uppercase;
-	font-size: 0.8em;
-	padding: 0.2em;
-	background: #DDD;
-}
-
-.news-item .text .inner {
-	padding-left: 2em;
 }
 
 #news .news-item .summary {

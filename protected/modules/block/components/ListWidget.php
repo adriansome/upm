@@ -8,6 +8,7 @@ class ListWidget extends CWidget
 	public $filters;
 	public $item_id;
 	public $item_slug;
+	public $viewData;
 
 	protected $config;
 	protected $page_id;
