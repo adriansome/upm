@@ -8,6 +8,7 @@ class ListWidget extends CWidget
 	public $filters;
 	public $item_id;
 	public $item_slug;
+	public $viewData;
 
 	protected $config;
 	protected $page_id;
@@ -173,6 +174,10 @@ class ListWidget extends CWidget
 
 				case 'file':
 					$contents[$content->name] = $content->file_value;
+					break;
+
+				case 'list':
+					$contents[$content->name] = $content->string_value;
 					break;
 
 				case 'boolean':
