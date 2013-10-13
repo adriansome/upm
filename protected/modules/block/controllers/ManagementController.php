@@ -199,7 +199,6 @@ class ManagementController extends BlockController
 	 */
 	public function actionUpdate($id,$list)
 	{
-
 		if(Yii::app()->request->urlReferrer !== $this->currentUrl)
 			Yii::app()->user->setReturnUrl(Yii::app()->request->urlReferrer);
 

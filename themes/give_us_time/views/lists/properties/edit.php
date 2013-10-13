@@ -3,7 +3,7 @@
 $data = $this->contents->getData();
 ?>
 <h1><?php echo "{$data['title']}, {$data['area']}" ?></h1>
-
+<input type="hidden" id="property-name" value="<?php echo $data['title'] ?>" />
 <div class="holidays-container"></div>
 
 <h2>Property Details: <?php echo $data['title'] ?></h2>

@@ -11,6 +11,8 @@
                 $user = $data['booked_by'];
                 $name = $user->initial . '. ' . $user->lastname;
                 $booked_by .= " by {$name}"; 
+            } else {
+                $data['booked_by'] = '';
             }
             
         }
@@ -25,8 +27,9 @@
 
         case 'provisionally-booked':
             ?>
-            <a class="action-button accept">Accept</a>
-            <a class="action-button reject" data-toggle="reject-item" data-id="<?php echo $data['block_id'] ?>"
+            <a class="action-button accept" data-toggle="accept-item" data-id="<?php echo $data['booked_by']->id ?>"
+               href="<?php echo Yii::app()->createUrl('/block/management/update/id/'.$data['block_id'].'/list/holidays'); ?>">Accept</a>
+            <a class="action-button reject" data-toggle="reject-item" data-id="<?php echo $data['booked_by']->id ?>"
                href="<?php echo Yii::app()->createUrl('/block/management/update/id/'.$data['block_id'].'/list/holidays'); ?>">Reject</a>
             <?php
             break;

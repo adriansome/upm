@@ -132,7 +132,9 @@ $(document).ready(function() {
     $('[data-toggle="reject-item"]').live('click', function(e) {
         e.preventDefault();
         var conf = confirm("Are you sure you want to reject this booking?");
-
+        
+        var user_id = $(this).data('id');
+        
         if (conf) {
             if ($('input[name=indexes]').length) {
                 // Create post array for edit
@@ -157,7 +159,24 @@ $(document).ready(function() {
                     dataType : 'json',
                     type: 'post',
                     success: function() {
-                        return false;
+                        updateList();
+                        // Send email to user
+                        $.ajax({
+                            url : '/user/management/sendNotification',
+                            data : {
+                                ajax: true,
+                                id: user_id,
+                                view_path: 'webroot.themes.give_us_time.views.emails.notification',
+                                params: {
+                                    'status': 'rejected',
+                                    'property_name' : $('#property-name').val()
+                                }
+                            },
+                            type: 'post',
+                            success: function(r) {
+                                console.log(r);
+                            }
+                        })
                     }
                 });
             } else {
@@ -165,6 +184,61 @@ $(document).ready(function() {
             }
         }
 
+    });
+    
+    $('[data-toggle="accept-item"]').live('click', function(e) {
+        
+        e.preventDefault();
+        
+        var conf = confirm("Are you sure you want to accept this booking?");
+        
+        var user_id = $(this).data('id');
+        
+        if (conf) {
+            if ($('input[name=indexes]').length) {
+                // Create post array for edit
+                var indexes = $('input[name="indexes"]').data();
+                var status = indexes.status;
+                var postData = {
+                    'Content' : {}
+                };
+                postData['Content'][status] = {
+                    'string_value': 'booked'
+                };
+                //postData = JSON.stringify(postData);
+                var url = $(this).attr('href');
+
+                $.ajax({
+                    url: url,
+                    data: postData,
+                    dataType : 'json',
+                    type: 'post',
+                    success: function() {
+                        updateList();
+                        // Send email to user
+                        $.ajax({
+                            url : '/user/management/sendNotification',
+                            data : {
+                                ajax: true,
+                                id: user_id,
+                                view_path: 'webroot.themes.give_us_time.views.emails.notification',
+                                params: {
+                                    'status': 'accepted',
+                                    'property_name' : $('#property-name').val()
+                                }
+                            },
+                            type: 'post',
+                            success: function(r) {
+                                console.log(r);
+                            }
+                        })
+                    }
+                });
+            } else {
+                alert('There was a problem accepting this booking.');
+            }
+        }
+        
     });
 
 

@@ -25,6 +25,11 @@ class ManagementController extends UserController
 				'users'=>array('@'),
 				'roles'=>array('admin'),
 			),
+                        array('allow',
+                            'users' => array('@'),
+                            'roles' => array('landlord'),
+                            'actions' => array('sendNotification')
+                        ),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -203,6 +208,46 @@ class ManagementController extends UserController
 
 		echo json_encode($response);
 	}
+        
+        /**
+         * Sends a notification email to the user
+         * 
+         * @param type $id
+         *      The ID of the user to send to
+         * @param string $viewPath
+         *      The view to use as a notification
+         */
+        public function actionSendNotification()
+        {
+            if (isset($_POST['ajax'])) {
+                if (!isset($_POST['id']) || !isset($_POST['view_path'])) {
+                    $response['error'] = "Missing required information to send notification";
+                } else {
+                    $id = (int)$_POST['id'];
+                    if (!$this->getViewFile($_POST['view_path']) || !$id) {
+                        $response['error'] = 'Invalid parameters';
+                    } else {
+                        $viewPath = $_POST['view_path'];
+                        $model = $this->loadModel($id);
+                        if (isset($_POST['params']) && is_array($_POST['params'])) {
+                            $params = $_POST['params'];
+                        } else {
+                            $params = array();
+                        }
+                        if ($model->sendNotification($viewPath, $params)) {
+                            $response['success'] = 'Notification sent';
+                        } else {
+                            $response['error'] = 'Could not send notification';
+                        }
+                    }
+                }
+                
+            } else {
+                $response['error'] = "Invalid request";
+            }
+            
+            echo json_encode($response);
+        }
 
 	/**
 	 * Returns the data model based on the primary key given in the GET variable.

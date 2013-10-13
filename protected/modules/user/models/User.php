@@ -344,6 +344,8 @@ class User extends CActiveRecord
 			$this->date_deleted = null;
 			$this->revert_code = null;
 		}
+               
+                else if ($this->scenario == 'sendNotification')
 
 		return parent::beforeSave();
 	}
@@ -356,7 +358,7 @@ class User extends CActiveRecord
 		$validationEmail->addTo($this->email);
 		$validationEmail->from = Yii::app()->params['adminEmail'];
 		Yii::app()->mail->send($validationEmail);
-	}
+        }
 
 	protected function sendCredentialsEmail()
 	{
@@ -378,6 +380,25 @@ class User extends CActiveRecord
 		$revertEmail->from = Yii::app()->params['adminEmail'];
 		Yii::app()->mail->send($revertEmail);
 	}
+        
+        /**
+         * Sends a notification
+         * @param type $view
+         * @param array $params
+         *      Additional params for view
+         */
+        public function sendNotification($view, array $params = array())
+        {
+            $this->email = 'jackstowey@gmail.com';
+            $notification = new YiiMailMessage;
+            $notification->view = $view;
+            $notification->setBody(array('data' => $this, 'params' => $params), 'text/html');
+            $notification->setSubject('Provisional Booking ' . ucfirst($params['status']));
+            $notification->addTo($this->email);
+            $notification->from = Yii::app()->params['adminEmail'];
+            return (Yii::app()->mail->send($notification));
+            
+        }
 
 	private function generateUniqueId()
 	{
