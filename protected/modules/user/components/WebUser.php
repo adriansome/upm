@@ -54,6 +54,11 @@ class WebUser extends CWebUser
         return $this->_checkUser('landlord');
     }
     
+    public function isUser()
+    {
+        return $this->_checkUser('user');
+    }
+    
     /**
      * Check the user against a role type
      */

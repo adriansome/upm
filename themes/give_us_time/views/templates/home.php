@@ -11,31 +11,40 @@
 		<div class="nugget" id="nugget-register">
 			<h2>Service Personnel Registration</h2>
 			<p>You need to be registered and verified<br/> to use this site. Click below to begin. </p>
-			<a href="#" class="more">Register to use site</a>
+			<a href="/register" class="more">Register to use site</a>
 		</div>
 
 		<div class="nugget" id="nugget-search">
 			<h2>Holiday Search</h2>
 			<p>Once registered and verified,<br/> search here for a holiday.</p>
+			<form id="search-form" action="/search" method="post">
 			<div class="form-row">
 				<select>
 					<option>Choose When</option>
 				</select>
 			</div>
 			<div class="form-row">			
-				<select>
-					<option>Choose Where</option>
-				</select>
+				<?php
+					$listWidget = new ListWidget();
+					$listWidget->name = 'properties';
+					$listWidget->init();
+			
+					$attributes = $listWidget->itemAttributes();
+					unset($listWidget);
+		
+					echo CHtml::dropDownList('Search[location]','', $attributes['location']['values']);
+				?>
 			</div>
 			<div class="form-row">
 				<input type="submit" class="more" value="Search For Holiday" />
 			</div>
+			</form>
 		</div>
 
 		<div class="nugget" id="nugget-donate">
 			<h2>Donate Time</h2>
 			<p>If you would like to donate a week<br/> of holiday time, click below.</p>
-			<a href="#" class="more">Donate holiday time</a>			
+			<a href="/register?type=landlord" class="more">Donate holiday time</a>			
 		</div>
 	</section>
 	<!-- End #home-upper -->

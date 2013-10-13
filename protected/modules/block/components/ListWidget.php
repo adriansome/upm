@@ -169,6 +169,10 @@ class ListWidget extends CWidget
 					$contents[$content->name] = $content->file_value;
 					break;
 
+				case 'list':
+					$contents[$content->name] = $content->string_value;
+					break;
+
 				case 'boolean':
 					$contents[$content->name] = $content->boolean_value;
 					break;
