@@ -393,7 +393,6 @@ class User extends CActiveRecord
          */
         public function sendNotification($view, array $params = array())
         {
-            $this->email = 'jackstowey@gmail.com';
             $notification = new YiiMailMessage;
             $notification->view = $view;
             $notification->setBody(array('data' => $this, 'params' => $params), 'text/html');
