@@ -51,7 +51,7 @@ class Menu extends CMenu
 
 					$menu_pages[$page['lv1ID']]['label'] = $page['label'];
 					$menu_pages[$page['lv1ID']]['active'] = ($_SERVER['REQUEST_URI'] == $page_uri);
-					$menu_pages[$page['lv1ID']]['visible'] = ($page['role'] == 'all' || (Yii::app()->user->isGuest && $page['role'] == 'guest') || ((!Yii::app()->user->isGuest && Yii::app()->user->role == $page['role']) || (($page['role'] == 'user' || $page['role'] == 'subscriber') && Yii::app()->user->isAdmin())));
+					$menu_pages[$page['lv1ID']]['visible'] = ($page['role'] == 'all' || (Yii::app()->user->isGuest && $page['role'] == 'guest') || ((!Yii::app()->user->isGuest && Yii::app()->user->role == $page['role']) || (($page['role'] == 'user' || $page['role'] == 'subscriber') && Yii::app()->user->isLoggedIn())));
 					$menu_pages[$page['lv1ID']]['url'] = Yii::app()->getBaseUrl(true).$page_uri;
 					     
 					if($page['lv2ID'] && $page['lv2Date_visible']){

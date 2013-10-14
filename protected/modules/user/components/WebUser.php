@@ -59,6 +59,11 @@ class WebUser extends CWebUser
         return $this->_checkUser('user');
     }
     
+    public function isLoggedIn()
+    {
+        return ($this->getIsGuest()) ? FALSE : TRUE;
+    }
+    
     /**
      * Check the user against a role type
      */

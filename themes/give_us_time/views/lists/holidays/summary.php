@@ -1,5 +1,6 @@
 <?php /* @var $data CArrayDataProvider */ ?>
-<li class="<?php echo $data['status']; ?>">
+<li data-start="<?php echo $data['arrival_date']; ?>" data-end="<?php echo $data['departure_date'] ?>" 
+    class="<?php echo $data['status']; ?>">
     <span class="timeframe"><?php output_holiday_dates($data['arrival_date'], $data['departure_date']) ?></span>
     <span class="capacity"><?php echo $data['number_of_bedrooms'] ?> Bed, Sleeps <?php echo $data['sleeps_number'] ?></span>
     <span class="status"><?php

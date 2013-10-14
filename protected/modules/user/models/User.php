@@ -224,7 +224,12 @@ class User extends CActiveRecord
 
 	public function getFullname()
 	{
-		return $this->firstname.' '.$this->lastname;
+                if (!$this->firstname) {
+                    $fullname = $this->initial . '. ' . $this->lastname;
+                } else {
+                    $fullname = $this->firstname . ' ' . $this->lastname;
+                }
+		return $fullname;
 	}
 
 	public function getreset_codeExpiryTime()
@@ -344,8 +349,6 @@ class User extends CActiveRecord
 			$this->date_deleted = null;
 			$this->revert_code = null;
 		}
-               
-                else if ($this->scenario == 'sendNotification')
 
 		return parent::beforeSave();
 	}
@@ -355,9 +358,10 @@ class User extends CActiveRecord
 		$validationEmail = new YiiMailMessage;
 		$validationEmail->view = 'user.views.mail.validationEmail';
 		$validationEmail->setBody(array('fullname'=>$this->fullname, 'uid'=>$this->activation_code), 'text/html');
+                $validationEmail->setSubject('Validate Email - ' . Yii::app()->name);
 		$validationEmail->addTo($this->email);
 		$validationEmail->from = Yii::app()->params['adminEmail'];
-		Yii::app()->mail->send($validationEmail);
+		return (Yii::app()->mail->send($validationEmail));
         }
 
 	protected function sendCredentialsEmail()

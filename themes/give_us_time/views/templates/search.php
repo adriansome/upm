@@ -1,6 +1,11 @@
-<?php $this->pageTitle = $model->window_title; ?>
+<?php $this->pageTitle = $model->window_title;
 
-<?php require_once(Yii::app()->theme->basepath.'/views/elements/header.php'); ?>
+// Redirect to home page if no search results provided
+if (!isset($_POST['Search'])) {
+    $this->redirect('/');
+}
+
+require_once(Yii::app()->theme->basepath.'/views/elements/header.php'); ?>
 
 	<div class="constrained">
 
@@ -10,16 +15,16 @@
 			<h1>Holiday search</h1>
 				<fieldset>
 					<div class="form-row">
-						<?php
-							$listWidget = new ListWidget();
-							$listWidget->name = 'properties';
-							$listWidget->init();
-					
-							$attributes = $listWidget->itemAttributes();
-							unset($listWidget);
-				
-							echo CHtml::dropDownList('Search[location]',$_POST['Search']['location'], $attributes['location']['values']);
-						?>
+                                        <?php
+                                        $listWidget = new ListWidget();
+                                        $listWidget->name = 'properties';
+                                        $listWidget->init();
+
+                                        $attributes = $listWidget->itemAttributes();
+                                        unset($listWidget);
+
+                                        echo CHtml::dropDownList('Search[location]',$_POST['Search']['location'], $attributes['location']['values']);
+                                        ?>
 					</div>
 					<div class="form-row">
 						<select>

@@ -299,8 +299,8 @@ nav:after,
 .form-row:after,
 .nugget:before,
 .nugget:after,
-.resort-listing > li:before,
-.resort-listing > li:after {
+.resort-listing li:before,
+.resort-listing li:after {
 	display: table;
 	clear: both;
 	content: ""
@@ -794,7 +794,7 @@ nav:after,
 	list-style-type: none;
 }
 
-.resort-listing > li {
+.resort-listing li {
 	position: relative;
 	margin-bottom: 14px;
 	padding: 14px;
@@ -809,7 +809,7 @@ ul li.provisionally-booked,
 	background: #ede4de;
 }
 
-.resort-listing > li > * {
+.resort-listing li > * {
 	margin-right: 10px;
 }
 
@@ -1237,6 +1237,11 @@ label {
 	width: 32%;
 }
 
+.booking-listing #properties .actions {
+    width: 30%;
+    float: right;
+    
+}
 .booking-listing .actions {
 	width: 20%;
 	text-align: right;

@@ -91,18 +91,23 @@ $(document).ready(function() {
     $('[data-toggle=\"add-item\"]').live('click', function(e) {
         e.preventDefault();
 
-        var url = $(this).attr('href');
+        var url = $(this).attr('href') + '?profile=true';
 
         $.get(url, function(response) {
             // Wait for the modal to appear and then amend property ID
-            $(response).on("shown.bs.modal", function() {
+            $(response).on("show.bs.modal", function() {
+                $(this).find('.modal-header').remove();
+                var text = (type == 'properties') ? 'property' : 'holiday';
+                // Append text to modal
+                $(this).find('#block-form').prepend('<h1>Please enter your ' + text + ' details</h1>')
+            }).on("shown.bs.modal", function() {
                 // Only do this if we're on the holidays page
                 if (type === 'holidays') {
                     // Check for an ID param
                     if (params.hasOwnProperty('id')) {
                         $('input[data-name="property_id"]').val(params.id);
                     }
-                }
+                }                
             }).modal();
 
             initRichTextEditors();
@@ -117,7 +122,12 @@ $(document).ready(function() {
 
         $.get(url, function(response)
         {
-            $(response).modal();
+            $(response).on("show.bs.modal", function() {
+                $(this).find('.modal-header').remove();
+                var text = (type == 'properties') ? 'property' : 'holiday';
+                // Append text to modal
+                $(this).find('#block-form').prepend('<h1>Please edit your ' + text + ' details</h1>');
+            }).modal();
             initRichTextEditors();
         });
 
@@ -134,6 +144,8 @@ $(document).ready(function() {
         var conf = confirm("Are you sure you want to reject this booking?");
         
         var user_id = $(this).data('id');
+        var holiday_start = $(this).parents('li').data('start');
+        var holiday_end = $(this).parents('li').data('end');        
         
         if (conf) {
             if ($('input[name=indexes]').length) {
@@ -169,7 +181,11 @@ $(document).ready(function() {
                                 view_path: 'webroot.themes.give_us_time.views.emails.notification',
                                 params: {
                                     'status': 'rejected',
-                                    'property_name' : $('#property-name').val()
+                                    'property_name' : $('#property-params').data('name'),
+                                    'landlord_name' : $('#landlord-params').data('name'),
+                                    'landlord_email': $('#landlord-params').data('email'),
+                                    'holiday_start' : holiday_start,
+                                    'holiday_end'   : holiday_end
                                 }
                             },
                             type: 'post',
@@ -193,6 +209,8 @@ $(document).ready(function() {
         var conf = confirm("Are you sure you want to accept this booking?");
         
         var user_id = $(this).data('id');
+        var holiday_start = $(this).parents('li').data('start');
+        var holiday_end = $(this).parents('li').data('end');
         
         if (conf) {
             if ($('input[name=indexes]').length) {
@@ -224,7 +242,11 @@ $(document).ready(function() {
                                 view_path: 'webroot.themes.give_us_time.views.emails.notification',
                                 params: {
                                     'status': 'accepted',
-                                    'property_name' : $('#property-name').val()
+                                    'property_name' : $('#property-params').data('name'),
+                                    'landlord_name' : $('#landlord-params').data('name'),
+                                    'landlord_email': $('#landlord-params').data('email'),
+                                    'holiday_start' : holiday_start,
+                                    'holiday_end'   : holiday_end
                                 }
                             },
                             type: 'post',
@@ -269,11 +291,11 @@ $(document).ready(function() {
         }
         var refreshUrl = $(this).data('href');
 
-        var form = $('#block-form');
+        var form = $(this).parents('#block-management').find('.modal-body form');
         $.ajax({
             type: 'POST',
             dataType: 'json',
-            data: $('form').serialize(),
+            data: form.serialize(),
             url: $(this).attr('href'),
             success: function(data) {
                 if (data.success)

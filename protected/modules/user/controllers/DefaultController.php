@@ -143,6 +143,7 @@ class DefaultController extends UserController
 	 */
 	public function actionRegister()
 	{
+
 		$model=new User;
 		$model->scenario = 'register';
 	
@@ -216,15 +217,15 @@ class DefaultController extends UserController
 	{
 		$model=$this->loadByUid('activation_code', $uid);
 		$model->scenario = 'validate';
-
 		if(empty($model->date_email_validated))
 		{
 			$model->save();
-			$this->setRefererSessionData($model->username);
+			$this->setRefererSessionData($model->email, $model->id, $model->email);
 			$this->redirect(array('login'));
 		}
-		else
+		else {
 			$this->redirect(array('login'));
+                }
 	}
 
 	/**
@@ -537,7 +538,11 @@ class DefaultController extends UserController
 		if (isset($this->_formFields[$regType])) {
 			$fields = $this->_formFields[$regType]['fields'];
 			foreach ($fields as $field_name => $properties) {
-				$model->$field_name = $attributes[$field_name];
+                            // Convert string to bool for checkboxes
+                            if(isset($properties['type']) && $properties['type'] == 'checkbox') {
+                                $attributes[$field_name] = ($attributes[$field_name]) ? 1 : 0;
+                            }
+                            $model->$field_name = $attributes[$field_name];
 			}
 		}
 		
@@ -547,12 +552,13 @@ class DefaultController extends UserController
 
 		if($model->save())
 		{
-			if($action == 'registrationSuccess')
-				$this->setRefererSessionData($model->email, $model->id, $model->email);
+			if($action == 'registrationSuccess') {
+                            $this->setRefererSessionData($model->email, $model->id, $model->email);
+                        }
 
 			$this->redirect(array($action));
 		}
-		
+
 		return $model;
 	}
 

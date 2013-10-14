@@ -94,8 +94,8 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
 					<?php
 					if ($step_name !== 'confirmation' || $name == 'date_terms_agreed' || $name == 'captcha_code') {
 						if (!isset($properties['type'])) {
-							// Default to text if no type set
-							$properties['type'] = 'text';
+                                                    // Default to text if no type set
+                                                    $properties['type'] = 'text';
 						}
 						switch ($properties['type']) {
 							case 'dropdown':
