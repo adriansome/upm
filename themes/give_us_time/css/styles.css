@@ -299,8 +299,8 @@ nav:after,
 .form-row:after,
 .nugget:before,
 .nugget:after,
-.resort-listing li:before,
-.resort-listing li:after {
+.resort-listing > li:before,
+.resort-listing > li:after {
 	display: table;
 	clear: both;
 	content: ""
@@ -794,7 +794,7 @@ nav:after,
 	list-style-type: none;
 }
 
-.resort-listing li {
+.resort-listing > li {
 	position: relative;
 	margin-bottom: 14px;
 	padding: 14px;
@@ -804,12 +804,12 @@ nav:after,
 	box-sizing: border-box;
 }
 
-ul li.provisionally-booked,
+ul > li.provisionally-booked,
 .status.provisionally-booked {
 	background: #ede4de;
 }
 
-.resort-listing li > * {
+.resort-listing > li > * {
 	margin-right: 10px;
 }
 
@@ -823,7 +823,8 @@ ul li.provisionally-booked,
 	width: 202px;
 }
 
-.resort-listing .column:last-child {
+.resort-listing .column:last-child,
+.resort-listing .column.last {
 	width: 375px;
 }
 
@@ -1062,9 +1063,13 @@ ul li.provisionally-booked,
 }
 
 label {
-	color: #a9a4a4;
 	font-size: 14px;
 	font-size: 1.4rem;
+}
+
+label,
+.standard-form .form-column-wrapper p {
+	color: #a9a4a4;
 }
 
 #main-content ol.form-steps {
@@ -1120,6 +1125,11 @@ label {
 	border-top: 1px solid #d6d6d6;
 }
 
+.modal .standard-form {
+	padding: 0;
+	border-top: none;
+}
+
 .standard-form fieldset {
 	margin-top: 20px;
 }
@@ -1146,6 +1156,7 @@ label {
 }
 
 .standard-form input[type=text],
+.standard-form input[type=email],
 .standard-form input[type=password],
 .standard-form textarea,
 .standard-form select,
@@ -1171,25 +1182,47 @@ label {
 	width: 100%;
 }
 
-.form-wrapper .errorMessage {
-	margin-top: 8px;
-	color: red;
+.standard-form .form-value {
+	display: inline-block;
+	padding: 6px 0;
+	color: #444;
+	font-size: 14px;
+	font-size: 1.4rem;
 }
 
-.form-wrapper img#yw0 {
+.standard-form .back,
+form .back {
 	float: left;
 }
 
+.form-wrapper .errorMessage {
+	margin-top: 8px;
+	color: #b22;
+}
+
+.form-wrapper img#yw0 {
+	display: block;
+}
+
 .form-wrapper #User_captcha_code {
-	width: 60%;
+	width: 50%;
+	margin-right: 5px;
+}
+
+#yw0_button {
+	color: #a9a4a4;
+	font-size: 14px;
+	font-size: 1.4rem;
 }
 
 .form-wrapper .step {
 	display: none;
 }
+
 .form-wrapper .step.active {
 	display: block;
 }
+
 
 /* ----- LANDLORD PAGES ------------------------------------------ */
 
@@ -1240,8 +1273,8 @@ label {
 .booking-listing #properties .actions {
     width: 30%;
     float: right;
-    
 }
+
 .booking-listing .actions {
 	width: 20%;
 	text-align: right;
