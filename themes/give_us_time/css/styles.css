@@ -1125,6 +1125,16 @@ label,
 	border-top: 1px solid #d6d6d6;
 }
 
+.standard-form.landlord-login {
+	padding-top: 0;
+	border-top: none;
+}
+
+.standard-form.landlord-login fieldset .form-row {
+	margin-top: 7px;
+	margin-bottom: 5px;
+}
+
 .modal .standard-form {
 	padding: 0;
 	border-top: none;
@@ -1148,6 +1158,12 @@ label,
 	float: left;
 	width: 34%;
 	padding: 6px 0;
+}
+
+.standard-form h3,
+.step h3 {
+	margin-bottom: 14px;
+	margin-bottom: 1.4rem;
 }
 
 .standard-form .validation {
@@ -1226,12 +1242,13 @@ form .back {
 
 /* ----- LANDLORD PAGES ------------------------------------------ */
 
-
-.booking-listing {
+#main-content .booking-listing {
 	margin: 15px 0;
 	color: #333;
 	font-size: 14px;
 	font-size: 1.4rem;
+	line-height: normal;
+	list-style-type: none;
 }
 
 .booking-listing li {
