@@ -1196,6 +1196,7 @@ label,
 }
 
 .standard-form .form-column-wrapper input[type=text],
+.standard-form .form-column-wrapper input[type=email],
 .standard-form .form-column-wrapper input[type=password],
 .standard-form .form-column-wrapper textarea,
 .standard-form .form-column-wrapper select {
@@ -1241,6 +1242,8 @@ form .back {
 .standard-form .errorMessage {
 	margin-top: 8px;
 	color: #b22;
+	font-size: 12px;
+	font-size: 1.2rem;	
 }
 
 .form-wrapper img#yw0 {
@@ -1434,11 +1437,6 @@ form .back {
 	width: 90%;
 	min-width: 330px;
 	max-width: 550px;
-}
-
-#login-form .errorMessage {
-	font-size: 12px;
-	font-size: 1.2rem;
 }
 
 /* Tweak styles to match PSDs: */
