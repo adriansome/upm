@@ -25,7 +25,7 @@
 .modal .list-view,
 .modal .item-view
 {
-	width: 48%;
+	width: 49%;
 }
 
 .modal .list-view {
@@ -368,6 +368,7 @@
 	border: 1px solid #313131;
 	border-top-color: #646464;
 	border-bottom-color: #0a0a0a;
+	border-radius: 4px;
 
 	box-shadow: none;
 	text-shadow: none;
@@ -392,9 +393,11 @@
 	text-align: center;
 }
 
-.modal-scrollable .close:hover {
+.modal-scrollable .close:hover,
+.modal-scrollable .close:focus {
 	color: #ccc;
-	text-decoration: none !important;
+	opacity: 1;
+	text-decoration: none !important;	
 }
 
 .modal .btn.add {
