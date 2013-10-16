@@ -69,7 +69,7 @@ $(function()
         $('#flashMessage').removeClass().addClass('alert alert-'+status).html(content).fadeIn(function() {
             setTimeout(function() {
                 $('#flashMessage').fadeOut();
-            }, 5000);
+            }, 7000);
         });
     }
 
