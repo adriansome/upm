@@ -1237,7 +1237,8 @@ form .back {
 	float: left;
 }
 
-.form-wrapper .errorMessage {
+.form-wrapper .errorMessage,
+.standard-form .errorMessage {
 	margin-top: 8px;
 	color: #b22;
 }
@@ -1418,6 +1419,26 @@ form .back {
 	color: #777;
 	padding-top: 1em;
 	text-align: left;
+}
+
+/* ----- LOGIN --------------------------------------------------- */
+
+#page-login {
+	height: 100%;
+	padding: 15px;
+}
+
+#page-login #content {
+	margin: 0 auto;
+	padding: 25px 0;
+	width: 90%;
+	min-width: 330px;
+	max-width: 550px;
+}
+
+#login-form .errorMessage {
+	font-size: 12px;
+	font-size: 1.2rem;
 }
 
 /* Tweak styles to match PSDs: */
