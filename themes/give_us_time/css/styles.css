@@ -1190,12 +1190,38 @@ label,
 	margin-right: 54%
 }
 
+.standard-form .row label ~ input[type=checkbox] {
+	margin-left: 2%;
+	font-size: 30px;
+}
+
 .standard-form .form-column-wrapper input[type=text],
 .standard-form .form-column-wrapper input[type=password],
 .standard-form .form-column-wrapper textarea,
 .standard-form .form-column-wrapper select {
 	float: none;
 	width: 100%;
+}
+
+.standard-form .filemanager-row input[type=text] {
+	float: left;
+	width: 41%;
+	margin-left: 2%;
+}
+
+.standard-form .filemanager-row .button-link {
+	position: relative;
+	top: 1px;
+	float: left;
+	margin-left: 2%
+}
+
+.modal-footer .discard {
+	margin-right: 10px;
+	color: #333;
+	font-size: 13px;
+	font-size: 1.3rem;
+
 }
 
 .standard-form .form-value {
