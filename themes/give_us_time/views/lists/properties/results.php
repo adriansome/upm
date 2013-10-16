@@ -68,9 +68,11 @@ $dataProvider = new CArrayDataProvider($allHolidays);
     $itemCount = count($allHolidays);
     $summaryText = "<p>We have {$itemCount} match";
     $summaryText .= ($itemCount > 1) ? 'es' : '';
-    $summaryText .= " for {$locationText}";
-    if ($dateStart) {
-        $summaryText .= " beginning in the week of {$dateTextFull}</p>";
+    if ($dateText || $locationText) {
+        $summaryText .= " for {$locationText}";
+        if ($dateStart) {
+            $summaryText .= " beginning in the week of {$dateTextFull}</p>";
+        }
     }
     $this->widget('zii.widgets.CListView', array(
             'id'=>'holidays',

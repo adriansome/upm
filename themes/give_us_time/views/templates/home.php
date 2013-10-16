@@ -20,7 +20,7 @@
 			<form id="search-form" action="/search" method="post">
 			<div class="form-row">
                             <?php
-                            $weeks[''] = 'Choose When';
+                            $weeks[''] = 'Any Week';
                             $weeks += Yii::app()->utility->get_week_options('M d, Y');
                             
                             echo CHtml::dropDownList('Search[holiday]','', $weeks);
@@ -35,7 +35,7 @@
 					$attributes = $listWidget->itemAttributes();
 					unset($listWidget);
 		
-					array_unshift($attributes['location']['values'],'Choose Where');
+					array_unshift($attributes['location']['values'],'Any Location');
 					echo CHtml::dropDownList('Search[location]','', $attributes['location']['values']);
 				?>
 			</div>

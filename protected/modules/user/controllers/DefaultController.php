@@ -308,10 +308,10 @@ class DefaultController extends UserController
 
 		if(isset($_POST['CredentialsForm']))
 		{
-			$model->attributes=$_POST['CredentialsForm'];
-			// validate user input and redirect to the previous page if valid
-			if($model->validate() && $model->sendEmail())
-				$this->redirect($this->createUrl('/user/default/reminderSent'));
+                    $model->attributes=$_POST['CredentialsForm'];
+                    // validate user input and redirect to the previous page if valid
+                    if($model->validate() && $model->sendEmail())
+                            $this->redirect($this->createUrl('/user/default/reminderSent'));
 		}
 
 		$this->render('forgottenCredentials',array(
@@ -326,9 +326,10 @@ class DefaultController extends UserController
 
 	public function actionResetPassword($uid)
 	{
+            
 		$model=$this->loadByUid('reset_code', $uid);
 
-	    $model->scenario = 'updatePassword';
+                $model->scenario = 'updatePassword';
 
 		// Get current time from MySQL server as unix timestamp.
 		$command=Yii::app()->db->createCommand("SELECT NOW() as 'now';")->queryAll();
@@ -340,10 +341,10 @@ class DefaultController extends UserController
 			{
 				$model->password1 = $_POST['User']['password1'];
 				$model->password2 = $_POST['User']['password2'];
-				
-				if($model->save())
+
+                                if($model->save())
 				{
-					$this->setRefererSessionData($model->username);
+					$this->setRefererSessionData($model->email, null, $model->email);
 					$this->redirect(array('login'));
 				}
 			}

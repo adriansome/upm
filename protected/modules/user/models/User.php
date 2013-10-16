@@ -123,15 +123,15 @@ class User extends CActiveRecord
 			array('personnel_type, personnel_rank, personnel_service_number, personnel_unit,
 					email, email_confirm, lastname, title, initial, phone_number, date_terms_agreed',
 					'required',
-					'on'=>'insert, register, update, adminUpdate'),
+					'on'=>'register'),
 			array('firstname, lastname, email, phone_number, date_terms_agreed', 'required', 'on' => 'register_landlord'),
 			array('fullname', 'safe'),
 			array('password1, password2', 'required', 'on'=>'register, passwordReset, updatePassword'),
-			array('currentPassword', 'required', 'on'=>'emailRevert, updateEmail, updatePassword'),
-			array('currentPassword', 'authenticate', 'on'=>'emailRevert, updateEmail, updatePassword'),
+			array('password1, password2', 'required', 'on'=>'emailRevert, updateEmail, updatePassword'),
+			//array('currentPassword', 'authenticate', 'on'=>'emailRevert, updateEmail, updatePassword'),
 			array('role', 'required', 'on'=>'adminUpdate'),
 			array('email, old_email, firstname, lastname', 'length', 'max'=>140),
-			array('captcha_code', 'captcha', 'on' => 'register'),
+			array('captcha_code', 'captcha', 'on' => 'register, register_landlord'),
 			array('password', 'length', 'max'=>60),
 			array('password2', 'compare', 'compareAttribute'=>'password1'),
 			array('email_confirm', 'compare', 'compareAttribute' => 'email', 'on' => 'register'),
@@ -236,7 +236,7 @@ class User extends CActiveRecord
 	public function getreset_codeExpiryTime()
 	{
 		// Return time 1 hour from when reset request was made.
-		return (strtotime($this->dateReset)+3600);
+		return (strtotime($this->date_reset)+3600);
 	}
 
 	public function setPurgeRecord($value)
@@ -371,7 +371,8 @@ class User extends CActiveRecord
 		$credentialsEmail = new YiiMailMessage;
 		$credentialsEmail->view = 'user.views.mail.credentialsEmail';
 		$credentialsEmail->setBody(array('fullname'=>$this->fullname, 'username'=>$this->username, 'uid'=>$this->reset_code, 'uidExpires'=>$uidExpires), 'text/html');
-		$credentialsEmail->addTo($this->email);
+		$credentialsEmail->setSubject('Reset Password Request - ' . Yii::app()->name);
+                $credentialsEmail->addTo($this->email);
 		$credentialsEmail->from = Yii::app()->params['adminEmail'];
 		Yii::app()->mail->send($credentialsEmail);
 	}
@@ -417,7 +418,7 @@ class User extends CActiveRecord
 
 	public function resetCredentials()
 	{
-		$this->dateReset = new CDbExpression('NOW()');
+		$this->date_reset = new CDbExpression('NOW()');
 		$this->reset_code = $this->generateUniqueId();
 		$this->sendCredentialsEmail();
 		return $this->save();
