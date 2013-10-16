@@ -7,8 +7,9 @@ $this->pageTitle=Yii::app()->name . ' - Login';
 $this->breadcrumbs=array(
 	'Login',
 );
-?>
 
+?>
+<div id="page-login">
 <div id="content">
 	<h1>Login</h1>
 
@@ -17,7 +18,7 @@ $this->breadcrumbs=array(
 		if(!empty($referer))
 		{
 			if(!empty($email))
-				$data = array('email'=>$email);
+                            $data = array('email'=>$email);
 		
 			$this->renderPartial('_'.$referer, $data);
 		}
@@ -29,6 +30,9 @@ $this->breadcrumbs=array(
 	<div class="form">
 	<?php $form=$this->beginWidget('CActiveForm', array(
 		'id'=>'login-form',
+                'htmlOptions' => array(
+                    'class' => 'standard-form'
+                ),
 		'enableClientValidation'=>true,
 		'clientOptions'=>array(
 			'validateOnSubmit'=>true,
@@ -37,13 +41,13 @@ $this->breadcrumbs=array(
 
 		<p class="note">Fields with <span class="required">*</span> are required.</p>
 
-		<div class="row">
+		<div class="form-row">
 			<?php echo $form->labelEx($model,'username'); ?>
 			<?php echo $form->textField($model,'username'); ?>
 			<?php echo $form->error($model,'username'); ?>
 		</div>
 
-		<div class="row">
+		<div class="form-row">
 			<?php echo $form->labelEx($model,'password'); ?>
 			<?php echo $form->passwordField($model,'password'); ?>
 			<?php echo $form->error($model,'password'); ?>
@@ -53,15 +57,16 @@ $this->breadcrumbs=array(
 			<?php echo $form->checkBox($model,'rememberMe'); ?>
 			<?php echo $form->label($model,'rememberMe'); ?>
 			<?php echo $form->error($model,'rememberMe'); ?>
-			<p class="hint">
-				<?php echo CHtml::link('Forgotten Username Or Password?', $this->createUrl('/user/default/forgottenCredentials')); ?>
-			</p>
 		</div>
 
-		<div class="row buttons">
+		<div class="form-row button-row">
+			<p class="hint">
+				<?php echo CHtml::link('Forgotten Username Or Password?', $this->createUrl('/user/default/forgottenCredentials')); ?>
+			</p>                    
 			<?php echo CHtml::submitButton('Login'); ?>
 		</div>
 
 	<?php $this->endWidget(); ?>
 	</div><!-- form -->
+</div>
 </div>

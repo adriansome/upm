@@ -17,7 +17,30 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
 	
 		<div class="inner-content form-wrapper">
 		<?php
-		
+                
+                if ( Yii::app()->request->getQuery('type') == 'landlord') {
+                ?>
+                    <form class="standard-form" method="post" action="/login">
+                        <h3>Existing Members</h3>
+                        <p>Already registered? Log in below.</p>
+                        
+                        <fieldset>
+                            <div class="form-row">
+                                <label>Username</label>
+                                <input type="text" name="LoginForm[username]" />
+                            </div>
+                            <div class="form-row">
+                                <label>Password</label>
+                                <input type="password" name="LoginForm[password]" />
+                            </div>
+                            <div class="form-row button-row">
+                                <input type="submit" value="Login" />
+                            </div>
+                        </fieldset>
+                    </form>
+                <?php
+                }
+                
 		if (count($steps) > 1) {
 		?>
 		<ol class="form-steps">
@@ -34,7 +57,9 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
 		</ol>	
 		<?php
 		}
-		
+		?>
+                <h3>New User</h3>    
+                <?php
 		// If steps have not been specified, output all fields in one step
 		if (!isset($steps)) {
 			$steps = array('');
@@ -79,9 +104,6 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
 			?>
 
 			<?php
-			if ($step_name !== 'confirmation') {
-				//echo $form->errorSummary($model);
-			}
 			$labels = $model->attributeLabels();
 		
 			CHtml::$afterRequiredLabel = ' <span>(required)</span>';
@@ -165,7 +187,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
 
 		}
                 ?>
-                <input type="hidden" id="reg-type" value="<?php echo Yii::app()->request->getQuery('type', 'user');; ?>" />
+                <input type="hidden" id="reg-type" value="<?php echo Yii::app()->request->getQuery('type', 'user'); ?>" />
                 <form method="post">
                 <div id="ajax-register" class="hidden">
                 </div>
