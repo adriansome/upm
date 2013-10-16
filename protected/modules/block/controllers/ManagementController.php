@@ -197,7 +197,7 @@ class ManagementController extends BlockController
 	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
-	public function actionUpdate($id,$list)
+	public function actionUpdate($id,$list='')
 	{
 		if(Yii::app()->request->urlReferrer !== $this->currentUrl)
 			Yii::app()->user->setReturnUrl(Yii::app()->request->urlReferrer);
