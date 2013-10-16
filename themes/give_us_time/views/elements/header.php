@@ -13,7 +13,17 @@
 			<input type="submit" name="yt0" value="Login" />
 		</form>
 		</div>
-		<?php endif?>
+                <?php elseif(Yii::app()->user->isLandlord()): ?>
+                <div class="login">
+                    <form action="/logout">
+                        <p>Welcome <?php echo Yii::app()->user->firstname 
+                            . ' ' . Yii::app()->user->lastname ?></p>
+                        <a href="/profile" class="message">Profile</a>
+                        <input type="submit" value="Logout" />
+                    </form>
+                </div>
+                <?php endif; ?>
+
 	</div>
 
 	<nav id="main-navigation">

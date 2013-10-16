@@ -65,15 +65,26 @@
 				"maxlength" : 300
 			}
         },
-
-        "facilities":
+                
+        "disabled_access":
         {
-            "type": "multiline",
-            "rules":
-            {
-				"maxlength" : 300
-			}
+            "type": "boolean"
         },
+                
+        "beach":
+        {
+            "type": "boolean"
+        },
+
+        "child_friendly":
+        {
+            "type": "boolean"
+        },
+                
+        "cancellation_fee":
+        {
+            "type": "boolean"
+        },                
 
         "accessibility":
         {

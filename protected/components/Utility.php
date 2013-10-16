@@ -26,5 +26,26 @@ class Utility extends CApplicationComponent {
 	  }
 	  return $string;
 	}
+        
+    /**
+     * Outputs a weeks select dropdown in the specified format
+     * @param string $format
+     *      The format to output the week select in
+     */
+    public function get_week_options($format)
+    {
+        // Get the first day of the current week
+        $current_date =  strtotime(date('Y-m-d', strtotime('last week')));
+        
+        for ($i = 1; $i <= 52; $i++) {
+            $this_date = date($format, strtotime('next week', $current_date));
+            $current_date = strtotime($this_date);
+            $week_value = date('Y-m-d', strtotime($this_date));
+            $weeks[$week_value] = $this_date;
+        }
+        
+        return $weeks;
+        
+    }
 }
 ?>

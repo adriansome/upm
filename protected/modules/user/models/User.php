@@ -199,7 +199,8 @@ class User extends CActiveRecord
 			'date_revert' => 'Date Revert',
 			'dateReset' => 'Date Reset',
 			'date_deleted' => 'Date Deleted',
-			'searchTerm' => 'Search Name or E-mail Address'
+			'searchTerm' => 'Search Name or E-mail Address',
+                        'captcha_code' => 'Please enter the displayed code'
 		);
 	}
 

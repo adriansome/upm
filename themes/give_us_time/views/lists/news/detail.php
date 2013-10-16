@@ -1,5 +1,5 @@
 <?php
-$data = $this->contents->getData();
+$data = $this->contents->rawData;
 ?>
 
 <div class="news-item">

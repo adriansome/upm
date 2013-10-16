@@ -24,6 +24,7 @@
 		<?php Yii::app()->clientScript->registerCssFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('bootstrap.assets.css')).'/bootstrap-wysihtml5.css'); ?>
 
 		<!-- Import application components js and css files. -->
+                <?php Yii::app()->clientScript->registerCssFile(Yii::app()->getModule('page')->getAssets() . '/js/nestedsortable/nestedSortable.css');?>
 		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/bootstrap-modal.js'); ?>
 		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/bootstrap-modalmanager.js'); ?>
 		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/adminzone.js'); ?>	
@@ -33,7 +34,6 @@
 		<?php Yii::app()->clientScript->registerCoreScript('jquery');?>
 		<?php Yii::app()->clientScript->registerCoreScript('jquery.ui');?>
 		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getModule('page')->getAssets() . '/js/nestedsortable/jquery.ui.nestedSortable.js');?>
-		<?php Yii::app()->clientScript->registerCssFile(Yii::app()->getModule('page')->getAssets() . '/js/nestedsortable/nestedSortable.css');?>
 
 		<style>
 		.in-page-edit.btn-link

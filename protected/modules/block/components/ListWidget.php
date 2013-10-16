@@ -42,6 +42,7 @@ class ListWidget extends CWidget
 		else {
 			$this->loadItems();
 		}
+
 	}
 
 	protected function configure()
@@ -72,7 +73,7 @@ class ListWidget extends CWidget
 		
 		if(isset($this->maxItems))
 			$params['limit'] = $this->maxItems;
-		
+                
 		if ($this->filters) {
 			$sql = "SELECT b.* "
 				. "FROM block AS b "
@@ -80,9 +81,23 @@ class ListWidget extends CWidget
 				. "ON c.`block_id` = b.`id` "
 				. "WHERE b.`name` LIKE '{$this->name} item%' ";
 			foreach ($this->filters as $field => $fieldData) {
-				$fieldType = $fieldData['field_type'];
-				$value = $fieldData['value'];
-				$sql .= "AND c.`name` = '{$field}' AND `{$fieldType}` = '{$value}'";
+                            if ($fieldData['field_type'] == 'date_value') {
+                                $sql .= " AND c.`name` = '{$field}' AND ";
+                                switch ($fieldData['operator']) {
+                                    case 'BETWEEN':
+                                        $sql .= "c.`date_value` BETWEEN "
+                                            . "'{$fieldData['start_date']}' AND "
+                                            . "'{$fieldData['end_date']}'";
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            } else {
+                                $fieldType = $fieldData['field_type'];
+                                $value = $fieldData['value'];
+                                $sql .= " AND c.`name` = '{$field}' AND c.`{$fieldType}` = '{$value}'";                               
+                            }
+
 			}
 			$items = Block::model()->findAllBySql($sql, $params);
 		} else {
@@ -98,17 +113,19 @@ class ListWidget extends CWidget
 			$list[$index] = $this->loadContents($item);
 			$list[$index]['block_id'] = $item->id;
 		}
-                
-		if(isset($this->pageSize))
-			$pagination = array('pageSize'=>$this->pageSize);
-		else
-			$pagination = false;
 
-		$this->contents = new CArrayDataProvider($list, array(
+		$dataProvider = new CArrayDataProvider($list, array(
 		    'id'=>'title',
-		    'keyField'=>'title',
-		    'pagination'=>$pagination,
+		    'keyField'=>'title'
 		));
+                
+		if(isset($this->pageSize)) {
+                    $dataProvider['pagination'] = array(
+                        'pageSize' => $this->pageSize
+                    );
+                }
+                
+                $this->contents = $dataProvider;
 	}
 	
 	/**
@@ -134,15 +151,15 @@ class ListWidget extends CWidget
 
                     $item = Block::model()->findBySql($sql);
 		}
-		
+
 		// Make sure we have the record
 		if ($item) {
 			$content = $this->loadContents($item);
 
 			$this->contents = new CArrayDataProvider($content, array(
 				'id'=>'title',
-				'keyField'=>'title'
-			));			
+				//'keyField'=>'title'
+			));
 		}
 		
 	}

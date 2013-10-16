@@ -299,8 +299,8 @@ nav:after,
 .form-row:after,
 .nugget:before,
 .nugget:after,
-.resort-listing > li:before,
-.resort-listing > li:after {
+.resort-listing li:before,
+.resort-listing li:after {
 	display: table;
 	clear: both;
 	content: ""
@@ -941,7 +941,7 @@ ul > li.provisionally-booked,
 	background-position: -25px 0;
 }
 
-.facilities .child-friendly {
+.facilities .child_friendly {
 	background-position: -50px 0;
 }
 

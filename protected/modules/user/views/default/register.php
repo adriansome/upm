@@ -68,7 +68,12 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
 				'htmlOptions' => array(
 					'class' => 'standard-form'
 				),
-				'enableAjaxValidation'=>false,
+				'enableAjaxValidation'=>true,
+                                'clientOptions' => array(
+                                    'validateOnSubmit' => true,
+                                    'validateOnChange' => true,
+                                    'afterValidate' => 'js:updateStep'
+                                ),
 				'enableClientValidation' => true
 			));
 			?>
@@ -98,37 +103,40 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
                                                     $properties['type'] = 'text';
 						}
 						switch ($properties['type']) {
-							case 'dropdown':
-								$list = $name . '_dropdown';
-								$listArray = $model->$list;
-								$none = array('' => 'Please select...');
-								$listArray = $none + $listArray;
-								echo $form->dropDownList($model, $name, $listArray);
-								break;
-							case 'checkbox':
-								echo $form->checkBox($model, $name);
-								break;
-							case 'textarea':
-								echo $form->textArea($model, $name);
-								break;
-							case 'password':
-								echo $form->passwordField($model, $name);
-								break;
-							case 'email':
-								echo $form->emailField($model, $name);
-								break;
-							case 'captcha':
-								$form->widget('CCaptcha');
-								echo $form->textField($model, $name);
-								break;
-							default:
-								echo $form->textField($model, $name);
-								break;
+                                                    case 'dropdown':
+                                                            $list = $name . '_dropdown';
+                                                            $listArray = $model->$list;
+                                                            $none = array('' => 'Please select...');
+                                                            $listArray = $none + $listArray;
+                                                            echo $form->dropDownList($model, $name, $listArray);
+                                                            break;
+                                                    case 'checkbox':
+                                                            echo $form->checkBox($model, $name);
+                                                            break;
+                                                    case 'textarea':
+                                                            echo $form->textArea($model, $name);
+                                                            break;
+                                                    case 'password':
+                                                            echo $form->passwordField($model, $name);
+                                                            break;
+                                                    case 'email':
+                                                            echo $form->emailField($model, $name);
+                                                            break;
+                                                    case 'captcha':
+                                                            $form->widget('CCaptcha', array(
+                                                                'buttonLabel' => false
+                                                            ));
+                                                            echo $form->textField($model, $name);
+                                                            echo "<a id='yw0_button' class='captcha_link' href='/user/captcha/?refresh=1'>Try a different code</a>";
+                                                            break;
+                                                    default:
+                                                            echo $form->textField($model, $name);
+                                                            break;
 						}
 						echo (isset($properties['tooltip'])) ? $properties['tooltip'] : '';
 						echo $form->error($model, $name);
 					} else {
-						echo "<span></span>";
+						echo '<span class="form-value"></span>';
 					}				
 					?>
 					</div>
@@ -137,35 +145,31 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
 				unset($fields[$name]);
 				$x++;
 			}
-			
-			$this->endWidget();
 			?>
 			<div class="form-row button-row">
-				<form method="post">
 				<?php
 				if ($step_count >= 1) {
 					echo "<a class='back' href='#'>Back</a>";
 				}
-				if ($total_steps == ($step_count + 1)) {
-					?>
-					
-					<?php echo CHtml::submitButton('Submit'); ?>
-					
-					<?php
-				} else {
-					?>
-					<a class="more">Next</a>
-					<?php
-				}
-				?>
-				<div class="hidden"></div>
-				</form>
-			</div>				
+                                
+                                $buttonText = ($total_steps === ($step_count + 1)) ? 'Submit' : 'Next'
+                                ?>
+                                
+                                <a class="more"><?php echo $buttonText ?></a>
+                        </div>
 			<?php
 			echo '</div>';
-			$step_count++;
+			$step_count++;                        
+			
+			$this->endWidget();
+
 		}
-		?>
+                ?>
+                <input type="hidden" id="reg-type" value="<?php echo Yii::app()->request->getQuery('type', 'user');; ?>" />
+                <form method="post">
+                <div id="ajax-register" class="hidden">
+                </div>
+                </form>
 	
 		</div>
 	</section>

@@ -19,11 +19,12 @@
 			<p>Once registered and verified,<br/> search here for a holiday.</p>
 			<form id="search-form" action="/search" method="post">
 			<div class="form-row">
-				<?php
-				$this->widget('ListWidget',array(
-					'name'=>'holidays',
-					'scenario'=>'select',
-				)); ?>
+                            <?php
+                            $weeks[''] = 'Choose When';
+                            $weeks += Yii::app()->utility->get_week_options('M d, Y');
+                            
+                            echo CHtml::dropDownList('Search[holiday]','', $weeks);
+                            ?>
 			</div>
 			<div class="form-row">			
 				<?php

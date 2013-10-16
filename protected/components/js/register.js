@@ -1,30 +1,17 @@
 $(document).ready( function() {
-      
+   
+   $('.captcha_link').click( function() {
+       console.log('triggered');
+   });
+   
    $('.form-wrapper a.more').click( function() {
 
         // Change the step we're on
         var currentStep = $('.step.active');
         var nextStep = currentStep.next('.step');
-        
+
         var form = $(this).parents('.step').find('form');
-        
-        // Validate this form when the user tries to go to the next step
-        trigger_validation(form);
-        
-        // Check for error labels
-        if (form.find('.errorMessage:visible').length) {
-            return false;
-        }
-        
-        // Update form steps
-        var currentStepControl = $('.form-steps .active');
-        currentStepControl.addClass('complete').removeClass('active');
-        currentStepControl.next('li').addClass('active');
-        
-        // Show the next step
-        currentStep.removeClass('active');
-        nextStep.addClass('active');
-        
+        $(this).parents('form').submit();
         
    });
    
@@ -54,7 +41,7 @@ $(document).ready( function() {
         var label = $(this).parents('div.form-row').find('label');
         var name = label.attr('for');
 
-        if ($(this).prop('tagName') == 'SELECT') {
+        if ($(this).prop('tagName') === 'SELECT') {
             var id = $(this).attr('id');
             val = $('#' + id + ' option:selected').text();
             if (!$('#' + id + ' option:selected').val()) {
@@ -67,69 +54,101 @@ $(document).ready( function() {
         if (!val) {
             return false;
         }
-
+        
         // Find the equivalent form field on the confirmation form
         var input = $('#registration-form-confirmation').find('label[for=' + name + ']');
 
-        input.parents('div.form-row').find('.form-column-wrapper span').html(val);
+        input.parents('div.form-row').find('.form-column-wrapper span.form-value').html(val);
 
    });
-   
-   $('input[type=submit]').click( function() {
-      
-        // Trigger validation for all forms on the registration process
-        $('.form-wrapper .step').each( function() {
-          trigger_validation($(this).find('form'));
-        });
-        
-        // Check for error labels (don't submit if errors appear)
-        if ($(this).parents('.step').find('.errorMessage:visible').length) {
-            return false;
-        }        
-        
-        var form = $(this).parents('form').find('div.hidden');
-        var data = '';
 
-        // Clear current form content if populated
-        form.html('');
-        
-        // Combine forms and submit
-        $('.inner-content.form-wrapper form').each( function() {
-            // Copy over values into hidden fields
-            $(this).find('input, textarea, select').each( function() {
-               var val = $(this).val();
-               if ($(this).attr('type') == 'checkbox') {
-                  val = ($(this).attr('checked')) ? 1 : 0;
-               }
-               // Skip over hidden fields (namely Yii's hidden checkbox fields that were causing issues)
-               if ($(this).attr('type') == 'hidden') {
-                  return;
-               }
-       
-               // Add hidden field to form before submit
-               $('<input>').attr({
-                  'type': 'hidden',
-                  'name' : $(this).attr('name'),
-                  'value' : val
-               }).appendTo(form);
-            });
-            
-        });
-
-   });
-   
-   /**
-    * Trigger Yii validation and trigger copying of fields
-    */
-   function trigger_validation(ref) {
-        // Copy over to confirmation step in case no form fields have been changed
-        var stepForm = ref.parents('.step').find('form');
-        
-        // Trigger change events for all form elements (this copies them to the confirmation screen)
-        // Also focus and then blur the elements in order to trigger Yii's validator
-        stepForm.find('input, textarea, select').not('a.more').each( function() {
-            $(this).trigger('change').focus().blur();
-        });
-   }
    
 });
+
+// Move the user to the next step if all validation passes
+function updateStep(form, data, hasError) {
+    
+    if (!hasError) {
+        // Change the step we're on
+        var currentStep = $('.step.active');
+        var nextStep = currentStep.next('.step');
+        if (!nextStep.length) {
+            // No more steps left, submit form
+            ajaxRegister();
+        } else {
+            // Update form steps
+            var currentStepControl = form.parents('.form-wrapper').find('.form-steps .active');
+            currentStepControl.addClass('complete').removeClass('active');
+            currentStepControl.next('li').addClass('active');
+
+            // Show the next step
+            currentStep.removeClass('active');
+            nextStep.addClass('active');
+        }
+    }
+
+}
+
+// Takes all steps from the form, combines them and then tries to register the user
+function ajaxRegister() {
+    
+    
+    var ajax_div = $('#ajax-register');
+
+    // Clear current form content if populated
+    ajax_div.html('');
+
+    // Combine forms and submit
+    $('.inner-content.form-wrapper form').each( function() {
+        // Copy over values into hidden fields
+        $(this).find('input, textarea, select').each( function() {
+           var val = $(this).val();
+           if ($(this).attr('type') == 'checkbox') {
+              val = ($(this).attr('checked')) ? 1 : 0;
+           }
+           // Skip over hidden fields (namely Yii's hidden checkbox fields that were causing issues)
+           if ($(this).attr('type') == 'hidden') {
+              return;
+           }
+           
+           // Add hidden field to form before submit
+           $('<input>').attr({
+              'type': 'hidden',
+              'name' : $(this).attr('name'),
+              'value' : val
+           }).appendTo(ajax_div);
+        });
+    });
+    var reg_type = $('#reg-type').val();
+    $('<input type="hidden" name="register_method" value="ajax">').appendTo(ajax_div);
+    $('<input type="hidden" name="success_view" value="webroot.themes.give_us_time.views.register.success">').appendTo(ajax_div);
+    $('<input type="hidden" name="type" value="' + reg_type + '">').appendTo(ajax_div);
+
+    var data = ajax_div.parent().serialize();
+
+    // Register via AJAX
+    $.ajax({
+        url: '/register',
+        data: data,
+        dataType: 'json',
+        type: 'post',
+        success: function(r) {
+            if (r.success === 1 && r.html) {
+                if (!$('.step.confirmation').length) {
+                    $('.step.active').html(r.html);
+                } else {
+                $('.step.confirmation').html(r.html);
+                    // Change the step we're on
+                    var currentStep = $('.step.active');
+
+                    // Complete step process
+                    var currentStepControl = $('.form-steps .active');
+                    currentStepControl.addClass('complete').removeClass('active');
+                }
+             
+            }
+        }
+    });
+
+    return false;    
+}

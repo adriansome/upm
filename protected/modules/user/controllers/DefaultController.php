@@ -147,18 +147,22 @@ class DefaultController extends UserController
 		$model=new User;
 		$model->scenario = 'register';
 	
-		// Get the type of registration form to output
-		$regType = Yii::app()->request->getQuery('type', 'user');
+                if (isset($_POST['type'])) {
+                    $regType = $_POST['type'];
+                } else {
+                    // Get the type of registration form to output
+                    $regType = Yii::app()->request->getQuery('type', 'user');
+                }
 		
 		// Default to user type registration if not a defined reg type
 		if (!isset($this->_formFields[$regType])) {
-			$regType = 'user';
+                    $regType = 'user';
 		}
 		
 		$outputFields = $this->_formFields[$regType];
 		
 		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		$this->performAjaxValidation($model, $regType);
 
 		if(isset($_POST['User']['email']))
 		{
@@ -173,19 +177,37 @@ class DefaultController extends UserController
 		    	$model = $record;
 		    	unset($record);
 		    }
-
+                        
 			if(isset($record->date_email_validated))
-				$this->redirect(array('login', 'username'=>$record->username));
+                            if (isset($_POST['register-type'])) {
+                                echo json_encode(array('error' => 'This email address has already been validated'));
+                                exit;
+                            } else {
+                                $this->redirect(array('login', 'username'=>$record->username));
+                            }
 			else {
-				$model=$this->saveModel($model, $_POST['User'], 'registrationSuccess', $regType);
+                            $regMethod = isset($_POST['register_method']) ? $_POST['register_method'] : 'ajax';
+                            $model=$this->saveModel($model, $_POST['User'], 'registrationSuccess', $regType, $regMethod);
+                            if ($model === TRUE) {
+                                if (isset($_POST['success_view'])) {
+                                    $view = $this->renderPartial($_POST['success_view'],
+                                            array('type' => $regType), TRUE);
+                                }
+                                echo json_encode(array(
+                                    'success' => 1,
+                                    'html' => $view
+                                ));
+                                exit;
+                            }
+                            
 			}
 		}
 
 		$this->render('register',array(
-			'model'=>$model,
-			'reg_type' => $regType,
-			'form_fields' => $outputFields['fields'],
-			'steps' => $outputFields['steps']
+                    'model'=>$model,
+                    'reg_type' => $regType,
+                    'form_fields' => $outputFields['fields'],
+                    'steps' => $outputFields['steps']
 		));
 	}
 
@@ -525,7 +547,7 @@ class DefaultController extends UserController
 		return $model;
 	}
 
-	protected function saveModel($model, $attributes, $action, $regType='user')
+	protected function saveModel($model, $attributes, $action, $regType='user', $regMethod='ajax')
 	{
 
 		if(!empty($model->email) && $attributes['email'] !== $model->email)
@@ -534,7 +556,7 @@ class DefaultController extends UserController
 			$model->emailChanged = true;
 		}
 
-		// Save fields dependent on registration type
+                // Save fields dependent on registration type
 		if (isset($this->_formFields[$regType])) {
 			$fields = $this->_formFields[$regType]['fields'];
 			foreach ($fields as $field_name => $properties) {
@@ -554,9 +576,13 @@ class DefaultController extends UserController
 		{
 			if($action == 'registrationSuccess') {
                             $this->setRefererSessionData($model->email, $model->id, $model->email);
+                            if ($regMethod == 'ajax') {
+                                return TRUE;
+                            }   
                         }
 
-			$this->redirect(array($action));
+                        $this->redirect(array($action));
+                        
 		}
 
 		return $model;
@@ -566,12 +592,22 @@ class DefaultController extends UserController
 	 * Performs the AJAX validation.
 	 * @param User $model the model to be validated
 	 */
-	protected function performAjaxValidation($model)
+	protected function performAjaxValidation($model, $regType='user')
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='user-form')
+		if(isset($_POST['ajax']))
 		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
+                    if ($_POST['ajax']==='user-form') {
+                        echo CActiveForm::validate($model);
+                        Yii::app()->end();
+                    } else if (strpos($_POST['ajax'], 'registration-form') !== FALSE) {
+                        // Validate this step
+                        foreach ($_POST['User'] as $field => $value) {
+                            $attributes[] = $field;
+                        }
+                        echo CActiveForm::validate($model, $attributes);
+                        Yii::app()->end();
+                    }
+                        
 		}
 	}
 }
