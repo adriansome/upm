@@ -9,6 +9,6 @@
 		'data-toggle' => 'modal',
 		'data-index' => $index,
 		'data-target'=>'#filemanager',
-        'class'=>'launch-filemanager',
+        'class'=>'launch-filemanager button-link',
 	),
 )); ?>

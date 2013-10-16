@@ -38,6 +38,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
                             </div>
                         </fieldset>
                     </form>
+                    <h3>New User</h3>   
                 <?php
                 }
                 
@@ -57,10 +58,8 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
 		</ol>	
 		<?php
 		}
-		?>
-                <h3>New User</h3>    
-                <?php
-		// If steps have not been specified, output all fields in one step
+
+                // If steps have not been specified, output all fields in one step
 		if (!isset($steps)) {
 			$steps = array('');
 		}

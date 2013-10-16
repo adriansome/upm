@@ -12,10 +12,18 @@ $this->beginWidget('TbModal', array('id'=>'block-management', 'htmlOptions'=>arr
 <div class="modal-body">
 	<?php $form=$this->beginWidget('CActiveForm', array(
 		'id'=>'block-form',
+                'htmlOptions' => array(
+                    'class' => 'standard-form'
+                ),            
 		'enableAjaxValidation'=>true,
 	)); ?>
-	<?php foreach($fields as $field): ?>
-		<div class="row">
+	<?php foreach($fields as $field): 
+                $class = ' ';
+                if (!is_object($field['input']) && strpos($field['input'], '#filemanager')) {
+                    $class .= 'filemanager-row';
+                }    
+        ?>
+		<div class="row<?php echo $class ?>">
 			<?php echo $field['label']; ?>
 			<?php
 				if(is_object($field['input'])) 
@@ -30,15 +38,6 @@ $this->beginWidget('TbModal', array('id'=>'block-management', 'htmlOptions'=>arr
 </div>
 
 <div class="modal-footer">
-    <?php $this->widget('TbButton', array(
-        'type'=>'success',
-        'label'=>'Save',
-        'url'=>Yii::app()->createUrl($url),
-        'htmlOptions'=>array(
-            'data-dismiss'=>'modal',
-            'class'=>'save',
-        ),
-    )); ?>
 
     <?php $this->widget('TbButton', array(
         'type'=>'danger',
@@ -49,5 +48,15 @@ $this->beginWidget('TbModal', array('id'=>'block-management', 'htmlOptions'=>arr
             'class'=>'discard',
         ),
     )); ?>
+    
+    <?php $this->widget('TbButton', array(
+        'type'=>'success',
+        'label'=>'Save',
+        'url'=>Yii::app()->createUrl($url),
+        'htmlOptions'=>array(
+            'data-dismiss'=>'modal',
+            'class'=>'save more',
+        ),
+    )); ?>    
 </div>
 <?php $this->endWidget(); ?>
