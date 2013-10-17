@@ -13,15 +13,7 @@
 			</nav>
 
 			<?php $this->widget('NuggetArea',array(
-				'name'=>'nugget 1',
-			)); ?>
-
-			<?php $this->widget('NuggetArea',array(
-				'name'=>'nugget 2',
-			)); ?>
-
-			<?php $this->widget('NuggetArea',array(
-				'name'=>'nugget 3',
+				'name'=>'nugget area',
 			)); ?>
 
 		</div>

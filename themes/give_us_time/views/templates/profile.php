@@ -17,21 +17,13 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
 		</nav>
 
 		<?php $this->widget('NuggetArea',array(
-			'name'=>'nugget 1',
-		)); ?>
-
-		<?php $this->widget('NuggetArea',array(
-			'name'=>'nugget 2',
-		)); ?>
-
-		<?php $this->widget('NuggetArea',array(
-			'name'=>'nugget 3',
+			'name'=>'nugget area',
 		)); ?>
 
 	</div>
 	<!-- End #sidebar -->
-	
-	<section id="main-content" class="column span12">		
+
+	<section id="main-content" class="column span12">
 		<?php
 		// Render properties if this is a landlord
 		if (Yii::app()->user->isLandlord()) {
@@ -51,6 +43,9 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
                                 )
                             )
                         ));
+                        ?>
+                        <a href="/profile/" class="back">Back to Properties</a>
+                        <?php
                     } else {
                         ?>
                         <h1>Welcome to Give Us Time - <?php echo $model->fullname; ?></h1>
@@ -67,7 +62,7 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
 				'enableAjaxValidation'=>false,
 				'enableClientValidation' => true
 			));
-			
+
 			// Output fields for this step
 			foreach ($fields as $name => $properties) {
 				if (isset($properties['on']) && !in_array($model->scenario, $properties['on'])) {
@@ -117,7 +112,7 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
 				</div>
 				<?php
 			}
-			
+
 		$this->endWidget();	*/
 ?>
 	</section>
@@ -128,7 +123,7 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
 </script>
 <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/bootstrap-modal.js'); ?>
 <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/bootstrap-modalmanager.js'); ?>
-<?php //Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/adminzone.js'); ?>	
+<?php //Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/adminzone.js'); ?>
 <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('tinymce')).'/tinymce.min.js'); ?>
 <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/properties.js"></script>
 
