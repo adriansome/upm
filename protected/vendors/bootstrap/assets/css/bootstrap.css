@@ -5539,13 +5539,13 @@ table th[class*="span"],
 	margin-left: 0;
 }
 
-.thumbnails > li {
+.modal .thumbnails > li {
 	float: left;
 	margin-bottom: 20px;
 	margin-left: 20px;
 }
 
-.thumbnail {
+.modal .thumbnail {
 	display: block;
 	padding: 4px;
 	line-height: 20px;
@@ -5562,22 +5562,22 @@ table th[class*="span"],
 					transition: all 0.2s ease-in-out;
 }
 
-a.thumbnail:hover,
-a.thumbnail:focus {
+.modal a.thumbnail:hover,
+.modal a.thumbnail:focus {
 	border-color: #0088cc;
 	-webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
 		 -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
 					box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25);
 }
 
-.thumbnail > img {
+.modal .thumbnail > img {
 	display: block;
 	max-width: 100%;
 	margin-right: auto;
 	margin-left: auto;
 }
 
-.thumbnail .caption {
+.modal .thumbnail .caption {
 	padding: 9px;
 	color: #555555;
 }

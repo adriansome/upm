@@ -821,15 +821,8 @@ ul > li.provisionally-booked,
 .resort-listing .thumbnail {
 	float: left;
 	width: 210px;
+	min-height: 1px;
 	overflow: hidden;
-}
-
-/* Yuck */
-.resort-listing a.thumbnail:hover,
-.resort-listing a.thumbnail:focus {
-	-webkit-box-shadow: none !important;
-	-moz-box-shadow: none !important;
-	box-shadow: none !important;
 }
 
 .resort-listing .column {

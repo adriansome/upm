@@ -12,11 +12,17 @@
 			)); ?><!-- mainmenu -->
 			</nav>
 
-			<div>
 			<?php $this->widget('NuggetArea',array(
-				'name'=>'nugget area',
+				'name'=>'nugget 1',
 			)); ?>
-			</div>
+
+			<?php $this->widget('NuggetArea',array(
+				'name'=>'nugget 2',
+			)); ?>
+
+			<?php $this->widget('NuggetArea',array(
+				'name'=>'nugget 3',
+			)); ?>
 
 		</div>
 		<!-- End #sidebar -->
@@ -29,7 +35,7 @@
 					'name'=>'main content area',
 					'scope'=>'page',
 				)); ?>
-			</div>	
+			</div>
 		</section>
 		<!-- End #main-content -->
 	</div>

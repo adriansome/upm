@@ -7,9 +7,9 @@ $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$this->contents,
 	'itemView'=>'summary',
 	'htmlOptions' => array(
-		'class' => 'constrained'					   
+		'class' => 'constrained'
 	),
-	//'summaryText'=> 'Properties',
+	'summaryText'=> 'You have not yet added any properties. Get started by clicking "Add new property"',
 	'template'=>'{items}',
 	/*'pager'=>array(
             'class'=>'CLinkPager',
