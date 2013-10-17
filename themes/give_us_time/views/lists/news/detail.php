@@ -10,7 +10,9 @@ $data = $this->contents->rawData;
             $img_src = $data['full_image'];
             $img_path = Yii::app()->basePath . '/..' . $img_src;
             if (is_file($img_path)) {
+                echo "<div class='picture-frame'>";
                 echo "<img src='{$img_src}' />";
+                echo "</div>";
             }
     }
     ?>
