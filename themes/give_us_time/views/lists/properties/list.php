@@ -9,7 +9,7 @@ $this->widget('zii.widgets.CListView', array(
 	'htmlOptions' => array(
 		'class' => 'constrained'
 	),
-	'summaryText'=> 'You have not yet added any properties. Get started by clicking "Add new property"',
+	'emptyText'=> 'You have not yet added any properties. Get started by clicking "Add new property".',
 	'template'=>'{items}',
 	/*'pager'=>array(
             'class'=>'CLinkPager',
