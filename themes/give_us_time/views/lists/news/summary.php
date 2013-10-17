@@ -17,12 +17,14 @@
     <div class='text column span12'>
         <div class='inner'>
             <div class='headline-wrapper'>
+                <h2>
                     <?php echo (isset($data['short_headline']) && !empty($data['short_headline']))
                     ? $data['short_headline'] : $data['title']; ?>
+                </h2>
             </div>
             <div class='summary'>
                 <p><?php echo Yii::app()->utility->truncate_text($data['summary'], 200); ?></p>	
-                <div class='more'><a href='?slug=<?php echo $data['slug']; ?>'>Read more</a></div>
+                <a href='?slug=<?php echo $data['slug']; ?>' class="more">Read more</a>
             </div>
         </div>
     </div>

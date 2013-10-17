@@ -316,6 +316,7 @@ nav:after,
 .column {
 	float: left;
 	margin: 0 7px;
+	min-height: 1px;
 	/*margin: 0 0.6076388%;*/
 }
 

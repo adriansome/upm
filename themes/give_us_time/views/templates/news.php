@@ -2,9 +2,8 @@
 
 <?php require_once(Yii::app()->theme->basepath.'/views/elements/header.php'); ?>
 
-<div id="content">
+	<div class="constrained">
 
-<div>
 <?php
 $widgetOptions = array('name' => 'news');
 if ($slug) {
@@ -25,9 +24,7 @@ if ($slug) {
 }
 
 $this->widget('ListWidget', $widgetOptions); ?>
-</div>
+
+	</div>
 
 <?php require_once(Yii::app()->theme->basepath.'/views/elements/footer.php'); ?>
-
-</div>
-
