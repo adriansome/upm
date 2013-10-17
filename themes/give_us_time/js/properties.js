@@ -53,7 +53,7 @@ $(document).ready(function() {
         if($(this).is('[data-index]'))
             var fileFieldID = $(this).attr('data-index');
 
-        if (url.indexOf('#') == 0)
+        if (url.indexOf('#') === 0)
             $(url).modal('open');
         else
         {
@@ -66,7 +66,7 @@ $(document).ready(function() {
                 // Initiate any rich text editors in the modal.
                 initRichTextEditors();
             }).success(function() {
-                if(target == '#filemanager')
+                if(target === '#filemanager')
                 {
                     var src = $('#fm-iframe').attr('src')+'&field_id=Content_'+fileFieldID+'_file_value';
                     $('#fm-iframe').attr('src', src);
@@ -75,7 +75,7 @@ $(document).ready(function() {
                 $(target).live('hidden',function() {
                     $(target).remove();
                     
-                    if(target != '#filemanager')
+                    if(target !== '#filemanager')
                     {
                         setTimeout(function() {
                             flashMessage('warning','Reloading page...');
@@ -97,9 +97,9 @@ $(document).ready(function() {
             // Wait for the modal to appear and then amend property ID
             $(response).on("show.bs.modal", function() {
                 $(this).find('.modal-header').remove();
-                var text = (type == 'properties') ? 'property' : 'holiday';
+                var text = (type === 'properties') ? 'property' : 'holiday';
                 // Append text to modal
-                $(this).find('#block-form').prepend('<h1>Please enter your ' + text + ' details</h1>')
+                $(this).find('#block-form').prepend('<h1>Please enter your ' + text + ' details</h1>');
             }).on("shown.bs.modal", function() {
                 // Only do this if we're on the holidays page
                 if (type === 'holidays') {
@@ -124,7 +124,7 @@ $(document).ready(function() {
         {
             $(response).on("show.bs.modal", function() {
                 $(this).find('.modal-header').remove();
-                var text = (type == 'properties') ? 'property' : 'holiday';
+                var text = (type === 'properties') ? 'property' : 'holiday';
                 // Append text to modal
                 $(this).find('#block-form').prepend('<h1>Please edit your ' + text + ' details</h1>');
             }).modal();
@@ -192,7 +192,7 @@ $(document).ready(function() {
                             success: function(r) {
                                 console.log(r);
                             }
-                        })
+                        });
                     }
                 });
             } else {
@@ -253,7 +253,7 @@ $(document).ready(function() {
                             success: function(r) {
                                 console.log(r);
                             }
-                        })
+                        });
                     }
                 });
             } else {
@@ -268,7 +268,7 @@ $(document).ready(function() {
         e.preventDefault();
         e.stopPropagation();
 
-        var text = (type == 'properties') ? 'property' : 'holiday';
+        var text = (type === 'properties') ? 'property' : 'holiday';
 
         var conf = confirm("Are you sure you want to delete this " + text + "?");
         // Delete has to be an AJAX request

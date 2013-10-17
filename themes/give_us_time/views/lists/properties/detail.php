@@ -27,18 +27,18 @@ $listWidget = new ListWidget();
 $listWidget->name = 'holidays';
 $listWidget->item_id = $holidayId;
 $listWidget->init();
+$holidayAttributes = $listWidget->itemAttributes();
 $holidayData = $listWidget->contents;
 
 // Holiday not found
 if (!$holidayData) {
-    throw new CHttpException(404, "Holiday item not found");
+    throw new CHttpException(404, "Holiday listing not found");
 }
 
 $holidayData = $holidayData->rawData;
 
 $arrival = date_parse_from_format('d/m/Y', $holidayData['arrival_date']);
 $departure = date_parse_from_format('d/m/Y', $holidayData['departure_date']);
-
 ?>
 
 <div class="constrained">
@@ -103,8 +103,21 @@ $departure = date_parse_from_format('d/m/Y', $holidayData['departure_date']);
             </div>
 
             <?php
-            Yii::app()->controller->renderPartial('webroot.themes.give_us_time.views.lists.holidays.booking');
+            // Only show the provisional booking form for users
+            if (Yii::app()->user->isUser()) {
+                Yii::app()->controller->renderPartial('webroot.themes.give_us_time.views.lists.holidays.booking',
+                array(
+                    'holiday_id'  => $holidayId,
+                    'attributes'  => $holidayAttributes,
+                    'landlord_id' => $propertyData['user_id'],
+                    'user_name'   => User::model()->findByPk(Yii::app()->user->id)->getFullname()
+                ));
+            }
             ?>
+            
+            <input type="hidden" id="holiday-dates" 
+                   data-start="<?php echo $holidayData['arrival_date'] ?>"
+                   data-end="<?php echo $holidayData['departure_date'] ?>" />
             
         </div>
     </section>

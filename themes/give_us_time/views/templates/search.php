@@ -1,5 +1,10 @@
 <?php $this->pageTitle = $model->window_title;
 
+// If this user isn't logged in, redirect
+if (!Yii::app()->user->isLoggedIn()) {
+    $this->redirect('/register');
+}
+
 // Redirect to home page if no search results provided
 if (!isset($_POST['Search'])) {
     $this->redirect('/');

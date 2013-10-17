@@ -15,7 +15,7 @@ if (isset($params['status'])) {
         ?>
         <p>Thank you for your e-mail.  We would be delighted to welcome you to 
         our property from <?php echo $params['holiday_start'] ?> to 
-        <?php echo $params['holiday_end'] ?> Please take this e-mail as confirmation.  
+        <?php echo $params['holiday_end'] ?>. Please take this e-mail as confirmation.  
         We would be grateful if you would contact <?php echo $params['landlord_email']; ?>
         via e-mail so we can provide you with the full address of the property, 
         give you more details about your holiday and take your contact details.</p>
