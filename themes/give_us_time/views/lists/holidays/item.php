@@ -56,28 +56,32 @@ $departure = date_parse_from_format('d/m/Y', $data['holiday']['departure_date'])
                     'cancellation_fee' => 'Cancellation Fee'
                 );
 
-                $outputHeading = TRUE;
-                $facilityOutput = FALSE;
-                $x = 1;
+                $facilities_start = "<h3>Facilities</h3><ul class='facilities'>";
+                $facilities_end = "</ul>";
+                $facilities_inner = '';
+                
                 foreach ($facilities as $id => $text) {
-                    if ($x == count($facilities) && $facilityOutput) {
-                        echo "</ul>";
+                    if (isset($data['property'][$id]) && $data['property'][$id] == 1) {
+                        $facilities_inner  .= "<li class='{$id}' data-tooltip='{$text}'><span>{$text}</span></li>";
                     }
-                    $x++;
-                    if ($data['property'][$id] == 0) {
-                        continue;
-                    }
-                    if ($outputHeading) {
-                        $facilityOutput = TRUE;
-                        echo "<h3>Facilities</h3>";
-                        echo "<ul class='facilities'>";
-                        $outputHeading = FALSE;
-                    }
-                    echo "<li class='{$id}' data-tooltip='{$text}'><span>{$text}</span></li>";
                 }
+                
+                if ($facilities_inner) {
+                    echo $facilities_start . $facilities_inner . $facilities_end;
+                }
+                
+                $propertyUrl = '/properties?slug=' . $data['property']['slug']
+                            . '&h=' . $data['holiday']['block_id'];
+                if (isset($_POST['Search']['location']) && $_POST['Search']['location']) {
+                    $propertyUrl .= '&l=' . $_POST['Search']['location'];
+                }
+                if (isset($_POST['Search']['holiday']) && $_POST['Search']['holiday']) {
+                    $propertyUrl .= '&d=' . $_POST['Search']['holiday'];
+                }
+                
                 ?>
 
 
-                <a href="/properties?slug=<?php echo $data['property']['slug']; ?>" class="more">Full Details</a>
+                <a href="<?php echo $propertyUrl ?>" class="more">Full Details</a>
         </div>
 </li>
