@@ -47,5 +47,26 @@ class Utility extends CApplicationComponent {
         return $weeks;
         
     }
+    
+    /**
+     * Formats a date into a human readable format
+     * 
+     * @param string $format
+     *      The format of the date string supplied
+     * @param string $date
+     *      The date string to format
+     * @param bool $includeYear
+     *      Include year with output?
+     */
+    public function get_formatted_date($format, $date, $includeYear=FALSE)
+    {
+        $parsed_date = date_parse_from_format($format, $date);
+        $month_name =  date("F", mktime(0, 0, 0, $parsed_date['month']));
+        $formatted = $month_name . " " . $parsed_date['day'];
+        if ($includeYear) {
+            $formatted .= " " . $parsed_date['year'];
+        }
+        return $formatted;
+    }
 }
 ?>

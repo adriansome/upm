@@ -14,41 +14,34 @@ if ($_POST['Search']['location']) {
     ));
 }
 
+// Set location and date params
+$selectedLocation = (isset($_POST['Search']['location'])) 
+                    ? $_POST['Search']['location'] : '';
+$selectedDate = (isset($_POST['Search']['holiday']))
+                ? $_POST['Search']['holiday'] : '';
+
+$listWidget = new ListWidget();
+$listWidget->name = 'properties';
+$listWidget->init();
+
+$attributes = $listWidget->itemAttributes();
+$locationAttributes = array('' => 'Any Location');
+$locationAttributes += $attributes['location']['values'];
+unset($listWidget);
+
 require_once(Yii::app()->theme->basepath.'/views/elements/header.php'); ?>
 
 	<div class="constrained">
 
 		<!-- Begin #sidebar -->
 		<div id="sidebar" class="column span4">
-			<form class="search nugget" id="search-form" action="/search" method="post">
-			<h1>Holiday search</h1>
-                            <fieldset>
-                                <div class="form-row">
-                                <?php
-                                $listWidget = new ListWidget();
-                                $listWidget->name = 'properties';
-                                $listWidget->init();
-
-                                $attributes = $listWidget->itemAttributes();
-                                $locationAttributes = array('' => 'Any Location');
-                                $locationAttributes += $attributes['location']['values'];
-                                unset($listWidget);
-
-                                echo CHtml::dropDownList('Search[location]',$_POST['Search']['location'], $locationAttributes);
-                                ?>
-                                </div>
-                                <div class="form-row">
-                                    <?php
-                                    $weeks[''] = 'Any Week';
-                                    $weeks += Yii::app()->utility->get_week_options('M d, Y');
-                                    echo CHtml::dropDownList('Search[holiday]',$_POST['Search']['holiday'], $weeks);
-                                    ?>
-                                </div>
-                                <div class="form-row button-row">
-                                        <input type="submit" value="Search" />
-                                </div>
-                            </fieldset>
-			</form>
+                    <?php
+                    $this->renderPartial('webroot.themes.give_us_time.views.elements.search-bar', array(
+                        'selectedLocation' => $selectedLocation,
+                        'selectedDate' => $selectedDate,
+                        'locationAttributes' => $locationAttributes
+                    ));
+                    ?>
 		</div>
 		<!-- End #sidebar -->
 

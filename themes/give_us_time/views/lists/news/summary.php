@@ -22,7 +22,7 @@
             </div>
             <div class='summary'>
                 <p><?php echo Yii::app()->utility->truncate_text($data['summary'], 200); ?></p>	
-                <div class='more'><a href='?slug=<?php echo $data['slug']; ?>'>Read more</a></div>
+                <a class='more' href='?slug=<?php echo $data['slug']; ?>'>Read more</a>
             </div>
         </div>
     </div>

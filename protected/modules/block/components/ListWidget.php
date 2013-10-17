@@ -25,23 +25,23 @@ class ListWidget extends CWidget
 	public function init()
 	{
 
-		$this->page_id = Yii::app()->session['page_id'];
-		$this->id = str_replace(' ', '-', $this->name);
+            $this->page_id = Yii::app()->session['page_id'];
+            $this->id = str_replace(' ', '-', $this->name);
 
-		$this->configure();
-		
-		$this->attributes = $this->itemAttributes();
-                
-                if ($this->name == 'holidays') {
-                    $this->_userList = $this->_getUsers();
-                }
-		
-		if(isset($this->item_id) || isset($this->item_slug)) {
-			$this->loadItem();
-		}
-		else {
-			$this->loadItems();
-		}
+            $this->configure();
+
+            $this->attributes = $this->itemAttributes();
+
+            if ($this->name == 'holidays') {
+                $this->_userList = $this->_getUsers();
+            }
+
+            if(isset($this->item_id) || isset($this->item_slug)) {
+                    $this->loadItem();
+            }
+            else {
+                    $this->loadItems();
+            }
 
 	}
 
@@ -212,14 +212,17 @@ class ListWidget extends CWidget
 
 	public function run()
 	{
-		if(Yii::app()->user->isAdmin() || Yii::app()->user->isEditor()){
-			echo '<div>';
-			$this->render($this->scenario);
-			require(Yii::app()->basepath.'/modules/block/widgets/views/_listManagement.php');
-			echo '</div>';
-		}
-		else
-			$this->render($this->scenario);
+            // Throw error if we've got nothing
+            if (!$this->contents) {
+                throw new CHttpException(404, 'Could not find the requested item.');
+            } else if(Yii::app()->user->isAdmin() || Yii::app()->user->isEditor()){
+                echo '<div>';
+                $this->render($this->scenario);
+                require(Yii::app()->basepath.'/modules/block/widgets/views/_listManagement.php');
+                echo '</div>';
+            } else {
+                $this->render($this->scenario);
+            }
 	}
         
         protected function _getUsers()

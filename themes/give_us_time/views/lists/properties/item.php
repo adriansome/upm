@@ -1,4 +1,4 @@
-<?php /* @var $data CArrayDataProvider */ ?>
+<?php /* @var $data CArrayDataProvider */  ?>
 <li>
 <?php if (isset($data['image']) && !empty($data['image'])):?>
         <?php $img_path = Yii::app()->basePath . '/..' . $data['image'];?>
