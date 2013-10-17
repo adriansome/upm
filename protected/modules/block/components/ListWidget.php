@@ -73,57 +73,44 @@ class ListWidget extends CWidget
 		
 		if(isset($this->maxItems))
 			$params['limit'] = $this->maxItems;
-                
 		if ($this->filters) {
-			$sql = "SELECT b.* "
-				. "FROM block AS b "
-				. "LEFT JOIN content AS c "
-				. "ON c.`block_id` = b.`id` "
-				. "WHERE b.`name` LIKE '{$this->name} item%' ";
-			foreach ($this->filters as $field => $fieldData) {
-                            if ($fieldData['field_type'] == 'date_value') {
-                                $sql .= " AND c.`name` = '{$field}' AND ";
-                                switch ($fieldData['operator']) {
-                                    case 'BETWEEN':
-                                        $sql .= "c.`date_value` BETWEEN "
-                                            . "'{$fieldData['start_date']}' AND "
-                                            . "'{$fieldData['end_date']}'";
-                                        break;
-                                    default:
-                                        break;
-                                }
-                            } else {
-                                $fieldType = $fieldData['field_type'];
-                                $value = $fieldData['value'];
-                                $sql .= " AND c.`name` = '{$field}' AND c.`{$fieldType}` = '{$value}'";                               
-                            }
-
-			}
-			$items = Block::model()->findAllBySql($sql, $params);
+                    $sql = "SELECT b.* "
+                            . "FROM block AS b "
+                            . "LEFT JOIN content AS c "
+                            . "ON c.`block_id` = b.`id` "
+                            . "WHERE b.`name` LIKE '{$this->name} item%' ";
+                    foreach ($this->filters as $field => $fieldData) {
+                        $fieldType = $fieldData['field_type'];
+                        $value = $fieldData['value'];
+                        $sql .= " AND c.`name` = '{$field}' AND c.`{$fieldType}` = '{$value}'";                       
+                    }
+                    $items = Block::model()->findAllBySql($sql, $params);
 		} else {
-			$items = Block::model()->with('contents')->findAll(array(
-				'condition'=>'t.name LIKE "'.$this->name.' item%"'
-			), $params);
+                    $items = Block::model()->with('contents')->findAll(array(
+                            'condition'=>'t.name LIKE "'.$this->name.' item%"'
+                    ), $params);
 		}
 
 		$list = array();
 
-		foreach($items as $index=>$item) 
+                foreach($items as $index=>$item) 
 		{
 			$list[$index] = $this->loadContents($item);
 			$list[$index]['block_id'] = $item->id;
 		}
-
-		$dataProvider = new CArrayDataProvider($list, array(
-		    'id'=>'title',
-		    'keyField'=>'title'
-		));
                 
-		if(isset($this->pageSize)) {
-                    $dataProvider['pagination'] = array(
+                $listData = array(
+                    'id' => 'title',
+                    'keyField' => 'title'
+                );
+                
+                if (isset($this->pageSize)) {
+                    $listData['pagination'] = array(
                         'pageSize' => $this->pageSize
                     );
                 }
+                
+                $dataProvider = new CArrayDataProvider($list, $listData);
                 
                 $this->contents = $dataProvider;
 	}
