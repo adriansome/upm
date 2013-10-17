@@ -12,7 +12,7 @@ $this->beginWidget('TbModal', array('id'=>'page-management', 'htmlOptions'=>arra
 
 <div class="modal-body">
 
-	<a class="button" data-toggle="default-action" data-target=".item-view" href="<?php echo $this->createUrl('create'); ?>">Create New Page</a>
+	<a class="add btn btn-link" data-toggle="default-action" data-target=".item-view" href="<?php echo $this->createUrl('create'); ?>">Create New Page</a>
 	<br/><br/>
 
 	<?php Yii::app()->clientScript->registerScriptFile($this->module->getAssets() . "/js/json/json2.min.js"); ?>
@@ -39,13 +39,13 @@ $this->beginWidget('TbModal', array('id'=>'page-management', 'htmlOptions'=>arra
 				list = $(this).nestedSortable('toArray', {startDepthCount: 0});
 				$.post(
 					'<?php echo $this->createUrl('/' . $this->module->id . '/management/save') ?>',
-					
+
 					{list: list },
-					
+
 					function(data){
 						$("#result").hide().html(data).fadeIn('slow')
 					},
-					
+
 					"html"
 				);
 			}

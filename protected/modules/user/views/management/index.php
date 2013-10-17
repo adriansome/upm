@@ -12,8 +12,8 @@ $this->beginWidget('TbModal', array('id'=>'user-management', 'htmlOptions'=>arra
 
 <div class="modal-body">
 
-<p></p><a class="button" data-toggle="default-action" data-target=".item-view" href="<?php echo $this->createUrl('create'); ?>">
-Add a User</a></p>
+<a class="button" data-toggle="default-action" data-target=".item-view" href="<?php echo $this->createUrl('create'); ?>">
+Add a User</a>
 
 <?php $this->renderPartial('_search', array('model'=>$model)); ?>
 
