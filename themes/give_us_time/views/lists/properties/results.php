@@ -63,7 +63,7 @@ unset($listWidget);
 $dataProvider = new CArrayDataProvider($allHolidays);
 ?>
 <h1>Results<?php echo ($dateText || $locationText) ? '&dash; ' : ' '; echo $dateText; echo ($dateText && $locationText) ? ', ' : ''; echo $locationText; ?></h1>
-<ul class="resort-listing search-listing">
+<!--<ul class="resort-listing search-listing">-->
     <?php
     $itemCount = count($allHolidays);
     $summaryText = "<p>We have {$itemCount} match";
@@ -81,6 +81,8 @@ $dataProvider = new CArrayDataProvider($allHolidays);
             'htmlOptions' => array(
                     'class' => 'constrained'					   
             ),
+            'itemsTagName' => 'ul',
+            'itemsCssClass' => 'resort-listing search-listing',
             'summaryText'=> $summaryText,
             'template'=>'{summary} {items}',
             /*'pager'=>array(
@@ -90,5 +92,5 @@ $dataProvider = new CArrayDataProvider($allHolidays);
             'viewData'=>array('attributes'=>$this->viewData['attributes'])
     ));
     ?>
-</ul>
+<!--</ul>-->
 
