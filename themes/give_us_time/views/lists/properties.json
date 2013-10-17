@@ -1,9 +1,13 @@
 {
 	"attributes":
 	{
+        "property_name": 
+        {
+            "type": "singleline"
+        },       
 		"title": 
 		{
-			"type": "singleline"
+			"type": "hidden"
 		},
         
         "location":

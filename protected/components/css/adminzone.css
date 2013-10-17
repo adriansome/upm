@@ -52,6 +52,10 @@
 	text-align: right;
 }
 
+.mce-tinymce.mce-container.mce-panel {
+	width: auto !important;
+}
+
 /* ----- Messages ----- */
 
 #flashMessage {

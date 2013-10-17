@@ -7,6 +7,30 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
 ?>
 
 <div class="constrained">
+
+	<!-- Begin #sidebar -->
+	<div id="sidebar" class="column span4">
+		<nav id="sub-navigation">
+		<?php $this->widget('Menu',array(
+			'id'=>'submenu'
+		)); ?><!-- mainmenu -->
+		</nav>
+
+		<?php $this->widget('NuggetArea',array(
+			'name'=>'nugget 1',
+		)); ?>
+
+		<?php $this->widget('NuggetArea',array(
+			'name'=>'nugget 2',
+		)); ?>
+
+		<?php $this->widget('NuggetArea',array(
+			'name'=>'nugget 3',
+		)); ?>
+
+	</div>
+	<!-- End #sidebar -->
+	
 	<section id="main-content" class="column span12">		
 		<?php
 		// Render properties if this is a landlord
