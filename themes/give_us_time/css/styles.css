@@ -824,11 +824,12 @@ ul > li.provisionally-booked,
 	overflow: hidden;
 }
 
+/* Yuck */
 .resort-listing a.thumbnail:hover,
 .resort-listing a.thumbnail:focus {
-	-webkit-box-shadow: none;
-	-moz-box-shadow: none;
-	box-shadow: none;
+	-webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
 }
 
 .resort-listing .column {

@@ -14,16 +14,16 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
 	<div id="sidebar" class="column span4"></div>
 	<section id="main-content" class="column span12">
 		<h1>Registration for Give Us Time</h1>
-	
+
 		<div class="inner-content form-wrapper">
 		<?php
-                
+
                 if ( Yii::app()->request->getQuery('type') == 'landlord') {
                 ?>
                     <form class="standard-form" method="post" action="/login">
                         <h3>Existing Members</h3>
                         <p>Already registered? Log in below.</p>
-                        
+
                         <fieldset>
                             <div class="form-row">
                                 <label>Username</label>
@@ -38,10 +38,10 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
                             </div>
                         </fieldset>
                     </form>
-                    <h3>New User</h3>   
+                    <h3>New User</h3>
                 <?php
                 }
-                
+
 		if (count($steps) > 1) {
 		?>
 		<ol class="form-steps">
@@ -55,7 +55,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
 				$x++;
 			}
 			?>
-		</ol>	
+		</ol>
 		<?php
 		}
 
@@ -75,15 +75,15 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
 			if ($step_count == 0) {
 				echo ' active';
 			}
-			echo "'>";		
+			echo "'>";
 
-			
+
 			// Reset fields for confirmation (unset fields that won't be output)
 			if ($step_name == 'confirmation') {
 				$fields = $form_fields;
 				unset($fields['password1'], $fields['password2'], $fields['email_confirm']);
 			}
-						
+
 			?>
 
 			<p class="note"><?php echo $step['desc'] ?></p>
@@ -104,9 +104,9 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
 
 			<?php
 			$labels = $model->attributeLabels();
-		
+
 			CHtml::$afterRequiredLabel = ' <span>(required)</span>';
-			
+
 			// Output fields for this step
 			foreach ($fields as $name => $properties) {
 				if ($x == $field_count) {
@@ -158,7 +158,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
 						echo $form->error($model, $name);
 					} else {
 						echo '<span class="form-value"></span>';
-					}				
+					}
 					?>
 					</div>
 				</div>
@@ -172,16 +172,16 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
 				if ($step_count >= 1) {
 					echo "<a class='back' href='#'>Back</a>";
 				}
-                                
+
                                 $buttonText = ($total_steps === ($step_count + 1)) ? 'Submit' : 'Next'
                                 ?>
-                                
+
                                 <a class="more"><?php echo $buttonText ?></a>
                         </div>
 			<?php
 			echo '</div>';
-			$step_count++;                        
-			
+			$step_count++;
+
 			$this->endWidget();
 
 		}
@@ -191,7 +191,9 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
                 <div id="ajax-register" class="hidden">
                 </div>
                 </form>
-	
+
 		</div>
 	</section>
 </div>
+
+<?php require_once(Yii::app()->theme->basepath.'/views/elements/footer.php'); ?>
