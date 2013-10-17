@@ -73,7 +73,6 @@ class ListWidget extends CWidget
 		
 		if(isset($this->maxItems))
 			$params['limit'] = $this->maxItems;
-                
 		if ($this->filters) {
                     $sql = "SELECT b.* "
                             . "FROM block AS b "
@@ -81,11 +80,9 @@ class ListWidget extends CWidget
                             . "ON c.`block_id` = b.`id` "
                             . "WHERE b.`name` LIKE '{$this->name} item%' ";
                     foreach ($this->filters as $field => $fieldData) {
-                        if ($fieldData['field_type'] == 'date_value') {
-                            $fieldType = $fieldData['field_type'];
-                            $value = $fieldData['value'];
-                            $sql .= " AND c.`name` = '{$field}' AND c.`{$fieldType}` = '{$value}'";                       
-                        }
+                        $fieldType = $fieldData['field_type'];
+                        $value = $fieldData['value'];
+                        $sql .= " AND c.`name` = '{$field}' AND c.`{$fieldType}` = '{$value}'";                       
                     }
                     $items = Block::model()->findAllBySql($sql, $params);
 		} else {
