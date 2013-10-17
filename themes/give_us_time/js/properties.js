@@ -42,6 +42,9 @@ $(document).ready(function() {
                 "filemanager": responsiveFileManager + "plugin.min.js"
             }
         });
+		setTimeout(function () {
+			$( ".datepicker" ).datepicker();
+		}, 200);
     }
 
     $('[data-toggle=\"modal\"]').live('click',function(e) {
@@ -53,11 +56,14 @@ $(document).ready(function() {
         if($(this).is('[data-index]'))
             var fileFieldID = $(this).attr('data-index');
 
-        if (url.indexOf('#') === 0)
+        if (url.indexOf('#') === 0) {
+        	$(".modal").remove();
             $(url).modal('open');
+        }
         else
         {
             $.get(url,function(response) {
+            	$(".modal").remove();
                 $(response).modal({backdrop: false, modalOverflow: true});
 
                 // Make modal window draggable.
@@ -94,6 +100,7 @@ $(document).ready(function() {
         var url = $(this).attr('href') + '?profile=true';
 
         $.get(url, function(response) {
+        	$(".modal").remove();
             // Wait for the modal to appear and then amend property ID
             $(response).on("show.bs.modal", function() {
                 $(this).find('.modal-header').remove();
@@ -122,6 +129,7 @@ $(document).ready(function() {
 
         $.get(url, function(response)
         {
+        	$(".modal").remove();
             $(response).on("show.bs.modal", function() {
                 $(this).find('.modal-header').remove();
                 var text = (type === 'properties') ? 'property' : 'holiday';
