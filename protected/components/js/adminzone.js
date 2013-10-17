@@ -24,6 +24,9 @@ $(function()
                 "filemanager" : responsiveFileManager+"plugin.min.js"
             } 
         });
+		setTimeout(function () {
+			$( ".datepicker" ).datepicker();
+		}, 200);
     }
 
 //    function updateList()
@@ -82,11 +85,14 @@ $(function()
         if($(this).is('[data-index]'))
             var fileFieldID = $(this).attr('data-index');
 
-        if (url.indexOf('#') == 0)
+        if (url.indexOf('#') == 0) {
+        	$(".modal").remove();
             $(url).modal('open');
+        }
         else
         {
             $.get(url,function(response) {
+            	$(".modal").remove();
                 $(response).modal({backdrop: false, modalOverflow: true});
 
                 // Make modal window draggable.
