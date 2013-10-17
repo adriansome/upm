@@ -7,7 +7,8 @@
 {
 	width: 765px;
 	width: 786px; /* remove horizontal scrollbar */	
-	left: 40%;
+	left: 50%;
+	margin-left: -393px;
 }
 
 /* Temporary hack for WYSIWYG blocks. SHould probably give them the 'wide' class */
@@ -19,7 +20,8 @@
 .modal.wide
 {
 	width: 965px;
-	left: 35%;
+	left: 50%;
+	margin-left: -482px;
 }
 
 .modal .list-view,
@@ -349,8 +351,9 @@
 	border-bottom-color: #171718;
 }
 
-.menu-item-list .item-wrapper b,
-.list-view .view b {
+/* Wossthisrulefor? */
+.menu-item-list .item-wrapper b, /*
+.list-view .view b */ {
 	float: left;
 }
 

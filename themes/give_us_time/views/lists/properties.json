@@ -28,7 +28,7 @@
             "values":
             {
 				"1": "House",
-				"2": "Appartment"
+				"2": "Apartment"
             }
         },
 		
@@ -120,13 +120,12 @@
 
         "date":
         {
-            "type": "date",
-            "format": "d/m/Y"
+            "type": "hidden"
         },
         
         "live_on_site":
         {
-            "type": "boolean"
+            "type": "hidden"
         },
 		
 		"user_id":
