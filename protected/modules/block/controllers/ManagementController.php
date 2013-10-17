@@ -71,11 +71,14 @@ class ManagementController extends BlockController
 			foreach($data['Content'] as $index => $content)
 			{
 				$fieldName = $contents[$index]->getAttribute('name');
-				
+				$fieldType = array_keys($content);
+				$value = array_values($content);
+
+				if($fieldType[0]=='date_value'){
+					$content[$fieldType[0]] = date('Y-m-d H:i:s', strtotime($value[0]));
+				}
 				// Use field as slug
 				if ($fieldName == 'title') {
-					$fieldType = array_keys($content);
-					$value = array_values($content);
 					$slugValue = array($fieldType[0] => Yii::app()->utility->string_to_slug($value[0]));
 					// Modify slug data
 					$slugContent = array(
@@ -160,8 +163,11 @@ class ManagementController extends BlockController
 
 				case 'date':
 					$fields[$content->name]['input']=$this->createWidget('zii.widgets.jui.CJuiDatePicker',array(
-					    'model'=>$content,
+						'model'=>$content,
 					    'attribute'=>"[$index]date_value",
+						'htmlOptions'=>array(
+                                'class'=>'datepicker'
+                                )
 					));
 					break;
 
@@ -210,6 +216,16 @@ class ManagementController extends BlockController
 		$block=$this->loadModel($id);
 		$contents = $block->contents;
 		
+		$block=$this->loadModel($id);
+		$contents = $block->contents;
+		
+		$listWidget = new ListWidget();
+		$listWidget->name = $list;
+		$listWidget->init();
+
+		$attributes = $listWidget->itemAttributes();
+		unset($listWidget);
+
 		if(isset($_POST['Content']))
 		{
 			// Forever an optimist.. Presume everything will save without error.
@@ -219,10 +235,13 @@ class ManagementController extends BlockController
 			foreach($_POST['Content'] as $index => $content)
 			{
 				
+				$fieldType = array_keys($content);
+				$value = array_values($content);
+				if($fieldType[0]=='date_value'){
+					$content[$fieldType[0]] = date('Y-m-d H:i:s', strtotime($value[0]));
+				}
 				if ($contents[$index]->name == 'title') {
 					// Take title field and convert to slug
-					$fieldType = array_keys($content);
-					$value = array_values($content);
 					// Update the slug field from title
 					$slugValue = array($fieldType[0] => Yii::app()->utility->string_to_slug($value[0]));
 				}
@@ -292,9 +311,17 @@ class ManagementController extends BlockController
 					break;
 
 				case 'date':
+					$content->date_value = date($attributes[$content->name]['format'], strtotime($content->date_value));
 					$fields[$content->name]['input']=$this->createWidget('zii.widgets.jui.CJuiDatePicker',array(
-					    'model'=>$content,
+						'model'=>$content,
 					    'attribute'=>"[$index]date_value",
+					    'options'=>array(
+							'dateFormat'=>'dd-mm-yy',
+						),
+						'htmlOptions'=>array(
+                                'class'=>'datepicker'
+                                )
+
 					));
 					break;
 
