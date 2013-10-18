@@ -11,7 +11,7 @@
 		<div class="nugget" id="nugget-register">
 			<h2>Service Personnel Registration</h2>
 			<p>You need to be registered and verified<br/> to use this site. Click below to begin. </p>
-			<a href="/register" class="more">Register to use site</a>
+			<a href="/welcome-user/" class="more">Register to use site</a>
 		</div>
 
 		<div class="nugget" id="nugget-search">
@@ -22,19 +22,19 @@
                             <?php
                             $weeks[''] = 'Any Week';
                             $weeks += Yii::app()->utility->get_week_options('M d, Y');
-                            
+
                             echo CHtml::dropDownList('Search[holiday]','', $weeks);
                             ?>
 			</div>
-			<div class="form-row">			
+			<div class="form-row">
 				<?php
 					$listWidget = new ListWidget();
 					$listWidget->name = 'properties';
 					$listWidget->init();
-			
+
 					$attributes = $listWidget->itemAttributes();
 					unset($listWidget);
-		
+
 					array_unshift($attributes['location']['values'],'Any Location');
 					echo CHtml::dropDownList('Search[location]','', $attributes['location']['values']);
 				?>
@@ -48,7 +48,7 @@
 		<div class="nugget" id="nugget-donate">
 			<h2>Donate Time</h2>
 			<p>If you would like to donate a week<br/> of holiday time, click below.</p>
-			<a href="/register?type=landlord" class="more">Donate holiday time</a>			
+			<a href="/welcome-timedonor/" class="more">Donate holiday time</a>
 		</div>
 	</section>
 	<!-- End #home-upper -->
@@ -73,14 +73,14 @@
 				),
 			)); ?>
 		</div>
-		<div class="slideshow-controls"></div>	
+		<div class="slideshow-controls"></div>
 		<a href="#" class="button-link">Read holiday stories</a>
 	</div>
 
 	<?php $this->widget('Nugget',array(
 		'name'=>'nugget-support',
 		'scope'=>'page',
-	)); ?>		
+	)); ?>
 </section>
 <!-- End #home-nuggets -->
 
@@ -133,7 +133,7 @@
 			removalDelay: 160,
 			preloader: false,
 			fixedContentPos: false
-		});			
+		});
 
 		$("#photo-slideshow .slides").carouFredSel({
 			items	: 1,

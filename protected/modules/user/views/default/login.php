@@ -2,7 +2,7 @@
 /* @var $this SiteController */
 /* @var $model LoginForm */
 /* @var $form CActiveForm  */
-
+$this->bodyId = 'page-login';
 $this->pageTitle=Yii::app()->name . ' - Login';
 $this->breadcrumbs=array(
 	'Login',
@@ -14,16 +14,16 @@ $this->breadcrumbs=array(
 	<h1>Login</h1>
 
 	<p>
-		<?php 
+		<?php
 		if(!empty($referer))
 		{
 			if(!empty($email))
                             $data = array('email'=>$email);
-		
+
 			$this->renderPartial('_'.$referer, $data);
 		}
 		?>
-		
+
 		Please fill out the following form with your login credentials:
 	</p>
 
@@ -62,7 +62,7 @@ $this->breadcrumbs=array(
 		<div class="form-row button-row">
 			<p class="hint">
 				<?php echo CHtml::link('Forgotten Username Or Password?', $this->createUrl('/user/default/forgottenCredentials')); ?>
-			</p>                    
+			</p>
 			<?php echo CHtml::submitButton('Login'); ?>
 		</div>
 

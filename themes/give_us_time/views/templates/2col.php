@@ -21,7 +21,14 @@
 
 		<!-- Begin #main-content -->
 		<section id="main-content" class="column span12">
-			<h1><?php echo $model->name; ?></h1>
+			<h1>
+			<?php
+			//echo $model->name;
+				$this->widget('SingleLineText', array(
+				'name'=>'page heading',
+				'scope'=>'page',
+			)); ?>
+			</h1>
 			<div class="inner-content">
 				<?php $this->widget('RichText',array(
 					'name'=>'main content area',
