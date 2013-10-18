@@ -813,7 +813,7 @@ nav:after,
 	box-sizing: border-box;
 }
 
-ul > li.provisionally-booked,
+ul li.provisionally-booked,
 .status.provisionally-booked {
 	background: #ede4de;
 }

@@ -4,7 +4,7 @@ $arrival = date_parse_from_format('d/m/Y', $data['holiday']['arrival_date']);
 $departure = date_parse_from_format('d/m/Y', $data['holiday']['departure_date']);
 
 ?>
-<li>
+<li<?php if($data['holiday']['status'] == 'provisionally-booked') echo " class='provisionally-booked'" ?>>
 <?php if (isset($data['property']['image']) && !empty($data['property']['image'])):?>
         <?php $img_path = Yii::app()->basePath . '/..' . $data['property']['image'];?>
         <?php if (is_file($img_path)):?>
@@ -79,9 +79,16 @@ $departure = date_parse_from_format('d/m/Y', $data['holiday']['departure_date'])
                     $propertyUrl .= '&d=' . $_POST['Search']['holiday'];
                 }
                 
+                if ($data['holiday']['status'] == 'provisionally-booked') {
                 ?>
-
-
-                <a href="<?php echo $propertyUrl ?>" class="more">Full Details</a>
+                    <div class="status">Provisionally Booked</div>
+                <?php
+                } else {
+                ?>
+                    <a href="<?php echo $propertyUrl ?>" class="more">Full Details</a>
+                <?php
+                }
+                ?>
+                
         </div>
 </li>

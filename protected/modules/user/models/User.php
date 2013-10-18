@@ -188,7 +188,7 @@ class User extends CActiveRecord
 			'country' => 'Country',
 			'phone_number' => 'Telephone number',
 			'accessibility' => 'Please tell us about any accessibility considerations you have when booking a holiday',
-			'date_terms_agreed' => 'I agree to the Terms and Conditions',
+			'date_terms_agreed' => 'I agree to the Terms and Conditions (click here to read)',
 			'date_updated' => 'Date Updated',
 			'date_last_login' => 'Date Last Login',
 			'date_created' => 'Date Joined',

@@ -115,7 +115,22 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
 
 				?>
 				<div class="form-row">
-					<?php echo $form->labelEx($model, $name); ?>
+                                    <?php
+                                    $labelHtml = '';
+                                    // Output link to terms and conditions
+                                    if ($name == 'date_terms_agreed') {
+                                        if (Yii::app()->request->getQuery('type') == 'landlord') {
+                                            $labelHtml = array(
+                                                'class' => 'terms landlord'
+                                            );
+                                        } else {
+                                            $labelHtml = array(
+                                                'class' => 'terms user'
+                                            );
+                                        }
+                                    }
+                                    echo $form->labelEx($model, $name, $labelHtml);
+                                    ?>
 					<div class="form-column-wrapper">
 					<?php
 					if ($step_name !== 'confirmation' || $name == 'date_terms_agreed' || $name == 'captcha_code') {

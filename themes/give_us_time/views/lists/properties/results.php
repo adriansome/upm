@@ -34,7 +34,11 @@ foreach ($propertyData as $property) {
     // Loop over the holidays and pull out content
     foreach ($holidays as $index => $holiday) {
         // Go through properties and strip out those which don't match the specified dates
-        // This would be much more efficient to be done with a query (refactor at some point)
+        // This would be much more efficient if it used a query (refactor at some point)
+        // Check for booked holidays
+        if ($holiday['status'] == 'booked') {
+            continue;
+        }
         if ($dateStart) {
             // Convert to database format
             $arrivalParts = date_parse_from_format("d/m/Y", $holiday['arrival_date']);
@@ -79,9 +83,6 @@ $dataProvider = new CArrayDataProvider($allHolidays);
             'id'=>'holidays',
             'dataProvider'=> $dataProvider,
             'itemView'=>'webroot.themes.give_us_time.views.lists.holidays.item',
-            'htmlOptions' => array(
-                    'class' => 'constrained'					   
-            ),
             'itemsTagName' => 'ul',
             'itemsCssClass' => 'resort-listing search-listing',
             'summaryText'=> $summaryText,

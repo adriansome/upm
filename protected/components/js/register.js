@@ -32,6 +32,17 @@ $(document).ready( function() {
 
    });
    
+   $('label.terms').click( function() {
+       
+       var url = ($(this).hasClass('landlord')) 
+                ? 'timedonortermsconditions'
+                : 'usertermsandconditions';
+       
+       window.open('/' + url);
+       return false;
+       
+   });
+   
    // Update confirmation form as user inputs data
    $('form input, form textarea, form select').change( function() {
 

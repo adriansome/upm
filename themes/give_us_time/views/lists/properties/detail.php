@@ -103,8 +103,9 @@ $departure = date_parse_from_format('d/m/Y', $holidayData['departure_date']);
             </div>
 
             <?php
+
             // Only show the provisional booking form for users
-            if (Yii::app()->user->isUser()) {
+            if (Yii::app()->user->isUser() && $holidayData['status'] == 'available') {
                 Yii::app()->controller->renderPartial('webroot.themes.give_us_time.views.lists.holidays.booking',
                 array(
                     'holiday_id'  => $holidayId,

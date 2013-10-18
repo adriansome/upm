@@ -22,6 +22,16 @@
                         <input type="submit" value="Logout" />
                     </form>
                 </div>
+                <?php elseif(Yii::app()->user->isUser()):
+                $userModel = User::model()->findByPk(Yii::app()->user->id);
+                $fullname = $userModel->getFullname();
+                ?> 
+                <div class="login">
+                    <form action="/logout">
+                        <p>Welcome <?php echo $fullname ?></p>
+                        <input type="submit" value="Logout" />
+                    </form>
+                </div>                
                 <?php endif; ?>
 
 	</div>

@@ -72,9 +72,16 @@ $(document).ready( function() {
                     $.ajax({
                         url : '/user/management/sendNotification',
                         data : notificationData,
+                        dataType: 'json',
                         type: 'post',
                         success: function(r) {
-                            console.log(r);
+                            if(r.hasOwnProperty('success')) {
+                                $('#provisional-booking').html("<h2>"
+                                + "Provisional Booking Request Sent</h2><p>"
+                                + "Your request has been sent to the landlord, you "
+                                + "will recieve an email from the landlord confirming "
+                                + "your booking shortly.<p>");
+                            }
                         }
                     });
                 } else {
