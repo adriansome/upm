@@ -46,7 +46,20 @@ $(document).ready( function() {
         };        
         
         var landlord_id =  $('#landlord-data').data('id');
-
+        
+        var notificationData = {
+            ajax: true,
+            id: landlord_id,
+            view_path: 'webroot.themes.give_us_time.views.emails.booking',
+            params: {
+                'booking' : true,
+                'id' : landlord_id, 
+                'holiday_start' : $('#holiday-dates').data('start'),
+                'holiday_end'   : $('#holiday-dates').data('end'),
+                'people' : form.serializeArray()
+            }
+        };
+        
         // Update database
         $.ajax({
             url: action,
@@ -58,18 +71,7 @@ $(document).ready( function() {
                     // Send email to landlord
                     $.ajax({
                         url : '/user/management/sendNotification',
-                        data : {
-                            ajax: true,
-                            id: landlord_id,
-                            view_path: 'webroot.themes.give_us_time.views.emails.booking',
-                            params: {
-                                'booking' : true,
-                                'id' : landlord_id, 
-                                'holiday_start' : $('#holiday-dates').data('start'),
-                                'holiday_end'   : $('#holiday-dates').data('end')
-                            },
-                            'form_data' : form.serialize()
-                        },
+                        data : notificationData,
                         type: 'post',
                         success: function(r) {
                             console.log(r);

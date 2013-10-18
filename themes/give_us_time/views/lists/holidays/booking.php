@@ -37,26 +37,8 @@ $indexes = array(
 
             <div class="form-row">
                     <label>Name</label>
-                    <input name="people[][name]" readonly="readonly" value="<?php echo $user_name ?>" type="text" />
+                    <input name="name" readonly="readonly" value="<?php echo $user_name ?>" type="text" />
             </div>
-        </fieldset>        
-        <fieldset class="hidden extra-person">
-            <legend>Person <span class="person_no"></span></legend>
-
-            <div class="form-row">
-                    <label>Name <span class="required">(required)</span></label>
-                    <input name="people[][name]" type="text">
-            </div>
-
-            <div class="form-row">
-                    <label>Age <span class="required">(required)</span></label>
-                    <input name="people[][age]" type="text">
-            </div>
-
-            <div class="form-row">
-                    <label>Relationship to you <span class="required">(required)</span></label>
-                    <input name="people[][relationship]" type="text">
-                </div>
         </fieldset>
 
         <div class="form-row">
@@ -71,3 +53,22 @@ $indexes = array(
             <div class="error"></div>
         </div>
 </form>
+
+<fieldset class="hidden extra-person">
+    <legend>Person <span class="person_no"></span></legend>
+
+    <div class="form-row">
+            <label>Name <span class="required">(required)</span></label>
+            <input name="name" type="text">
+    </div>
+
+    <div class="form-row">
+            <label>Age <span class="required">(required)</span></label>
+            <input name="age" type="text">
+    </div>
+
+    <div class="form-row">
+            <label>Relationship to you <span class="required">(required)</span></label>
+            <input name="relationship" type="text">
+        </div>
+</fieldset>
