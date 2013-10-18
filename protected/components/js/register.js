@@ -1,7 +1,7 @@
 $(document).ready( function() {
    
-   $('.captcha_link').click( function() {
-       console.log('triggered');
+   $('#yw0').ready( function() {
+       $('#yw0_button').click();
    });
    
    $('.form-wrapper a.more').click( function() {

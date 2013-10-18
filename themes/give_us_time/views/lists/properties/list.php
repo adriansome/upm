@@ -6,9 +6,6 @@ $this->widget('zii.widgets.CListView', array(
 	'id'=>'properties',
 	'dataProvider'=>$this->contents,
 	'itemView'=>'summary',
-	'htmlOptions' => array(
-		'class' => 'constrained'
-	),
 	'emptyText'=> 'You have not yet added any properties. Get started by clicking "Add new property".',
 	'template'=>'{items}',
 	/*'pager'=>array(

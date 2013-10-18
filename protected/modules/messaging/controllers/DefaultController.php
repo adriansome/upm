@@ -11,6 +11,7 @@ class DefaultController extends Controller
 			// captcha action renders the CAPTCHA image displayed on the contact page
 			'captcha'=>array(
 				'class'=>'CCaptchaAction',
+                                'testLimit' => 0,
 				'backColor'=>0xFFFFFF,
 			),
 		);

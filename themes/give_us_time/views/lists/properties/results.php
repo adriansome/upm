@@ -44,7 +44,8 @@ foreach ($propertyData as $property) {
             $diff = $userDate->diff($systemDate);
 
             // Make sure the holiday falls within  a week of the user's specified date
-            if ($diff->days > 7 || $diff->invert == 1) {
+            // The holiday should either fall on, or 6 days after the chosen date
+            if ($diff->days > 6 || $diff->invert == 1) {
                 continue;
             }
         }

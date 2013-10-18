@@ -26,8 +26,8 @@ class DefaultController extends UserController
 				'phone_number' => array(),
 				'password1' => array('type' => 'password'),
 				'password2' => array('type' => 'password'),
-				'date_terms_agreed' => array('type' => 'checkbox', 'on' => array('register')),
-				'captcha_code' => array('type' => 'captcha', 'on' => array('register'))
+				'date_terms_agreed' => array('type' => 'checkbox'),
+				'captcha_code' => array('type' => 'captcha')
 			)
 		),
 		'user' => array(
@@ -285,8 +285,10 @@ class DefaultController extends UserController
 			if($model->validate() && $model->login()) {
 				$returnUrl = Yii::app()->user->returnUrl;
 				if (Yii::app()->user->isLandlord()) {
-					$returnUrl = '/profile';
-				}
+                                    $returnUrl = '/profile';
+                                } else {
+                                    $returnUrl = '/';
+                                }
 				$this->redirect($returnUrl);
 			}
 		}
@@ -595,20 +597,24 @@ class DefaultController extends UserController
 	 */
 	protected function performAjaxValidation($model, $regType='user')
 	{
-		if(isset($_POST['ajax']))
-		{
-                    if ($_POST['ajax']==='user-form') {
-                        echo CActiveForm::validate($model);
-                        Yii::app()->end();
-                    } else if (strpos($_POST['ajax'], 'registration-form') !== FALSE) {
-                        // Validate this step
-                        foreach ($_POST['User'] as $field => $value) {
-                            $attributes[] = $field;
-                        }
-                        echo CActiveForm::validate($model, $attributes);
-                        Yii::app()->end();
+
+            if(isset($_POST['ajax']))
+            {
+                if (isset($_POST['User']['captcha_code'])) {
+                    unset($_POST['User']['captcha_code']);
+                }
+                if ($_POST['ajax']==='user-form') {
+                    echo CActiveForm::validate($model);
+                    Yii::app()->end();
+                } else if (strpos($_POST['ajax'], 'registration-form') !== FALSE) {
+                    // Validate this step
+                    foreach ($_POST['User'] as $field => $value) {
+                        $attributes[] = $field;
                     }
-                        
-		}
+                    echo CActiveForm::validate($model, $attributes);
+                    Yii::app()->end();
+                }
+
+            }
 	}
 }
