@@ -28,22 +28,22 @@ $data = $this->contents->rawData;
         if ($data['description']) {
         ?>
             <h2>Description</h2>
-            <p><?php echo $data['description'] ?></p>        
+            <p><?php echo $data['description'] ?></p>
         <?php
         }
         ?>
-            
+
         <?php
         if ($data['additional_info']) {
         ?>
             <h2>Additional Info</h2>
-            <p><?php echo $data['additional_info'] ?></p>        
+            <p><?php echo $data['additional_info'] ?></p>
         <?php
         }
-        ?>            
+        ?>
 
     </div>
-    </div>
+</div>
 <p>
 <a data-toggle="edit-item" class="more" href="<?php echo Yii::app()->createUrl('/block/management/update/id/' . $this->item_id . '/list/properties'); ?>">Edit</a>
 </p>

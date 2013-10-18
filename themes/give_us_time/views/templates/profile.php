@@ -44,7 +44,7 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
                             )
                         ));
                         ?>
-                        <a href="/profile/" class="back">Back to Properties</a>
+                        <a href="/profile" class="back">Back to Properties</a>
                         <?php
                     } else {
                         ?>
