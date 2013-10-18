@@ -48,6 +48,7 @@ class ListWidget extends CWidget
 	protected function configure()
 	{
 		$config = file_get_contents(
+
 			Yii::app()->theme->basepath.'/views/lists/'.$this->name.'.json'
 		);
 
@@ -92,13 +93,13 @@ class ListWidget extends CWidget
 		}
 
 		$list = array();
-
+                
                 foreach($items as $index=>$item) 
 		{
 			$list[$index] = $this->loadContents($item);
 			$list[$index]['block_id'] = $item->id;
 		}
-                
+
                 $listData = array(
                     'id' => 'title',
                     'keyField' => 'title'
@@ -158,9 +159,14 @@ class ListWidget extends CWidget
 	protected function loadContents(Block $item) {
 
 		$contents = array();
-                
+
 		foreach($item->contents as $content)
 		{
+                        // Without this line, there are errors if any fields get renamed
+                        // Or remove
+                        if (!isset($this->attributes[$content->name])) {
+                            continue;
+                        }
 			switch($this->attributes[$content->name]['type'])
 			{
 				case 'singleline':
@@ -207,6 +213,7 @@ class ListWidget extends CWidget
 					throw new CHttpException(500, 'Unknown type "'.$this->attributes[$content->name]['type'].'" for attribute "'.$content->name.'"');
 			}
 		}
+
 		return $contents;
 	}
 

@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     var type, params;
-
+    
     // Check for different DOM elements to determine what type of page we're on
     if ($('.properties-container').length) {
         type = 'properties';
@@ -42,9 +42,11 @@ $(document).ready(function() {
                 "filemanager": responsiveFileManager + "plugin.min.js"
             }
         });
-		setTimeout(function () {
-			$( ".datepicker" ).datepicker();
-		}, 200);
+        setTimeout(function () {
+            $(".datepicker").datepicker({
+                'dateFormat' : 'yy-mm-dd'
+            });
+        }, 200);
     }
 
     $('[data-toggle=\"modal\"]').live('click',function(e) {
