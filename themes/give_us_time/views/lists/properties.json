@@ -69,18 +69,42 @@
 				"maxlength" : 300
 			}
         },
-                
-        "disabled_access":
+        "wifi":
         {
             "type": "boolean"
         },
+        
+        "gym":
+        {
+            "type": "boolean"
+        }, 
                 
         "beach":
         {
             "type": "boolean"
         },
+        
+        "swimming_pool":
+        {
+            "type": "boolean"
+        },       
+        
+         "parking":
+        {
+            "type": "boolean"
+        },       
+                      
+        "disabled_access":
+        {
+            "type": "boolean"
+        },
 
         "child_friendly":
+        {
+            "type": "boolean"
+        },
+
+        "dog_friendly":
         {
             "type": "boolean"
         },
