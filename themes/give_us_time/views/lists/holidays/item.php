@@ -1,4 +1,4 @@
-<?php /* @var $data CArrayDataProvider */ 
+<?php /* @var $data CArrayDataProvider */
 
 $arrival = date_parse_from_format('d/m/Y', $data['holiday']['arrival_date']);
 $departure = date_parse_from_format('d/m/Y', $data['holiday']['departure_date']);
@@ -13,9 +13,9 @@ $departure = date_parse_from_format('d/m/Y', $data['holiday']['departure_date'])
 <?php endif?>
         <div class="column">
         <h2><?php echo $attributes['location']['values'][$data['property']['location']]; ?></h2>
-            <p><?php 
-            echo $data['holiday']['number_of_bedrooms'] . ' bed ' . 
-            $attributes['type']['values'][$data['property']['type']] . '. ';   
+            <p><?php
+            echo $data['holiday']['number_of_bedrooms'] . ' bed ' .
+            $attributes['type']['values'][$data['property']['type']] . '. ';
             echo 'Sleeps ' . $data['holiday']['sleeps_number'];
             ?>
             </p>
@@ -37,12 +37,12 @@ $departure = date_parse_from_format('d/m/Y', $data['holiday']['departure_date'])
         <div class="column">
                 <h2>Resort</h2>
                 <p><?php echo $data['property']['title'] ?></p>
-                
+
                 <?php
                 if ($data['property']['description']) {
                     ?>
                     <h3>Description</h3>
-                    <p><?php echo $data['property']['description'] ?></p>                
+                    <p><?php echo $data['property']['description'] ?></p>
                     <?php
                 }
                 ?>
@@ -50,26 +50,31 @@ $departure = date_parse_from_format('d/m/Y', $data['holiday']['departure_date'])
 
                 <?php
                 $facilities = array(
-                    'disabled_access' => 'Disabled Access',
+                	'wifi' => 'Wi-Fi',
+                	'gym' => 'Gym',
                     'beach' => 'Beach',
+                    'swimming_pool' => 'Swimming Pool',
+                    'parking' => 'Parking',
+                    'disabled_access' => 'Disabled Access',
                     'child_friendly' => 'Child-friendly',
+                    'dog_friendly' => 'Dog-friendly',
                     'cancellation_fee' => 'Cancellation Fee'
                 );
 
                 $facilities_start = "<h3>Facilities</h3><ul class='facilities'>";
                 $facilities_end = "</ul>";
                 $facilities_inner = '';
-                
+
                 foreach ($facilities as $id => $text) {
                     if (isset($data['property'][$id]) && $data['property'][$id] == 1) {
                         $facilities_inner  .= "<li class='{$id}' data-tooltip='{$text}'><span>{$text}</span></li>";
                     }
                 }
-                
+
                 if ($facilities_inner) {
                     echo $facilities_start . $facilities_inner . $facilities_end;
                 }
-                
+
                 $propertyUrl = '/properties?slug=' . $data['property']['slug']
                             . '&h=' . $data['holiday']['block_id'];
                 if (isset($_POST['Search']['location']) && $_POST['Search']['location']) {
@@ -78,7 +83,7 @@ $departure = date_parse_from_format('d/m/Y', $data['holiday']['departure_date'])
                 if (isset($_POST['Search']['holiday']) && $_POST['Search']['holiday']) {
                     $propertyUrl .= '&d=' . $_POST['Search']['holiday'];
                 }
-                
+
                 ?>
 
 

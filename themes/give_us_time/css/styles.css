@@ -304,7 +304,9 @@ nav:after,
 .nugget:before,
 .nugget:after,
 .resort-listing li:before,
-.resort-listing li:after {
+.resort-listing li:after,
+.property-details:before,
+.property-details:after {
 	display: table;
 	clear: both;
 	content: ""
@@ -933,8 +935,12 @@ ul > li.provisionally-booked,
 
 .facilities li {
 	display: inline-block;
-	width: 21px;
+	width: 20px;
 	height: 20px;
+	margin-right: 3px;
+	padding: 1px;
+	border: 1px solid #bbb;
+	border-radius: 3px;
 
 	background: transparent url(../images/icons-facilities.png) no-repeat;
 }
@@ -943,20 +949,43 @@ ul > li.provisionally-booked,
 	display: none;
 }
 
-.facilities .disabled-access {
+.facilities .wifi {
 	background-position: 0 0;
 }
 
+.facilities .gym {
+	width: 21px;
+	background-position: -24px 0;
+}
+
 .facilities .beach {
-	background-position: -25px 0;
+	width: 21px;	
+	background-position: -49px 0;
+}
+
+.facilities .swimming_pool {
+	width: 21px;	
+	background-position: -74px 0;
+}
+
+.facilities .parking {
+	background-position: -100px 0;
+}
+
+.facilities .disabled_access {
+	background-position: -125px 0;
 }
 
 .facilities .child_friendly {
-	background-position: -50px 0;
+	background-position: -150px 0;
 }
 
-.facilities .cancellation-fee {
-	background-position: -75px 0;
+.facilities .dog_friendly {
+	background-position: -175px 0;
+}
+
+.facilities .cancellation_fee {
+	background-position: -200px 0;
 }
 
 
@@ -1368,6 +1397,14 @@ form .back {
 .action-button.cancel {
 	padding-right: 24px;	
 	background: #993333 url(../images/icon-cancel.png) 90% 50% no-repeat;
+}
+
+.edit-wrapper {
+	clear: both;
+	margin: 6px 0 15px 0;
+	padding: 20px;
+	background: #fff;
+	text-align: center;
 }
 
 /* ----- CONTACT ------------------------------------------------- */
