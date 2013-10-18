@@ -287,9 +287,9 @@ class DefaultController extends UserController
 				if (Yii::app()->user->isLandlord()) {
                                     $returnUrl = '/profile';
                                 } else {
-                                    $this->redirect('/');
+                                    $returnUrl = '/';
                                 }
-				//$this->redirect($returnUrl);
+				$this->redirect($returnUrl);
 			}
 		}
 
