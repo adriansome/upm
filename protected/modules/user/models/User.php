@@ -413,7 +413,7 @@ class User extends CActiveRecord
             $notification->setBody(array('data' => $this, 'params' => $params), 'text/html');
             $subject = 'Provisional Booking';
             if (isset($params['status'])) {
-                $subject .= ucfirst($params['status']);
+                $subject .= " " . ucfirst($params['status']);
             }
             $notification->setSubject($subject);
             $notification->addTo($this->email);

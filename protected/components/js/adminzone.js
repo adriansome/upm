@@ -89,13 +89,15 @@ $(function()
             var fileFieldID = $(this).attr('data-index');
 
         if (url.indexOf('#') == 0) {
-        	$(".modal").remove();
+            $(".modal").remove();
             $(url).modal('open');
         }
         else
         {
             $.get(url,function(response) {
-            	$(".modal").remove();
+            	if (target !== '#filemanager') {
+                    $(".modal").remove();
+                }
                 $(response).modal({backdrop: false, modalOverflow: true});
 
                 // Make modal window draggable.

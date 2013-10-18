@@ -257,7 +257,7 @@ class ManagementController extends BlockController
 
 		$form = new CActiveForm;
 		$fields = array();
-		
+
 		foreach($contents as $index=>$content)
 		{
 			$fields[$content->name] = array(
