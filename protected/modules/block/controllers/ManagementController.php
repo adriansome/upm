@@ -301,6 +301,12 @@ class ManagementController extends BlockController
 					break;
 
 				case 'date':
+                                        $listWidget = new ListWidget();
+					$listWidget->name = $list;
+					$listWidget->init();
+			
+					$attributes = $listWidget->itemAttributes();
+					unset($listWidget);
 					$content->date_value = date($attributes[$content->name]['format'], strtotime($content->date_value));
 					$fields[$content->name]['input']=$this->createWidget('zii.widgets.jui.CJuiDatePicker',array(
 						'model'=>$content,
