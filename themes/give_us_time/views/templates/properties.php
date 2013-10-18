@@ -25,7 +25,7 @@ if (isset($slug) && $slug) {
     require_once(Yii::app()->theme->basepath.'/views/elements/footer.php');
     
     
-} else {
+} else if(Yii::app()->user->isLandlord() || Yii::app()->user->isAdmin()) {
 
     $this->widget('ListWidget',array(
         'name'=>'properties',
@@ -38,6 +38,8 @@ if (isset($slug) && $slug) {
         )
     )); 
 
+} else {
+    $this->redirect('/');
 }
 ?>
 
