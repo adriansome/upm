@@ -163,11 +163,11 @@ class ManagementController extends BlockController
 
 				case 'date':
 					$fields[$content->name]['input']=$this->createWidget('zii.widgets.jui.CJuiDatePicker',array(
-						'model'=>$content,
+                                            'model'=>$content,
 					    'attribute'=>"[$index]date_value",
-						'htmlOptions'=>array(
-                                'class'=>'datepicker'
-                                )
+                                            'htmlOptions'=>array(
+                                                'class'=>'datepicker'
+                                            )
 					));
 					break;
 
@@ -215,16 +215,6 @@ class ManagementController extends BlockController
 
 		$block=$this->loadModel($id);
 		$contents = $block->contents;
-		
-		$block=$this->loadModel($id);
-		$contents = $block->contents;
-		
-		$listWidget = new ListWidget();
-		$listWidget->name = $list;
-		$listWidget->init();
-
-		$attributes = $listWidget->itemAttributes();
-		unset($listWidget);
 
 		if(isset($_POST['Content']))
 		{

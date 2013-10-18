@@ -66,9 +66,9 @@ $(document).ready( function() {
                                 'booking' : true,
                                 'id' : landlord_id, 
                                 'holiday_start' : $('#holiday-dates').data('start'),
-                                'holiday_end'   : $('#holiday-dates').data('end'),
-                                'form_data'     : form.serialize()
-                            }
+                                'holiday_end'   : $('#holiday-dates').data('end')
+                            },
+                            'form_data' : form.serialize()
                         },
                         type: 'post',
                         success: function(r) {

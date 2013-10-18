@@ -119,8 +119,10 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
 </div>
 
 <script type="text/javascript">
-    var responsiveFileManager = "<?php echo Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('filemanager')); ?>/";
+    var responsiveFileManager = "<?php echo Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('filemanager'));?>";
 </script>
+
+<?php if (!Yii::app()->user->isAdmin()) { ?>
 <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/bootstrap-modal.js'); ?>
 <?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/bootstrap-modalmanager.js'); ?>
 <?php //Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/adminzone.js'); ?>
@@ -128,5 +130,7 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
 <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/properties.js"></script>
 
 <?php
+}
+
 require_once(Yii::app()->theme->basepath.'/views/elements/footer.php');
 ?>

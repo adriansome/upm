@@ -24,9 +24,12 @@ $(function()
                 "filemanager" : responsiveFileManager+"plugin.min.js"
             } 
         });
-		setTimeout(function () {
-			$( ".datepicker" ).datepicker();
-		}, 200);
+        $(document).ready( function() {
+            $(".datepicker").datepicker({
+                'dateFormat' : 'yy-mm-dd'
+            });
+        });
+               
     }
 
 //    function updateList()
