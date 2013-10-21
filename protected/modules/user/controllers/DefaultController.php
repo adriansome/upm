@@ -247,7 +247,7 @@ class DefaultController extends UserController
 		}
 		else {
 			$this->redirect(array('login'));
-                }
+		}
 	}
 
 	/**
