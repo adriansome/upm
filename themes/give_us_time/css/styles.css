@@ -303,8 +303,8 @@ nav:after,
 .form-row:after,
 .nugget:before,
 .nugget:after,
-.resort-listing li:before,
-.resort-listing li:after,
+.resort-listing > li:before,
+.resort-listing > li:after,
 .property-details:before,
 .property-details:after {
 	display: table;
