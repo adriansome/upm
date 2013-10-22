@@ -65,12 +65,27 @@ $departure = date_parse_from_format('d/m/Y', $holidayData['departure_date']);
             <div class="column image-column">
                 <div id="resort-full-image">
                     <?php
-                    if (isset($propertyData['image']) && !empty($propertyData['image'])) {
-                        $img_path = Yii::app()->basePath . '/..' . $propertyData['image'];
-                        if (is_file($img_path)) {
-                            echo "<img alt='' src='" . $propertyData['image'] .  "' />";                  
-                        }
-                    }
+                    if (isset($propertyData['image_1']) && !empty($propertyData['image_1'])):
+                        $img_path = Yii::app()->basePath . '/..' . $propertyData['image_1'];
+                        if (is_file($img_path)):?>
+                            <img alt="" src="/thumbs<?php echo $propertyData['image_1']?>_450x310" />
+                        <?php endif?>
+                    <?php endif?>
+                </div>
+                <div id="resort-thumbnails">
+                    <?php
+                    for($i=1;$i<=5;$i++){
+						if (isset($propertyData['image_'.$i]) && !empty($propertyData['image_'.$i])) {
+							$img_path = Yii::app()->basePath . '/..' . $propertyData['image_'.$i];
+							if (is_file($img_path)) {
+								?>
+								<!-- images/photos/album1/gh53.jpg_200x300.jpg -->
+								<a href="/thumbs<?php echo $propertyData['image_'.$i] ?>_450x310"><img src="/thumbs<?php echo $propertyData['image_'.$i] . '_87x62' ?>" alt="" /></a>
+							
+								<?php
+							}
+						}
+					}
                     ?>
                 </div>
                 <div id="holiday-details">
@@ -124,3 +139,13 @@ $departure = date_parse_from_format('d/m/Y', $holidayData['departure_date']);
     </section>
     <!-- End #main-content -->
 </div>
+
+<script>
+$(document).ready(function() {
+	$("#resort-thumbnails a").click(function () {
+		var newSrc = $(this).attr("href");
+		$("#resort-full-image img").attr("src", newSrc);
+		return false;
+	});
+});
+</script>

@@ -26,6 +26,7 @@ $config = array(
 		'application.components.*',
 		'bootstrap.components.*',
 		'bootstrap.widgets.*',
+		'application.helpers.*',
 		'mail.*',
 	),
 
@@ -53,6 +54,14 @@ $config = array(
 				'setup'=>'site/setup',
 			),
 		),
+		
+		'image'=>array(
+          'class'=>'application.extensions.image.CImageComponent',
+            // GD or ImageMagick
+            'driver'=>'GD',
+            // ImageMagick setup path
+            'params'=>array('directory'=>'/opt/local/bin'),
+        ),
 
 		'mail' => array(
  			'class' => 'YiiMail',

@@ -39,6 +39,7 @@ return array(
                 'area/management/nugget' => $module_name . '/management/nugget',
                 $module_name . '/management/<action:\w+>/<id:\d+>' => $module_name . '/management/<action>',
                 $module_name . '/management/<action:\w+>' => $module_name . '/management/<action>',
+                'thumbs/<url:.+>'=>'block/resources/thumbs',
             ),
         ),
     ),

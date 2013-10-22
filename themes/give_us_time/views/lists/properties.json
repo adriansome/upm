@@ -119,7 +119,27 @@
 			}
         },
         
-        "image":
+        "image_1":
+        {
+            "type": "file"
+        },
+        
+        "image_2":
+        {
+            "type": "file"
+        },
+        
+        "image_3":
+        {
+            "type": "file"
+        },
+        
+        "image_4":
+        {
+            "type": "file"
+        },
+        
+        "image_5":
         {
             "type": "file"
         },
