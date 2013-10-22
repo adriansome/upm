@@ -65,7 +65,9 @@ $(document).ready(function() {
         else
         {
             $.get(url,function(response) {
-            	$(".modal").remove();
+            	if (target !== '#filemanager') {
+                    $(".modal").remove();
+                }
                 $(response).modal({backdrop: false, modalOverflow: true});
 
                 // Make modal window draggable.

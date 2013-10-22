@@ -12,10 +12,10 @@ $data = $this->contents->rawData;
 
 <div class="property-details">
     <div class="column image-column">
-        <?php if (isset($data['image']) && !empty($data['image'])):?>
-                <?php $img_path = Yii::app()->basePath . '/..' . $data['image'];?>
+        <?php if (isset($data['image_1']) && !empty($data['image_1'])):?>
+                <?php $img_path = Yii::app()->basePath . '/..' . $data['image_1'];?>
                 <?php if (is_file($img_path)):?>
-                        <?php echo '<img src="'.$data['image'].'" /></a>'?>
+                        <?php echo '<img src="/thumbs'.$data['image_1'].'_450x310" /></a>'?>
                 <?php endif?>
         <?php endif?>
     </div>

@@ -111,4 +111,9 @@ $hidden_files = array('config.php');
  *******************/
 $java_upload=true;
 $JAVAMaxSizeUpload=200; //Gb
+
+/*******************
+ * User based filemanager
+ *******************/
+//$_SESSION['subfolder'] = 
 ?>

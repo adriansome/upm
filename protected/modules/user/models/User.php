@@ -336,6 +336,12 @@ class User extends CActiveRecord
 		{
 			$this->date_email_validated = new CDbExpression('NOW()');
 			$this->activation_code = null;
+			if($this->role=='landlord'){
+				// Make directory for upload
+				if(!file_exists($_SERVER['DOCUMENT_ROOT'].'/assets/source/landlord/'.md5($this->email))){
+					mkdir($_SERVER['DOCUMENT_ROOT'].'/assets/source/landlord/'.md5($this->email),0777,true);
+				}
+			}
 		}
 
 		else if ($this->scenario == 'revertEmail')

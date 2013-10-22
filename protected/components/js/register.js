@@ -38,7 +38,7 @@ $(document).ready( function() {
                 ? 'timedonortermsconditions'
                 : 'usertermsandconditions';
        
-       window.open('/' + url);
+       window.open('/' + url, 'terms-popup', 'height=800,width=700');
        return false;
        
    });
