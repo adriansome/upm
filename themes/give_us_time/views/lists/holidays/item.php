@@ -5,10 +5,10 @@ $departure = date_parse_from_format('d/m/Y', $data['holiday']['departure_date'])
 
 ?>
 <li<?php if($data['holiday']['status'] == 'provisionally-booked') echo " class='provisionally-booked'" ?>>
-<?php if (isset($data['property']['image']) && !empty($data['property']['image'])):?>
-        <?php $img_path = Yii::app()->basePath . '/..' . $data['property']['image'];?>
+<?php if (isset($data['property']['image_1']) && !empty($data['property']['image_1'])):?>
+        <?php $img_path = Yii::app()->basePath . '/..' . $data['property']['image_1'];?>
         <?php if (is_file($img_path)):?>
-                <?php echo '<a href="/properties?slug='.$data['property']['slug'].'" class="thumbnail"><img src="'.$data['property']['image'].'" /></a>'?>
+                <?php echo '<a href="/properties?slug='.$data['property']['slug'].'" class="thumbnail"><img src="/thumbs'.$data['property']['image_1'].'_210x150" /></a>'?>
         <?php endif?>
 <?php endif?>
         <div class="column">
