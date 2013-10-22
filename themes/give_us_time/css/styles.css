@@ -837,7 +837,7 @@ ul li.provisionally-booked,
 
 .resort-listing .column:last-child,
 .resort-listing .column.last {
-	width: 355px;
+	width: 355px; /* why was this changed from 375px? */
 }
 
 .date-range {
