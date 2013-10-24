@@ -216,12 +216,14 @@
 	width: 65%;
 }
 
-.modal .upload-row input[type=text] {
+.modal .row.upload-row input[type=text],
+.modal .row.filemanager-row input[type=text] {
 	width: 48%;
-
+	margin-left: 0px;
 }
 
-.modal .upload-row .btn {
+.modal .upload-row .btn,
+.modal .filemanager-row .btn {
 	position: relative;
 	top: -2px;
 	margin-left: 5px;

@@ -11,7 +11,7 @@ Yii::setPathOfAlias('filemanager', dirname(__FILE__).'/../vendors/filemanager');
 // Main application config.
 $config = array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	
+
 	'name'=>'Give Us Time',
 
 	// set site/app theme here
@@ -71,10 +71,10 @@ $config = array(
  		),
 
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=fanatic_give_us_time',
+			'connectionString' => 'mysql:host=localhost;dbname=give_us_time',
 			'emulatePrepare' => true,
 			'username' => 'root',
-			'password' => 'Dr0GonSam',
+			'password' => '',
 			'charset' => 'utf8',
 		),
 
@@ -101,11 +101,11 @@ $config = array(
 				),
 
 				// uncomment the following to show log messages on web pages
-				
+
 				/*array(
 					'class'=>'CWebLogRoute',
 				),*/
-				
+
 			),
 		),
 	),
@@ -127,7 +127,7 @@ $config = array(
             3=>array(
                 'name'=>'submenu',
                 'maxDepth'=>3,
-            ),            
+            ),
         ),
 	),
 );
