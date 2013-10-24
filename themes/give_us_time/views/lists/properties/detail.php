@@ -15,7 +15,7 @@ $locationAttributes += $attributes['location']['values'];
 unset($listWidget);
 
 // Set location and date params
-$selectedLocation = (isset($_GET['l'])) 
+$selectedLocation = (isset($_GET['l']))
                     ? $_GET['l'] : '';
 $selectedDate = (isset($_GET['d']))
                 ? $_GET['d'] : '';
@@ -62,6 +62,30 @@ $departure = date_parse_from_format('d/m/Y', $holidayData['departure_date']);
             <?php echo $propertyData['title'] . ', ' . $propertyData['area'] ?>
         </h1>
         <div class="inner-content">
+
+			<h2>Holiday Details</h2>
+			<div id="holiday-details">
+				<div class="date-range">
+					<div class="date">
+						<div class="month"><?php echo date("F", mktime(0, 0, 0, $arrival['month'])); ?></div>
+						<div class="day"><?php echo $arrival['day']; ?></div>
+					</div>
+					to
+					<div class="date">
+						<div class="month"><?php echo date("F", mktime(0, 0, 0, $departure['month'])); ?></div>
+						<div class="day"><?php echo $departure['day']; ?></div>
+					</div>
+				</div>
+
+				<div class="resort-info">
+					<div class="resort-name"><?php echo $propertyData['title'] ?>, <?php echo $propertyData['area'] ?></div>
+					<div class="resort-details"><?php
+					echo $holidayData['number_of_bedrooms'] . ' bed ' .
+						$attributes['type']['values'][$propertyData['type']] . '. ';
+					 echo 'Sleeps ' . $holidayData['sleeps_number'];?></div>
+				</div>
+			</div>
+
             <div class="column image-column">
                 <div id="resort-full-image">
                     <?php
@@ -81,40 +105,63 @@ $departure = date_parse_from_format('d/m/Y', $holidayData['departure_date']);
 								?>
 								<!-- images/photos/album1/gh53.jpg_200x300.jpg -->
 								<a href="/thumbs<?php echo $propertyData['image_'.$i] ?>_450x310"><img src="/thumbs<?php echo $propertyData['image_'.$i] . '_87x62' ?>" alt="" /></a>
-							
+
 								<?php
 							}
 						}
 					}
                     ?>
                 </div>
-                <div id="holiday-details">
-                    <div class="date-range">
-                        <div class="date">
-                            <div class="month"><?php echo date("F", mktime(0, 0, 0, $arrival['month'])); ?></div>
-                            <div class="day"><?php echo $arrival['day']; ?></div>
-                        </div>
-                        to
-                        <div class="date">
-                            <div class="month"><?php echo date("F", mktime(0, 0, 0, $departure['month'])); ?></div>
-                            <div class="day"><?php echo $departure['day']; ?></div>
-                        </div>
-                    </div>
-                    <h2>Holiday Details</h2>
-                    <div class="resort-info">
-                        <div class="resort-name"><?php echo $propertyData['title'] ?>, <?php echo $propertyData['area'] ?></div>
-                        <div class="resort-details"><?php 
-                        echo $holidayData['number_of_bedrooms'] . ' bed ' . 
-                            $attributes['type']['values'][$propertyData['type']] . '. ';   
-                         echo 'Sleeps ' . $holidayData['sleeps_number'];?></div>
-                    </div>                    
-                </div>
+
             </div>
             <div class="column full-details-column">
-                    <h2>Resort</h2>
-                    <p><?php echo $propertyData['title']; ?></p>
+				<h2 class="property-name"><?php echo $propertyData['title'] ?> <span class="property-type">(<?php echo $propertyData['type'] ?>)</span></h2>
+				<div class="property-location"><?php echo $propertyData['area'] ?>, <?php echo $propertyData['city'] ?>, <?php echo $propertyData['location'] ?></div>
 
-                    <p><?php echo $propertyData['description']; ?></p>
+				<?php
+				if ($propertyData['description']) {
+				?>
+				<div class="property-description">
+					<p><?php echo $propertyData['description'] ?></p>
+				</div>
+				<?php
+				}
+				?>
+
+                <ul class="facilities">
+                    <li class="disabled_access" data-tooltip="Disabled access"><span>Disabled access</span></li>
+                    <li class="beach" data-tooltip="Beach"><span>Beach</span></li>
+                    <li class="child_friendly" data-tooltip="Child-friendly"><span>Child-friendly</span></li>
+                    <li class="cancellation_fee" data-tooltip="Cancellation Fee"><span>Cancellation Fee</span></li>
+                </ul>
+
+				<?php
+				if ($propertyData['additional_info']) {
+				?>
+				<div class="property-additional">
+					<p><?php echo $propertyData['additional_info'] ?></p>
+				</div>
+				<?php
+				}
+
+				if ($propertyData['accessibility']) {
+				?>
+				<div class="property-accessibility">
+					<h3>Accessibility Information</h3>
+					<p><?php echo $propertyData['accessibility'] ?></p>
+				</div>
+				<?php
+				}
+
+				if ($propertyData['extras']) {
+				?>
+				<div class="property-additional-costs">
+					<h3>Any extra costs that you could be required to pay</h3>
+					<p><?php echo $propertyData['extras'] ?></p>
+				</div>
+				<?php
+				}
+				?>
             </div>
 
             <?php
@@ -130,11 +177,11 @@ $departure = date_parse_from_format('d/m/Y', $holidayData['departure_date']);
                 ));
             }
             ?>
-            
-            <input type="hidden" id="holiday-dates" 
+
+            <input type="hidden" id="holiday-dates"
                    data-start="<?php echo $holidayData['arrival_date'] ?>"
                    data-end="<?php echo $holidayData['departure_date'] ?>" />
-            
+
         </div>
     </section>
     <!-- End #main-content -->

@@ -2,9 +2,11 @@
 <li>
 <?php if (isset($data['image_1']) && !empty($data['image_1'])):?>
         <?php $img_path = Yii::app()->basePath . '/..' . $data['image_1'];?>
+        <div class="picture-frame">
         <?php if (is_file($img_path)):?>
-                <?php echo '<a href="/properties?slug='.$data['slug'].'" class="thumbnail"><img src="/thumbs'.$data['image_1'].'_210x150" /></a>'?>
+                <?php echo '<a href="/properties?slug='.$data['slug'].'"><img src="/thumbs'.$data['image_1'].'_210x150" /></a>'?>
         <?php endif?>
+        </div>
 <?php endif?>
         <div class="column">
         <h2><?php echo $attributes['location']['values'][$data['location']]  ?></h2>

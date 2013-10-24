@@ -10,40 +10,90 @@ $data = $this->contents->rawData;
 
 <h2>Property Details: <?php echo $data['title'] ?></h2>
 
-<div class="property-details">
-    <div class="column image-column">
-        <?php if (isset($data['image_1']) && !empty($data['image_1'])):?>
-                <?php $img_path = Yii::app()->basePath . '/..' . $data['image_1'];?>
-                <?php if (is_file($img_path)):?>
-                        <?php echo '<img src="/thumbs'.$data['image_1'].'_450x310" /></a>'?>
-                <?php endif?>
-        <?php endif?>
-    </div>
+<div class="inner-content landlord-property-details">
+	<a data-toggle="edit-item" class="action-button edit" href="<?php echo Yii::app()->createUrl('/block/management/update/id/' . $this->item_id . '/list/properties'); ?>">Edit</a>
+	<div class="property-details">
+		<div class="column image-column">
+			<?php if (isset($data['image_1']) && !empty($data['image_1'])):?>
+					<?php $img_path = Yii::app()->basePath . '/..' . $data['image_1'];?>
+					<?php if (is_file($img_path)):?>
+							<?php echo '<img src="/thumbs'.$data['image_1'].'_450x310" /></a>'?>
+					<?php endif?>
+			<?php endif?>
+		</div>
 
-    <div class="column full-details-column">
-        <h2>Resort</h2>
-        <p><?php echo $data['title'] ?></p>
+		<div class="column full-details-column">
+			<h2 class="property-name"><?php echo $data['title'] ?> <span class="property-type">(<?php echo $data['type'] ?>)</span></h2>
+			<div class="property-location"><?php echo $data['area'] ?>, <?php echo $data['city'] ?>, <?php echo $data['location'] ?></div>
 
-        <?php
-        if ($data['description']) {
-        ?>
-            <h2>Description</h2>
-            <p><?php echo $data['description'] ?></p>
-        <?php
-        }
-        ?>
+			<?php
+			if ($data['description']) {
+			?>
+			<div class="property-description">
+				<p><?php echo $data['description'] ?></p>
+			</div>
+			<?php
+			}
+			?>
 
-        <?php
-        if ($data['additional_info']) {
-        ?>
-            <h2>Additional Info</h2>
-            <p><?php echo $data['additional_info'] ?></p>
-        <?php
-        }
-        ?>
+	<?php
+					$facilities = array(
+						'wifi' => 'Wi-Fi',
+						'gym' => 'Gym',
+						'beach' => 'Beach',
+						'swimming_pool' => 'Swimming Pool',
+						'parking' => 'Parking',
+						'disabled_access' => 'Disabled Access',
+						'child_friendly' => 'Child-friendly',
+						'dog_friendly' => 'Dog-friendly',
+						'cancellation_fee' => 'Cancellation Fee'
+					);
 
-    </div>
+					$facilities_start = "<ul class='facilities'>";
+					$facilities_end = "</ul>";
+					$facilities_inner = '';
+
+					foreach ($facilities as $id => $text) {
+						if (isset($data[$id]) && $data[$id] == 1) {
+							$facilities_inner  .= "<li class='{$id}' data-tooltip='{$text}'><span>{$text}</span></li>";
+						}
+					}
+
+					if ($facilities_inner) {
+						echo $facilities_start . $facilities_inner . $facilities_end;
+					}
+	?>
+
+
+			<?php
+			if ($data['additional_info']) {
+			?>
+			<div class="property-additional">
+				<p><?php echo $data['additional_info'] ?></p>
+			</div>
+			<?php
+			}
+
+			if ($data['accessibility']) {
+			?>
+			<div class="property-accessibility">
+				<h3>Accessibility Information</h3>
+				<p><?php echo $data['accessibility'] ?></p>
+			</div>
+			<?php
+			}
+
+			if ($data['extras']) {
+			?>
+			<div class="property-additional-costs">
+				<h3>Any extra costs that you could be required to pay</h3>
+				<p><?php echo $data['extras'] ?></p>
+			</div>
+			<?php
+			}
+
+			?>
+
+		</div>
+	</div>
 </div>
-<p>
-<a data-toggle="edit-item" class="more" href="<?php echo Yii::app()->createUrl('/block/management/update/id/' . $this->item_id . '/list/properties'); ?>">Edit</a>
-</p>

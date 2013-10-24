@@ -306,7 +306,9 @@ nav:after,
 .resort-listing > li:before,
 .resort-listing > li:after,
 .property-details:before,
-.property-details:after {
+.property-details:after,
+#holiday-details:before,
+#holiday-details:after {
 	display: table;
 	clear: both;
 	content: ""
@@ -1312,7 +1314,7 @@ form .back {
 /* ----- LANDLORD PAGES ------------------------------------------ */
 
 #main-content .booking-listing {
-	margin: 15px 0;
+	margin: 15px 0 30px 0;
 	color: #333;
 	font-size: 14px;
 	font-size: 1.4rem;
@@ -1406,6 +1408,111 @@ form .back {
 	background: #fff;
 	text-align: center;
 }
+
+/* ----- Changes to the original design ----- */
+
+#holiday-details {
+	margin-top: 10px;
+}
+
+#holiday-details .date-range {
+	float: left;
+	width: 210px;
+}
+
+#holiday-details .resort-info {
+	float: left;
+	color: #878787;
+	font-size: 18px;
+}
+
+.resort-info .resort-name {
+	color: #909979;
+	font-weight: bold;
+}
+
+.inner-content h2 {
+	color: #909979;	
+}
+
+.inner-content.landlord-property-details {
+	position: relative;
+	margin-bottom: 15px;
+}
+
+.landlord-property-details .action-button.edit,
+.landlord-details .action-button.edit {
+	float: right;
+}
+
+.holidays-container + h2 {
+	margin-bottom: 15px;
+}
+
+.landlord-details .landlord-name {
+	float: left;
+	color: #999999;
+	font-size: 18px;
+	font-style: italic;
+}
+
+.landlord-property-details h3,
+.landlord-property-details p {
+	font-size: 14px;
+}
+
+.property-name {
+	color: #909979;
+	font-size: 18px;
+}
+
+.property-name .property-type {
+	font-style: italic;
+	font-weight: normal;
+}
+
+.property-location {
+	color: #878787;
+	font-size: 18px;
+}
+
+.property-description p {
+	color: #909979;
+	font-style: italic;	
+}
+
+#main-content .facilities {
+	margin-bottom: 9px;
+}
+
+.property-additional p {
+	color: #999999;
+	font-style: italic;
+}
+
+.property-accessibility h3,
+.property-accessibility p {
+	color: #7c933e;
+}
+
+.property-accessibility h3 {
+	font-weight: bold;
+}
+
+.property-additional-costs h3,
+.property-additional-costs p {
+	color: #666666;
+}
+
+/* Uncomment below for shifted landlords version. Does this break the full detail version? */
+/*
+.image-column {
+	width: 465px;
+}
+.full-details-column {
+	width: 340px;
+}
+*/
 
 /* ----- CONTACT ------------------------------------------------- */
 
@@ -1585,6 +1692,16 @@ body {
 
 #home-nuggets p {
 	color: #767f5f;
+}
+
+#home-nuggets .nugget-wrapper {
+	position: relative;
+	float: left;
+	width: 31.634%;
+}
+
+#home-nuggets .nugget-wrapper .nugget {
+	float: none;
 }
 
 #sidebar .nugget,
@@ -2095,7 +2212,7 @@ img.mfp-img {
     transform-origin: 0; }
 
   .mfp-arrow-right {
-    -webkit-transform-origin: 100%;
+    -webki1314t-transform-origin: 100%;
     transform-origin: 100%; }
 
   .mfp-container {

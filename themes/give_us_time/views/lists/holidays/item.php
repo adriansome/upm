@@ -7,9 +7,11 @@ $departure = date_parse_from_format('d/m/Y', $data['holiday']['departure_date'])
 <li<?php if($data['holiday']['status'] == 'provisionally-booked') echo " class='provisionally-booked'" ?>>
 <?php if (isset($data['property']['image_1']) && !empty($data['property']['image_1'])):?>
         <?php $img_path = Yii::app()->basePath . '/..' . $data['property']['image_1'];?>
+        <div class="picture-frame">
         <?php if (is_file($img_path)):?>
-                <?php echo '<a href="/properties?slug='.$data['property']['slug'].'" class="thumbnail"><img src="/thumbs'.$data['property']['image_1'].'_210x150" /></a>'?>
+                <?php echo '<a href="/properties?slug='.$data['property']['slug'].'"><img src="/thumbs'.$data['property']['image_1'].'_210x150" /></a>'?>
         <?php endif?>
+        </div>
 <?php endif?>
         <div class="column">
         <h2><?php echo $attributes['location']['values'][$data['property']['location']]; ?></h2>
@@ -83,7 +85,7 @@ $departure = date_parse_from_format('d/m/Y', $data['holiday']['departure_date'])
                 if (isset($_POST['Search']['holiday']) && $_POST['Search']['holiday']) {
                     $propertyUrl .= '&d=' . $_POST['Search']['holiday'];
                 }
-                
+
                 if ($data['holiday']['status'] == 'provisionally-booked') {
                 ?>
                     <div class="status">Provisionally Booked</div>
@@ -94,6 +96,6 @@ $departure = date_parse_from_format('d/m/Y', $data['holiday']['departure_date'])
                 <?php
                 }
                 ?>
-                
+
         </div>
 </li>

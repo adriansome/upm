@@ -10,6 +10,16 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
 
 	<!-- Begin #sidebar -->
 	<div id="sidebar" class="column span4">
+		<?php
+
+			// If on Edit Property / Availability Page
+			if (isset($id) && (int)$id) {
+		?>
+				<a href="/profile" class="back">Back to Properties</a>
+		<?php
+			}
+		?>
+
 		<nav id="sub-navigation">
 		<?php $this->widget('Menu',array(
 			'id'=>'submenu'
@@ -43,9 +53,6 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
                                 )
                             )
                         ));
-                        ?>
-                        <a href="/profile" class="back">Back to Properties</a>
-                        <?php
                     } else {
                         ?>
                         <h1>Welcome to Give Us Time - <?php echo $model->fullname; ?></h1>
