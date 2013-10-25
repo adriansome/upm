@@ -802,6 +802,11 @@ nav:after,
 
 /* ----- SEARCH RESULTS ------------------------------------------ */
 
+#main-content .list-view .summary {
+	margin: 0;
+	text-align: left;
+}
+
 #main-content .resort-listing {
 	margin-left: 0px;
 	list-style-type: none;
@@ -826,7 +831,8 @@ ul li.provisionally-booked,
 	margin-right: 10px;
 }
 
-.resort-listing .thumbnail {
+.resort-listing .thumbnail,
+.resort-listing .picture-frame {
 	float: left;
 	width: 210px;
 	min-height: 1px;
@@ -995,10 +1001,12 @@ ul li.provisionally-booked,
 
 .image-column {
 	width: 470px;
+	margin-left: 0px;
 }
 
 .full-details-column {
 	width: 315px;
+	margin-right: 0px;
 }
 
 #holiday-details {
@@ -1505,14 +1513,13 @@ form .back {
 }
 
 /* Uncomment below for shifted landlords version. Does this break the full detail version? */
-/*
+
 .image-column {
 	width: 465px;
 }
 .full-details-column {
 	width: 340px;
 }
-*/
 
 /* ----- CONTACT ------------------------------------------------- */
 
