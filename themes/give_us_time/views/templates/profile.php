@@ -22,7 +22,8 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
 
 		<nav id="sub-navigation">
 		<?php $this->widget('Menu',array(
-			'id'=>'submenu'
+			'id'=>'submenu',
+            'page_id' => $model->id
 		)); ?><!-- mainmenu -->
 		</nav>
 

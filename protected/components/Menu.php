@@ -3,6 +3,8 @@ Yii::import('zii.widgets.CMenu');
 
 class Menu extends CMenu
 {
+    public $page_id;
+    
 	public function init()
 	{
 		if(Yii::app()->hasModule('page') && isset($this->id))
@@ -31,10 +33,16 @@ class Menu extends CMenu
 				->where('(lv1.date_active IS NOT NULL AND lv1.date_visible IS NOT NULL)')
 				->andWhere('(lv2.date_active IS NOT NULL OR lv2.name IS NULL)')
 				->andWhere('(lv3.date_active IS NOT NULL OR lv3.name IS NULL)')
-				->andWhere('menu.menu_id = :menu_id', array(':menu_id' => $_id))
-				    
-				->order('lv1.lft ASC, lv2.lft ASC, lv3.lft ASC')
+				->andWhere('menu.menu_id = :menu_id', array(':menu_id' => $_id));
+            
+            // when submenu, we only want children/grandchildren of current page
+            if($this->id == 'submenu')
+            {
+                $command->andWhere('lv1.parent_id = :page_id', array(':page_id' => $this->page_id));
+            }
+				$command->order('lv1.lft ASC, lv2.lft ASC, lv3.lft ASC')
 			;
+            
 			$pages = $command->queryAll();
 			
 			$menu_pages = array();

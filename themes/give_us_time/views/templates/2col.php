@@ -7,8 +7,10 @@
 		<!-- Begin #sidebar -->
 		<div id="sidebar" class="column span4">
 			<nav id="sub-navigation">
+                
 			<?php $this->widget('Menu',array(
-				'id'=>'submenu'
+				'id'=>'submenu',
+                'page_id' => $model->id
 			)); ?><!-- mainmenu -->
 			</nav>
 
