@@ -23,12 +23,14 @@ class Menu extends CMenu
 
 			// Find all the active/visible pages that belong to this menu.
 			$command = Yii::app()->db->createCommand()
-				->select('lv1.id AS lv1ID, lv2.id AS lv2ID, lv3.id AS lv3ID, lv1.date_visible AS lv1Date_visible, lv2.date_visible AS lv2Date_visible, lv3.date_visible AS lv3Date_visible, lv1.name AS label, lv1.link AS url, lv1.role AS role, lv2.name AS lv2Label, lv2.link AS lv2Url, lv2.role AS lv2Role, lv3.name AS lv3Label, lv3.link AS lv3Url, lv3.role AS lv3Role')
+				->select('lv1.id AS lv1ID, lv2.id AS lv2ID, lv3.id AS lv3ID, lv1.date_visible AS lv1Date_visible, lv2.date_visible AS lv2Date_visible, lv3.date_visible AS lv3Date_visible, lv1.name AS label, lv1.link AS url, lv1.role AS role, lv2.name AS lv2Label, lv2.link AS lv2Url, lv2.role AS lv2Role, lv3.name AS lv3Label, lv3.link AS lv3Url, lv3.role AS lv3Role, menu2.id AS menu2id, menu3.id AS menu3id')
 				->from('page lv1')
 				->join('page_menu menu', 'lv1.id = menu.page_id')
 				    
 				->leftJoin('page lv2', 'lv1.id = lv2.parent_id')
 				->leftJoin('page lv3', 'lv2.id = lv3.parent_id')
+                ->leftJoin('page_menu menu2', 'lv2.id = menu2.page_id')
+                ->leftJoin('page_menu menu3', 'lv3.id = menu3.page_id')
 				    
 				->where('(lv1.date_active IS NOT NULL AND lv1.date_visible IS NOT NULL)')
 				->andWhere('(lv2.date_active IS NOT NULL OR lv2.name IS NULL)')
@@ -42,7 +44,7 @@ class Menu extends CMenu
             }
 				$command->order('lv1.lft ASC, lv2.lft ASC, lv3.lft ASC')
 			;
-            
+                
 			$pages = $command->queryAll();
 			
 			$menu_pages = array();
@@ -51,7 +53,7 @@ class Menu extends CMenu
 			if(is_array($pages))
 			{
 				foreach ($pages as $index => $page)
-				{
+				{                    
 					$page_uri = $page['url'];
 					
 					if($page_uri[0] != '/')
@@ -63,6 +65,11 @@ class Menu extends CMenu
 					$menu_pages[$page['lv1ID']]['url'] = Yii::app()->getBaseUrl(true).$page_uri;
 					     
 					if($page['lv2ID'] && $page['lv2Date_visible']){
+                        
+                        // don't show child if it's not set to be a submenu item
+                        if($this->id=='submenu' && $page['menu2id'] == NULL)
+                            continue;
+
 						$page_uri = $page['lv2Url'];
 					      
 						if($page_uri[0] != '/')
@@ -73,6 +80,11 @@ class Menu extends CMenu
 							'url'=>Yii::app()->getBaseUrl(true).$page_uri
 							);
 						if($page['lv3ID'] && $page['lv3Date_visible']){
+                            
+                            // don't show child if it's not set to be a submenu item
+                            if($this->id=='submenu' && $page['menu3id'] == NULL)
+                                continue;
+
 							$page_uri = $page['lv3Url'];
 	
 							if($page_uri[0] != '/')
