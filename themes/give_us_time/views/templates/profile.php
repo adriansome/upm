@@ -56,7 +56,7 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
                         ));
                     } else {
                         ?>
-                        <h1>Welcome to Give Us Time - <?php echo $model->fullname; ?></h1>
+                        <h1>Welcome back - <?php echo $model->fullname; ?></h1>
                         <div class="properties-container"></div>
                         <?php
                     }

@@ -8,13 +8,14 @@ class DefaultController extends UserController
 			'steps' => array(
 				'details' => array(
 					'title' => 'Your Details',
-					'desc' => 'Thank you for signing up to Give Us Time as a time donor. Please enter your details below.',
+					'desc' => 'Please tell us about yourself.',
 					'fields' => -1
 				)
 			),
 			'fields' => array(
 				'firstname' => array(),
 				'lastname' => array(),
+				'phone_number' => array(),
 				'email' => array('type' => 'email'),
 				'address1' => array(),
 				'address2' => array(),
@@ -23,7 +24,6 @@ class DefaultController extends UserController
 				'county' => array(),
 				'postcode' => array(),
 				'country' => array(),
-				'phone_number' => array(),
 				'password1' => array('type' => 'password'),
 				'password2' => array('type' => 'password'),
 				'date_terms_agreed' => array('type' => 'checkbox'),
@@ -34,17 +34,17 @@ class DefaultController extends UserController
 			'steps' => array(
 				'service' => array(
 					'title' => 'Service Details',
-					'desc'	=> 'Please Enter Your Service Details Below',
+					'desc'	=> 'Please tell us about your service history.',
 					'fields' => 4
 				),
 				'details' => array(
 					'title' => 'Your Details',
-					'desc'	=> 'Please Enter Your Details Below',
+					'desc'	=> 'Please tell us about yourself.',
 					'fields' => 9
 				),
 				'confirmation' => array(
 					'title' => 'Confirmation',
-					'desc'	=> 'Please confirm your details and agree to the terms and conditions'
+					'desc'	=> 'Please confirm your details and accept the terms and conditions.'
 				)
 			),
 			'fields' => array(
@@ -70,8 +70,8 @@ class DefaultController extends UserController
 				'captcha_code' => array('type' => 'captcha')
 			)
 		)
-	);	
-	
+	);
+
 	/**
 	 * @return array action filters
 	 */
@@ -92,8 +92,8 @@ class DefaultController extends UserController
             ),
         );
     }
-	
-	
+
+
 	/**
 	 * Specifies the access control rules.
 	 * This method is used by the 'accessControl' filter.
@@ -146,21 +146,21 @@ class DefaultController extends UserController
 
 		$model=new User;
 		$model->scenario = 'register';
-	
+
                 if (isset($_POST['type'])) {
                     $regType = $_POST['type'];
                 } else {
                     // Get the type of registration form to output
                     $regType = Yii::app()->request->getQuery('type', 'user');
                 }
-		
+
 		// Default to user type registration if not a defined reg type
 		if (!isset($this->_formFields[$regType])) {
                     $regType = 'user';
 		}
-		
+
 		$outputFields = $this->_formFields[$regType];
-		
+
 		// Uncomment the following line if AJAX validation is needed
 		$this->performAjaxValidation($model, $regType);
 
@@ -177,7 +177,7 @@ class DefaultController extends UserController
 		    	$model = $record;
 		    	unset($record);
 		    }
-                        
+
 			if(isset($record->date_email_validated))
                             if (isset($_POST['register-type'])) {
                                 echo json_encode(array('error' => 'This email address has already been validated'));
@@ -199,7 +199,7 @@ class DefaultController extends UserController
                                 ));
                                 exit;
                             }
-                            
+
 			}
 		}
 
@@ -266,7 +266,7 @@ class DefaultController extends UserController
 			$email = Yii::app()->session['referer']['email'];
 			$model->username = Yii::app()->session['referer']['user'];
 			unset(Yii::app()->session['referer']);
-		}	
+		}
 
 		// if it is ajax validation request
 		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
@@ -328,7 +328,7 @@ class DefaultController extends UserController
 
 	public function actionResetPassword($uid)
 	{
-            
+
 		$model=$this->loadByUid('reset_code', $uid);
 
                 $model->scenario = 'updatePassword';
@@ -376,21 +376,21 @@ class DefaultController extends UserController
 	{
 
 		$role = Yii::app()->user->role;
-		
+
 		if (isset($this->_formFields[$role]['fields'])) {
 			$fields = $this->_formFields[$role]['fields'];
 		} else {
 			$fields = array();
 		}
-		
+
 		$view = 'profile';
-		
-		$themeView = 'webroot.themes.' . Yii::app()->theme->getName() . '.views.templates.profile';		
-		
+
+		$themeView = 'webroot.themes.' . Yii::app()->theme->getName() . '.views.templates.profile';
+
 		if ($this->getViewFile($themeView)) {
 			$view = $themeView;
-			
-		}		
+
+		}
 
 		$this->render($themeView ,array(
                     'model'=>$this->loadModel(),
@@ -409,7 +409,7 @@ class DefaultController extends UserController
 		$this->layout='//layouts/righty';
 
 		$model=$this->loadModel();
-	    
+
 		$model->scenario = 'update';
 
 		// Uncomment the following line if AJAX validation is needed
@@ -436,7 +436,7 @@ class DefaultController extends UserController
 		$this->layout='//layouts/righty';
 
 		$model=$this->loadModel();
-	    
+
 		$model->scenario = 'updateEmail';
 
 		// Uncomment the following line if AJAX validation is needed
@@ -447,7 +447,7 @@ class DefaultController extends UserController
 			$model->currentPassword = $_POST['User']['currentPassword'];
 			$model->old_email = $model->email;
 			$model->email = $_POST['User']['email'];
-			
+
 			if($model->save())
 				$this->redirect(array('profile'));
 		}
@@ -467,7 +467,7 @@ class DefaultController extends UserController
 		$this->layout='//layouts/righty';
 
 		$model=$this->loadModel();
-	    
+
 		$model->scenario = 'updatePassword';
 
 		// Uncomment the following line if AJAX validation is needed
@@ -478,7 +478,7 @@ class DefaultController extends UserController
 			$model->currentPassword = $_POST['User']['currentPassword'];
 			$model->password1 = $_POST['User']['password1'];
 			$model->password2 = $_POST['User']['password2'];
-			
+
 			if($model->save())
 				$this->redirect(array('profile'));
 		}
@@ -570,7 +570,7 @@ class DefaultController extends UserController
                             $model->$field_name = $attributes[$field_name];
 			}
 		}
-		
+
 		if ($regType == 'landlord') {
 			$model->scenario = 'register_landlord';
 		}
@@ -581,11 +581,11 @@ class DefaultController extends UserController
                             $this->setRefererSessionData($model->email, $model->id, $model->email);
                             if ($regMethod == 'ajax') {
                                 return TRUE;
-                            }   
+                            }
                         }
 
                         $this->redirect(array($action));
-                        
+
 		}
 
 		return $model;

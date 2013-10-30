@@ -50,7 +50,7 @@ class User extends CActiveRecord
   	public $currentPassword;
   	public $emailChanged = false;
   	public $searchTerm;
-	
+
 	public $personnel_type_dropdown = array(
 		'serving' => 'Serving in the Armed Forces',
 		'veteran' => 'A Veteran discharged since 2001 through injury',
@@ -91,7 +91,7 @@ class User extends CActiveRecord
 		'WO2' => 'WO2',
 		'Other' => 'Other'
 	);
-	
+
   	private $purgeRecord = false;
 
 	/**
@@ -162,23 +162,24 @@ class User extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'email' => 'E-mail',
-			'email_confirm' => 'Confirm E-mail address',
-			'old_email' => 'Old E-mail', 'password' => 'Password',
+			'email' => 'Your e-mail',
+			'email_confirm' => 'Confirm e-mail address',
+			'old_email' => 'Old e-mail address',
+			'password' => 'Password',
 			'currentPassword' => 'Current Password',
 			'password1' => 'New Password',
 			'password2' => 'Confirm New Password',
 			'role' => 'role',
 			'username' => 'Username',
-			'personnel_type' => 'I am Currently',
-			'personnel_rank' => 'Rank / Rating',
-			'personnel_service_number' => 'Service Number',
-			'personnel_unit' => 'Unit / Station / Ship',
-			'title' => 'Title',
-			'initial' => 'Initial',
-			'firstname' => 'First Name',
-			'lastname' => 'Last Name',
-			'fullname' => 'Name',
+			'personnel_type' => 'Your current situation',
+			'personnel_rank' => 'Your rank/rating',
+			'personnel_service_number' => 'Your service number',
+			'personnel_unit' => 'Your unit/station/ship',
+			'title' => 'Your title',
+			'initial' => 'Your initial',
+			'firstname' => 'Your first name',
+			'lastname' => 'Your last name',
+			'fullname' => 'Your full name',
 			'address1' => 'Address1',
 			'address2' => 'Address2',
 			'area' => 'Area',
@@ -186,8 +187,8 @@ class User extends CActiveRecord
 			'county' => 'County',
 			'postcode' => 'Postcode',
 			'country' => 'Country',
-			'phone_number' => 'Telephone number',
-			'accessibility' => 'Please tell us about any accessibility considerations you have when booking a holiday',
+			'phone_number' => 'Your telephone number',
+			'accessibility' => 'Please give details of any accessibility requirements.',
 			'date_terms_agreed' => 'I agree to the Terms and Conditions (click here to read)',
 			'date_updated' => 'Date Updated',
 			'date_last_login' => 'Date Last Login',
@@ -215,7 +216,7 @@ class User extends CActiveRecord
 		$criteria->select = array('*', 'CONCAT(firstname, " ", lastname, " ", email) AS searchTerm');
 		$criteria->compare('CONCAT(firstname, " ", lastname, " ", email)', $this->searchTerm, true);
 		$criteria->compare('role', $this->role, true);
-		
+
 		$criteria->addCondition('date_deleted IS NULL');
 
 		return new CActiveDataProvider($this, array(
@@ -258,7 +259,7 @@ class User extends CActiveRecord
 
 			if($identity->errorCode===UserIdentity::ERROR_USERNAME_INVALID)
 				$this->addError('username','Username not found');
-			
+
 			if($identity->errorCode===UserIdentity::ERROR_PASSWORD_INVALID)
 				$this->addError('currentPassword','Incorrect Password');
 
@@ -277,7 +278,7 @@ class User extends CActiveRecord
 			$this->revert_code = $this->generateUniqueId();
 			$this->sendRevertEmail('user.views.mail.deletionEmail');
 			return $this->save();
-			
+
 		}
 	}
 
@@ -298,13 +299,13 @@ class User extends CActiveRecord
 			$this->sendValidationEmail();
 			$this->date_validation_email_sent = new CDbExpression('NOW()');
 		}
-		
+
 		if ($this->scenario == 'register_landlord') {
 			$this->updatePassword();
 			$this->activation_code = $this->generateUniqueId();
 			$this->role = 'landlord';
 			$this->sendValidationEmail();
-			$this->date_validation_email_sent = new CDbExpression('NOW()');			
+			$this->date_validation_email_sent = new CDbExpression('NOW()');
 		}
 
 		if($this->scenario == 'resendEmailVerification')
@@ -392,7 +393,7 @@ class User extends CActiveRecord
 		$revertEmail->from = Yii::app()->params['adminEmail'];
 		Yii::app()->mail->send($revertEmail);
 	}
-        
+
         /**
          * Sends a notification
          * @param type $view
@@ -430,7 +431,7 @@ class User extends CActiveRecord
             }
             $notification->from = $from;
             return (Yii::app()->mail->send($notification));
-            
+
         }
 
 	private function generateUniqueId()

@@ -9,22 +9,22 @@
 	<!-- Begin #home-upper -->
 	<section id="home-upper" class="constrained">
 		<div class="nugget" id="nugget-register">
-			<h2>Service Personnel Registration</h2>
-			<p>You need to be registered and verified<br/> to use this site. Click below to begin. </p>
-			<a href="/welcome-user/" class="more">Register to use site</a>
+			<h2>Register For Time</h2>
+			<p>Get verified as service personnel before searching for a holiday.</p>
+			<a href="/welcome-user/" class="more">Register</a>
 		</div>
 
 		<div class="nugget" id="nugget-search">
-			<h2>Holiday Search</h2>
-			<p>Once registered and verified,<br/> search here for a holiday.</p>
+			<h2>Search For Time</h2>
+			<p>Registered and verified? Search for a Give Us Time holiday.</p>
 			<form id="search-form" action="/search" method="post">
 			<div class="form-row">
-                            <?php
-                            $weeks[''] = 'Any Week';
-                            $weeks += Yii::app()->utility->get_week_options('M d, Y');
+				<?php
+					$weeks[''] = 'Any Week';
+					$weeks += Yii::app()->utility->get_week_options('M d, Y');
 
-                            echo CHtml::dropDownList('Search[holiday]','', $weeks);
-                            ?>
+					echo CHtml::dropDownList('Search[holiday]','', $weeks);
+				?>
 			</div>
 			<div class="form-row">
 				<?php
@@ -40,15 +40,15 @@
 				?>
 			</div>
 			<div class="form-row">
-				<input type="submit" class="more" value="Search For Holiday" />
+				<input type="submit" class="more" value="Search" />
 			</div>
 			</form>
 		</div>
 
 		<div class="nugget" id="nugget-donate">
 			<h2>Donate Time</h2>
-			<p>If you would like to donate a week<br/> of holiday time, click below.</p>
-			<a href="/welcome-timedonor/" class="more">Donate holiday time</a>
+			<p>Donate a holiday in your second home or timeshare to a military family.</p>
+			<a href="/welcome-timedonor/" class="more">Donate</a>
 		</div>
 	</section>
 	<!-- End #home-upper -->
@@ -65,7 +65,7 @@
 	</div>
 
 	<div class="nugget">
-		<h2>View Our Holiday Stories</h2>
+		<h2>Real Give Us Time Holidays</h2>
 		<div id="photo-slideshow">
 			<?php $this->widget('Carousel',array(
 				'name'=>'holidays-carousel',
@@ -76,7 +76,7 @@
 			)); ?>
 		</div>
 		<div class="slideshow-controls"></div>
-		<a href="#" class="button-link">Read holiday stories</a>
+		<a href="#" class="button-link">View holiday stories</a>
 	</div>
 
 	<div class="nugget-wrapper">

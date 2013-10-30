@@ -21,8 +21,8 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
                 if ( Yii::app()->request->getQuery('type') == 'landlord') {
                 ?>
                     <form class="standard-form" method="post" action="/login">
-                        <h3>Existing Members</h3>
-                        <p>Already registered? Log in below.</p>
+                        <h3>Already registered?</h3>
+                        <p>Log in to Give Us Time.</p>
 
                         <fieldset>
                             <div class="form-row">
@@ -38,7 +38,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
                             </div>
                         </fieldset>
                     </form>
-                    <h3>New User</h3>
+                    <h3 class="form-heading">Register as a new user</h3>
                 <?php
                 }
 
