@@ -8,7 +8,7 @@
 		<?php endif; ?>
 	</h2>
 	<?php endif; ?>
-	
+
 	<?php if($this->image_src): ?>
 		<div class="picture-frame">
 			<?php echo CHtml::image($this->image_src, $this->image_alt, array('title'=>$this->image_title)); ?>
@@ -16,7 +16,9 @@
 	<?php endif; ?>
 
 	<?php if($this->text): ?>
-		<p><?php echo $this->text; ?></p>
+		<div class="text">
+			<p><?php echo $this->text; ?></p>
+		</div>
 	<?php endif; ?>
 
 	<?php if($this->link_in_body): ?>

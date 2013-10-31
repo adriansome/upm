@@ -440,6 +440,16 @@ nav:after,
 	background: #fff;
 }
 
+.strapline {
+	position: absolute;
+	right: 0px;
+	top: 72px;
+	color: #fff;
+	font-size: 30px;
+	font-style: italic;
+	text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3), 0px 0px 8px rgba(0, 0, 0, 0.3);
+}
+
 .login {
 	position: absolute;
 	top: 0;
@@ -457,6 +467,37 @@ nav:after,
 	margin: 0 0 0 10px;
 	display: inline-block;
 }
+
+#page-header .social-media {
+	position: absolute;
+	right: 502px;
+	top: 5px;
+}
+
+.icon-twitter,
+.icon-facebook {
+	display: inline-block;
+	float: left;
+	width: 37px;
+	height: 37px;
+	opacity: 0.8;
+	overflow: hidden;
+	text-indent: -9999px;
+}
+
+.icon-twitter:hover,
+.icon-facebook:hover {
+	opacity: 1;
+}
+
+.icon-twitter {
+	background: transparent url(../images/icon-twitter.png) 0 0 no-repeat;
+}
+
+.icon-facebook {
+	background: transparent url(../images/icon-facebook.png) 0 0 no-repeat;
+}
+
 
 /* ----- Page Footer ----- */
 
@@ -550,9 +591,40 @@ nav:after,
 	text-align: center;
 }
 
-#home .nugget:first-child {
+#home .nugget:first-child,
+#home .nugget-wrapper:first-child {
 	margin-left: 0;
 }
+
+#home-nuggets .nugget-wrapper {
+	position: relative;
+	float: left;
+	width: 31.634%;
+	margin-left: 2.548%;	
+}
+
+#home-nuggets .nugget-wrapper .btn-link,
+#home-nuggets .nugget-wrapper .button-link{
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+}
+
+#home-nuggets .nugget-wrapper {
+	height: 420px;
+}
+
+#home-nuggets .nugget-wrapper .nugget {
+	float: none;
+	width: 100%;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+#home-nuggets .nugget-wrapper #photo-slideshow {
+	left: -22px;
+}
+
 
 #nugget-register {
 	background: rgba(108, 130, 47, 0.65);
@@ -595,16 +667,23 @@ nav:after,
 	font-size: 2.4rem;
 }
 
-#home-nuggets .button-link {
+#home-nuggets .nugget .picture-frame {
+	text-align: center;
+}
+
+#home-nuggets .button-link,
+#home-nuggets .btn-link {
 	float: right;
 }
 
-.nugget-2col .thumbnail {
+.nugget-2col .thumbnail,
+#nugget-2col-disabled .picture-frame {
 	float: left;
 	width: 48%;
 }
 
-.nugget-2col .text {
+.nugget-2col .text,
+#nugget-2col-disabled .text {
 	float: right;
 	width: 48%;
 }
@@ -641,7 +720,7 @@ nav:after,
 }
 
 .slides img {
-	max=height: 200px;
+	max-height: 200px;
 }
 
 .slideshow-controls {
@@ -1634,6 +1713,8 @@ body {
 #main-navigation {
 	margin-top: -115px;
 	padding-top: 55px;
+	margin-top: -70px;
+	padding-top: 10px;	
 	background: #f4f4f4;
 }
 
@@ -1654,6 +1735,18 @@ body {
 	color: #005030;
 	font-size: 14px;
 	font-size: 1.4rem;
+}
+
+/* to make the menu items 'align' with the homepage search nugget (for now) */
+
+#main-navigation li {
+	margin-left: 34px;
+}
+
+#main-navigation a {
+	padding: 10px 25px;
+	font-size: 16px;
+	font-size: 1.6rem;
 }
 
 #main-navigation a:hover,
@@ -1706,17 +1799,6 @@ body {
 	color: #767f5f;
 }
 
-#home-nuggets .nugget-wrapper {
-	position: relative;
-	float: left;
-	width: 31.634%;
-}
-
-#home-nuggets .nugget-wrapper .nugget {
-	float: none;
-	width: 100%;
-}
-
 #sidebar .nugget,
 .inner-content {
 	background-color: #fff;
@@ -1756,6 +1838,10 @@ body {
 	float: right;
 	width: 320px;
 	margin: 0 0 18px 18px;
+}
+
+#home-nuggets .nugget {
+	padding-top: 0;
 }
 
 #home-nuggets h2 {

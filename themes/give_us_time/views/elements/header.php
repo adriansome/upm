@@ -16,7 +16,7 @@
                 <?php elseif(Yii::app()->user->isLandlord()): ?>
                 <div class="login">
                     <form action="/logout">
-                        <p>Welcome <?php echo Yii::app()->user->firstname 
+                        <p>Welcome <?php echo Yii::app()->user->firstname
                             . ' ' . Yii::app()->user->lastname ?></p>
                         <a href="/profile" class="message">Profile</a>
                         <input type="submit" value="Logout" />
@@ -25,14 +25,19 @@
                 <?php elseif(Yii::app()->user->isUser()):
                 $userModel = User::model()->findByPk(Yii::app()->user->id);
                 $fullname = $userModel->getFullname();
-                ?> 
+                ?>
                 <div class="login">
                     <form action="/logout">
                         <p>Welcome <?php echo $fullname ?></p>
                         <input type="submit" value="Logout" />
                     </form>
-                </div>                
+                </div>
                 <?php endif; ?>
+
+				<div class="social-media">
+					<a href="https://twitter.com/giveustime" title="Follow us on Twitter" class="icon-twitter" target="_blank">Follow us on Twitter</a>
+					<a href="https://www.facebook.com/GiveUsTime" title="Find us on Facebook" class="icon-facebook" target="_blank">Find us on Facebook</a>
+				</div>
 
 	</div>
 

@@ -64,19 +64,21 @@
 		)); ?>
 	</div>
 
-	<div class="nugget">
-		<h2>Real Give Us Time Holidays</h2>
-		<div id="photo-slideshow">
-			<?php $this->widget('Carousel',array(
-				'name'=>'holidays-carousel',
-				'options'=>array(
-					'items'	=> 1,
-					'auto' => 3000,
-				),
-			)); ?>
+	<div class="nugget-wrapper">
+		<div class="nugget">
+			<h2>Real Give Us Time Holidays</h2>
+			<div id="photo-slideshow">
+				<?php $this->widget('Carousel',array(
+					'name'=>'holidays-carousel',
+					'options'=>array(
+						'items'	=> 1,
+						'auto' => 3000,
+					),
+				)); ?>
+			</div>
+			<div class="slideshow-controls"></div>
+			<a href="#" class="button-link">View holiday stories</a>
 		</div>
-		<div class="slideshow-controls"></div>
-		<a href="#" class="button-link">View holiday stories</a>
 	</div>
 
 	<div class="nugget-wrapper">
