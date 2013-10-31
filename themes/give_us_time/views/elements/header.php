@@ -1,5 +1,9 @@
 <!-- Begin #page-header -->
-<header id="page-header">
+<header id="page-header"
+	<?php
+		echo ' class="banner' . rand(1, 3) . '"';
+	?>
+>
 	<div class="constrained">
 		<a href="/"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/logo.png" class="logo" alt="Give Us Time" /></a>
 		<?php if(Yii::app()->user->getId() === null):?>

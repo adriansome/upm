@@ -90,7 +90,8 @@ h3 {
 	font-weight: bold;
 }
 
-p {
+p,
+span.empty {
 	margin-bottom: 18px;
 	margin-bottom: 1.8rem;
 	font-size: 12px;
@@ -395,8 +396,20 @@ nav:after,
 
 #page-header {
 	margin-bottom: 40px;
-	background: #ddd url(../images/home-banner.jpg) top center no-repeat;
+	background: #ddd url(../images/banner1.jpg) top center no-repeat;
 	background-size: cover;
+}
+
+#page-header.banner1 {
+	background-image: url(../images/banner1.jpg);
+}
+
+#page-header.banner2 {
+	background-image: url(../images/banner2.jpg);
+}
+
+#page-header.banner3 {
+	background-image: url(../images/banner3.jpg);
 }
 
 #page-header .constrained {
@@ -445,7 +458,7 @@ nav:after,
 	right: 0px;
 	top: 72px;
 	color: #fff;
-	font-size: 30px;
+	font-size: 26px;
 	font-style: italic;
 	text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3), 0px 0px 8px rgba(0, 0, 0, 0.3);
 }
@@ -470,7 +483,7 @@ nav:after,
 
 #page-header .social-media {
 	position: absolute;
-	right: 502px;
+	left: 235px;
 	top: 5px;
 }
 
@@ -548,9 +561,21 @@ nav:after,
 /* ----- Upper Section ----- */
 
 #home-upper-wrapper {
-	background: transparent url(../images/home-banner.jpg) center top no-repeat;
+	background: transparent url(../images/banner1.jpg) center top no-repeat;
 	background-size: cover;
 	border-bottom: 1px solid #d6d6d6;
+}
+
+#home-upper-wrapper.banner1 {
+	background-image: url(../images/banner1.jpg);
+}
+
+#home-upper-wrapper.banner2 {
+	background-image: url(../images/banner2.jpg);
+}
+
+#home-upper-wrapper.banner3 {
+	background-image: url(../images/banner3.jpg);
 }
 
 #home-upper h2 {
@@ -1701,7 +1726,7 @@ body {
 
 #main-content > h1 {
 	height: 4rem;
-	margin-left: 14px;	
+/*	margin-left: 14px;*/
 	margin-bottom: 0;
 	font-weight: bold;
 }

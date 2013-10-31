@@ -3,7 +3,11 @@
 <?php $this->bodyId = 'home'; ?>
 
 <!-- Begin #home-upper-wrapper -->
-<div id="home-upper-wrapper">
+<div id="home-upper-wrapper"
+	<?php
+		echo ' class="banner' . rand(1, 3) . '"';
+	?>
+>
 	<?php require_once(Yii::app()->theme->basepath.'/views/elements/header.php'); ?>
 
 	<!-- Begin #home-upper -->

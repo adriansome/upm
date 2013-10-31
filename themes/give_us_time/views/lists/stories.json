@@ -1,0 +1,41 @@
+{
+	"attributes":
+	{
+		"title": 
+		{
+			"type": "singleline"
+		},    
+        
+        "full_name": 
+        {
+            "type": "singleline"
+        },
+  
+        "size_of_group": 
+        {
+            "type": "singleline"
+        },
+
+        "start_date":
+        {
+            "type": "date",
+            "format": "d/m/Y"
+        },
+
+        "end_date":
+        {
+            "type": "date",
+            "format": "d/m/Y"
+        },
+
+        "holiday_story":
+        {
+            "type": "html"
+        },
+        
+        "full_image":
+        {
+            "type": "file"
+        }
+	}	
+}
