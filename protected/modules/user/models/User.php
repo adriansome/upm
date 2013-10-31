@@ -189,7 +189,7 @@ class User extends CActiveRecord
 			'country' => 'Country',
 			'phone_number' => 'Your telephone number',
 			'accessibility' => 'Please give details of any accessibility requirements.',
-			'date_terms_agreed' => 'I agree to the Terms and Conditions (click here to read)',
+			'date_terms_agreed' => 'Terms and Conditions',
 			'date_updated' => 'Date Updated',
 			'date_last_login' => 'Date Last Login',
 			'date_created' => 'Date Joined',

@@ -1,5 +1,7 @@
 $(document).ready( function() {
-   
+
+	$('#User_date_terms_agreed').after('<span class="form-value"> Click <a target="_blank" href="/usertermsandconditions">here</a> to read the terms and conditions.</span>');
+
    $('#yw0').ready( function() {
        $('#yw0_button').click();
    });
@@ -69,8 +71,10 @@ $(document).ready( function() {
         // Find the equivalent form field on the confirmation form
         var input = $('#registration-form-confirmation').find('label[for=' + name + ']');
 
-        input.parents('div.form-row').find('.form-column-wrapper span.form-value').html(val);
-
+		// don't update t & c as it'll replace link text
+		if(name != 'User_date_terms_agreed') {
+			input.parents('div.form-row').find('.form-column-wrapper span.form-value').html(val);
+		}
    });
 
    
