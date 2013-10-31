@@ -23,8 +23,8 @@ $data = $this->contents->rawData;
 		</div>
 
 		<div class="column full-details-column">
-			<h2 class="property-name"><?php echo $data['title'] ?> <span class="property-type">(<?php echo $data['type'] ?>)</span></h2>
-			<div class="property-location"><?php echo $data['area'] ?>, <?php echo $data['city'] ?>, <?php echo $data['location'] ?></div>
+			<h2 class="property-name"><?php echo $data['title'] ?> <span class="property-type">(<?php echo $this->attributes['type']['values'][$data['type']] ?>)</span></h2>
+			<div class="property-location"><?php echo $data['area'] ?>, <?php echo $data['city'] ?>, <?php echo $this->attributes['location']['values'][$data['location']] ?></div>
 
 			<?php
 			if ($data['description']) {
