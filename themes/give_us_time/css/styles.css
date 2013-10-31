@@ -474,8 +474,8 @@ nav:after,
 	top: 5px;
 }
 
-.icon-twitter,
-.icon-facebook {
+.social-media .twitter,
+.social-media .facebook {
 	display: inline-block;
 	float: left;
 	width: 37px;
@@ -485,16 +485,16 @@ nav:after,
 	text-indent: -9999px;
 }
 
-.icon-twitter:hover,
-.icon-facebook:hover {
+.social-media .twitter:hover,
+.social-media .facebook:hover {
 	opacity: 1;
 }
 
-.icon-twitter {
+.social-media .twitter {
 	background: transparent url(../images/icon-twitter.png) 0 0 no-repeat;
 }
 
-.icon-facebook {
+.social-media .facebook {
 	background: transparent url(../images/icon-facebook.png) 0 0 no-repeat;
 }
 
@@ -700,7 +700,7 @@ nav:after,
 #photo-slideshow .slides {
 	position: relative;
 	left: 19px;
-	top: 21px;
+	top: 12px;
 	height: 200px;
 	overflow: hidden;
 }
@@ -716,7 +716,7 @@ nav:after,
 .slides li {
 	float: left;
 	width: 300px;
-	height: 240px;
+	height: 250px;
 }
 
 .slides img {
@@ -1932,6 +1932,11 @@ h2 {
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	box-shadow: none;
+}
+
+#message-from-liam .in-page-edit.btn-link {
+	position: static;
+	display: inline-block;
 }
 
 #mainmenu ul {
