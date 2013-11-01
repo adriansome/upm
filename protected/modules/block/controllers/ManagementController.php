@@ -131,10 +131,18 @@ class ManagementController extends BlockController
 		$fields = array();
 
 		foreach($contents as $index=>$content)
-		{
+		{            
+            if(isset($attributes[$content->name]['label']) && !empty($attributes[$content->name]['label']))
+            {
+                $label = $attributes[$content->name]['label'];
+            }
+            else
+            {
+                $label = $content->name;
+            }  
 
 			$fields[$content->name] = array(
-				'label'=>CHtml::label(ucfirst($content->name), "Content[$index][string_value]"),
+				'label'=>CHtml::label(ucfirst($label), "Content[$index][string_value]"),
 				'validation'=>$form->error($content,"[$index]string_value"),
 			);
 
@@ -259,11 +267,20 @@ class ManagementController extends BlockController
 		$fields = array();
 
 		foreach($contents as $index=>$content)
-		{
+		{            
+            if(isset($attributes[$content->name]['label']) && !empty($attributes[$content->name]['label']))
+            {
+                $label = $attributes[$content->name]['label'];
+            }
+            else
+            {
+                $label = $content->name;
+            }            
+            
 			$fields[$content->name] = array(
-				'label'=>CHtml::label(ucfirst($content->name), "Content[$index][string_value]"),
+				'label'=>CHtml::label(ucfirst($label), "Content[$index][string_value]"),
 				'validation'=>$form->error($content,"[$index]string_value"),
-			);
+			); 
 
 			switch ($content->type->name)
 			{

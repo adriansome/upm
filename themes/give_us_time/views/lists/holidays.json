@@ -5,15 +5,16 @@
         {
             
             "type" : "date",
-            "format": "d/m/Y"
-            
+            "format": "d/m/Y",
+            "label": "Arrival date"
         },
                 
         "departure_date":
         {
             
             "type": "date",
-            "format": "d/m/Y"
+            "format": "d/m/Y",
+            "label": "Departure Date"
         },
         
         "type": 
@@ -36,12 +37,14 @@
                 
         "number_of_bedrooms":
         {
-            "type": "singleline"
+            "type": "singleline",
+            "label": "Number of bedrooms"
         },
                 
         "sleeps_number":
         {
-            "type": "singleline"
+            "type": "singleline",
+            "label": "Number of people it sleeps"
         },
         
         "property_id":
