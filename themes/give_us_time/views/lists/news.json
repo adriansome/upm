@@ -13,7 +13,8 @@
             "rules":
             {
                 "maxlength" : 30
-            }
+            },
+            "label": "Short headline"
         },
         
         "summary":
@@ -27,12 +28,14 @@
         
         "full_story":
         {
-            "type": "html"
+            "type": "html",
+            "label": "Full story"
         },
         
         "full_image":
         {
-            "type": "file"
+            "type": "file",
+            "label": "Full Image"
         },
         
         "date":
@@ -43,7 +46,8 @@
         
         "live_on_site":
         {
-            "type": "boolean"
+            "type": "boolean",
+            "label": "Live on site"
         }
 	}	
 }

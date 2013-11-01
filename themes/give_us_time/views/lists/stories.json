@@ -8,34 +8,40 @@
         
         "full_name": 
         {
-            "type": "singleline"
+            "type": "singleline",
+            "label": "Full name"
         },
   
         "size_of_group": 
         {
-            "type": "singleline"
+            "type": "singleline",
+            "lable": "Size of group"
         },
 
         "start_date":
         {
             "type": "date",
-            "format": "d/m/Y"
+            "format": "d/m/Y",
+            "label": "Start date"
         },
 
         "end_date":
         {
             "type": "date",
-            "format": "d/m/Y"
+            "format": "d/m/Y",
+            "label": "End date"
         },
 
         "holiday_story":
         {
-            "type": "html"
+            "type": "html",
+            "input": "Holiday story"
         },
         
         "full_image":
         {
-            "type": "file"
+            "type": "file",
+            "label": "Full image"
         }
 	}	
 }
