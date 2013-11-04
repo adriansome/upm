@@ -7,12 +7,12 @@
 			<p>
 				Registered in England and Wales No 08556057.<br/>
 				Charity Commission Number 1152978. <br/>
-				Registered Office 50 Albermarle Street, London. W1S 5BD.  Terms and Conditions.
+				Registered Office 50 Albermarle Street, London. W1S 5BD.
 			</p>
 		</div>
 
 		<div class="column one-half">
-			<nav id="footer-navigation"> 
+			<nav id="footer-navigation">
 				<?php $this->widget('Menu',array(
 					'id'=>'footer'
 				)); ?><!-- mainmenu -->

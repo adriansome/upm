@@ -476,9 +476,13 @@ nav:after,
 }
 
 .login .message {
-	width: 300px;
+	width: 280px;
 	margin: 0 0 0 10px;
 	display: inline-block;
+}
+
+.login .message p {
+	margin-bottom: 0;
 }
 
 #page-header .social-media {
