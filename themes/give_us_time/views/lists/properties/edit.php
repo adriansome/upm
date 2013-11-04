@@ -17,7 +17,7 @@ $data = $this->contents->rawData;
 			<?php if (isset($data['image_1']) && !empty($data['image_1'])):?>
 					<?php $img_path = Yii::app()->basePath . '/..' . $data['image_1'];?>
 					<?php if (is_file($img_path)):?>
-							<?php echo '<img src="'.$data['image_1'].'" /></a>'?>
+							<?php echo '<img src="/thumbs'.$data['image_1'].'_450x310" /></a>'?>
 					<?php endif?>
 			<?php endif?>
 		</div>
