@@ -5,27 +5,7 @@
 		{
 			"type": "singleline"
 		},
-        
-        
-        "short_headline":
-        {
-            "type": "singleline",
-            "rules":
-            {
-                "maxlength" : 30
-            },
-            "label": "Short headline"
-        },
-        
-        "summary":
-        {
-            "type": "multiline",
-            "rules":
-            {
-                "maxlength" : 30
-            }
-        },
-        
+               
         "full_story":
         {
             "type": "html",
