@@ -125,10 +125,6 @@ $(document).ready(function() {
         });
 
     });
-    
-    $('.modal-footer > a.save').live('click', function(){        
-       window.location.reload(); 
-    });
 
     $('[data-toggle=\"edit-item\"]').live('click', function(e) {
         e.preventDefault();
@@ -320,6 +316,8 @@ $(document).ready(function() {
                 }
             }
         });
+        
+        window.location.reload();
     });
 
     // Update the list for the specified type
