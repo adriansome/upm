@@ -110,7 +110,14 @@ $(document).ready(function() {
                 $(this).find('.modal-header').remove();
                 var text = (type === 'properties') ? 'property' : 'holiday';
                 // Append text to modal
-                $(this).find('#block-form').prepend('<h1>Please enter your ' + text + ' details</h1>');
+				if(text === 'property')
+				{
+					$(this).find('#block-form').prepend('<h1>Please tell us about the property you own');
+				}
+				else
+				{
+					$(this).find('#block-form').prepend('<h1>Please enter your ' + text + ' details</h1>');
+				}
             }).on("shown.bs.modal", function() {
                 // Only do this if we're on the holidays page
                 if (type === 'holidays') {

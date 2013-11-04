@@ -3,7 +3,8 @@
 	{
         "title": 
         {
-            "type": "singleline"
+            "type": "singleline",
+            "label": "Property name"
         },
         
         "location":
@@ -29,6 +30,7 @@
         "type":
         {
             "type": "list",
+            "label": "Property type",
 		"values":
 		{
 			"1": "House",

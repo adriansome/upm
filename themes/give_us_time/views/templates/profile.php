@@ -74,11 +74,10 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
 
                         </div>
                         
-                        <h2>Your properties</h2>
-                        <br/>
-                        
+                        <h2>Your properties</h2>                        
                         <div class="properties-container">
                         </div>
+                        <br/>
                         <?php
                     }
 		}
@@ -145,7 +144,7 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
 		$this->endWidget();	*/
 ?>
                             
-                            <p>Thank you for supporting Give Us Time. Your holiday donations are very much appreciated. Please continue to support military families during their holidays by giving them them privacy.</p>
+         <p>Thank you for supporting Give Us Time. Your holiday donations are very much appreciated. Please continue to support military families during their holidays by giving them them privacy.</p>
 	</section>
 </div>
 
