@@ -19,7 +19,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
 		<?php
 
                 if ( Yii::app()->request->getQuery('type') == 'landlord') {
-                ?>
+                	/*
                     <form class="standard-form" method="post" action="/login">
                         <h3>Already registered?</h3>
                         <p>Log in to Give Us Time.</p>
@@ -38,8 +38,9 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
                             </div>
                         </fieldset>
                     </form>
+                    */ ?>
                     <h3 class="form-heading">Register as a new user</h3>
-                <?php
+			<?php
                 }
 
 		if (count($steps) > 1) {
