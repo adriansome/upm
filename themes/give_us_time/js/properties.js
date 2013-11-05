@@ -324,11 +324,13 @@ $(document).ready(function() {
                 if (data.success)
                 {
                     updateList();
+                    // only refresh for updating property
+                    if (this.url.indexOf('list/properties') > 0) {
+                        window.location.reload();
+                    }
                 }
             }
-        });
-        
-        window.location.reload();
+        });        
     });
 
     // Update the list for the specified type
