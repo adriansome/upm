@@ -40,6 +40,8 @@ return array(
                 $module_name . '/management/<action:\w+>/<id:\d+>' => $module_name . '/management/<action>',
                 $module_name . '/management/<action:\w+>' => $module_name . '/management/<action>',
                 'thumbs/<url:.+>'=>'block/resources/thumbs',
+                'browse/<index:\d+>/landlord/<subfolder:\w+>'=>'block/resources/browse',
+                'upload/<subfolder:\w+>/'=>'block/resources/upload',
             ),
         ),
     ),

@@ -5,6 +5,7 @@ class ResourcesController extends Controller {
     public function actionThumbs() {
  
         $request = str_replace(DIRECTORY_SEPARATOR . 'thumbs', '', Yii::app()->request->requestUri);
+        //$request = str_replace( '/thumbs', '', Yii::app()->request->requestUri);
  
         $resourcesPath = Yii::getPathOfAlias('webroot') . $request;
         $targetPath = Yii::getPathOfAlias('webroot') . str_replace('/source/','/thumbs/',$request);
@@ -48,5 +49,30 @@ class ResourcesController extends Controller {
             throw new CHttpException(400, 'Wrong params');
         }
     }
+    
+    public function actionBrowse($index, $subfolder)
+    {        
+        $this->renderPartial('uploadImage',
+                array(
+                    'folder' => '/assets/source/landlord',
+                    'subfolder' => $subfolder,
+                    'index' => $index),
+                false, true
+		);
+    }
  
+    
+    public function actionUpload($subfolder)
+    {
+        error_reporting(E_ALL | E_STRICT);
+        require(Yii::getPathOfAlias('webroot') . '/protected/extensions/image/UploadHandler.php');
+        
+        $options = array('upload_dir' => Yii::getPathOfAlias('webroot') . "/assets/source/landlord/$subfolder/",
+            'upload_url' => Yii::app()->getBaseUrl(true) . "/assets/source/landlord/$subfolder/",
+            );
+        
+        $upload_handler = new UploadHandler($options);
+        
+        //var_dump($upload_handler);
+    }
 }
