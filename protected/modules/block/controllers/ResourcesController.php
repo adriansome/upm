@@ -5,7 +5,7 @@ class ResourcesController extends Controller {
     public function actionThumbs() {
  
         $request = str_replace(DIRECTORY_SEPARATOR . 'thumbs', '', Yii::app()->request->requestUri);
-        //$request = str_replace( '/thumbs', '', Yii::app()->request->requestUri);
+        $request = str_replace( '/thumbs', '', Yii::app()->request->requestUri);
  
         $resourcesPath = Yii::getPathOfAlias('webroot') . $request;
         $targetPath = Yii::getPathOfAlias('webroot') . str_replace('/source/','/thumbs/',$request);
@@ -74,5 +74,25 @@ class ResourcesController extends Controller {
         $upload_handler = new UploadHandler($options);
         
         //var_dump($upload_handler);
+    }
+    
+    public function actionList($subfolder)
+    {
+        if (is_dir(Yii::getPathOfAlias('webroot') . "/assets/source/landlord/$subfolder")) 
+        {
+            $files = scandir(Yii::getPathOfAlias('webroot') . "/assets/source/landlord/$subfolder");
+
+            $size = '_100x100';
+
+            foreach ($files as $file):
+
+                if (in_array($file, array(".", "..")) || is_dir($file) || $file === 'thumbnail') {
+                    continue;
+                }
+
+                echo "<img id='$file' src='/thumbs//assets/source/landlord/$subfolder/$file$size' />";
+
+            endforeach;
+        }
     }
 }

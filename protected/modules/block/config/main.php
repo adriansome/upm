@@ -42,6 +42,7 @@ return array(
                 'thumbs/<url:.+>'=>'block/resources/thumbs',
                 'browse/<index:\d+>/landlord/<subfolder:\w+>'=>'block/resources/browse',
                 'upload/<subfolder:\w+>/'=>'block/resources/upload',
+                'list/<subfolder:\w+>/'=>'block/resources/list',
             ),
         ),
     ),

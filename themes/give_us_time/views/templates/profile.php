@@ -71,6 +71,7 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
                                 $model->county <br/>
                                 $model->country. $model->postcode" ?>                        
                             </p>
+                            <a data-toggle="edit-item" class="more" href="/user/management/item">Edit profile</a>
 
                         </div>
                         
@@ -143,7 +144,6 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
 
 		$this->endWidget();	*/
 ?>
-                            
          <p>Thank you for supporting Give Us Time. Your holiday donations are very much appreciated. Please continue to support military families during their holidays by giving them them privacy.</p>
 	</section>
 </div>
@@ -161,6 +161,13 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
 
 <?php
 }
+Yii::app()->clientScript->registerCssFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.css')).'/jquery.fileupload.css');
+Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/jquery.ui.widget.js'); 
+Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/bootstrap-modal.js'); 
+Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/bootstrap-modalmanager.js'); 
+Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/jquery.ui.widget.js');
+Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/jquery.iframe-transport.js');
+Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/jquery.fileupload.js');
 
 require_once(Yii::app()->theme->basepath.'/views/elements/footer.php');
 ?>

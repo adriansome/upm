@@ -42,11 +42,13 @@ $(document).ready(function() {
                 "filemanager": responsiveFileManager + "plugin.min.js"
             }
         });
+        
         setTimeout(function () {
-            $(".datepicker").datepicker({
+                $(".datepicker").datepicker({
                 'dateFormat' : 'yy-mm-dd'
             });
         }, 200);
+        
     }
 
     $('[data-toggle=\"modal\"]').live('click',function(e) {
@@ -71,16 +73,18 @@ $(document).ready(function() {
                 $(response).modal({backdrop: false, modalOverflow: true});
 
                 // Make modal window draggable.
-                $(target).draggable({ handle: ".modal-header" });
+                if (target !== '#filemanager') {
+                    $(target).draggable({ handle: ".modal-header" });
+                }
                 
                 // Initiate any rich text editors in the modal.
                 initRichTextEditors();
             }).success(function() {
-                if(target === '#filemanager')
+                /*if(target === '#filemanager')
                 {
                     var src = $('#fm-iframe').attr('src')+'&field_id=Content_'+fileFieldID+'_file_value';
                     $('#fm-iframe').attr('src', src);
-                }
+                }*/
 
                 $(target).live('hidden',function() {
                     $(target).remove();
