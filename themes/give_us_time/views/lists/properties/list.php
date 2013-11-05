@@ -1,4 +1,6 @@
 <?php /* @var $this ListWidget */ ?>
+<a data-toggle="add-item" class="more" href="<?php echo Yii::app()->createUrl('/properties/management/item'); ?>">Add new property</a>
+
 <ul class="booking-listing">
 <?php
 $this->widget('zii.widgets.CListView', array(
@@ -14,4 +16,3 @@ $this->widget('zii.widgets.CListView', array(
 ));
 ?>
 </ul>
-<a data-toggle="add-item" class="more" href="<?php echo Yii::app()->createUrl('/properties/management/item'); ?>">Add new property</a>

@@ -56,29 +56,30 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
                         ));
                     } else {
                         ?>
-                        <h1>Welcome back - <?php echo $model->fullname; ?></h1>
-                        
-                        <p>Thanks for visiting your Give Us Time profile.</p>
-                        
-                        <div class="details-container">
-                            <h2>Your details</h2>
-                            <p>
-                            <?php echo "$model->title $model->firstname $model->lastname <br/>
-                                $model->phone_number <br/>
-                                $model->email <br/>
-                                $model->address1, $model->address2 <br/>
-                                $model->area, $model->city, <br/>
-                                $model->county <br/>
-                                $model->country. $model->postcode" ?>                        
-                            </p>
-                            <a data-toggle="edit-item" class="more" href="/user/management/item">Edit profile</a>
-
-                        </div>
-                        
-                        <h2>Your properties</h2>                        
+                        <h1>Welcome to Give Us Time - <?php echo $model->fullname; ?></h1>
+                                              
                         <div class="properties-container">
                         </div>
+                        
+                        <div class="landlord-details">
+                            <h2>Your Details</h2>
+                            <div class="inner-content">
+                                <div class="landlord-name"><?php echo $model->fullname; ?></div>
+                                <p>
+                                <?php echo " <br/>
+                                    $model->phone_number <br/>
+                                    $model->email <br/>
+                                    $model->address1, $model->address2 <br/>
+                                    $model->area, $model->city, <br/>
+                                    $model->county <br/>
+                                    $model->country. $model->postcode" ?>  
+                                </p>
+                                <a data-toggle="edit-item" class="action-button edit" href="/#">Edit</a>
+                            </div>
+                        </div>
+                        
                         <br/>
+                        <p>Thank you for supporting Give Us Time. Your holiday donations are very much appreciated. Please continue to support military families during their holidays by giving them them privacy.</p>
                         <?php
                     }
 		}
@@ -144,7 +145,6 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
 
 		$this->endWidget();	*/
 ?>
-         <p>Thank you for supporting Give Us Time. Your holiday donations are very much appreciated. Please continue to support military families during their holidays by giving them them privacy.</p>
 	</section>
 </div>
 
