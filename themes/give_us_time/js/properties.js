@@ -3,7 +3,7 @@ $(document).ready(function() {
     var type, params;
     
     // Check for different DOM elements to determine what type of page we're on
-    if ($('.properties-container').length || $('.property-details').length) {
+    if ($('.properties-container').length) {
         type = 'properties';
     } else if ($('.holidays-container').length) {
         type = 'holidays';
@@ -147,7 +147,8 @@ $(document).ready(function() {
         	$(".modal").remove();
             $(response).on("show.bs.modal", function() {
                 $(this).find('.modal-header').remove();
-                var text = (type === 'properties') ? 'property' : 'holiday';
+                var text = ($(this).find('form').attr('action').indexOf('properties') > 0) ? 'property' : 'holiday';
+                //var text = (type === 'properties') ? 'property' : 'holiday';
                 // Append text to modal
                 $(this).find('#block-form').prepend('<h1>Please edit your ' + text + ' details</h1>');
             }).modal();
