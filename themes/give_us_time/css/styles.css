@@ -382,6 +382,14 @@ nav:after,
 	/*width: 48.784722%;*/
 }
 
+.span10 {
+	width: 706px;
+}
+
+.span11 {
+	width: 778px;
+}
+
 .span12 {
 	width: 850px;
 	/*width: 73.784722%;*/
@@ -1706,7 +1714,8 @@ form .back {
 	width: 100%;
 }
 
-#news .news-item .summary {
+#news .news-item .summary,
+#stories .news-item .summary {
 	color: #777;
 	padding-top: 1em;
 	text-align: left;
@@ -2748,3 +2757,9 @@ img.mfp-img {
 	opacity: .6;
 	border-radius: 8px;
 }
+
+/*
+.modal-scrollable .close-modal.btn.btn-danger {
+	display: none;
+}
+*/
