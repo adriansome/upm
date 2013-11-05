@@ -25,11 +25,15 @@ class ManagementController extends UserController
 				'users'=>array('@'),
 				'roles'=>array('admin'),
 			),
-                        array('allow',
-                            'users' => array('@'),
-                            'roles' => array('landlord', 'user'),
-                            'actions' => array('sendNotification')
-                        ),
+            array('allow',
+                'users' => array('@'),
+                'roles' => array('landlord', 'user'),
+                'actions' => array('sendNotification')
+            ),
+            array('allow',
+                'actions' => array('update'),
+                'users' => array('@')
+            ),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
