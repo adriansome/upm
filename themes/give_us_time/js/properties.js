@@ -3,7 +3,7 @@ $(document).ready(function() {
     var type, params;
     
     // Check for different DOM elements to determine what type of page we're on
-    if ($('.properties-container').length) {
+    if ($('.properties-container').length || $('.property-details').length) {
         type = 'properties';
     } else if ($('.holidays-container').length) {
         type = 'holidays';
