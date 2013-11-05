@@ -74,7 +74,7 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
                                     $model->county <br/>
                                     $model->country. $model->postcode" ?>  
                                 </p>
-                                <a data-toggle="edit-item" class="action-button edit" href="/#">Edit</a>
+                                <a data-toggle="edit-item" class="action-button edit" href="/user/management/update/id/<?=Yii::app()->user->id?>/">Edit</a>
                             </div>
                         </div>
                         
