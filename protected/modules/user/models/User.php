@@ -121,7 +121,7 @@ class User extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('personnel_type, personnel_rank, personnel_service_number, personnel_unit,
-					email, email_confirm, lastname, title, initial, phone_number, date_terms_agreed',
+					email, email_confirm, lastname, title, firstname, phone_number, date_terms_agreed',
 					'required',
 					'on'=>'register'),
 			array('firstname, lastname, email, phone_number, date_terms_agreed', 'required', 'on' => 'register_landlord'),

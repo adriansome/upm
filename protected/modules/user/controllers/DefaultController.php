@@ -55,7 +55,7 @@ class DefaultController extends UserController
 					'tooltip' => "<p>Please enter the name of the last unit or ship you were on or were based in</p>"
 				),
 				'title' => array(),
-				'initial' => array(),
+				'firstname' => array(),
 				'lastname' => array(),
 				'phone_number' => array(),
 				'email' => array('type' => 'email'),
