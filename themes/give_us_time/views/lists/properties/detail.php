@@ -116,7 +116,7 @@ $departure = date_parse_from_format('d/m/Y', $holidayData['departure_date']);
             </div>
             <div class="column full-details-column">
 				<h2 class="property-name"><?php echo $propertyData['title'] ?> <span class="property-type">(<?php echo $this->attributes['type']['values'][$propertyData['type']] ?>)</span></h2>
-				<div class="property-location"><?php echo $propertyData['area'] ?>, <?php echo $propertyData['city'] ?></div>
+				<div class="property-location"><?php echo $propertyData['area'] ?>, <?php echo $propertyData['city'] ?>, <?php echo $this->attributes['location']['values'][$propertyData['location']] ?></div>
 
 				<?php
 				if ($propertyData['description']) {

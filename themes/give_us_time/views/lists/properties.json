@@ -7,6 +7,26 @@
             "label": "Property name"
         },
         
+        "location":
+        {
+            "type": "list",
+            "values":
+            {
+		"1":	"Wales",
+		"2":	"Scotland",
+		"3":	"East Anglia",
+		"4":	"Midlands",
+		"5":	"North West",
+		"6":	"North East",
+		"7":	"South West",
+		"8":	"South East",
+		"9":	"London",
+		"10":	"Midlands",
+		"11":	"Europe",
+		"12":	"World"
+            }
+        },
+        
         "type":
         {
             "type": "list",
