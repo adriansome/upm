@@ -24,7 +24,7 @@ $data = $this->contents->rawData;
 
 		<div class="column full-details-column">
 			<h2 class="property-name"><?php echo $data['title'] ?> <span class="property-type">(<?php echo $this->attributes['type']['values'][$data['type']] ?>)</span></h2>
-			<div class="property-location"><?php echo $data['area'] ?>, <?php echo $data['city'] ?></div>
+			<div class="property-location"><?php echo $data['area'] ?>, <?php echo $data['city'] ?>, <?php echo $this->attributes['location']['values'][$data['location']] ?></div>
 
 			<?php
 			if ($data['description']) {
@@ -66,13 +66,6 @@ $data = $this->contents->rawData;
 
 
 			<?php
-			if ($data['additional_info']) {
-			?>
-			<div class="property-additional">
-				<p><?php echo $data['additional_info'] ?></p>
-			</div>
-			<?php
-			}
 
 			if ($data['accessibility']) {
 			?>
