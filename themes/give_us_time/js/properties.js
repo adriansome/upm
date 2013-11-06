@@ -79,7 +79,9 @@ $(document).ready(function() {
                     if (target !== '#filemanager') {
                         $(".modal").remove();
                     }
-                    $(response).modal({backdrop: false, modalOverflow: true});
+                    $(response).on("hide.bs.modal", function() {
+                    })
+                    .modal({backdrop: false, modalOverflow: true});
 
                     // Make modal window draggable.
                     if (target !== '#filemanager') {
@@ -103,10 +105,9 @@ $(document).ready(function() {
                             var index = $(this).parent().parent().find('#index').val();
 
                             $('#Content_' + index + '_file_value').val('/assets/source/landlord/'+ subfolder + id);
+                            
+                            $('#upload-images').hide();
                         });
-                    
-                        //var src = $('#fm-iframe').attr('src')+'&field_id=Content_'+fileFieldID+'_file_value';
-                        //$('#fm-iframe').attr('src', src);
                     }
 
                     $(target).live('hidden',function() {
