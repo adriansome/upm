@@ -136,14 +136,6 @@ $departure = date_parse_from_format('d/m/Y', $holidayData['departure_date']);
                 </ul>
 
 				<?php
-				if ($propertyData['additional_info']) {
-				?>
-				<div class="property-additional">
-					<p><?php echo $propertyData['additional_info'] ?></p>
-				</div>
-				<?php
-				}
-
 				if ($propertyData['accessibility']) {
 				?>
 				<div class="property-accessibility">

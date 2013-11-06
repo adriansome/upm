@@ -66,13 +66,6 @@ $data = $this->contents->rawData;
 
 
 			<?php
-			if ($data['additional_info']) {
-			?>
-			<div class="property-additional">
-				<p><?php echo $data['additional_info'] ?></p>
-			</div>
-			<?php
-			}
 
 			if ($data['accessibility']) {
 			?>
