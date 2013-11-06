@@ -11,6 +11,7 @@ $this->beginWidget('TbModal', array('id' => 'upload-images', 'htmlOptions' => ar
 <div class="modal-header">
     <a class="close" data-dismiss="modal">&times;</a>
     <h4>Browse images</h4>
+    <input type="hidden" value="<?=$index?>" id="index" />
 </div>
 <div class="modal-body">
 </div>

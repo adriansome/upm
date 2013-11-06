@@ -51,7 +51,6 @@ $(document).ready(function() {
         
     }
     
-
     $('[data-toggle=\"modal\"]').live('click',function(e) {
         e.preventDefault();
         
@@ -71,10 +70,10 @@ $(document).ready(function() {
             
             if(imagemodal.length > 0)
             {
-                $('#upload-images').modal({backdrop: false, modalOverflow: true});
+                $('#upload-images').remove();
+                //$('#upload-images').modal({backdrop: true, modalOverflow: true});
+                //$('.modal-backdrop').last().remove()
             }
-            else
-            {
             
                 $.get(url,function(response) {
                     if (target !== '#filemanager') {
@@ -101,8 +100,9 @@ $(document).ready(function() {
 
                             var id = $(this).attr('id');
                             var subfolder = $('#subfolder').val();
+                            var index = $(this).parent().parent().find('#index').val();
 
-                            $('#Content_' + fileFieldID + '_file_value').val('/assets/source/landlord/'+ subfolder + id);
+                            $('#Content_' + index + '_file_value').val('/assets/source/landlord/'+ subfolder + id);
                         });
                     
                         //var src = $('#fm-iframe').attr('src')+'&field_id=Content_'+fileFieldID+'_file_value';
@@ -121,7 +121,6 @@ $(document).ready(function() {
                         }
                     });
                 });
-            }
         }
     });
 
