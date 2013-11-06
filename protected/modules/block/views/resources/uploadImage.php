@@ -1,7 +1,7 @@
 <?php
 /* @var $this ResourcesController */
 
-$this->beginWidget('TbModal', array('id' => 'upload-images', 'htmlOptions' => array()));?>
+$this->beginWidget('TbModal', array('id' => 'upload-images', 'htmlOptions' => array('class' => 'modal-scrollable')));?>
 
 <style>
     .modal-body img {margin:2px;}
@@ -17,6 +17,10 @@ $this->beginWidget('TbModal', array('id' => 'upload-images', 'htmlOptions' => ar
 </div>
 
 <div class="modal-footer">
+    <!-- The global progress bar 
+    <div id="progress" class="progress">
+        <div class="progress-bar progress-bar-success"></div>
+    </div>-->
     <span class="btn btn-success fileinput-button">
         <i class="glyphicon glyphicon-plus"></i>
         <span>Select files...</span>
@@ -54,7 +58,14 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
         dataType: 'json',
         done: function (e, data) {
             updateImageList();
-        }
+        },
+        /*progressall: function(e, data){
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .progress-bar').css(
+                'width',
+                progress + '%'
+            );            
+        }*/
     });");?>
 
 <?php $this->endWidget(); ?>

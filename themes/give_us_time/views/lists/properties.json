@@ -7,26 +7,6 @@
             "label": "Property name"
         },
         
-        "location":
-        {
-            "type": "list",
-            "values":
-            {
-		"1":	"Wales",
-		"2":	"Scotland",
-		"3":	"East Anglia",
-		"4":	"Midlands",
-		"5":	"North West",
-		"6":	"North East",
-		"7":	"South West",
-		"8":	"South East",
-		"9":	"London",
-		"10":	"Midlands",
-		"11":	"Europe",
-		"12":	"World"
-            }
-        },
-        
         "type":
         {
             "type": "list",
@@ -41,19 +21,14 @@
 			"6": "Other"
 		}
         },
-		
-        "area":
-        {
-            "type": "singleline"
-        },
         
         "city":
         {
             "type": "singleline",
             "label" : "Town"
         },
-        
-        "county":
+		
+        "area":
         {
             "type": "singleline"
         },
@@ -70,16 +45,6 @@
             {
                 "maxlength" : 300
             }
-        },
-
-        "additional_info":
-        {
-            "type": "multiline",
-            "rules":
-            {
-				"maxlength" : 300
-			},
-            "label": "Addtional Info"
         },
         "wifi":
         {
@@ -129,15 +94,6 @@
         {
             "type": "boolean",
             "label": "Cancellation fee"
-        },                
-
-        "accessibility":
-        {
-            "type": "multiline",
-            "rules":
-            {
-				"maxlength" : 300
-			}
         },
         
         "image_1":
@@ -170,19 +126,32 @@
             "label": "Image 5"
         },
         
-        "welcome_pack":
-        {
-            "type": "file",
-            "label": "Welcome pack"
-        },
-        
         "extras":
         {
             "type": "multiline",
+            "label": "Booking extras/costs/conditions",
             "rules":
             {
 				"maxlength" : 300
 			}
+        },                
+
+        "accessibility":
+        {
+            "type": "multiline",
+            "label": "Accessibility details ",
+            "rules":
+            {
+				"maxlength" : 300
+			}
+        },
+                
+        "departure_date":
+        {
+            
+            "type": "date",
+            "format": "d/m/Y",
+            "label": "When is this property available?"
         },
 
         "user_id":
