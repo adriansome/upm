@@ -74,7 +74,7 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
                                     $model->county <br/>
                                     $model->country. $model->postcode" ?>  
                                 </p>
-                                <a data-toggle="edit-item" class="action-button edit" href="/user/management/update/id/<?=Yii::app()->user->id?>/">Edit</a>
+                                <a data-toggle="edit-item" class="action-button edit" href="/user/management/update/id/<?php echo Yii::app()->user->id?>/">Edit</a>
                             </div>
                         </div>
                         
@@ -174,7 +174,7 @@ if (Yii::app()->user->isLandlord()) {
     
     ?>
 
-<input type="hidden" id="subfolder" value="<?=$subfolder?>" />
+<input type="hidden" id="subfolder" value="<?php echo $subfolder? >" />
     
 <?php   
 }
