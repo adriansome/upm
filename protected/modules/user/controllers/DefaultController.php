@@ -16,7 +16,10 @@ class DefaultController extends UserController
 				'firstname' => array(),
 				'lastname' => array(),
 				'phone_number' => array(),
-				'email' => array('type' => 'email'),
+				'email' => array(
+					'type' => 'email',
+					'tooltip' => '<p>Your Email address will become your username.</p>'
+				),
 				'address1' => array(),
 				'address2' => array(),
 				'area' => array(),

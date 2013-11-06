@@ -51,7 +51,7 @@
 
 		<div class="nugget" id="nugget-donate">
 			<h2>Donate time</h2>
-			<p>Donate a holiday in your second home or timeshare to a military family.</p>
+			<p>Donate some time in your holiday property to a military family.</p>
 			<a href="/welcome-timedonor/" class="more">Donate</a>
 		</div>
 	</section>
