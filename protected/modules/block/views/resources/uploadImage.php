@@ -13,23 +13,6 @@ $this->beginWidget('TbModal', array('id' => 'upload-images', 'htmlOptions' => ar
     <h4>Browse images</h4>
 </div>
 <div class="modal-body">
-    <?php
-    /*if (is_dir(Yii::getPathOfAlias('webroot') . "$folder/$subfolder")) {
-        $files = scandir(Yii::getPathOfAlias('webroot') . "$folder/$subfolder");
-
-        $size = '_100x100';
-        
-        foreach ($files as $file):
-
-            if (in_array($file, array(".", "..")) || is_dir($file) || $file === 'thumbnail') {
-                continue;
-            }
-            
-            echo "<img id='$file' src='/thumbs/$folder/$subfolder/$file$size' />";
-
-        endforeach;
-    }*/
-    ?>
 </div>
 
 <div class="modal-footer">
@@ -42,6 +25,7 @@ $this->beginWidget('TbModal', array('id' => 'upload-images', 'htmlOptions' => ar
 </div>
 <?php
 
+Yii::app()->getClientScript()->registerCoreScript( 'jquery.ui' ); 
 Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/jquery.ui.widget.js'); 
 Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/bootstrap-modal.js'); 
 Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/bootstrap-modalmanager.js'); 
@@ -63,18 +47,6 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
      }
 
     updateImageList();
-
-    $('#upload-images img').on('click', function(){
-        $('#upload-images .modal-body img').each(function(){
-            $(this).removeClass('selected');
-        });
-
-        $(this).addClass('selected');
-
-        var id = $(this).attr('id');
-
-        $('#Content_".$index."_file_value').val('".$folder."/".$subfolder."/'+id);
-    }); 
        
     $('#fileupload').fileupload({
         url: 'upload/".$subfolder."',
@@ -83,4 +55,5 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
             updateImageList();
         }
     });");?>
+
 <?php $this->endWidget(); ?>

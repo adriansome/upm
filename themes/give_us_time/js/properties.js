@@ -50,6 +50,7 @@ $(document).ready(function() {
         }, 200);
         
     }
+    
 
     $('[data-toggle=\"modal\"]').live('click',function(e) {
         e.preventDefault();
@@ -66,38 +67,61 @@ $(document).ready(function() {
         }
         else
         {
-            $.get(url,function(response) {
-            	if (target !== '#filemanager') {
-                    $(".modal").remove();
-                }
-                $(response).modal({backdrop: false, modalOverflow: true});
-
-                // Make modal window draggable.
-                if (target !== '#filemanager') {
-                    $(target).draggable({ handle: ".modal-header" });
-                }
-                
-                // Initiate any rich text editors in the modal.
-                initRichTextEditors();
-            }).success(function() {
-                /*if(target === '#filemanager')
-                {
-                    var src = $('#fm-iframe').attr('src')+'&field_id=Content_'+fileFieldID+'_file_value';
-                    $('#fm-iframe').attr('src', src);
-                }*/
-
-                $(target).live('hidden',function() {
-                    $(target).remove();
-                    
-                    if(target !== '#filemanager')
-                    {
-                        setTimeout(function() {
-                            flashMessage('warning','Reloading page...');
-                        }, 2500);
-                        window.location.reload(true);
+            var imagemodal = $('#upload-images'); 
+            
+            if(imagemodal.length > 0)
+            {
+                $('#upload-images').modal({backdrop: false, modalOverflow: true});
+            }
+            else
+            {
+            
+                $.get(url,function(response) {
+                    if (target !== '#filemanager') {
+                        $(".modal").remove();
                     }
+                    $(response).modal({backdrop: false, modalOverflow: true});
+
+                    // Make modal window draggable.
+                    if (target !== '#filemanager') {
+                        $(target).draggable({ handle: ".modal-header" });
+                    }
+
+                    // Initiate any rich text editors in the modal.
+                    initRichTextEditors();
+                }).success(function() {
+                    if(target === '#filemanager')
+                    {
+                        $('#upload-images img').live('click', function(){
+                            $('#upload-images .modal-body img').each(function(){
+                                $(this).removeClass('selected');
+                            });
+
+                            $(this).addClass('selected');
+
+                            var id = $(this).attr('id');
+                            var subfolder = $('#subfolder').val();
+
+                            $('#Content_' + fileFieldID + '_file_value').val('/assets/source/landlord/'+ subfolder + id);
+                        });
+                    
+                        //var src = $('#fm-iframe').attr('src')+'&field_id=Content_'+fileFieldID+'_file_value';
+                        //$('#fm-iframe').attr('src', src);
+                    }
+
+                    $(target).live('hidden',function() {
+                        $(target).remove();
+
+                        if(target !== '#filemanager')
+                        {
+                            setTimeout(function() {
+                                flashMessage('warning','Reloading page...');
+                            }, 2500);
+                            window.location.reload(true);
+                        }
+                    });
                 });
-            });
+            }
         }
     });
 

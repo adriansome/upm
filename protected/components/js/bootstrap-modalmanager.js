@@ -411,7 +411,7 @@
 	};
 
 	$.fn.modalmanager.defaults = {
-		backdropLimit: 999,
+		backdropLimit: 1,
 		resize: true,
 		spinner: '<div class="loading-spinner fade" style="width: 200px; margin-left: -100px;"><div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div></div>',
 		backdropTemplate: '<div class="modal-backdrop" />'
