@@ -21,8 +21,8 @@ class DefaultController extends UserController
 					'tooltip' => '<p>Your Email address will become your username.</p>'
 				),
 				'address1' => array(),
-				'address2' => array(),
-				'area' => array(),
+				//'address2' => array(),
+				//'area' => array(),
 				'city' => array(),
 				'county' => array(),
 				'postcode' => array(),

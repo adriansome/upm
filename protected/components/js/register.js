@@ -1,6 +1,6 @@
 $(document).ready( function() {
 
-	$('#User_date_terms_agreed').after('<span class="form-value"> Click <a target="_blank" href="/usertermsandconditions">here</a> to read the terms and conditions.</span>');
+	$('#User_date_terms_agreed').after('<p class="form-value" style="display:inline;"> I agree to the <a target="_blank" href="/usertermsandconditions">Give Us Time rules</a>, give permission for my details to be verified by Give Us Time and understand that providing false information is a criminal offence.</p>');
 
    $('#yw0').ready( function() {
        $('#yw0_button').click();
