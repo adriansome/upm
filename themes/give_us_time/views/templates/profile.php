@@ -174,7 +174,7 @@ if (Yii::app()->user->isLandlord()) {
     
     ?>
 
-<input type="hidden" id="subfolder" value="<?php echo $subfolder? >" />
+<input type="hidden" id="subfolder" value="<?php echo $subfolder ?>" />
     
 <?php   
 }
