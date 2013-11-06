@@ -152,7 +152,12 @@ $(document).ready(function() {
                     if (params.hasOwnProperty('id')) {
                         $('input[data-name="property_id"]').val(params.id);
                     }
-                }                
+                }    
+                
+                // i think fileupload.js is adding this once it's been registered
+                $('.modal-scrollable').removeClass('modal-scrollable');
+                $('.modal-backdrop').attr('style','');
+                
             }).modal();
 
             initRichTextEditors();
@@ -174,6 +179,12 @@ $(document).ready(function() {
                 //var text = (type === 'properties') ? 'property' : 'holiday';
                 // Append text to modal
                 $(this).find('#block-form').prepend('<h1>Please edit your ' + text + ' details</h1>');
+                
+            }).on("shown.bs.modal",function(){
+                // i think fileupload.js is adding this once it's been registered
+                $('.modal-scrollable').removeClass('modal-scrollable');
+                $('.modal-backdrop').attr('style','');
+                
             }).modal();
             initRichTextEditors();
         });
