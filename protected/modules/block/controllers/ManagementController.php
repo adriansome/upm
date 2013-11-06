@@ -162,7 +162,7 @@ class ManagementController extends BlockController
 					break;
 
 				case 'file':
-					$fields[$content->name]['input']=$this->renderPartial('_fileField', array(
+					$fields[$content->name]['input']=$this->renderPartial('_imageField', array(
 						'form'=>$form,
 						'index'=>$index,
 						'content'=>$content,
