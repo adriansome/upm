@@ -265,9 +265,20 @@ class ManagementController extends BlockController
 
 		$form = new CActiveForm;
 		$fields = array();
+        
+        if($list != '')
+        {
+            // get the attributes so we can populate any overriding labels
+            $listWidget = new ListWidget();
+            $listWidget->name = $list;
+            $listWidget->init();
+
+            $attributes = $listWidget->itemAttributes();
+            unset($listWidget);            
+        }
 
 		foreach($contents as $index=>$content)
-		{            
+		{         
             if(isset($attributes[$content->name]['label']) && !empty($attributes[$content->name]['label']))
             {
                 $label = $attributes[$content->name]['label'];
@@ -275,7 +286,7 @@ class ManagementController extends BlockController
             else
             {
                 $label = $content->name;
-            }            
+            }
             
 			$fields[$content->name] = array(
 				'label'=>CHtml::label(ucfirst($label), "Content[$index][string_value]"),
