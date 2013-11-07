@@ -775,7 +775,11 @@ a {
 #nuggets > * {
 	margin-bottom: 25px;
 }
-
+/*
+#nuggets .in-page-edit {
+	margin-bottom: 0;
+}
+*/
 #nuggets .nugget {
 	position: relative;
 	padding: 20px;
@@ -807,17 +811,8 @@ a {
 	overflow: hidden;
 }
 
-.image-nugget img:first-child {
-	position: absolute;
-	top: 0px;
-	left: 0px;	
-}
-
-
 #nuggets .image-nugget-wrapper img {
-	position: absolute;
-	top: 0px;
-	left: 0px;	
+	position: static;
 }
 
 #nuggets .image-nugget-wrapper .text {
@@ -841,15 +836,13 @@ a {
 	width: 100%;
 /*	min-height: 262px;*/
 	padding: 0;
+
+	background: transparent;
 	border-radius: 9px;	
 	overflow: hidden;
 }
 
 #nuggets .image-nugget-wrapper .nugget h2 {
-	display: none;
-}
-
-#nuggets .image-nugget-wrapper .btn {
 	display: none;
 }
 

@@ -60,24 +60,6 @@
 					)); ?>
 				</div>			
 
-<!--
-				<div class="nugget">
-					<div class="text">
-						<h2>Heading</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing 	elit. Ut eu nisl dui.</p>
-					</div>
-					<div class="picture-frame">
-						<img src="images/tree.png" alt="" />
-					</div>
-				</div>
-
-				<div class="image-nugget">
-					<img src="example-content/image-nugget.jpg" alt="" />
-					<div class="text">
-						Please call us for any enquiries about Avalon Marshes on 01823 652400
-					</div>
-				</div>
--->
 				<div class="checklist-nugget">
 					<h2>Wildlife Check List</h2>
 					<ul class="checklist">
