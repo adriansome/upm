@@ -40,21 +40,33 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
 		if (Yii::app()->user->isLandlord()) {
                     // Display properties list if not editing an existing property
                     if (isset($id) && (int)$id) {
-                        ?>
-                        <input type="hidden" id="get-params" data-id="<?php echo $id; ?>"/>
-                        <?php
-                        $this->widget('ListWidget',array(
-                            'name'=>'properties',
-                            'scenario'=>'edit',
-                            'item_id' => $id,
-                            'filters' => array(
-                                'user_id' => array(
-                                    'field_type' => 'string_value',
-                                    'value' => Yii::app()->user->id
+                        
+                        // check whether this property belongs to this user (landlord)
+                        $property = Block::model()->findByPk($id);
+                        
+                        if(Yii::app()->user->id != $property->getContentValue('user_id', 'string_value'))
+                        {?>
+        <p>You do not have permission to view this page</p>
+                        <?php }
+                        else
+                        {
+                            ?>
+                            <input type="hidden" id="get-params" data-id="<?php echo $id; ?>"/>
+                            <?php
+                            $this->widget('ListWidget',array(
+                                'name'=>'properties',
+                                'scenario'=>'edit',
+                                'item_id' => $id,
+                                'filters' => array(
+                                    'user_id' => array(
+                                        'field_type' => 'string_value',
+                                        'value' => Yii::app()->user->id
+                                    )
                                 )
-                            )
-                        ));
-                    } else {
+                            ));
+                            }
+                        
+                        } else {
                         ?>
                         <h1>Welcome to Give Us Time - <?php echo $model->fullname; ?></h1>
                                               
