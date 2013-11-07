@@ -14,12 +14,29 @@ $data = $this->contents->rawData;
 	<a data-toggle="edit-item" class="action-button edit" href="<?php echo Yii::app()->createUrl('/block/management/update/id/' . $this->item_id . '/list/properties'); ?>">Edit</a>
 	<div class="property-details">
 		<div class="column image-column">
+			<div id="resort-full-image">
 			<?php if (isset($data['image_1']) && !empty($data['image_1'])):?>
 					<?php $img_path = Yii::app()->basePath . '/..' . $data['image_1'];?>
 					<?php if (is_file($img_path)):?>
 							<?php echo '<img src="/thumbs'.$data['image_1'].'_450x310" /></a>'?>
 					<?php endif?>
 			<?php endif?>
+				</div>
+                <div id="resort-thumbnails">
+                    <?php
+                    for($i=1;$i<=5;$i++){
+						if (isset($data['image_'.$i]) && !empty($data['image_'.$i])) {
+							$img_path = Yii::app()->basePath . '/..' . $data['image_'.$i];
+							if (is_file($img_path)) {
+								?>
+								<a href="/thumbs<?php echo $data['image_'.$i] ?>_450x310"><img src="/thumbs<?php echo $data['image_'.$i] . '_87x62' ?>" alt="" /></a>
+
+								<?php
+							}
+						}
+					}
+                    ?>
+                </div>
 		</div>
 
 		<div class="column full-details-column">
@@ -90,3 +107,12 @@ $data = $this->contents->rawData;
 		</div>
 	</div>
 </div>
+<script>
+$(document).ready(function() {
+	$("#resort-thumbnails a").click(function () {
+		var newSrc = $(this).attr("href");
+		$("#resort-full-image img").attr("src", newSrc);
+		return false;
+	});
+});
+</script>
