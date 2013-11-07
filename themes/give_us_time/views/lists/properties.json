@@ -118,31 +118,31 @@
         
         "image_1":
         {
-            "type": "file",
+            "type": "image",
             "label": "Image 1"
         },
         
         "image_2":
         {
-            "type": "file",
+            "type": "image",
             "label": "Image 2"
         },
         
         "image_3":
         {
-            "type": "file",
+            "type": "image",
             "label": "Image 3"
         },
         
         "image_4":
         {
-            "type": "file",
+            "type": "image",
             "label": "Image 4"
         },
         
         "image_5":
         {
-            "type": "file",
+            "type": "image",
             "label": "Image 5"
         },
         

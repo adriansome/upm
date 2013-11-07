@@ -100,6 +100,7 @@ abstract class BlockWidget extends CWidget
 					break;
 
 				case 'file':
+				case 'image':
 					$this->$attribute = $values[$attribute]->file_value;
 					break;
 

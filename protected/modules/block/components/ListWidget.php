@@ -183,6 +183,7 @@ class ListWidget extends CWidget
 					break;
 
 				case 'file':
+                                case 'image':
 					$contents[$content->name] = $content->file_value;
 					break;
 

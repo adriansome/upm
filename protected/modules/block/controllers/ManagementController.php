@@ -161,8 +161,16 @@ class ManagementController extends BlockController
 					$fields[$content->name]['input']=$form->textArea($content,"[$index]string_value",array('class'=>'tinymce-editor'));
 					break;
 
-				case 'file':
+				case 'image':
 					$fields[$content->name]['input']=$this->renderPartial('_imageField', array(
+						'form'=>$form,
+						'index'=>$index,
+						'content'=>$content,
+					), true, true);
+					break;
+
+				case 'file':
+					$fields[$content->name]['input']=$this->renderPartial('_fileField', array(
 						'form'=>$form,
 						'index'=>$index,
 						'content'=>$content,
@@ -220,7 +228,7 @@ class ManagementController extends BlockController
 	{
 		if(Yii::app()->request->urlReferrer !== $this->currentUrl)
 			Yii::app()->user->setReturnUrl(Yii::app()->request->urlReferrer);
-
+                
 		$block=$this->loadModel($id);
 		$contents = $block->contents;
 
@@ -308,8 +316,16 @@ class ManagementController extends BlockController
 					$fields[$content->name]['input']=$form->textArea($content,"[$index]string_value",array('class'=>'tinymce-editor'));
 					break;
 
-				case 'file':
+				case 'image':
 					$fields[$content->name]['input']=$this->renderPartial('_imageField', array(
+						'form'=>$form,
+						'index'=>$index,
+						'content'=>$content,
+					), true, true);
+					break;
+
+				case 'file':
+					$fields[$content->name]['input']=$this->renderPartial('_fileField', array(
 						'form'=>$form,
 						'index'=>$index,
 						'content'=>$content,

@@ -93,6 +93,12 @@ $(document).ready(function() {
                 }).success(function() {
                     if(target === '#filemanager')
                     {
+                        if($('#fm-iframe').length > 0)
+                        {
+                            var src =$('#fm-iframe').attr('src')+'&field_id=Content_'+fileFieldID+'_file_value';
+                            $('#fm-iframe').attr('src', src);
+                        }
+
                         $('#upload-images img').live('click', function(){
                             $('#upload-images .modal-body img').each(function(){
                                 $(this).removeClass('selected');
