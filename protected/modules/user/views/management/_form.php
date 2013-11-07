@@ -16,19 +16,13 @@ Yii::app()->clientScript->registerCss('user-management-form','
 	div#content span#User_role input {
 	    display: inline-block;
 	}
-');
+');?>
 
-$this->beginWidget('TbModal', array('id'=>'user-edit', 'htmlOptions'=>array('data-keyboard'=>'false', 'data-backdrop'=>'static'))); ?>
-
-<div class="modal-header">
-    <a class="close" data-dismiss="modal">&times;</a>
-    <h4>Edit User</h4>
-</div>
-<div class="modal-body">
-
+<div class="form">
+    
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'user-form',
-	'enableAjaxValidation'=>true,
+	'enableAjaxValidation'=>false,
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
@@ -75,28 +69,3 @@ $this->beginWidget('TbModal', array('id'=>'user-edit', 'htmlOptions'=>array('dat
 <?php $this->endWidget(); ?>
 
 </div>
-<div class="modal-footer">
-    <?php $this->widget('TbButton', array(
-        'type'=>'danger',
-        'label'=>'Discard',
-        'url'=>'#',
-        'htmlOptions'=>array(
-            'data-dismiss'=>'modal',
-            'class'=>'discard',
-        ),
-    )); ?>
-    
-    <?php $this->widget('TbButton', array(
-        'type'=>'success',
-        'label'=>'Save',
-        'url'=>Yii::app()->createUrl('/block/management/update/id/'.$block->id.'/list/'.$list),
-        'htmlOptions'=>array(
-            'data-dismiss'=>'modal',
-            'class'=>'save more',
-        ),
-    )); ?>
-
-
-</div>
-
-<?php $this->endWidget(); ?>
