@@ -1,1 +1,183 @@
-body{background-color:#fff;font-family:Verdana,Arial,Helvetica,sans-serif;font-size:11px;scrollbar-3dlight-color:#f0f0ee;scrollbar-arrow-color:#676662;scrollbar-base-color:#f0f0ee;scrollbar-darkshadow-color:#ddd;scrollbar-face-color:#e0e0dd;scrollbar-highlight-color:#f0f0ee;scrollbar-shadow-color:#f0f0ee;scrollbar-track-color:#f5f5f5}td,th{font-family:Verdana,Arial,Helvetica,sans-serif;font-size:11px}.mce-object{border:1px dotted #3a3a3a;background:#d5d5d5 url(img/object.gif) no-repeat center}.mce-pagebreak{cursor:default;display:block;border:0;width:100%;height:5px;border:1px dashed #666;margin-top:15px}.mce-item-anchor{cursor:default;display:inline-block;-webkit-user-select:all;-webkit-user-modify:read-only;-moz-user-select:all;-moz-user-modify:read-only;user-select:all;user-modify:read-only;width:9px!important;height:9px!important;border:1px dotted #3a3a3a;background:#d5d5d5 url(img/anchor.gif) no-repeat center}.mce-nbsp{background:#AAA}hr{cursor:default}.mce-match-marker{background:green;color:#fff}.mce-spellchecker-word{background:url(img/wline.gif) repeat-x bottom left;cursor:default}.mce-item-table,.mce-item-table td,.mce-item-table th,.mce-item-table caption{border:1px dashed #BBB}td.mce-item-selected,th.mce-item-selected{background-color:#39f!important}.mce-edit-focus{outline:1px dotted #333}
+div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+@import url("http://fonts.googleapis.com/css?family=Signika:400,700");
+
+body {
+	background-color: #fff;
+	font-family:  "Signika", Helvetica, Arial, sans-serif;
+	font-size: 11px;
+	scrollbar-3dlight-color: #f0f0ee;
+	scrollbar-arrow-color: #676662;
+	scrollbar-base-color: #f0f0ee;
+	scrollbar-darkshadow-color: #ddd;
+	scrollbar-face-color: #e0e0dd;
+	scrollbar-highlight-color: #f0f0ee;
+	scrollbar-shadow-color: #f0f0ee;
+	scrollbar-track-color: #f5f5f5;
+}
+
+.mce-object {
+	border: 1px dotted #3a3a3a;
+	background: #d5d5d5 url(img/object.gif) no-repeat center;
+}
+
+.mce-pagebreak {
+	cursor: default;
+	display: block;
+	width: 100%;
+	height: 5px;
+	border: 1px dashed #666;
+	margin-top: 15px;
+}
+
+.mce-item-anchor {
+	cursor: default;
+	display: inline-block;
+	-webkit-user-select: all;
+	-webkit-user-modify: read-only;
+	-moz-user-select: all;
+	-moz-user-modify: read-only;
+	user-select: all;
+	user-modify: read-only;
+	width: 9px!important;
+	height: 9px!important;
+	border: 1px dotted #3a3a3a;
+	background: #d5d5d5 url(img/anchor.gif) no-repeat center;
+}
+
+.mce-nbsp {
+	background: #AAA;
+}
+
+hr {
+	cursor: default;
+}
+
+.mce-match-marker {
+	background: green;
+	color: #fff;
+}
+
+.mce-spellchecker-word {
+	background: url(img/wline.gif) repeat-x bottom left;
+	cursor: default;
+}
+
+.mce-item-table,.mce-item-table td,.mce-item-table th,.mce-item-table caption {
+	border: 1px dashed #BBB;
+}
+
+td.mce-item-selected,th.mce-item-selected {
+	background-color: #39f!important;
+}
+
+.mce-edit-focus {
+	outline: 1px dotted #333;
+}
+
+h2 {
+	margin-bottom: 18px;
+	color: #478e97;
+	font-size: 20px;
+	font-weight: normal;
+}
+
+p,
+ul,
+ol,
+h4 {
+	margin-bottom:  1em;
+	color:  #404040;
+	font-size:  16px;
+	line-height:  1.45;
+}
+
+ul,
+ol {
+	margin-left:  22px;
+}
+
+ul {
+	list-style-type:  disc;
+}
+
+ol {
+	list-style-type:  decimal;
+}
+
+h4  {
+	margin-bottom: 0;
+	color: #478e97;
+	font-size: 16px;
+	font-weight: normal;
+}
+
+a {
+	color: inherit;
+}
+
+.testimonial {
+	position: relative;
+	margin-bottom: 40px;
+	padding: 25px;
+	background: #478e97;
+	border-radius: 9px;
+	color: #fff;
+	font-size: 28px;
+	text-align: center;
+}
+
+.testimonial p {
+	margin-bottom: 0px;
+	color: #fff;
+	font-size: 28px;	
+}
+
+.testimonial p:before,
+.testimonial p:after {
+	position: absolute;
+	font-family: Georgia, "Times New Roman", serif;
+	font-size: 72px;
+}
+
+.testimonial p:before {
+	top: 00px;
+	left: 10px;
+	content: "“";
+}
+
+.testimonial p:after {
+	bottom: 0px;
+	right: 0px;
+	content: "”";
+}
+
+.testimonial:after {
+	position: absolute;
+	right: 55px;
+	bottom: -22px;
+	display: block;
+	width: 38px;
+	height: 22px;
+	background: transparent url(../images/balloon-tail.png) 0 0 no-repeat;
+	content: "";
+}

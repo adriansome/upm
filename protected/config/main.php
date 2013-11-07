@@ -12,10 +12,10 @@ Yii::setPathOfAlias('filemanager', dirname(__FILE__).'/../vendors/filemanager');
 $config = array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 
-	'name'=>'Give Us Time',
+	'name'=>'Avalon Marshes',
 
 	// set site/app theme here
-	'theme'=>'give_us_time',
+	'theme'=>'avalon',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -54,7 +54,7 @@ $config = array(
 				'setup'=>'site/setup',
 			),
 		),
-		
+
 		'image'=>array(
           'class'=>'application.extensions.image.CImageComponent',
             // GD or ImageMagick
@@ -71,7 +71,7 @@ $config = array(
  		),
 
 		'db'=>array(
-			'connectionString' => 'mysql:host=localhost;dbname=give_us_time',
+			'connectionString' => 'mysql:host=localhost;dbname=avalonrob',
 			'emulatePrepare' => true,
 			'username' => 'root',
 			'password' => '',
