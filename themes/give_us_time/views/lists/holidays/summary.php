@@ -7,7 +7,16 @@
         if ($data['status'] == 'available') {
             $booked_by = 'Available';
         } else {
-            $booked_by = "Booked";
+            
+            if($data['status'] == 'provisionally-booked')
+            {       
+                $booked_by = "Provisionally booked";                
+            }
+            else
+            {            
+                $booked_by = "Booked";                
+            }
+            
             if  (isset($data['booked_by']) && $data['booked_by'] instanceof User) {
                 $user = $data['booked_by'];
                 $name = $user->initial . '. ' . $user->lastname;
