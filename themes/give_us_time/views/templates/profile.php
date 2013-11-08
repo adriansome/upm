@@ -40,10 +40,10 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
 		if (Yii::app()->user->isLandlord()) {
                     // Display properties list if not editing an existing property
                     if (isset($id) && (int)$id) {
-                        
+
                         // check whether this property belongs to this user (landlord)
                         $property = Block::model()->findByPk($id);
-                        
+
                         if(Yii::app()->user->id != $property->getContentValue('user_id', 'string_value'))
                         {?>
         <p>You do not have permission to view this page</p>
@@ -65,18 +65,18 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
                                 )
                             ));
                             }
-                        
+
                         } else {
                         ?>
                         <h1>Welcome to Give Us Time - <?php echo $model->fullname; ?></h1>
-                                              
+
                         <div class="properties-container">
                         </div>
-                        
+
                         <div class="landlord-details">
                             <h2>Your Details</h2>
                             <div class="inner-content">
-                                <div id="address">
+                                <div class="details-row" id="address">
                                     <div class="landlord-name"><?php echo $model->fullname; ?></div>
                                     <p>
                                     <?php echo " <br/>
@@ -84,17 +84,17 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
                                         $model->address1, $model->address2 <br/>
                                         $model->area, $model->city, <br/>
                                         $model->county <br/>
-                                        $model->country. $model->postcode" ?>  
+                                        $model->country. $model->postcode" ?>
                                     </p>
                                     <a data-toggle="edit-item" data-target="profile" class="action-button edit" href="/user/profileupdate/">Edit</a>
                                 </div>
-                                <div id="email">
+                                <div class="details-row" id="email">
                                     <p>
                                         <span>Username: </span><?php echo $model->email?>
                                     </p>
                                     <a data-toggle="edit-item" data-target="profile" class="action-button edit" href="/user/profileupdateemail">Edit</a>
                                 </div>
-                                <div id="password">
+                                <div class="details-row" id="password">
                                     <p>
                                         <span>Password: </span>*****
                                     </p>
@@ -102,7 +102,7 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
                                 </div>
                             </div>
                         </div>
-                        
+
                         <br/>
                         <p>Thank you for supporting Give Us Time. Your holiday donations are very much appreciated. Please continue to support military families during their holidays by giving them their privacy.</p>
                         <?php
@@ -187,21 +187,21 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
 <?php
 }
 if (Yii::app()->user->isLandlord()) {
-    
+
     Yii::app()->clientScript->registerCssFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.css')).'/jquery.fileupload.css');
-    Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/jquery.ui.widget.js'); 
-    Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/bootstrap-modal.js'); 
-    Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/bootstrap-modalmanager.js'); 
+    Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/jquery.ui.widget.js');
+    Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/bootstrap-modal.js');
+    Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/bootstrap-modalmanager.js');
     Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/jquery.iframe-transport.js');
     Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/jquery.fileupload.js');
-    
+
     $subfolder = str_replace('landlord/', '', $_SESSION['subfolder']);
-    
+
     ?>
 
 <input type="hidden" id="subfolder" value="<?php echo $subfolder ?>" />
-    
-<?php   
+
+<?php
 }
 require_once(Yii::app()->theme->basepath.'/views/elements/footer.php');
 ?>
