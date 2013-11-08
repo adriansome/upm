@@ -86,6 +86,7 @@ $dataProvider = new CArrayDataProvider($allHolidays);
             'itemsTagName' => 'ul',
             'itemsCssClass' => 'resort-listing search-listing',
             'summaryText'=> $summaryText,
+			'emptyText' => 'No properties are available on the dates / locations you requested. Please try widening your search.',
             'template'=>'{summary} {items}',
             /*'pager'=>array(
                 'class'=>'CLinkPager',
