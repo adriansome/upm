@@ -89,7 +89,20 @@ class ManagementController extends BlockController
 					$fieldType = array_keys($content);
 					// Alter user ID value
 					$content = array($fieldType[0] => Yii::app()->user->id);
-				}
+				} else if ($fieldName == 'arrival_date') {
+                    // check it's set after today         
+                    $arrival_date = $content[$fieldType[0]];
+                    if($content[$fieldType[0]] < date('Y-m-d H:m:s'))
+                    {
+                        $contentValidates = false;
+                    }                
+				} else if ($fieldName == 'departure_date') {
+                    // check it's set after arrival
+                    if($content[$fieldType[0]] < $arrival_date)
+                    {
+                        $contentValidates = false;                        
+                    }
+                }
 				
 				$contents[$index]->attributes = $content;
 				// If any content is not valid set $contentSaved flag to false.
@@ -255,7 +268,21 @@ class ManagementController extends BlockController
 					if (isset($slugValue)) {
 						$content = $slugValue;
 					}
-				}
+				} else if ($contents[$index]->name == 'arrival_date') {
+                    // check it's set after today         
+                    $arrival_date = $content[$fieldType[0]];
+                    if($content[$fieldType[0]] < date('Y-m-d H:m:s'))
+                    {
+                        $contentSaved = false;
+                    }                
+				} else if ($contents[$index]->name == 'departure_date') {
+                    // check it's set after arrival
+                    if($content[$fieldType[0]] < $arrival_date)
+                    {
+                        $contentSaved = false;                        
+                    }
+                }
+                
 				$contents[$index]->attributes = $content;
 				// If any content cannot be saved set $contentSaved flag to false.
 				if(!$contents[$index]->save())
