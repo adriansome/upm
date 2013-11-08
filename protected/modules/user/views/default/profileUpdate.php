@@ -3,10 +3,6 @@
 /* @var $model User */
 $this->beginWidget('TbModal', array('id'=>'update-user-management', 'htmlOptions'=>array('data-keyboard'=>'false', 'data-backdrop'=>'static', 'data-locked'=>'true'))); ?>
 
-<div class="modal-header">
-    <h4>Update <?php echo $model->fullname; ?></h4>
-</div>
-
 <div class="modal-body">
 
 	<?php echo $this->renderPartial('_profile', array('model'=>$model)); ?>
@@ -31,7 +27,7 @@ $this->beginWidget('TbModal', array('id'=>'update-user-management', 'htmlOptions
         'htmlOptions'=>array(
             'data-dismiss'=>'modal',
             'data-target'=>'user-list',
-            'class'=>'save list',
+            'class'=>'save more btn btn-success',
         ),
     )); ?>
 </div>

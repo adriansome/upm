@@ -28,7 +28,7 @@ $this->beginWidget('TbModal', array('id'=>'update-user-management', 'htmlOptions
         'htmlOptions'=>array(
             'data-dismiss'=>'modal',
             'data-target'=>'user-list',
-            'class'=>'save list',
+            'class'=>'save more btn btn-success',
         ),
     )); ?>
 </div>

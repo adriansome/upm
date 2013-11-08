@@ -552,6 +552,7 @@ class DefaultController extends UserController
 
 		if(isset($_POST['User']))
 		{
+            $model->username = $model->email;
 			$model->currentPassword = $_POST['User']['currentPassword'];
 			$model->password1 = $_POST['User']['password1'];
 			$model->password2 = $_POST['User']['password2'];

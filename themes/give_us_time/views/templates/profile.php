@@ -88,7 +88,7 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
                                     </p>
                                     <a data-toggle="edit-item" data-target="profile" class="action-button edit" href="/user/profileupdate/">Edit</a>
                                 </div>
-                                <!--<div id="email">
+                                <div id="email">
                                     <p>
                                         <span>Username: </span><?php echo $model->email?>
                                     </p>
@@ -99,7 +99,7 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
                                         <span>Password: </span>*****
                                     </p>
                                     <a data-toggle="edit-item" data-target="profile" class="action-button edit" href="/user/profileupdatepassword/">Edit</a>
-                                </div>-->
+                                </div>
                             </div>
                         </div>
                         

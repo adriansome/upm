@@ -127,8 +127,9 @@ class User extends CActiveRecord
 			array('firstname, lastname, email, phone_number, date_terms_agreed', 'required', 'on' => 'register_landlord, update_profile'),
 			array('fullname, title, initial, address1, address2, area, city, county, postcode, country', 'safe'),
 			array('password1, password2', 'required', 'on'=>'register, passwordReset, updatePassword'),
-			array('password1, password2', 'required', 'on'=>'emailRevert, updateEmail, updatePassword'),
-			//array('currentPassword', 'authenticate', 'on'=>'emailRevert, updateEmail, updatePassword'),
+			array('password1, password2', 'required', 'on'=>'emailRevert'),
+			array('currentPassword', 'authenticate', 'on'=>'updatePassword'),
+			//array('currentPassword', 'authenticate', 'on'=>'emailRevert, updatePassword'),
 			array('role', 'required', 'on'=>'adminUpdate'),
 			array('email, old_email, firstname, lastname', 'length', 'max'=>140),
 			array('captcha_code', 'captcha', 'on' => 'register, register_landlord'),
@@ -256,7 +257,7 @@ class User extends CActiveRecord
 		{
 			$identity=new UserIdentity($this->username,$this->currentPassword);
 			$identity->authenticate();
-
+            
 			if($identity->errorCode===UserIdentity::ERROR_USERNAME_INVALID)
 				$this->addError('username','Username not found');
 

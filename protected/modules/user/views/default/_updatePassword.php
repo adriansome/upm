@@ -10,6 +10,7 @@
 	<?php $form=$this->beginWidget('CActiveForm', array(
 		'id'=>'password-update-form',
 		'enableAjaxValidation'=>false,
+        'htmlOptions' => array('class' => 'standard-form'),
 	)); ?>
 
 		<p class="note">Fields with <span class="required">*</span> are required.</p>

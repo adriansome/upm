@@ -22,7 +22,10 @@ Yii::app()->clientScript->registerCss('user-management-form','
  $form=$this->beginWidget('CActiveForm', array( 
     'id'=>'user-form', 
     'enableAjaxValidation'=>false, 
+     'htmlOptions' => array('class' => 'standard-form')
 )); ?> 
+
+    <h1>Update profile</h1>
   
     <p class="note">Fields with <span class="required">*</span> are required.</p> 
   
