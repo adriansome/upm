@@ -176,16 +176,22 @@ $(document).ready(function() {
         e.preventDefault();
 
         var url = $(this).attr('href');
+        var target = $(this).data('target');
 
         $.get(url, function(response)
         {
-        	$(".modal").remove();
+            $(".modal").remove();
+            
             $(response).on("show.bs.modal", function() {
-                $(this).find('.modal-header').remove();
-                var text = ($(this).find('form').attr('action').indexOf('properties') > 0) ? 'property' : 'holiday';
-                //var text = (type === 'properties') ? 'property' : 'holiday';
-                // Append text to modal
-                $(this).find('#block-form').prepend('<h1>Please edit your ' + text + ' details</h1>');
+                
+                if(target !== 'profile')
+                {
+                    $(this).find('.modal-header').remove();
+                    var text = ($(this).find('form').attr('action').indexOf('properties') > 0) ? 'property' : 'holiday';
+                    //var text = (type === 'properties') ? 'property' : 'holiday';
+                    // Append text to modal
+                    $(this).find('#block-form').prepend('<h1>Please edit your ' + text + ' details</h1>');
+                }
                 
             }).on("shown.bs.modal",function(){
                 // i think fileupload.js is adding this once it's been registered
@@ -356,7 +362,15 @@ $(document).ready(function() {
         }
         var refreshUrl = $(this).data('href');
 
-        var form = $(this).parents('#block-management').find('.modal-body form');
+        if(target == 'user-list')
+        {
+            var form = $(this).parents('#update-user-management').find('.modal-body form');
+        }
+        else
+        {
+            var form = $(this).parents('#block-management').find('.modal-body form');
+        }
+        
         $.ajax({
             type: 'POST',
             dataType: 'json',
@@ -366,8 +380,8 @@ $(document).ready(function() {
                 if (data.success)
                 {
                     updateList();
-                    // only refresh for updating property
-                    if (this.url.indexOf('list/properties') > 0) {
+                    // only refresh for updating property/profile
+                    if (this.url.indexOf('list/properties') > 0 || this.url.indexOf('user/profileupdate') > 0) {
                         window.location.reload();
                     }
                 }

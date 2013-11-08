@@ -76,17 +76,30 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
                         <div class="landlord-details">
                             <h2>Your Details</h2>
                             <div class="inner-content">
-                                <div class="landlord-name"><?php echo $model->fullname; ?></div>
-                                <p>
-                                <?php echo " <br/>
-                                    $model->phone_number <br/>
-                                    $model->email <br/>
-                                    $model->address1, $model->address2 <br/>
-                                    $model->area, $model->city, <br/>
-                                    $model->county <br/>
-                                    $model->country. $model->postcode" ?>  
-                                </p>
-                                <a data-toggle="edit-item" class="action-button edit" href="/user/management/update/id/<?php echo Yii::app()->user->id?>/">Edit</a>
+                                <div id="address">
+                                    <div class="landlord-name"><?php echo $model->fullname; ?></div>
+                                    <p>
+                                    <?php echo " <br/>
+                                        $model->phone_number <br/>
+                                        $model->address1, $model->address2 <br/>
+                                        $model->area, $model->city, <br/>
+                                        $model->county <br/>
+                                        $model->country. $model->postcode" ?>  
+                                    </p>
+                                    <a data-toggle="edit-item" data-target="profile" class="action-button edit" href="/user/profileupdate/">Edit</a>
+                                </div>
+                                <!--<div id="email">
+                                    <p>
+                                        <span>Username: </span><?php echo $model->email?>
+                                    </p>
+                                    <a data-toggle="edit-item" data-target="profile" class="action-button edit" href="/user/profileupdateemail">Edit</a>
+                                </div>
+                                <div id="password">
+                                    <p>
+                                        <span>Password: </span>*****
+                                    </p>
+                                    <a data-toggle="edit-item" data-target="profile" class="action-button edit" href="/user/profileupdatepassword/">Edit</a>
+                                </div>-->
                             </div>
                         </div>
                         

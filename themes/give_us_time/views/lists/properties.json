@@ -165,14 +165,6 @@
 				"maxlength" : 300
 			}
         },
-                
-        "departure_date":
-        {
-            
-            "type": "date",
-            "format": "d/m/Y",
-            "label": "When is this property available?"
-        },
 
         "user_id":
         {
