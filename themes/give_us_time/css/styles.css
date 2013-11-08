@@ -1471,6 +1471,10 @@ form .back {
 	list-style-type: none;
 }
 
+#properties.list-view {
+	padding-top: 0px;
+}
+
 .booking-listing.constrained,
 .booking-listing .constrained {
 	width: auto;
@@ -1658,8 +1662,36 @@ form .back {
 .image-column {
 	width: 465px;
 }
+
 .full-details-column {
 	width: 340px;
+}
+
+/* ----- Edit Landlord Details ----- */
+
+.details-row {
+	position: relative;
+	padding: 10px 0;
+	border-bottom: 1px solid #ddd;
+}
+
+.details-row:first-child {
+	padding-top: 0px;
+}
+
+
+.details-row:first-child .edit {
+	top: 0px;
+}
+
+.details-row p {
+	margin-bottom: 0;
+}
+
+.details-row .edit {
+	position: absolute;
+	right: 0px;
+	top: 8px;
 }
 
 /* ----- CONTACT ------------------------------------------------- */
