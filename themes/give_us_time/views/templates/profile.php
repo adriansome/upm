@@ -80,11 +80,13 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
                                     <div class="landlord-name"><?php echo $model->fullname; ?></div>
                                     <p>
                                     <?php echo " <br/>
-                                        $model->phone_number <br/>
                                         $model->address1, $model->address2 <br/>
                                         $model->area, $model->city, <br/>
                                         $model->county <br/>
-                                        $model->country. $model->postcode" ?>
+                                        $model->postcode.<br/>
+                                        $model->country<br/><br/>
+										$model->phone_number
+                                        " ?>
                                     </p>
                                     <a data-toggle="edit-item" data-target="profile" class="action-button edit" href="/user/profileupdate/">Edit</a>
                                 </div>
