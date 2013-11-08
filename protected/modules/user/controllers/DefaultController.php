@@ -128,6 +128,9 @@ class DefaultController extends UserController
 				'actions'=>array(
 					'profile',
 					'update',
+                    'profileupdate',
+                    'profileupdateemail',
+                    'profileupdatepassword',
 					'updateEmail',
 					'updatePassword',
 					'delete'
@@ -432,6 +435,77 @@ class DefaultController extends UserController
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.
+	 */
+	public function actionProfileUpdate()
+	{
+		$model=$this->loadModel();
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+        $model->scenario = 'update_profile';
+        
+		if(isset($_POST['User']))
+		{            
+			$model->attributes=$_POST['User'];
+            
+            $model->username = $model->email;
+            
+			if($model->save())
+				$response['success'] = $model->username.' has been saved.';
+			else
+				$response['error'] = $model->username.' could not be saved.';
+			
+			echo json_encode($response);
+			exit;
+		}
+
+		$this->performAjaxValidation($model);
+
+		$this->renderPartial('profileUpdate',array(
+			'model'=>$model,
+		));
+	}
+	/**
+	 * Updates a particular model.
+	 * If update is successful, the browser will be redirected to the 'view' page.
+	 * @param integer $id the ID of the model to be updated
+	 */
+	public function actionProfileUpdateEmail()
+	{
+		$this->layout='//layouts/righty';
+
+		$model=$this->loadModel();
+
+		$model->scenario = 'updateEmail';
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['User']))
+		{
+			$model->currentPassword = $_POST['User']['currentPassword'];
+			$model->old_email = $model->email;
+			$model->email = $_POST['User']['email'];
+
+			if($model->save())
+				$response['success'] = $model->username.' has been saved.';
+			else
+				$response['error'] = $model->username.' could not be saved.';
+			
+			echo json_encode($response);
+			exit;
+		}
+
+		$this->renderPartial('profileUpdateEmail',array(
+			'model'=>$model,
+		));
+	}    
+    
+
+	/**
+	 * Updates a particular model.
+	 * If update is successful, the browser will be redirected to the 'view' page.
 	 * @param integer $id the ID of the model to be updated
 	 */
 	public function actionUpdateEmail()
@@ -456,6 +530,41 @@ class DefaultController extends UserController
 		}
 
 		$this->render('updateEmail',array(
+			'model'=>$model,
+		));
+	}
+
+	/**
+	 * Updates a particular model.
+	 * If update is successful, the browser will be redirected to the 'view' page.
+	 * @param integer $id the ID of the model to be updated
+	 */
+	public function actionProfileUpdatePassword()
+	{
+		$this->layout='//layouts/righty';
+
+		$model=$this->loadModel();
+
+		$model->scenario = 'updatePassword';
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['User']))
+		{
+			$model->currentPassword = $_POST['User']['currentPassword'];
+			$model->password1 = $_POST['User']['password1'];
+			$model->password2 = $_POST['User']['password2'];
+
+			if($model->save())$response['success'] = $model->username.' password has been saved.';
+			else
+				$response['error'] = $model->username.' password could not be saved.';
+			
+			echo json_encode($response);
+			exit;
+		}
+
+		$this->renderPartial('profileUpdatePassword',array(
 			'model'=>$model,
 		));
 	}
