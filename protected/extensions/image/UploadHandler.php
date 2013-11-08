@@ -128,7 +128,7 @@ class UploadHandler
                     'max_width' => 800,
                     'max_height' => 600
                 ),
-                */
+                
                 'thumbnail' => array(
                     // Uncomment the following to use a defined directory for the thumbnails
                     // instead of a subdirectory based on the version identifier.
@@ -142,7 +142,7 @@ class UploadHandler
                     //'crop' => true,
                     'max_width' => 80,
                     'max_height' => 80
-                )
+                )*/
             )
         );
         if ($options) {
@@ -424,15 +424,16 @@ class UploadHandler
     }
 
     protected function get_unique_filename($name,
-            $type = null, $index = null, $content_range = null) {
-        while(is_dir($this->get_upload_path($name))) {
+            $type = null, $index = null, $content_range = null)
+    {
+        while (is_dir($this->get_upload_path($name))) {
             $name = $this->upcount_name($name);
         }
         // Keep an existing filename if this is part of a chunked upload:
         $uploaded_bytes = $this->fix_integer_overflow(intval($content_range[1]));
-        while(is_file($this->get_upload_path($name))) {
+        while (is_file($this->get_upload_path($name))) {
             if ($uploaded_bytes === $this->get_file_size(
-                    $this->get_upload_path($name))) {
+                            $this->get_upload_path($name))) {
                 break;
             }
             $name = $this->upcount_name($name);
@@ -447,9 +448,10 @@ class UploadHandler
         // Also remove control characters and spaces (\x00..\x20) around the filename:
         $name = trim(basename(stripslashes($name)), ".\x00..\x20");
         // Use a timestamp for empty filenames:
-        if (!$name) {
+        //if (!$name) {
+            // jocavill: always use timestamp to keep images readable for thumbnails and unique
             $name = str_replace('.', '-', microtime(true));
-        }
+        //}
         // Add missing file extension for known image types:
         if (strpos($name, '.') === false &&
             preg_match('/^image\/(gif|jpe?g|png)/', $type, $matches)) {

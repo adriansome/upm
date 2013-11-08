@@ -10,10 +10,11 @@ $this->beginWidget('TbModal', array('id' => 'upload-images', 'htmlOptions' => ar
 </style>
 <div class="modal-header">
     <a class="close" data-dismiss="modal">&times;</a>
-    <h4>Browse images</h4>
+    <h4>Your images</h4>
     <input type="hidden" value="<?php echo $index ?>" id="index" />
 </div>
 <div class="modal-body">
+    <p>You have not yet uploaded any images. Click 'Upload image' to continue.</p>
 </div>
 
 <div class="modal-footer">
@@ -22,11 +23,12 @@ $this->beginWidget('TbModal', array('id' => 'upload-images', 'htmlOptions' => ar
         <div class="progress-bar progress-bar-success"></div>
     </div>
     <p class="info">The maximum file size for uploads is 5 MB </p>
+    <p style="color:red;" id="error"></p>
     <span class="btn btn-success fileinput-button">
         <i class="glyphicon glyphicon-plus"></i>
-        <span>Select files...</span>
+        <span>Upload image</span>
         <!-- The file input field used as target for the file upload widget -->
-        <input id="fileupload" type="file" name="files[]" multiple>
+        <input id="fileupload" type="file" name="files[]">
     </span>
 </div>
 <?php
@@ -46,7 +48,10 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
         $.ajax({
             url: '/list/".$subfolder."',
             success: function(r) {
-                $('#upload-images .modal-body').html(r);
+            
+                if(r.length > 0){
+                    $('#upload-images .modal-body').html(r);
+                }
             }
         });
         
@@ -57,8 +62,9 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
     $('#fileupload').fileupload({
         url: 'upload/".$subfolder."',
         dataType: 'json',
-        done: function (e, data) {
-            updateImageList();
+        add: function(e, data){
+            $('#progress').show();
+            data.submit();
         },
         progress: function(e, data){
             var progress = parseInt(data.loaded / data.total * 100, 10);
@@ -66,7 +72,15 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
                 'width',
                 progress + '%'
             );            
-        }
+        },
+        fail: function(e, data){
+            $('#progress').hide();
+            $('#error').html('Your image could not be uploaded.');
+        },
+        done: function (e, data) {
+            updateImageList();
+            $('#progress').hide();
+        },
     });");?>
 
 <?php $this->endWidget(); ?>

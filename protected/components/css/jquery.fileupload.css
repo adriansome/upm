@@ -30,6 +30,10 @@
     float:left;
 }
 
+#upload-images #progress {
+    display :none; 
+}
+
 .progress-bar {
     float: left;
     width: 0;

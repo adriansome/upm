@@ -50,6 +50,9 @@ class ResourcesController extends Controller {
         }
     }
     
+    /* 
+     * Display modal image upload with images living in landlord's specific folder
+     */
     public function actionBrowse($index, $subfolder)
     {        
         $this->renderPartial('uploadImage',
@@ -59,8 +62,7 @@ class ResourcesController extends Controller {
                     'index' => $index),
                 false, true
 		);
-    }
- 
+    } 
     
     public function actionUpload($subfolder)
     {
