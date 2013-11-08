@@ -13,13 +13,13 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
 <div class="constrained">
 	<div id="sidebar" class="column span4"></div>
 	<section id="main-content" class="column span12">
-	
+
 	<?php if ( Yii::app()->request->getQuery('type') == 'landlord') :?>
 		<h1>Register as a donor</h1>
 	<?php else: ?>
 		<h1>Register as service personnel</h1>
 	<?php endif; ?>
-	
+
 		<div class="inner-content form-wrapper">
 		<?php
 
@@ -43,8 +43,9 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
                             </div>
                         </fieldset>
                     </form>
-                    */ ?>
+
                     <h3 class="form-heading">Register as a new user</h3>
+             	*/ ?>
 			<?php
                 }
 
