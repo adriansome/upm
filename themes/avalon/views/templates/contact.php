@@ -9,12 +9,12 @@
 	<div class="banner">
 		<div class="constrained">
 			<h1>
-			<?php
-			//echo $model->name;
-				$this->widget('SingleLineText', array(
-				'name'=>'page heading',
-				'scope'=>'page',
-			)); ?>
+				<?php
+				//echo $model->name;
+					$this->widget('SingleLineText', array(
+					'name'=>'page heading',
+					'scope'=>'page',
+				)); ?>
 			</h1>
 		</div>
 	</div>
@@ -26,9 +26,9 @@
 
 			<!-- Begin #sub-navigation -->
 			<div class="column span3" id="sub-navigation">
-			<?php $this->widget('Menu',array(
-				'id'=>'submenu'
-			)); ?><!-- submenu -->
+				<?php $this->widget('Menu',array(
+					'id'=>'submenu'
+				)); ?><!-- submenu -->
 			</div>
 			<!-- End #sub-navigation -->
 
@@ -65,36 +65,16 @@
 						<h3>Head Office</h3>
 						<div class="row">
 							<div class="column span4">
-
 								<?php $this->widget('RichText',array(
 									'name'=>'Head office contact details',
 									'scope'=>'page',
-								)); ?>	
-
-<!--
-								<h4>Telephone: </h4>
-								<p>01823 652400</p>
-
-								<h4>Email:</h4>
-								<p><a href="mailto:enquiries@somersetwildlife.org">enquiries@somersetwildlife.org</a></p>
--->
+								)); ?>
 							</div>
 							<div class="column span3">
-
 								<?php $this->widget('RichText',array(
 									'name'=>'Head office address',
 									'scope'=>'page',
-								)); ?>	
-<!--
-								<h4>Address:</h4>
-								<p>
-									Somerset Wildlife Trust<br/>
-									Tonedale Mill<br/>
-									Tonedale<br/>
-									Wellington<br/>
-									TA21 0AW
-								</p>
--->
+								)); ?>
 							</div>
 						</div>
 
@@ -104,30 +84,13 @@
 								<?php $this->widget('RichText',array(
 									'name'=>'Mendip office contact details',
 									'scope'=>'page',
-								)); ?>									
-<!--								
-								<h4>Telephone: </h4>
-								<p>01823 652400</p>
-
-								<h4>Email:</h4>
-								<p><a href="#">enquiries@somersetwildlife.org</a></p>
--->								
+								)); ?>			
 							</div>
 							<div class="column span3">
 								<?php $this->widget('RichText',array(
 									'name'=>'Mendip office address',
 									'scope'=>'page',
-								)); ?>									
-<!--								
-								<h4>Address:</h4>
-								<p>
-									Somerset Wildlife Trust<br/>
-									Callow Rock Offices<br/>
-									Shipham Road<br/>
-									Cheddar<br/>
-									BS27 3DQ
-								</p>
--->								
+								)); ?>		
 							</div>
 						</div>
 
