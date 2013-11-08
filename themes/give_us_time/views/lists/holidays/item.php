@@ -3,6 +3,15 @@
 $arrival = date_parse_from_format('d/m/Y', $data['holiday']['arrival_date']);
 $departure = date_parse_from_format('d/m/Y', $data['holiday']['departure_date']);
 
+$propertyUrl = '/properties?slug=' . $data['property']['slug']
+            . '&h=' . $data['holiday']['block_id'];
+if (isset($_POST['Search']['location']) && $_POST['Search']['location']) {
+    $propertyUrl .= '&l=' . $_POST['Search']['location'];
+}
+if (isset($_POST['Search']['holiday']) && $_POST['Search']['holiday']) {
+    $propertyUrl .= '&d=' . $_POST['Search']['holiday'];
+}
+
 ?>
 <li<?php if($data['holiday']['status'] == 'provisionally-booked') echo " class='provisionally-booked'" ?>>
         <div class="picture-frame">
@@ -10,7 +19,7 @@ $departure = date_parse_from_format('d/m/Y', $data['holiday']['departure_date'])
         <?php $img_path = Yii::app()->basePath . '/..' . $data['property']['image_1'];?>
 
         <?php if (is_file($img_path)):?>
-                <?php echo '<a href="/properties?slug='.$data['property']['slug'].'"><img src="/thumbs'.$data['property']['image_1'].'_210x150" /></a>'?>
+                <?php echo '<a href="'.$propertyUrl.'"><img src="/thumbs'.$data['property']['image_1'].'_210x150" /></a>'?>
         <?php endif?>
 
 <?php endif?>
@@ -77,15 +86,6 @@ $departure = date_parse_from_format('d/m/Y', $data['holiday']['departure_date'])
 
 						if ($facilities_inner) {
 							echo $facilities_start . $facilities_inner . $facilities_end;
-						}
-
-						$propertyUrl = '/properties?slug=' . $data['property']['slug']
-									. '&h=' . $data['holiday']['block_id'];
-						if (isset($_POST['Search']['location']) && $_POST['Search']['location']) {
-							$propertyUrl .= '&l=' . $_POST['Search']['location'];
-						}
-						if (isset($_POST['Search']['holiday']) && $_POST['Search']['holiday']) {
-							$propertyUrl .= '&d=' . $_POST['Search']['holiday'];
 						}
 
 						if ($data['holiday']['status'] == 'provisionally-booked') {
