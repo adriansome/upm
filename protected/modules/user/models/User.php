@@ -367,7 +367,7 @@ class User extends CActiveRecord
 		$validationEmail = new YiiMailMessage;
 		$validationEmail->view = 'user.views.mail.validationEmail';
 		$validationEmail->setBody(array('fullname'=>$this->fullname, 'uid'=>$this->activation_code), 'text/html');
-                $validationEmail->setSubject('Validate Email - ' . Yii::app()->name);
+        $validationEmail->setSubject('Validate Email - ' . Yii::app()->name);
 		$validationEmail->addTo($this->email);
 		$validationEmail->from = Yii::app()->params['adminEmail'];
 		return (Yii::app()->mail->send($validationEmail));
@@ -380,7 +380,7 @@ class User extends CActiveRecord
 		$credentialsEmail->view = 'user.views.mail.credentialsEmail';
 		$credentialsEmail->setBody(array('fullname'=>$this->fullname, 'username'=>$this->username, 'uid'=>$this->reset_code, 'uidExpires'=>$uidExpires), 'text/html');
 		$credentialsEmail->setSubject('Reset Password Request - ' . Yii::app()->name);
-                $credentialsEmail->addTo($this->email);
+        $credentialsEmail->addTo($this->email);
 		$credentialsEmail->from = Yii::app()->params['adminEmail'];
 		Yii::app()->mail->send($credentialsEmail);
 	}
@@ -425,6 +425,9 @@ class User extends CActiveRecord
             }
             $notification->setSubject($subject);
             $notification->addTo($this->email);
+            if (isset($params['cc'])) {
+                $notification->addCc($params['cc']);                
+            }            
             if (isset($params['from_email'])) {
                 $from = $params['from_email'];
             } else {

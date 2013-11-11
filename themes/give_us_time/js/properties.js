@@ -256,7 +256,8 @@ $(document).ready(function() {
                                     'landlord_name' : $('#landlord-params').data('name'),
                                     'landlord_email': $('#landlord-params').data('email'),
                                     'holiday_start' : holiday_start,
-                                    'holiday_end'   : holiday_end
+                                    'holiday_end'   : holiday_end,
+                                    'cc'            : 'bookings@giveustime.org.uk'
                                 }
                             },
                             type: 'post',
@@ -317,7 +318,8 @@ $(document).ready(function() {
                                     'landlord_name' : $('#landlord-params').data('name'),
                                     'landlord_email': $('#landlord-params').data('email'),
                                     'holiday_start' : holiday_start,
-                                    'holiday_end'   : holiday_end
+                                    'holiday_end'   : holiday_end,
+                                    'cc'            : 'bookings@giveustime.org.uk'
                                 }
                             },
                             type: 'post',

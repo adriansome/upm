@@ -113,7 +113,7 @@ $config = array(
 	// application-level parameters that can be accessed
 	// using Yii::app()->params['paramName']
 	'params'=>array(
-		'adminEmail'=>'mail@mattbiddle.cc',
+		'adminEmail'=>'enquiries@giveustime.org.uk',
 		'maxDepth'=>3,
         'menus'=>array(
             1=>array(
