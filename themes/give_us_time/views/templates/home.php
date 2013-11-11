@@ -110,7 +110,7 @@
 				'scope'=>'page',
 			)); ?>
 		</h1>
-		<a href="http://www.youtube.com/embed/4CVO2lRoL-Y?rel=0" class="video-trigger">
+		<a href="http://www.youtube.com/watch?v=4CVO2lRoL-Y" class="video-trigger">
 			<?php $this->widget('Image', array(
 				'name'=>'video-thumbnail',
 				'scope'=>'page',
