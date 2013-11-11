@@ -30,7 +30,7 @@ foreach ($propertyData as $property) {
     
     // Get all the holidays for this property specifically
     $holidays = $listWidget->contents->getData();
-
+    
     // Loop over the holidays and pull out content
     foreach ($holidays as $index => $holiday) {
         // Go through properties and strip out those which don't match the specified dates
@@ -39,12 +39,20 @@ foreach ($propertyData as $property) {
         if ($holiday['status'] == 'booked') {
             continue;
         }
+        
+        // Convert to database format
+        $arrivalParts = date_parse_from_format("d/m/Y", $holiday['arrival_date']);
+        $arrivalDate = implode('-', array($arrivalParts['year'], $arrivalParts['month'], $arrivalParts['day']));
+        $userDate = new DateTime($dateStart);
+        $systemDate = new DateTime($arrivalDate);
+        $today_date = new DateTime('now');
+        
+        // don't show holidays that started in the past
+        if ($systemDate < $today_date) {
+            continue;
+        }
+        
         if ($dateStart) {
-            // Convert to database format
-            $arrivalParts = date_parse_from_format("d/m/Y", $holiday['arrival_date']);
-            $arrivalDate = implode('-', array($arrivalParts['year'], $arrivalParts['month'], $arrivalParts['day']));
-            $userDate = new DateTime($dateStart);
-            $systemDate = new DateTime($arrivalDate);
             $diff = $userDate->diff($systemDate);
 
             // Make sure the holiday falls within  a week of the user's specified date
