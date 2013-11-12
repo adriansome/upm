@@ -1,7 +1,6 @@
 <?php
 // Should get this from config, but quick fix for now
-//$recipient = 'enquiries@giveustime.org.uk';
-$recipient = 'jackstowey@gmail.com';
+$recipient = 'enquiries@giveustime.org.uk';
 $errors = array();
 $success = FALSE;
 
@@ -84,7 +83,7 @@ if (isset($_POST['contact-send']) && $_POST['contact-send']) {
                     echo "<p class='success'>Your message has been sent.</p>";
                 }
                 if (!empty($errors)) {
-                    echo "<p>An error occurred while trying to send the form.</p>";
+                    echo "<p class='validation error'>An error occurred while trying to send the form.</p>";
                 }
                 ?>
 				<div class="key">
