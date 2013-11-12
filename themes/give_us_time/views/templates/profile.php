@@ -34,17 +34,33 @@ require_once(Yii::app()->theme->basepath . '/views/elements/header.php');
             ));
             ?>
         <?php } else { // soldier view...
-        }
-        ?>
+            
+            $listWidget = new ListWidget();
+            $listWidget->name = 'properties';
+            $listWidget->init();
+
+            $attributes = $listWidget->itemAttributes();
+            $locationAttributes = array('' => 'Any Location');
+            $locationAttributes += $attributes['location']['values'];
+            unset($listWidget);
+
+            Yii::app()->controller->renderPartial('webroot.themes.give_us_time.views.elements.search-bar', array(
+                'selectedLocation' => '',
+                'selectedDate' => '',
+                'locationAttributes' => $locationAttributes
+            ));
+            
+            
+        } ?>
     </div>
     <!-- End #sidebar -->
 
     <section id="main-content" class="column span12">
         <?php
         if (Yii::app()->user->isLandlord()) {
-            include '_landlordProfile.php';
+            include dirname(__FILE__).'/_landlordProfile.php';
         } else {
-            include '_soldierProfile.php';
+            include dirname(__FILE__).'/_soldierProfile.php';
         }
         ?>
     </section>
