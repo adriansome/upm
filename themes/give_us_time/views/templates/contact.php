@@ -1,6 +1,6 @@
 <?php
-// Should get this from config, but quick fix for now
-$recipient = 'enquiries@giveustime.org.uk';
+$recipient = Yii::app()->params['adminEmail'];
+
 $errors = array();
 $success = FALSE;
 
