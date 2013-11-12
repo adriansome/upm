@@ -3,6 +3,7 @@
 //$recipient = 'enquiries@giveustime.org.uk';
 $recipient = 'jackstowey@gmail.com';
 $errors = array();
+$success = FALSE;
 
 // Send the contact form
 if (isset($_POST['contact-send']) && $_POST['contact-send']) {
@@ -17,7 +18,11 @@ if (isset($_POST['contact-send']) && $_POST['contact-send']) {
             $email->setSubject('Contact Form - ' . Yii::app()->name);
             $email->addTo($recipient);
             $email->setFrom(array($_POST['email'] => $_POST['name']));
-            Yii::app()->mail->send($email);
+            if (Yii::app()->mail->send($email)) {
+                // If message sends, clear out contact form
+                unset($_POST['name'], $_POST['email'], $_POST['message']);
+                $success = TRUE;
+            }
         } else {
             if (!$_POST['name']) {
                 $errors['name'] = 'This field is required.';
@@ -74,7 +79,14 @@ if (isset($_POST['contact-send']) && $_POST['contact-send']) {
 					'name'=>'main content area',
 					'scope'=>'page',
 				)); ?>
-
+                <?php
+                if ($success) {
+                    echo "<p class='success'>Your message has been sent.</p>";
+                }
+                if (!empty($errors)) {
+                    echo "<p>An error occurred while trying to send the form.</p>";
+                }
+                ?>
 				<div class="key">
 					<p>Fields marked '<span class="required">(required)</span>' are mandatory.</p>
 				</div>
