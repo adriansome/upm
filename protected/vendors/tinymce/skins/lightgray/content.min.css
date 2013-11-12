@@ -1,1 +1,176 @@
-body{background-color:#fff;font-family:Verdana,Arial,Helvetica,sans-serif;font-size:11px;scrollbar-3dlight-color:#f0f0ee;scrollbar-arrow-color:#676662;scrollbar-base-color:#f0f0ee;scrollbar-darkshadow-color:#ddd;scrollbar-face-color:#e0e0dd;scrollbar-highlight-color:#f0f0ee;scrollbar-shadow-color:#f0f0ee;scrollbar-track-color:#f5f5f5}td,th{font-family:Verdana,Arial,Helvetica,sans-serif;font-size:11px}.mce-object{border:1px dotted #3a3a3a;background:#d5d5d5 url(img/object.gif) no-repeat center}.mce-pagebreak{cursor:default;display:block;border:0;width:100%;height:5px;border:1px dashed #666;margin-top:15px}.mce-item-anchor{cursor:default;display:inline-block;-webkit-user-select:all;-webkit-user-modify:read-only;-moz-user-select:all;-moz-user-modify:read-only;user-select:all;user-modify:read-only;width:9px!important;height:9px!important;border:1px dotted #3a3a3a;background:#d5d5d5 url(img/anchor.gif) no-repeat center}.mce-nbsp{background:#AAA}hr{cursor:default}.mce-match-marker{background:green;color:#fff}.mce-spellchecker-word{background:url(img/wline.gif) repeat-x bottom left;cursor:default}.mce-item-table,.mce-item-table td,.mce-item-table th,.mce-item-table caption{border:1px dashed #BBB}td.mce-item-selected,th.mce-item-selected{background-color:#39f!important}.mce-edit-focus{outline:1px dotted #333}
+div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+@import url("http://fonts.googleapis.com/css?family=Signika:400,700");
+
+body {
+	background-color: #fff;
+	font-family:  "Signika", Helvetica, Arial, sans-serif;
+	font-size: 11px;
+	scrollbar-3dlight-color: #f0f0ee;
+	scrollbar-arrow-color: #676662;
+	scrollbar-base-color: #f0f0ee;
+	scrollbar-darkshadow-color: #ddd;
+	scrollbar-face-color: #e0e0dd;
+	scrollbar-highlight-color: #f0f0ee;
+	scrollbar-shadow-color: #f0f0ee;
+	scrollbar-track-color: #f5f5f5;
+}
+
+.mce-object {
+	border: 1px dotted #3a3a3a;
+	background: #d5d5d5 url(img/object.gif) no-repeat center;
+}
+
+.mce-pagebreak {
+	cursor: default;
+	display: block;
+	width: 100%;
+	height: 5px;
+	border: 1px dashed #666;
+	margin-top: 15px;
+}
+
+.mce-item-anchor {
+	cursor: default;
+	display: inline-block;
+	-webkit-user-select: all;
+	-webkit-user-modify: read-only;
+	-moz-user-select: all;
+	-moz-user-modify: read-only;
+	user-select: all;
+	user-modify: read-only;
+	width: 9px!important;
+	height: 9px!important;
+	border: 1px dotted #3a3a3a;
+	background: #d5d5d5 url(img/anchor.gif) no-repeat center;
+}
+
+.mce-nbsp {
+	background: #AAA;
+}
+
+hr {
+	cursor: default;
+}
+
+.mce-match-marker {
+	background: green;
+	color: #fff;
+}
+
+.mce-spellchecker-word {
+	background: url(img/wline.gif) repeat-x bottom left;
+	cursor: default;
+}
+
+.mce-item-table,.mce-item-table td,.mce-item-table th,.mce-item-table caption {
+	border: 1px dashed #BBB;
+}
+
+td.mce-item-selected,th.mce-item-selected {
+	background-color: #39f!important;
+}
+
+.mce-edit-focus {
+	outline: 1px dotted #333;
+}
+
+h1 {
+	margin-bottom: 25px;
+	color: #909979;		
+	font-size: 25px;
+}
+
+h2 {
+	color: #295e2d;
+	font-size: 18px;
+}
+
+h3 {
+	color: #295e2d;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+p {
+	margin-bottom: 18px;
+	font-size: 12px;
+	line-height: 1.5;
+}
+
+strong {
+	font-weight: bold;
+}
+
+.button-link {
+/*	padding: 6px 30px;*/
+	padding: 7px 28px;
+	background: #f6f6f6;
+	background: -moz-linear-gradient(top,  #fefefe 0%, #eeeeee 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fefefe), color-stop(100%,#eeeeee));
+	background: -webkit-linear-gradient(top,  #fefefe 0%,#eeeeee 100%);
+	background: -o-linear-gradient(top,  #fefefe 0%,#eeeeee 100%);
+	background: -ms-linear-gradient(top,  #fefefe 0%,#eeeeee 100%);
+	background: linear-gradient(to bottom,  #fefefe 0%,#eeeeee 100%);
+	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);	
+	border: 1px solid #ddd;
+	border-radius: 5px;	
+	color: #333;
+	font-size: 13px; /* does this need to be made more specific */
+	text-decoration: none;	
+}
+
+.button-link:hover {
+	border-color: #c4c4c4;
+}
+
+.button-link:active {
+	background: #eee;
+	background: #f6f6f6;
+	background: -moz-linear-gradient(top,  #e6e6e6 0%, #f2f2f2 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e6e6e6), color-stop(100%,#f2f2f2));
+	background: -webkit-linear-gradient(top,  #e6e6e6 0%,#f2f2f2 100%);
+	background: -o-linear-gradient(top,  #e6e6e6 0%,#f2f2f2 100%);
+	background: -ms-linear-gradient(top,  #e6e6e6 0%,#f2f2f2 100%);
+	background: linear-gradient(to bottom,  #e6e6e6 0%,#f2f2f2 100%);
+	border-color: #c4c4c4;
+	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.back {
+	padding-left: 20px;
+	background: transparent url(../img/icon-prev.png) left center no-repeat;
+	color: #909979;
+	font-size: 16px;
+	text-decoration: none;
+}
+
+.more {
+	padding: 4px 54px 4px 28px;
+	background: #7c933e url(../img/icon-next.png) 89% 50% no-repeat;
+	border: none;
+	border-radius: 5px;
+	color: #fff;
+	cursor: pointer;
+	font-size: 16px;
+	text-decoration: none;
+}
