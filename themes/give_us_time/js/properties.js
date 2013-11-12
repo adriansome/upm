@@ -422,11 +422,117 @@ $(document).ready(function() {
         
         return false;
     });
+    
+    
+        
+    $('#story #fileupload').fileupload({
+        url: 'upload/source',
+        dataType: 'json',
+        add: function(e, data){
+            $('#progress').show();
+            data.submit();
+        },
+        progress: function(e, data){
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .progress-bar').css(
+                'width',
+                progress + '%'
+            );            
+        },
+        fail: function(e, data){
+            $('#progress').hide();
+            $('#error').html('Your image could not be uploaded.');
+        },
+        done: function (e, data) {
+            // get name of new file
+            var filename = '/assets/source/' + data.result.files[0].name;
+
+            var $html = $("<div class='thumbnail'></div>");
+            var $img = $("<img src='/thumbs"+filename+"_75x75' />");
+            var $remove = $("<a href='"+ data.result.files[0].deleteUrl +"' class='remove'>Remove Image</a>");
+            var $input = $("<input type='hidden' name='Content["+$('#image_index').val()+"][file_value]' value='"+filename+"' />");
+
+            $html.append($img); 
+            $html.append($remove);
+            $html.append($input);
+
+            $('.uploaded-images').append($html);
+
+            $('#progress').hide();
+        },
+    });    
+    
+    
+    tinymce.init({
+        selector: "textarea#redactor.tinymce-editor",
+        theme: "modern",
+        width: 680,
+        height: 300,
+        menubar: false,
+        statusbar: false,
+    });
+    
+    
+    $('form#story').live('submit', function(e){
+        e.preventDefault();
+
+        // check there's at least a story
+        if($('#redactor').val() === '')
+        {
+            alert('Please supply a story!');
+            return false;
+        }
+
+         $.ajax({
+             type: 'POST',
+             dataType: 'json',
+             data: $(this).serialize(),
+             url: $(this).attr('action'),
+             success: function(data) {
+                 if (data.success)
+                 {
+                     // thank you msg
+                     window.location.reload();
+                 }
+                 else
+                 {
+                     //msg
+                 }
+             }
+         });
+       
+    });
+    
+    
+    $('#story .remove').live('click', function(e){
+        e.preventDefault();
+
+        // remove image
+        /* $.ajax({
+             type: 'DELETE',
+             dataType: 'json',
+             url: $(this).attr('action'),
+             success: function(data) {
+                 if (data.success)
+                 {
+                     // thank you msg
+                     window.location.reload();
+                 }
+                 else
+                 {
+                     //msg
+                 }
+             }
+         });*/
+         
+        // remove input 
+        $(this).parent().remove();
+    });
+    
 
     // Update the list for the specified type
     function updateList()
     {
-
         var url = type + '/management';
 
         $.ajax({

@@ -35,7 +35,7 @@ class ManagementController extends BlockController
                 'roles' => array('landlord'),
             ),
             array('allow',
-                'actions' => array('update'),
+                'actions' => array('item','update'),
                 'users' => array('@'),
                 'roles' => array('user')
             ),

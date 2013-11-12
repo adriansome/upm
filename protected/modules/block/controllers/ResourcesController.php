@@ -69,9 +69,18 @@ class ResourcesController extends Controller {
         error_reporting(E_ALL | E_STRICT);
         require(Yii::getPathOfAlias('webroot') . '/protected/extensions/image/UploadHandler.php');
         
-        $options = array('upload_dir' => Yii::getPathOfAlias('webroot') . "/assets/source/landlord/$subfolder/",
-            'upload_url' => Yii::app()->getBaseUrl(true) . "/assets/source/landlord/$subfolder/",
-            );
+        if($subfolder == 'source')
+        {
+            $uploadPath = "/assets/source/";
+        }
+        else
+        {
+            $uploadPath = "/assets/source/landlord/$subfolder/";            
+        }
+        
+        $options = array('upload_dir' => Yii::getPathOfAlias('webroot') . $uploadPath,
+            'upload_url' => Yii::app()->getBaseUrl(true) . $uploadPath,
+            );        
         
         $upload_handler = new UploadHandler($options);
         

@@ -22,7 +22,7 @@ $property_url = '/properties?slug='.$property['slug'].'&h='.$data['block_id'];
 
 <li style="clear:both;">
     <a href="<?php echo $property_url;?>" class="thumbnail">
-        <img src="<?php echo $property['image_1']?>" alt="" />
+        <img src="/thumbs/<?php echo $property['image_1']?>_210x210" alt="" />
     </a>
     <div class="column">
         <h2><?php echo $property_location?></h2>

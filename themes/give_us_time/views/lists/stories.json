@@ -42,6 +42,12 @@
         {
             "type": "file",
             "label": "Full image"
+        },
+        
+        "status":
+        {
+            "type": "hidden",
+            "default": "submitted" 
         }
 	}	
 }

@@ -32,51 +32,77 @@ $this->widget('ListWidget', array(
         )
     )
 ));
+
+$listWidget = new ListWidget();
+$listWidget->name = 'stories';
+$listWidget->init();
+$attributes = $listWidget->itemAttributes();
+unset($listWidget);
+
+$keys = array_keys($attributes);
+$indexes = array(
+    'full_name' => array_search('full_name', $keys),
+    'status' => array_search('status', $keys),
+    'holiday_story' => array_search('holiday_story', $keys),
+    'full_image' => array_search('full_image', $keys),
+    'title' => array_search('title', $keys),
+    'size_of_group' => array_search('size_of_group', $keys),
+    'start_date' => array_search('start_date', $keys),
+    'end_date' => array_search('end_date', $keys),
+);
+
 ?>
 
-
-<!-- todo ...
 <h2>Your Holiday Story</h2>
 
 <div class="inner-content">
     <p>We would like you to complete a short holiday story, and upload a picture, so that we can show the people who donate holidays. It's great for them to see that they provided a break that was valued by you.</p>
 
     <p>Please tell us about your holiday, even if it is only a short summary:</p>
-    <form action="#" method="post">
+    
+    <form action="/stories/management/item" method="post" id="story">
+        <input type="hidden" name="Content[<?php echo $indexes['full_name'] ?>][string_value]" value="<?php echo $model->fullname?>" />
+        <input type="hidden" name="Content[<?php echo $indexes['status'] ?>][string_value]" value="submitted" />
+        <input type="hidden" name="Content[<?php echo $indexes['title'] ?>][string_value]" value="" />
+        <input type="hidden" name="Content[<?php echo $indexes['size_of_group'] ?>][string_value]" value="" />
+        <input type="hidden" name="Content[<?php echo $indexes['start_date'] ?>][date_value]" value="" />
+        <input type="hidden" name="Content[<?php echo $indexes['end_date'] ?>][date_value]" value="" />
+        <input type="hidden" id="image_index" value="<?php echo $indexes['full_image'] ?>" />
 
         <div class="form-row">
-            <textarea id="redactor" name="content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in diam dignissim, consectetur lectus sed, tincidunt quam. Fusce eu hendrerit tortor. Curabitur in tempor lectus. Donec non nisi vitae tortor euismod tempus id vel turpis. Nullam sed odio quam. Etiam eu dolor vel nisl auctor hendrerit. Ut eu diam pharetra ligula ultrices congue in nec nisl. Pellentesque condimentum quam ac orci luctus, non tempus mauris tincidunt. Morbi scelerisque lorem non dolor viverra blandit.</p>
-            </textarea>
+            <textarea id="redactor" name="Content[<?php echo $indexes['holiday_story'] ?>][string_value]" class="tinymce-editor"></textarea>
         </div>
 
-        <div class="form-row">
-            <h3>Add An Image</h3>
+        <div class="form-row" id="upload-images">
             
-            <input type="file" />
-
+            <span class="btn btn-success fileinput-button">
+                <i class="glyphicon glyphicon-plus"></i>
+                <span>Add An Image</span>
+                <input id="fileupload" type="file" name="files[]">
+            </span>
+            
             <div class="uploaded-images">
-                <div class="thumbnail">
-                    <img src="example-content/resort-thumbnail.jpg" alt="" />
-                    <a class="remove" title="Remove Image">Remove Image</a>
+                <div id="progress" class="progress">
+                    <div class="progress-bar progress-bar-success"></div>
                 </div>
-                <div class="thumbnail">
-                    <img src="example-content/resort-thumbnail.jpg" alt="" />
-                    <a class="remove" title="Remove Image">Remove Image</a>
-                </div>
-                <div class="thumbnail">
-                    <img src="example-content/resort-thumbnail.jpg" alt="" />
-                    <a class="remove" title="Remove Image">Remove Image</a>
-                </div>
+                <span id="error" class="error"></span>
             </div>
         </div>
 
         <p>Your holiday story will be reviewed by Give Us Time. We will publish your story to our website shortly. </p>
         <div class="form-row">
-            <label>Please tick this box to agree that you are happy to have your story published on our public website: <input type="checkbox" /></label>
+            <label>Please tick this box to agree that you are happy to have your story published on our public website: <input required type="checkbox" /></label>
         </div>
         <div class="form-row button-row">
             <input type="submit" value="Save" />
         </div>
     </form>
-</div>-->
+</div>
+<?php 
+
+Yii::app()->clientScript->registerCssFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.css')) . '/jquery.fileupload.css');
+Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/jquery.ui.widget.js'); 
+Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/jquery.ui.widget.js');
+Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/jquery.iframe-transport.js');
+Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/jquery.fileupload.js');
+?>
