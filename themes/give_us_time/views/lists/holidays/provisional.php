@@ -1,7 +1,8 @@
 
 <ul class="resort-listing">
-
+    
     <?php
+    
     $this->widget('zii.widgets.CListView', array(
         'dataProvider' => $this->contents,
         'itemView' => 'provisionalItem',

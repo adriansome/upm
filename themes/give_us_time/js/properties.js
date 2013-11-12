@@ -390,6 +390,38 @@ $(document).ready(function() {
             }
         });        
     });
+    
+    $('.provisionally-booked .cancel').live('click', function(e) {
+        e.preventDefault();
+                
+        var indexes = $('#indexes').data();
+        var status = indexes.status;
+        var bookedby = indexes.bookedby;
+        
+        // set contents values
+        var postData = {
+            'Content' : {}
+        };
+        postData['Content'][status] = {
+            'string_value': 'available'
+        };
+        postData['Content'][bookedby] = {
+            'string_value': ''
+        }; 
+                
+        // Update database
+        $.ajax({
+            url: this.href,
+            data : postData,
+            dataType: 'json',
+            type: 'post',
+            success: function(r) {
+                window.location.reload();
+            }
+        });
+        
+        return false;
+    });
 
     // Update the list for the specified type
     function updateList()

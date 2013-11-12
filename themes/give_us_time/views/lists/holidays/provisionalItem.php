@@ -6,7 +6,6 @@ $status = $data['status'];
 $no_bedrooms = intval($data['number_of_bedrooms']);
 $no_sleeps = intval($data['sleeps_number']);
 
-
 $listWidget = new ListWidget();
 $listWidget->name = 'properties';
 $listWidget->item_id = $data['property_id'];
@@ -20,9 +19,6 @@ $property_location = $attributes['location']['values'][$property['type']];
 $property_url = '/properties?slug='.$property['slug'].'&h='.$data['block_id'];
 
 ?>
-<!--<pre>
-<?php //var_dump($data);?>
-</pre>-->
 
 <li style="clear:both;">
     <a href="<?php echo $property_url;?>" class="thumbnail">
@@ -55,7 +51,8 @@ $property_url = '/properties?slug='.$property['slug'].'&h='.$data['block_id'];
         
             <div class="status provisionally-booked">
                 <span>Provisionally Booked</span>
-                <a href="#" class="action-button cancel">Cancel</a>
+                <a href="/block/management/update/id/<?php echo $data['block_id'] ?>" class="action-button cancel">Cancel</a>
+                <input type="hidden" id=""
             </div>
             <p>You are waiting for this holiday to be confirmed.</p>
         

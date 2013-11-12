@@ -1,7 +1,25 @@
+<?php
+
+$listWidget = new ListWidget();
+$listWidget->name = 'holidays';
+$listWidget->init();
+$attributes = $listWidget->itemAttributes();
+unset($listWidget);
+
+$keys = array_keys($attributes);
+$indexes = array(
+    'status' => array_search('status', $keys),
+    'booked_by' => array_search('booked_by', $keys)
+);
+
+?>
+
 <h1>Welcome <?php echo $model->title, ' ', $model->lastname ?></h1>
 
 <h2>Your Provisional Holiday Booking</h2>
-
+        
+<input type="hidden" id="indexes" data-status="<?php echo $indexes['status'] ?>"
+       data-bookedby="<?php echo $indexes['booked_by'] ?>" />
 <?php
 
 $this->widget('ListWidget', array(
@@ -11,7 +29,6 @@ $this->widget('ListWidget', array(
         'booked_by' => array(
             'field_type' => 'string_value',
             'value' => Yii::app()->user->id,
-            //'viewData'=>array('attributes'=>$attributes),
         )
     )
 ));
