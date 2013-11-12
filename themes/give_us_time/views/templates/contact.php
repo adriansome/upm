@@ -1,6 +1,7 @@
 <?php
 // Should get this from config, but quick fix for now
-$recipient = 'enquiries@giveustime.org.uk';
+//$recipient = 'enquiries@giveustime.org.uk';
+$recipient = 'jackstowey@gmail.com';
 $errors = array();
 
 // Send the contact form
