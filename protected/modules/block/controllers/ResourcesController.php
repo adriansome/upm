@@ -51,35 +51,31 @@ class ResourcesController extends Controller {
     }
     
     /* 
-     * Display modal image upload with images living in landlord's specific folder
+     * Display modal image upload with images living in $path
      */
-    public function actionBrowse($index, $subfolder)
+    public function actionBrowse($index, $path)
     {        
         $this->renderPartial('uploadImage',
                 array(
-                    'folder' => '/assets/source/landlord',
-                    'subfolder' => $subfolder,
+                    'path' => $path,
                     'index' => $index),
                 false, true
 		);
     } 
-    
-    public function actionUpload($subfolder)
+    /*
+     * $path string Path from webroot to location where file will be uploaded
+     */    
+    public function actionUpload($path)
     {
-        error_reporting(E_ALL | E_STRICT);
+        if(!is_dir(Yii::getPathOfAlias('webroot') . '/' . $path))
+        {
+            throw new CHttpException(404, 'Folder not found');
+        }
+        
         require(Yii::getPathOfAlias('webroot') . '/protected/extensions/image/UploadHandler.php');
         
-        if($subfolder == 'source')
-        {
-            $uploadPath = "/assets/source/";
-        }
-        else
-        {
-            $uploadPath = "/assets/source/landlord/$subfolder/";            
-        }
-        
-        $options = array('upload_dir' => Yii::getPathOfAlias('webroot') . $uploadPath,
-            'upload_url' => Yii::app()->getBaseUrl(true) . $uploadPath,
+        $options = array('upload_dir' => Yii::getPathOfAlias('webroot') . '/' . $path . '/',
+            'upload_url' => Yii::app()->getBaseUrl(true) . '/' . $path . '/',
             );        
         
         $upload_handler = new UploadHandler($options);
@@ -87,11 +83,17 @@ class ResourcesController extends Controller {
         //var_dump($upload_handler);
     }
     
-    public function actionList($subfolder)
-    {
-        if (is_dir(Yii::getPathOfAlias('webroot') . "/assets/source/landlord/$subfolder")) 
-        {
-            $files = scandir(Yii::getPathOfAlias('webroot') . "/assets/source/landlord/$subfolder");
+    /*
+     * Function to give <img> tags for each file found is given directory. 
+     * (This could be enhanced to provide a flat list of files, given a format perhaps)
+     * 
+     * $path string Path to where images will be iterated over for list
+     */
+    public function actionList($path)
+    {              
+        if (is_dir(Yii::getPathOfAlias('webroot') . '/' . $path)) 
+        {            
+            $files = scandir(Yii::getPathOfAlias('webroot') . '/' . $path);
 
             $size = '_100x100';
 
@@ -101,7 +103,7 @@ class ResourcesController extends Controller {
                     continue;
                 }
 
-                echo "<img id='$file' src='/thumbs//assets/source/landlord/$subfolder/$file$size' />";
+                echo "<img id='$file' src='/thumbs/$path/$file$size' />";
 
             endforeach;
         }

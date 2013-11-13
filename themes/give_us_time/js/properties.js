@@ -426,7 +426,7 @@ $(document).ready(function() {
     
         
     $('#story #fileupload').fileupload({
-        url: 'upload/source',
+        url: 'upload/assets/source',
         dataType: 'json',
         add: function(e, data){
             $('#progress').show();

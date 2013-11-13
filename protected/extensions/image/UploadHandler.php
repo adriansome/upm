@@ -450,7 +450,7 @@ class UploadHandler
         // Use a timestamp for empty filenames:
         //if (!$name) {
             // jocavill: always use timestamp to keep images readable for thumbnails and unique
-            $name = str_replace('.', '-', microtime(true));
+            $name = str_replace('.', 'a', microtime(true));
         //}
         // Add missing file extension for known image types:
         if (strpos($name, '.') === false &&

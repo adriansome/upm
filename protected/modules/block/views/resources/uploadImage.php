@@ -46,7 +46,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
      function updateImageList(){
 
         $.ajax({
-            url: '/list/".$subfolder."',
+            url: '/list/".$path."',
             success: function(r) {
             
                 if(r.length > 0){
@@ -60,7 +60,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
     updateImageList();
        
     $('#fileupload').fileupload({
-        url: 'upload/".$subfolder."',
+        url: 'upload/".$path."',
         dataType: 'json',
         add: function(e, data){
             $('#progress').show();
