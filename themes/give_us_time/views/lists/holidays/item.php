@@ -56,7 +56,7 @@ if (isset($_POST['Search']['holiday']) && $_POST['Search']['holiday']) {
 						if ($data['property']['description']) {
 							?>
 							<!--<h3>Description</h3>-->
-							<p><?php echo Yii::app()->utility->truncate_text($data['property']['description'], 450); ?></p>
+							<p><?php echo nl2br(Yii::app()->utility->truncate_text($data['property']['description'], 450)); ?></p>
 							<?php
 						}
 						?>

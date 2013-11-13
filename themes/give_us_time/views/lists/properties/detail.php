@@ -122,7 +122,7 @@ $departure = date_parse_from_format('d/m/Y', $holidayData['departure_date']);
 				if ($propertyData['description']) {
 				?>
 				<div class="property-description">
-					<p><?php echo $propertyData['description'] ?></p>
+					<p><?php echo nl2br($propertyData['description']) ?></p>
 				</div>
 				<?php
 				}
@@ -140,7 +140,7 @@ $departure = date_parse_from_format('d/m/Y', $holidayData['departure_date']);
 				?>
 				<div class="property-accessibility">
 					<h3>Accessibility Information</h3>
-					<p><?php echo $propertyData['accessibility'] ?></p>
+					<p><?php echo nl2br($propertyData['accessibility']) ?></p>
 				</div>
 				<?php
 				}
@@ -149,7 +149,7 @@ $departure = date_parse_from_format('d/m/Y', $holidayData['departure_date']);
 				?>
 				<div class="property-additional-costs">
 					<h3>Any extra costs that you could be required to pay</h3>
-					<p><?php echo $propertyData['extras'] ?></p>
+					<p><?php echo nl2br($propertyData['extras']) ?></p>
 				</div>
 				<?php
 				}

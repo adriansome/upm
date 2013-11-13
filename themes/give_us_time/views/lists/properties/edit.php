@@ -47,7 +47,7 @@ $data = $this->contents->rawData;
 			if ($data['description']) {
 			?>
 			<div class="property-description">
-				<p><?php echo $data['description'] ?></p>
+				<p><?php echo nl2br($data['description']) ?></p>
 			</div>
 			<?php
 			}
@@ -88,7 +88,7 @@ $data = $this->contents->rawData;
 			?>
 			<div class="property-accessibility">
 				<h3>Accessibility Information</h3>
-				<p><?php echo $data['accessibility'] ?></p>
+				<p><?php echo nl2br($data['accessibility']) ?></p>
 			</div>
 			<?php
 			}
@@ -97,7 +97,7 @@ $data = $this->contents->rawData;
 			?>
 			<div class="property-additional-costs">
 				<h3>Any extra costs that you could be required to pay</h3>
-				<p><?php echo $data['extras'] ?></p>
+				<p><?php echo nl2br($data['extras']) ?></p>
 			</div>
 			<?php
 			}

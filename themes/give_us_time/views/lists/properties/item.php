@@ -31,7 +31,7 @@
                 <p><?php echo $data['title'] ?></p>
 
                 <h3>Description</h3>
-                <p><?php echo $data['description'] ?></p>
+                <p><?php echo nl2br($data['description']) ?></p>
 
                 <h3>Facilities</h3>
                 <ul class="facilities">

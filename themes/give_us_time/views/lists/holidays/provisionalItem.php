@@ -45,7 +45,7 @@ $property_url = '/properties?slug='.$property['slug'].'&h='.$data['block_id'];
         <p><?php echo $property['title']?></p>
 
         <h3>Description</h3>
-        <p><?php echo $property['description']?></p>
+        <p><?php echo nl2br($property['description'])?></p>
 
         <?php if($status == 'provisionally-booked'): ?>
         
