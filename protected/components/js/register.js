@@ -159,8 +159,11 @@ function ajaxRegister() {
                     // Complete step process
                     var currentStepControl = $('.form-steps .active');
                     currentStepControl.addClass('complete').removeClass('active');
-                }
-             
+                }             
+            }
+            else
+            {
+                alert(r.error);
             }
         }
     });
