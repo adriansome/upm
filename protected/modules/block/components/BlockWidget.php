@@ -30,14 +30,19 @@ abstract class BlockWidget extends CWidget
 	}
 
 	protected function loadBlock()
-	{
+	{        
 		$params = array('name'=>$this->name, 'page_id'=>$this->page_id);
-
+        
 		if(!empty($this->scope))
 			$params = array_merge($params, array('scope'=>$this->scope));
 
-		$block = Block::model()->with('contents')->findByAttributes($params);
-		
+        // For nuggets we already have the block ID
+        if ($this->name === 'nugget') {
+            $block = Block::model()->with('contents')->findByPk($this->block_id);
+        } else {
+            $block = Block::model()->with('contents')->findByAttributes($params);
+        }
+        
 		if(!isset($block))
 			$block = $this->createBlock();
 
