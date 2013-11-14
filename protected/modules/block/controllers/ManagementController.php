@@ -464,9 +464,10 @@ class ManagementController extends BlockController
 			if (null !== $area) {
                 // Remove area to block link
                 $areaBlock = AreaBlock::model();
-                $areaBlock->block_id = $id;
-                $areaBlock->area_id = $area;
-                $areaBlock->delete();
+                $areaBlock->deleteByPk(array(
+                    'block_id' => $id,
+                    'area_id' => $area
+                ));
             }
             $response['success'] = 'This block has been deactivated.';
 		}
@@ -580,6 +581,12 @@ class ManagementController extends BlockController
             $assignedBlocks[$areaBlock->block_id] = $areaBlock;
         }
         
+        if (!empty($assignedBlocks)) {
+            $firstAssignedBlockId = reset($assignedBlocks)->block_id;
+        } else {
+            $firstAssignedBlockId = null;
+        }
+        
         // Sort items so that assigned blocks are output first
         $data = $dataProvider->getData();
         foreach ($data as $index => $block) {
@@ -591,10 +598,10 @@ class ManagementController extends BlockController
         }
         
         $sortedData = array_merge($tempData, $data);
-        
+
         if (!empty($data)) {
-            sort($data);
-            $firstUnassignedBlockId = $data[0]->id;
+            $unassignedBlock = current(array_values($data));
+            $firstUnassignedBlockId = $unassignedBlock->id;
         } else {
             $firstUnassignedBlockId = null;
         }
@@ -608,6 +615,7 @@ class ManagementController extends BlockController
 			'id'=>$areaID,
             'areaId'=>$id,
             'assignedBlocks'=>$assignedBlocks,
+            'firstAssignedBlockId' => $firstAssignedBlockId,
             'firstUnassignedBlockId' => $firstUnassignedBlockId
     	));
     }

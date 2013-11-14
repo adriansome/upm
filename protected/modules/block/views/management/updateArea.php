@@ -27,6 +27,7 @@ $this->beginWidget('TbModal', array('id'=>'area-management', 'htmlOptions'=>arra
         'viewData'=> array(
             'areaId' => $areaId,
             'assignedBlocks' => $assignedBlocks,
+            'firstAssignedBlockId' => $firstAssignedBlockId,
             'firstUnassignedBlockId' => $firstUnassignedBlockId
         ),
 		'itemView'=>'_areaItem',
