@@ -24,8 +24,7 @@ if ($assigned && $data->id === $firstAssignedBlockId) {
         'url'=>Yii::app()->createUrl('/block/management/update/id/'.$data->id),
         'htmlOptions'=>array(
             'data-toggle' => 'edit-item',
-			'data-target'=>'area-management',
-            'data-href' => '/block/management/area/'.$areaId,
+			'data-target'=>'.item-view',
         	'id'=>'edit-block-'.$data->id,
             'class'=>'edit',
         ),
