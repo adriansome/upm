@@ -543,34 +543,33 @@ class DefaultController extends UserController
 	 */
 	public function actionProfileUpdatePassword()
 	{
-		$this->layout='//layouts/righty';
+            $this->layout='//layouts/righty';
 
-		$model=$this->loadModel();
+            $model=$this->loadModel();
 
-		$model->scenario = 'updatePassword';
+            $model->scenario = 'updatePassword';
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+            if (isset($_POST['User'])) {
+                $model->username = $model->email;
+                $model->currentPassword = $_POST['User']['currentPassword'];
+                $model->password1 = $_POST['User']['password1'];
+                $model->password2 = $_POST['User']['password2'];
 
-		if(isset($_POST['User']))
-		{
-            $model->username = $model->email;
-			$model->currentPassword = $_POST['User']['currentPassword'];
-			$model->password1 = $_POST['User']['password1'];
-			$model->password2 = $_POST['User']['password2'];
+                if ($model->save()) {
+                    $response['success'] = $model->username . ' password has been saved.';
+                } else {
+                    $response['error'] = $model->username . ' password could not be saved.';
+                    $response['success'] = false;
+                }
 
-			if($model->save())$response['success'] = $model->username.' password has been saved.';
-			else
-				$response['error'] = $model->username.' password could not be saved.';
-			
-			echo json_encode($response);
-			exit;
-		}
+                echo json_encode($response);
+                exit;
+            }
 
-		$this->renderPartial('profileUpdatePassword',array(
-			'model'=>$model,
-		));
-	}
+            $this->renderPartial('profileUpdatePassword', array(
+                'model' => $model,
+            ));
+        }
 
 	/**
 	 * Updates a particular model.
