@@ -112,7 +112,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
 			<?php
 			$labels = $model->attributeLabels();
 
-			CHtml::$afterRequiredLabel = ' <span>(required)</span>';
+			CHtml::$afterRequiredLabel = ' <span>*Required</span>';
 
 			// Output fields for this step
 			foreach ($fields as $name => $properties) {
