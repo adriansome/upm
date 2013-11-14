@@ -416,6 +416,66 @@ class ManagementController extends BlockController
                         'list' => $list
 		));
 	}
+    
+    /**
+     * Activate this block
+     * If this block is a nugget, add it to the current page
+     * 
+     * @param int $id
+     *      The ID of the block to activate
+     */
+    public function actionActivate($id, $area=null)
+    {
+		if(isset($_POST['ajax']))
+		{
+			$response =array();
+            
+            // Special case for nuggets
+			if (null !== $area) {
+                // Create area to block link
+                $areaBlock = new AreaBlock();
+                $areaBlock->block_id = $id;
+                $areaBlock->area_id = $area;
+                $areaBlock->save();
+            }
+            $response['success'] = 'This block has been activated.';
+		}
+		else
+			$response['error'] = 'Invalid request';
+        
+        echo json_encode($response);
+        
+    }
+    
+    /**
+     * Deactivate this block
+     * If this block is a nugget, remove it from the current page
+     * 
+     * @param int $id
+     *      The ID of the block to activate
+     */
+    public function actionDeactivate($id, $area=null)
+    {
+		if(isset($_POST['ajax']))
+		{
+			$response =array();
+            
+            // Special case for nuggets
+			if (null !== $area) {
+                // Remove area to block link
+                $areaBlock = AreaBlock::model();
+                $areaBlock->block_id = $id;
+                $areaBlock->area_id = $area;
+                $areaBlock->delete();
+            }
+            $response['success'] = 'This block has been deactivated.';
+		}
+		else
+			$response['error'] = 'Invalid request';
+        
+        echo json_encode($response);
+        
+    }
 
 	/**
 	 * Deletes a particular model.
@@ -499,20 +559,56 @@ class ManagementController extends BlockController
     	$area = Area::model()->findByPk($id)->name;
     	$areaID = str_replace(' ', '-', $area);
 
+        // Pull out all nuggets that are set to site wide
 		$dataProvider=new CActiveDataProvider('Block', array(
 		    'criteria'=>array(
-		    	'join'=>'LEFT JOIN area_block AS a ON a.block_id = t.id',
-		        'condition'=>'a.area_id = '.$id,
+		        'condition'=>'name LIKE "%nugget%" AND `scope` = "site" AND `date_deleted` IS NULL',
 		    ),
 		    'pagination'=>array(
 		        'pageSize'=>20,
 		    ),
 		));
 
+        // Get all blocks assigned to this area
+        $areaBlocks = AreaBlock::model()->findAllByAttributes(array(
+            'area_id' => $id
+        ));
+        
+        $tempData = $assignedBlocks = array();
+        
+        foreach ($areaBlocks as $areaBlock) {
+            $assignedBlocks[$areaBlock->block_id] = $areaBlock;
+        }
+        
+        // Sort items so that assigned blocks are output first
+        $data = $dataProvider->getData();
+        foreach ($data as $index => $block) {
+            if (isset($assignedBlocks[$block->id])) {
+                $tempData[] = $block;
+                // Remove from current data array
+                unset($data[$index]);
+            }
+        }
+        
+        $sortedData = array_merge($tempData, $data);
+        
+        if (!empty($data)) {
+            sort($data);
+            $firstUnassignedBlockId = $data[0]->id;
+        } else {
+            $firstUnassignedBlockId = null;
+        }
+
+        // Put data arrays back together with assigned blocks first
+        $dataProvider->setData($sortedData);
+        
     	$this->renderPartial('updateArea',array(
     		'dataProvider'=>$dataProvider,
 			'name'=>$area,
 			'id'=>$areaID,
+            'areaId'=>$id,
+            'assignedBlocks'=>$assignedBlocks,
+            'firstUnassignedBlockId' => $firstUnassignedBlockId
     	));
     }
 
@@ -520,12 +616,13 @@ class ManagementController extends BlockController
 	{
 		$nugget = new Nugget;
 		$attributes = $nugget->attributes();
+
 		unset($nugget);
 
-		$name = 'New Nugget';
+		$name = 'nugget';
 		$scope = 'site';
 		
-		if(isset($_POST['Block']) && isset($_POST['Content']))
+		if(isset($_POST['Content']))
 			$data = $_POST;
 		else
 			$data = false;
