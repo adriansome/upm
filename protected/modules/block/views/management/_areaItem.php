@@ -10,6 +10,9 @@ if (!isset($assignedBlocks[$data->id])) {
 if (!$assigned && $data->id === $firstUnassignedBlockId) {
     echo "<h4>Nugget Library</h4>";
 }
+if ($assigned && $data->id === $firstAssignedBlockId) {
+    echo "<h4>On this page:</h4>";
+}
 ?>
 
 <div class="view">
@@ -21,7 +24,8 @@ if (!$assigned && $data->id === $firstUnassignedBlockId) {
         'url'=>Yii::app()->createUrl('/block/management/update/id/'.$data->id),
         'htmlOptions'=>array(
             'data-toggle' => 'edit-item',
-			'data-target'=>'.item-view',
+			'data-target'=>'area-management',
+            'data-href' => '/block/management/area/'.$areaId,
         	'id'=>'edit-block-'.$data->id,
             'class'=>'edit',
         ),
@@ -36,6 +40,8 @@ if (!$assigned && $data->id === $firstUnassignedBlockId) {
             'htmlOptions'=>array(
                 'id'=>'activate-block-'.$data->id,
                 'data-toggle' => 'toggle-action',
+                'data-target'=>'area-management',
+                'data-href' => '/block/management/area/'.$areaId,
                 'class'=>'activate',
             ),
         ));
@@ -48,7 +54,9 @@ if (!$assigned && $data->id === $firstUnassignedBlockId) {
             'htmlOptions'=>array(
                 'id'=>'delete-block-'.$data->id,
                 'data-toggle' => 'toggle-action',
-                'class'=>'deactivate',
+                'data-target'=>'area-management',
+                'data-href' => '/block/management/area/'.$areaId,
+                'class'=>'activate',
             ),
         )); 
     }
@@ -61,6 +69,8 @@ if (!$assigned && $data->id === $firstUnassignedBlockId) {
             'htmlOptions'=>array(
                 'data-id'=>$data->id,
                 'data-toggle' => 'delete-item',
+                'data-target'=>'area-management',
+                'data-href' => '/block/management/area/'.$areaId,
                 'class'=>'delete',
             ),
         ));
