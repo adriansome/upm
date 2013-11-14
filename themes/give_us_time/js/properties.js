@@ -381,6 +381,9 @@ $(document).ready(function() {
             success: function(data) {
                 if (data.success)
                 {
+                    if (this.url.indexOf('profileupdatepassword') > 0)
+                        alert(data.success);
+                    
                     updateList();
                     // only refresh for updating property/profile
                     if (this.url.indexOf('list/properties') > 0 || this.url.indexOf('user/profileupdate') > 0) {
