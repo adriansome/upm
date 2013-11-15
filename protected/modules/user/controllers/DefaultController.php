@@ -260,9 +260,13 @@ class DefaultController extends UserController
 
 	/**
 	 * Displays the login page
+     * 
+     * @param $page
+     *      The page of the site the login was called from
 	 */
-	public function actionLogin()
+	public function actionLogin($page='')
 	{
+
 		$model=new LoginForm;
 
 		$referer = null;
@@ -306,6 +310,7 @@ class DefaultController extends UserController
 			'model'=>$model,
 			'referer'=>$referer,
 			'email'=>$email,
+            'page'=>$page
 		));
 	}
 
