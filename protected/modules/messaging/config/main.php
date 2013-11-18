@@ -1,5 +1,6 @@
 <?php
 $module_name = basename(dirname(dirname(__FILE__)));
+
 $default_controller = 'default';
  
 return array(
@@ -23,4 +24,10 @@ return array(
             ),
         ),
     ),
+    
+    'params' => array(
+        'coreManagementActions' => array(
+            'Message Centre' => array('/messaging/management')
+        )
+    )
 );

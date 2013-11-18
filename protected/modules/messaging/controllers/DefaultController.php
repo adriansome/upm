@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Defines
+ */
 class DefaultController extends Controller
 {
 	/**

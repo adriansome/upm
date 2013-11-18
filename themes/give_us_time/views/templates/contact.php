@@ -77,8 +77,26 @@ if (isset($_POST['contact-send']) && $_POST['contact-send']) {
 				<?php $this->widget('RichText',array(
 					'name'=>'main content area',
 					'scope'=>'page',
-				)); ?>
+				));
+                ?>
+
                 <?php
+                try {
+                    $this->widget('Form', array(
+                        'name' => 'contact-form',
+                        'page_id' => $model->id,
+                        'scope' => 'page',
+                        //'view' => 'forms.templates.contact',
+                        'json' => 'forms/json/contact'
+                    ));   
+                } catch (Exception $e) {
+                    Yii::log($e->getMessage(), 'error');
+                    echo "<p class='error'>An error occurred while outputting this form</p>";
+                }
+                ?>
+
+                <?php
+                /*
                 if ($success) {
                     echo "<p class='success'>Your message has been sent.</p>";
                 }
@@ -130,7 +148,9 @@ if (isset($_POST['contact-send']) && $_POST['contact-send']) {
 						<input name="contact-send" type="submit" value="Send" />
 					</div>
 				</form>
-
+                <?php
+                 */
+                ?>
 			</div>
 		</section>
 		<!-- End #main-content -->

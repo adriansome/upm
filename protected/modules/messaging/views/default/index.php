@@ -1,7 +1,6 @@
 <?php
 /* @var $this DefaultController */
 /* @var $model ContactForm */
-
 $this->pageTitle='Contact Us';
 ?>
 

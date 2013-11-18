@@ -20,10 +20,10 @@ class MessagingModule extends CWebModule
 			return false;
 	}
 
-	public function getAssets()
+	/*public function getAssets()
 	{
 		return Yii::app()->getAssetManager()->publish(
     		Yii::getPathOfAlias('application.modules.contact.assets')
     	);
-	}
+	}*/
 }

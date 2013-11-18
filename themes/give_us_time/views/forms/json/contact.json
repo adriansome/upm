@@ -1,0 +1,43 @@
+{
+	"attributes":
+	{
+		"name": 
+		{
+			"type": "text",
+            "label": "Name",
+            "rules": {
+                "required" : true
+            }
+		},
+
+		"email": 
+		{
+			"type": "text",
+            "label": "E-mail",
+            "rules" : {
+                "required" : true,
+                "email" : true
+            }
+		},
+
+		"message":
+		{
+			"type": "textarea",
+            "label": "Message",
+            "rules": {
+                "required" : true
+            },
+            "options" : {
+                "rows": 6,
+                "cols": 20
+            }
+		},
+        
+        "submit": 
+        {
+            "type": "submit",
+            "value": "Send"
+        }
+    },    
+    "postHandler" : "submit"
+}

@@ -1,7 +1,6 @@
 <?php
 /* @var $form CActiveForm */
 /* @var $model User */
-
 if(Yii::app()->user->hasFlash('contact')):
 ?>
 

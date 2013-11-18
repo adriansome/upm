@@ -48,6 +48,7 @@ $this->beginWidget('TbModal', array('id'=>'page-management', 'htmlOptions'=>arra
         });        
     }
     sortList();
+    // Add to list of callbacks so that the sortable list continues to work after AJAX requests
     if (!document.hasOwnProperty('callbacks')) {
         document.callbacks = ['sortList'];
     } else {

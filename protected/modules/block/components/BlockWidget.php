@@ -91,6 +91,9 @@ abstract class BlockWidget extends CWidget
 		{
 			switch($definition['type'])
 			{
+                case 'text':
+                case 'textarea':
+                case 'submit':
 				case 'singleline':
 				case 'multiline':
 					$this->$attribute = htmlspecialchars($values[$attribute]->string_value);

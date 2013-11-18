@@ -4,7 +4,7 @@ class ManagementController extends Controller
 {
 	public function actionIndex()
 	{
-		$this->render('index');
+		$this->renderPartial('index');
 	}
 
 	// Uncomment the following methods and override them if needed

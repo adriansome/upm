@@ -39,7 +39,7 @@ class DefaultController extends PageController
 	 */
 	public function actionView($link, $id=null, $slug=null)
 	{
-
+        
 		if($link == 'home')
 			$link = '/';
 		
