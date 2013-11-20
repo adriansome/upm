@@ -27,69 +27,99 @@ class BlockForm
     }
     
     public function fetchFormParts()
-    {
-        //todo: replicate functionality from ManagementBlock::create() to populate array of form parts
-        
-        $this->parts[0]['label'] = '<label for="Content[0][string_value]">Title</label>';
-        $this->parts[0]['input'] = '<input size="60" maxlength="140" data-name="title" name="Content[0][string_value]" id="Content_0_string_value" type="text">';
-        
-        $this->parts[1]['label'] = '<label for="Content[1][string_value]">Location</label>';
-        $this->parts[1]['input'] = '<input size="60" maxlength="140" data-name="location" name="Content[1][string_value]" id="Content_1_string_value" type="text">';
-        
-        $this->parts[2]['label'] = '<label for="Content[2][string_value]">Name</label>';
-        $this->parts[2]['input'] = '<input size="60" maxlength="140" data-name="name" name="Content[2][string_value]" id="Content_2_string_value" type="text">';
-        
-        $this->parts[3]['label'] = '<label for="Content[3][string_value]">Caption</label>';
-        $this->parts[3]['input'] = '<input placeholder="Enter a caption" size="60" maxlength="140" data-name="caption" name="Content[3][string_value]" id="Content_3_string_value" type="text">';
-                
-        $this->parts[4]['label'] = '<label for="Content[4][string_value]">Birds</label>';
-        $this->parts[4]['input'] = '<input id="ytContent_4_boolean_value" type="hidden" value="0" name="Content[4][boolean_value]">
-            <input name="Content[4][boolean_value]" id="Content_4_boolean_value" value="1" type="checkbox">';
-        
-        $this->parts[5]['label'] = '';
-        $this->parts[5]['input'] = '';
-        
-        $this->parts[6]['label'] = '';
-        $this->parts[6]['input'] = '';
-        
-        $this->parts[7]['label'] = '';
-        $this->parts[7]['input'] = '';
-        
-        $this->parts[8]['label'] = '';
-        $this->parts[8]['input'] = '';
-        
-        $this->parts[9]['label'] = '';
-        $this->parts[9]['input'] = '';
-        
-        $this->parts[10]['label'] = '';
-        $this->parts[10]['input'] = '';
-        
-        $this->parts[11]['label'] = '';
-        $this->parts[11]['input'] = '';
-        
-        $this->parts[12]['label'] = '';
-        $this->parts[12]['input'] = '';
-        
-        $this->parts[13]['label'] = '';
-        $this->parts[13]['input'] = '';
-        
-        $this->parts[14]['label'] = '<label for="Content[14][string_value]">Photo</label>';
-        $this->parts[14]['input'] = '<span class="btn btn-success fileinput-button">
-                                        <span>Add An Image</span>
-                                        <input id="fileupload" type="file" name="files[]">
-                                    </span>
+    {     
+    	$block = new Block;
+		$block->name = $this->name;
+		$block->scope = $this->scope;
 
-                                    <div class="uploaded-images">
-                                        <div id="progress" class="progress">
-                                            <div class="progress-bar progress-bar-success"></div>
-                                        </div>
-                                        <span id="error" class="error"></span>
-                                    </div>';
+		$contents = array(); $i = 0;
+
+		foreach($this->attributes as $attribute=>$definition)
+		{
+			$contents[$i] = new Content;
+			$contents[$i]->name = $attribute;
+			$contents[$i]->block_id = $block->id;
+			$contents[$i]->type_id = ContentType::model()->findByAttributes(array('name'=>$definition['type']))->id;
+			$i++;
+		}
         
-        $this->parts[15]['label'] = '';
-        $this->parts[15]['input'] = '<input data-name="status" value="submitted" name="Content[15][string_value]" id="Content_15_string_value" type="hidden">';
-        
-        
+        $form = new CActiveForm;
+
+		foreach($contents as $index=>$content)
+		{            
+            if(isset($this->attributes[$content->name]['label']) && !empty($this->attributes[$content->name]['label']))
+            {
+                $label = $this->attributes[$content->name]['label'];
+            }
+            else
+            {
+                $label = $content->name;
+            }  
+
+			$this->parts[$content->name] = array(
+				'label'=>CHtml::label(ucfirst($label), "Content[$index][string_value]"),
+				'validation'=>$form->error($content,"[$index]string_value"),
+			);
+
+			switch ($content->type->name)
+			{
+				case 'singleline':
+					$this->parts[$content->name]['input']=$form->textField($content,"[$index]string_value",
+							array('size'=>60,'maxlength'=>140, 'data-name'=>$content->name));
+					break;
+
+				case 'multiline':
+					$this->parts[$content->name]['input']=$form->textArea($content,"[$index]string_value",array('rows' => 6, 'cols' => 50));
+					break;
+
+				case 'html':
+					$this->parts[$content->name]['input']=$form->textArea($content,"[$index]string_value",array('class'=>'tinymce-editor'));
+					break;
+
+				case 'image':
+					$this->parts[$content->name]['input']=$form->hiddenField($content, "[$index]file_value");
+					break;
+
+				case 'file':
+                    //TODO
+					/*$this->parts[$content->name]['input']=$this->renderPartial('_fileField', array(
+						'form'=>$form,
+						'index'=>$index,
+						'content'=>$content,
+					), true, true);*/
+					break;
+
+				case 'date':
+                    //TODO
+					/*$this->parts[$content->name]['input']=Yii::app()->controller->widget('zii.widgets.jui.CJuiDatePicker',array(
+                                            'model'=>$content,
+					    'attribute'=>"[$index]date_value",
+                                            'htmlOptions'=>array(
+                                                'class'=>'datepicker'
+                                            )
+					));*/
+					break;
+
+				case 'list':
+					$this->parts[$content->name]['input']=CHtml::dropDownList('Content['.$index.'][string_value]','', $this->attributes[$content->name]['values']);
+					break;
+
+				case 'boolean':
+					$this->parts[$content->name]['input']=$form->checkBox($content,"[$index]boolean_value");
+					break;
+
+				case 'hidden':
+                    $default = (isset($this->attributes[$content->name]['default'])) ? $this->attributes[$content->name]['default'] : '';
+					// Don't display a label for a hidden field
+					$this->parts[$content->name]['label'] = '';
+					$this->parts[$content->name]['input']=$form->hiddenField($content,"[$index]string_value",
+						array('data-name' => $content->name, 'value' => $default));
+					break;				
+				
+				default:
+					throw new CHttpException(500, 'Unknown content type "'.$content->type->name.'"');
+			}
+		}        
     }
 
 }

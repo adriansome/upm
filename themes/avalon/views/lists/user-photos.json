@@ -1,19 +1,20 @@
 {
     "attributes":
             {
-                "title":
+                "caption":
                         {
                             "type": "singleline"
+                        },
+                "date":
+                        {
+                            "type": "date",
+                            "label": "Date photo was taken"
                         },
                 "location":
                         {
                             "type": "singleline"
                         },
                 "name":
-                        {
-                            "type": "singleline"
-                        },
-                "caption":
                         {
                             "type": "singleline"
                         },
@@ -65,10 +66,9 @@
                         {
                             "type": "image"
                         },
-                "status":
+                "live":
                         {
-                            "type": "hidden",
-                            "default": "submitted"
+                            "type": "boolean"
                         }
 
             }
