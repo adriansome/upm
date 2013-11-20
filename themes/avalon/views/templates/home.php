@@ -78,7 +78,7 @@
 
 				<h3>Get Involved</h3>
 				<p>Taken a great photograph at Avalon Marshes? Upload it to our Photo Stream.</p>
-				<a href="#" class="view-more">Upload Photo</a>
+				<a href="upload-photo" class="view-more">Upload Photo</a>
 			</div>
 
 			<div class="photos" id="photos">
