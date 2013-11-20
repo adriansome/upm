@@ -81,6 +81,10 @@ class LoginForm extends CFormModel
 			if (Yii::app()->user->isLandlord()){
 				$_SESSION['subfolder'] = 'landlord/'.md5($this->_identity->username).'/';
 			}
+            else 
+            {
+                $_SESSION['subfolder'] = '';
+            }
 
 			return true;
 		}

@@ -35,7 +35,7 @@ class ManagementController extends BlockController
                 'roles' => array('landlord'),
             ),
             array('allow',
-                'actions' => array('update'),
+                'actions' => array('item','update'),
                 'users' => array('@'),
                 'roles' => array('user')
             ),
@@ -89,7 +89,20 @@ class ManagementController extends BlockController
 					$fieldType = array_keys($content);
 					// Alter user ID value
 					$content = array($fieldType[0] => Yii::app()->user->id);
-				}
+				} else if ($fieldName == 'arrival_date') {
+                    // check it's set after today         
+                    $arrival_date = $content[$fieldType[0]];
+                    if($content[$fieldType[0]] < date('Y-m-d H:m:s'))
+                    {
+                        $contentValidates = false;
+                    }                
+				} else if ($fieldName == 'departure_date') {
+                    // check it's set after arrival
+                    if($content[$fieldType[0]] < $arrival_date)
+                    {
+                        $contentValidates = false;                        
+                    }
+                }
 				
 				$contents[$index]->attributes = $content;
 				// If any content is not valid set $contentSaved flag to false.
@@ -161,6 +174,14 @@ class ManagementController extends BlockController
 					$fields[$content->name]['input']=$form->textArea($content,"[$index]string_value",array('class'=>'tinymce-editor'));
 					break;
 
+				case 'image':
+					$fields[$content->name]['input']=$this->renderPartial('_imageField', array(
+						'form'=>$form,
+						'index'=>$index,
+						'content'=>$content,
+					), true, true);
+					break;
+
 				case 'file':
 					$fields[$content->name]['input']=$this->renderPartial('_fileField', array(
 						'form'=>$form,
@@ -220,7 +241,7 @@ class ManagementController extends BlockController
 	{
 		if(Yii::app()->request->urlReferrer !== $this->currentUrl)
 			Yii::app()->user->setReturnUrl(Yii::app()->request->urlReferrer);
-
+                
 		$block=$this->loadModel($id);
 		$contents = $block->contents;
 
@@ -247,7 +268,21 @@ class ManagementController extends BlockController
 					if (isset($slugValue)) {
 						$content = $slugValue;
 					}
-				}
+				} else if ($contents[$index]->name == 'arrival_date') {
+                    // check it's set after today         
+                    $arrival_date = $content[$fieldType[0]];
+                    if($content[$fieldType[0]] < date('Y-m-d H:m:s'))
+                    {
+                        $contentSaved = false;
+                    }                
+				} else if ($contents[$index]->name == 'departure_date') {
+                    // check it's set after arrival
+                    if($content[$fieldType[0]] < $arrival_date)
+                    {
+                        $contentSaved = false;                        
+                    }
+                }
+                
 				$contents[$index]->attributes = $content;
 				// If any content cannot be saved set $contentSaved flag to false.
 				if(!$contents[$index]->save())
@@ -265,9 +300,20 @@ class ManagementController extends BlockController
 
 		$form = new CActiveForm;
 		$fields = array();
+        
+        if($list != '')
+        {
+            // get the attributes so we can populate any overriding labels
+            $listWidget = new ListWidget();
+            $listWidget->name = $list;
+            $listWidget->init();
+
+            $attributes = $listWidget->itemAttributes();
+            unset($listWidget);            
+        }
 
 		foreach($contents as $index=>$content)
-		{            
+		{         
             if(isset($attributes[$content->name]['label']) && !empty($attributes[$content->name]['label']))
             {
                 $label = $attributes[$content->name]['label'];
@@ -275,7 +321,7 @@ class ManagementController extends BlockController
             else
             {
                 $label = $content->name;
-            }            
+            }
             
 			$fields[$content->name] = array(
 				'label'=>CHtml::label(ucfirst($label), "Content[$index][string_value]"),
@@ -295,6 +341,14 @@ class ManagementController extends BlockController
 
 				case 'html':
 					$fields[$content->name]['input']=$form->textArea($content,"[$index]string_value",array('class'=>'tinymce-editor'));
+					break;
+
+				case 'image':
+					$fields[$content->name]['input']=$this->renderPartial('_imageField', array(
+						'form'=>$form,
+						'index'=>$index,
+						'content'=>$content,
+					), true, true);
 					break;
 
 				case 'file':
@@ -362,6 +416,67 @@ class ManagementController extends BlockController
                         'list' => $list
 		));
 	}
+    
+    /**
+     * Activate this block
+     * If this block is a nugget, add it to the current page
+     * 
+     * @param int $id
+     *      The ID of the block to activate
+     */
+    public function actionActivate($id, $area=null)
+    {
+		if(isset($_POST['ajax']))
+		{
+			$response =array();
+            
+            // Special case for nuggets
+			if (null !== $area) {
+                // Create area to block link
+                $areaBlock = new AreaBlock();
+                $areaBlock->block_id = $id;
+                $areaBlock->area_id = $area;
+                $areaBlock->save();
+            }
+            $response['success'] = 'This block has been activated.';
+		}
+		else
+			$response['error'] = 'Invalid request';
+        
+        echo json_encode($response);
+        
+    }
+    
+    /**
+     * Deactivate this block
+     * If this block is a nugget, remove it from the current page
+     * 
+     * @param int $id
+     *      The ID of the block to activate
+     */
+    public function actionDeactivate($id, $area=null)
+    {
+		if(isset($_POST['ajax']))
+		{
+			$response =array();
+            
+            // Special case for nuggets
+			if (null !== $area) {
+                // Remove area to block link
+                $areaBlock = AreaBlock::model();
+                $areaBlock->deleteByPk(array(
+                    'block_id' => $id,
+                    'area_id' => $area
+                ));
+            }
+            $response['success'] = 'This block has been deactivated.';
+		}
+		else
+			$response['error'] = 'Invalid request';
+        
+        echo json_encode($response);
+        
+    }
 
 	/**
 	 * Deletes a particular model.
@@ -445,20 +560,63 @@ class ManagementController extends BlockController
     	$area = Area::model()->findByPk($id)->name;
     	$areaID = str_replace(' ', '-', $area);
 
+        // Pull out all nuggets that are set to site wide
 		$dataProvider=new CActiveDataProvider('Block', array(
 		    'criteria'=>array(
-		    	'join'=>'LEFT JOIN area_block AS a ON a.block_id = t.id',
-		        'condition'=>'a.area_id = '.$id,
+		        'condition'=>'name LIKE "%nugget%" AND `scope` = "site" AND `date_deleted` IS NULL',
 		    ),
 		    'pagination'=>array(
 		        'pageSize'=>20,
 		    ),
 		));
 
+        // Get all blocks assigned to this area
+        $areaBlocks = AreaBlock::model()->findAllByAttributes(array(
+            'area_id' => $id
+        ));
+        
+        $tempData = $assignedBlocks = array();
+        
+        foreach ($areaBlocks as $areaBlock) {
+            $assignedBlocks[$areaBlock->block_id] = $areaBlock;
+        }
+        
+        if (!empty($assignedBlocks)) {
+            $firstAssignedBlockId = reset($assignedBlocks)->block_id;
+        } else {
+            $firstAssignedBlockId = null;
+        }
+        
+        // Sort items so that assigned blocks are output first
+        $data = $dataProvider->getData();
+        foreach ($data as $index => $block) {
+            if (isset($assignedBlocks[$block->id])) {
+                $tempData[] = $block;
+                // Remove from current data array
+                unset($data[$index]);
+            }
+        }
+        
+        $sortedData = array_merge($tempData, $data);
+
+        if (!empty($data)) {
+            $unassignedBlock = current(array_values($data));
+            $firstUnassignedBlockId = $unassignedBlock->id;
+        } else {
+            $firstUnassignedBlockId = null;
+        }
+
+        // Put data arrays back together with assigned blocks first
+        $dataProvider->setData($sortedData);
+        
     	$this->renderPartial('updateArea',array(
     		'dataProvider'=>$dataProvider,
 			'name'=>$area,
 			'id'=>$areaID,
+            'areaId'=>$id,
+            'assignedBlocks'=>$assignedBlocks,
+            'firstAssignedBlockId' => $firstAssignedBlockId,
+            'firstUnassignedBlockId' => $firstUnassignedBlockId
     	));
     }
 
@@ -466,12 +624,13 @@ class ManagementController extends BlockController
 	{
 		$nugget = new Nugget;
 		$attributes = $nugget->attributes();
+
 		unset($nugget);
 
-		$name = 'New Nugget';
+		$name = 'nugget';
 		$scope = 'site';
 		
-		if(isset($_POST['Block']) && isset($_POST['Content']))
+		if(isset($_POST['Content']))
 			$data = $_POST;
 		else
 			$data = false;

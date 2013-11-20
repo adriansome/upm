@@ -13,13 +13,18 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
 <div class="constrained">
 	<div id="sidebar" class="column span4"></div>
 	<section id="main-content" class="column span12">
-		<h1>Registration for Give Us Time</h1>
+
+	<?php if ( Yii::app()->request->getQuery('type') == 'landlord') :?>
+		<h1>Register as a donor</h1>
+	<?php else: ?>
+		<h1>Register as service personnel</h1>
+	<?php endif; ?>
 
 		<div class="inner-content form-wrapper">
 		<?php
 
                 if ( Yii::app()->request->getQuery('type') == 'landlord') {
-                ?>
+                	/*
                     <form class="standard-form" method="post" action="/login">
                         <h3>Already registered?</h3>
                         <p>Log in to Give Us Time.</p>
@@ -38,8 +43,10 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
                             </div>
                         </fieldset>
                     </form>
+
                     <h3 class="form-heading">Register as a new user</h3>
-                <?php
+             	*/ ?>
+			<?php
                 }
 
 		if (count($steps) > 1) {
@@ -105,7 +112,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
 			<?php
 			$labels = $model->attributeLabels();
 
-			CHtml::$afterRequiredLabel = ' <span>(required)</span>';
+			CHtml::$afterRequiredLabel = ' <span>*Required</span>';
 
 			// Output fields for this step
 			foreach ($fields as $name => $properties) {

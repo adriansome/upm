@@ -22,12 +22,13 @@ class NuggetArea extends CWidget
 		$params = array('name'=>$this->name, 'page_id'=>$this->page_id);
 
 		$area = Area::model()->with('blocks')->findByAttributes($params);
-		
+
 		if(!isset($area))
 			$area = $this->createArea();
-
+        
 		$this->dbID = $area->id;
 		$this->loadBlocks($area->blocks);
+
 	}
 
 	protected function createArea()
@@ -53,6 +54,7 @@ class NuggetArea extends CWidget
 			$this->blocks[] = $this->createWidget('Nugget', array(
 				'name'=>$block->name,
 				'scope'=>$block->scope,
+                'block_id'=>$block->id,
 				'isManaged'=>true,
 			));
 		}

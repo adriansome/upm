@@ -23,12 +23,14 @@
 
 		"image_title":
 		{
-			"type": "singleline"
+			"type": "singleline",
+            "label": "Image title"
 		},
 
 		"link_text":
 		{
-			"type": "singleline"
+			"type": "singleline",
+            "label": "link text"
 		},
 
 		"author":
@@ -39,7 +41,8 @@
 		"date_published":
 		{
 			"type": "date",
-			"format": "d/m/Y"
+			"format": "d/m/Y",
+            "label": "Date published"
 		}
 	}	
 }

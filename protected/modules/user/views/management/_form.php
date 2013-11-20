@@ -16,11 +16,10 @@ Yii::app()->clientScript->registerCss('user-management-form','
 	div#content span#User_role input {
 	    display: inline-block;
 	}
-');
-?>
+');?>
 
 <div class="form">
-
+    
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'user-form',
 	'enableAjaxValidation'=>false,
@@ -69,4 +68,4 @@ Yii::app()->clientScript->registerCss('user-management-form','
 
 <?php $this->endWidget(); ?>
 
-</div><!-- form -->
+</div>

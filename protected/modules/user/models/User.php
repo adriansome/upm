@@ -121,14 +121,15 @@ class User extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('personnel_type, personnel_rank, personnel_service_number, personnel_unit,
-					email, email_confirm, lastname, title, initial, phone_number, date_terms_agreed',
+					email, email_confirm, lastname, title, firstname, phone_number, date_terms_agreed',
 					'required',
 					'on'=>'register'),
-			array('firstname, lastname, email, phone_number, date_terms_agreed', 'required', 'on' => 'register_landlord'),
-			array('fullname', 'safe'),
+			array('firstname, lastname, email, phone_number, date_terms_agreed', 'required', 'on' => 'register_landlord, update_profile'),
+			array('fullname, title, initial, address1, address2, area, city, county, postcode, country', 'safe'),
 			array('password1, password2', 'required', 'on'=>'register, passwordReset, updatePassword'),
-			array('password1, password2', 'required', 'on'=>'emailRevert, updateEmail, updatePassword'),
-			//array('currentPassword', 'authenticate', 'on'=>'emailRevert, updateEmail, updatePassword'),
+			array('password1, password2', 'required', 'on'=>'emailRevert'),
+			array('currentPassword', 'authenticate', 'on'=>'updatePassword'),
+			//array('currentPassword', 'authenticate', 'on'=>'emailRevert, updatePassword'),
 			array('role', 'required', 'on'=>'adminUpdate'),
 			array('email, old_email, firstname, lastname', 'length', 'max'=>140),
 			array('captcha_code', 'captcha', 'on' => 'register, register_landlord'),
@@ -162,13 +163,13 @@ class User extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'email' => 'Your e-mail',
+			'email' => 'Your e-mail address',
 			'email_confirm' => 'Confirm e-mail address',
 			'old_email' => 'Old e-mail address',
 			'password' => 'Password',
 			'currentPassword' => 'Current Password',
-			'password1' => 'New Password',
-			'password2' => 'Confirm New Password',
+			'password1' => 'Choose a password',
+			'password2' => 'Confirm password',
 			'role' => 'role',
 			'username' => 'Username',
 			'personnel_type' => 'Your current situation',
@@ -180,7 +181,7 @@ class User extends CActiveRecord
 			'firstname' => 'Your first name',
 			'lastname' => 'Your last name',
 			'fullname' => 'Your full name',
-			'address1' => 'Address1',
+			'address1' => 'Your address',
 			'address2' => 'Address2',
 			'area' => 'Area',
 			'city' => 'City',
@@ -188,7 +189,7 @@ class User extends CActiveRecord
 			'postcode' => 'Postcode',
 			'country' => 'Country',
 			'phone_number' => 'Your telephone number',
-			'accessibility' => 'Please give details of any accessibility requirements.',
+			'accessibility' => 'Accessibility requirements',
 			'date_terms_agreed' => 'Terms and Conditions',
 			'date_updated' => 'Date Updated',
 			'date_last_login' => 'Date Last Login',
@@ -256,7 +257,7 @@ class User extends CActiveRecord
 		{
 			$identity=new UserIdentity($this->username,$this->currentPassword);
 			$identity->authenticate();
-
+            
 			if($identity->errorCode===UserIdentity::ERROR_USERNAME_INVALID)
 				$this->addError('username','Username not found');
 
@@ -366,7 +367,7 @@ class User extends CActiveRecord
 		$validationEmail = new YiiMailMessage;
 		$validationEmail->view = 'user.views.mail.validationEmail';
 		$validationEmail->setBody(array('fullname'=>$this->fullname, 'uid'=>$this->activation_code), 'text/html');
-                $validationEmail->setSubject('Validate Email - ' . Yii::app()->name);
+        $validationEmail->setSubject('Validate Email - ' . Yii::app()->name);
 		$validationEmail->addTo($this->email);
 		$validationEmail->from = Yii::app()->params['adminEmail'];
 		return (Yii::app()->mail->send($validationEmail));
@@ -379,7 +380,7 @@ class User extends CActiveRecord
 		$credentialsEmail->view = 'user.views.mail.credentialsEmail';
 		$credentialsEmail->setBody(array('fullname'=>$this->fullname, 'username'=>$this->username, 'uid'=>$this->reset_code, 'uidExpires'=>$uidExpires), 'text/html');
 		$credentialsEmail->setSubject('Reset Password Request - ' . Yii::app()->name);
-                $credentialsEmail->addTo($this->email);
+        $credentialsEmail->addTo($this->email);
 		$credentialsEmail->from = Yii::app()->params['adminEmail'];
 		Yii::app()->mail->send($credentialsEmail);
 	}
@@ -424,6 +425,9 @@ class User extends CActiveRecord
             }
             $notification->setSubject($subject);
             $notification->addTo($this->email);
+            if (isset($params['cc'])) {
+                $notification->addCc($params['cc']);                
+            }            
             if (isset($params['from_email'])) {
                 $from = $params['from_email'];
             } else {

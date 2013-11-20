@@ -59,6 +59,15 @@ $(function()
 
 				// Remove modal close button from item-header
 //				$(target+' > .item-header > .close').remove();
+                // Run any callbacks registered
+                if (document.hasOwnProperty('callbacks')) {
+                    for (i=0;i<=document.callbacks.length;i++) {
+                        var fn = window[document.callbacks[i]];
+                        if (typeof(fn) === 'function') {
+                            fn();
+                        }
+                    }
+                }
 
 				// Initiate any rich text editors in the modal.
 				initRichTextEditors();
@@ -69,7 +78,7 @@ $(function()
 
         return false;
     }
-
+    
     function flashMessage(status,content)
     {
         $('#flashMessage').removeClass().addClass('alert alert-'+status).html(content).fadeIn(function() {
@@ -289,3 +298,6 @@ $(function()
 
 });
 
+function testFunction() {
+    alert('In test function');
+}

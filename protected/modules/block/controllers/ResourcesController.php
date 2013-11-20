@@ -5,6 +5,7 @@ class ResourcesController extends Controller {
     public function actionThumbs() {
  
         $request = str_replace(DIRECTORY_SEPARATOR . 'thumbs', '', Yii::app()->request->requestUri);
+        $request = str_replace( '/thumbs', '', Yii::app()->request->requestUri);
  
         $resourcesPath = Yii::getPathOfAlias('webroot') . $request;
         $targetPath = Yii::getPathOfAlias('webroot') . str_replace('/source/','/thumbs/',$request);
@@ -48,5 +49,63 @@ class ResourcesController extends Controller {
             throw new CHttpException(400, 'Wrong params');
         }
     }
- 
+    
+    /* 
+     * Display modal image upload with images living in $path
+     */
+    public function actionBrowse($index, $path)
+    {        
+        $this->renderPartial('uploadImage',
+                array(
+                    'path' => $path,
+                    'index' => $index),
+                false, true
+		);
+    } 
+    /*
+     * $path string Path from webroot to location where file will be uploaded
+     */    
+    public function actionUpload($path)
+    {
+        if(!is_dir(Yii::getPathOfAlias('webroot') . '/' . $path))
+        {
+            throw new CHttpException(404, 'Folder not found');
+        }
+        
+        require(Yii::getPathOfAlias('webroot') . '/protected/extensions/image/UploadHandler.php');
+        
+        $options = array('upload_dir' => Yii::getPathOfAlias('webroot') . '/' . $path . '/',
+            'upload_url' => Yii::app()->getBaseUrl(true) . '/' . $path . '/',
+            );        
+        
+        $upload_handler = new UploadHandler($options);
+        
+        //var_dump($upload_handler);
+    }
+    
+    /*
+     * Function to give <img> tags for each file found is given directory. 
+     * (This could be enhanced to provide a flat list of files, given a format perhaps)
+     * 
+     * $path string Path to where images will be iterated over for list
+     */
+    public function actionList($path)
+    {              
+        if (is_dir(Yii::getPathOfAlias('webroot') . '/' . $path)) 
+        {            
+            $files = scandir(Yii::getPathOfAlias('webroot') . '/' . $path);
+
+            $size = '_100x100';
+
+            foreach ($files as $file):
+
+                if (in_array($file, array(".", "..")) || is_dir($file) || $file === 'thumbnail') {
+                    continue;
+                }
+
+                echo "<img id='$file' src='/thumbs/$path/$file$size' />";
+
+            endforeach;
+        }
+    }
 }

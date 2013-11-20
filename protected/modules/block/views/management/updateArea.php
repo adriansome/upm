@@ -20,10 +20,16 @@ $this->beginWidget('TbModal', array('id'=>'area-management', 'htmlOptions'=>arra
             'id'=>'add-root-item',
             'class'=>'add',
         ),
-    )); ?>
-
-	<?php $this->widget('zii.widgets.CListView', array(
+    )); 
+        
+    $this->widget('zii.widgets.CListView', array(
 		'dataProvider'=>$dataProvider,
+        'viewData'=> array(
+            'areaId' => $areaId,
+            'assignedBlocks' => $assignedBlocks,
+            'firstAssignedBlockId' => $firstAssignedBlockId,
+            'firstUnassignedBlockId' => $firstUnassignedBlockId
+        ),
 		'itemView'=>'_areaItem',
 		'id'=>$id.'-blocks',
 	)); ?>

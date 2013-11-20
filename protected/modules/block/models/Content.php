@@ -133,4 +133,11 @@ class Content extends CActiveRecord
 
 		return parent::beforeSave();
 	}
+    
+    public function beforeValidate()
+    {
+        //todo: add custom validation set in teh JSON files here
+        
+        return parent::beforeValidate();
+    }
 }

@@ -42,13 +42,15 @@ $(document).ready(function() {
                 "filemanager": responsiveFileManager + "plugin.min.js"
             }
         });
+        
         setTimeout(function () {
-            $(".datepicker").datepicker({
+                $(".datepicker").datepicker({
                 'dateFormat' : 'yy-mm-dd'
             });
         }, 200);
+        
     }
-
+    
     $('[data-toggle=\"modal\"]').live('click',function(e) {
         e.preventDefault();
         
@@ -64,36 +66,68 @@ $(document).ready(function() {
         }
         else
         {
-            $.get(url,function(response) {
-            	if (target !== '#filemanager') {
-                    $(".modal").remove();
-                }
-                $(response).modal({backdrop: false, modalOverflow: true});
-
-                // Make modal window draggable.
-                $(target).draggable({ handle: ".modal-header" });
-                
-                // Initiate any rich text editors in the modal.
-                initRichTextEditors();
-            }).success(function() {
-                if(target === '#filemanager')
-                {
-                    var src = $('#fm-iframe').attr('src')+'&field_id=Content_'+fileFieldID+'_file_value';
-                    $('#fm-iframe').attr('src', src);
-                }
-
-                $(target).live('hidden',function() {
-                    $(target).remove();
-                    
-                    if(target !== '#filemanager')
-                    {
-                        setTimeout(function() {
-                            flashMessage('warning','Reloading page...');
-                        }, 2500);
-                        window.location.reload(true);
+            var imagemodal = $('#upload-images'); 
+            
+            if(imagemodal.length > 0)
+            {
+                $('#upload-images').remove();
+                //$('#upload-images').modal({backdrop: true, modalOverflow: true});
+                //$('.modal-backdrop').last().remove()
+            }
+            
+                $.get(url,function(response) {
+                    if (target !== '#filemanager') {
+                        $(".modal").remove();
                     }
+                    $(response).on("hide.bs.modal", function() {
+                    })
+                    .modal({backdrop: false, modalOverflow: true});
+
+                    // Make modal window draggable.
+                    if (target !== '#filemanager') {
+                        $(target).draggable({ handle: ".modal-header" });
+                    }
+
+                    // Initiate any rich text editors in the modal.
+                    initRichTextEditors();
+                }).success(function() {
+                    if(target === '#filemanager')
+                    {
+                        if($('#fm-iframe').length > 0)
+                        {
+                            var src =$('#fm-iframe').attr('src')+'&field_id=Content_'+fileFieldID+'_file_value';
+                            $('#fm-iframe').attr('src', src);
+                        }
+
+                        $('#upload-images img').live('click', function(){
+                            $('#upload-images .modal-body img').each(function(){
+                                $(this).removeClass('selected');
+                            });
+
+                            $(this).addClass('selected');
+
+                            var id = $(this).attr('id');
+                            var subfolder = $('#subfolder').val();
+                            var index = $(this).parent().parent().find('#index').val();
+
+                            $('#Content_' + index + '_file_value').val('/assets/source/landlord/'+ subfolder + id);
+                            
+                            $('#upload-images').hide();
+                        });
+                    }
+
+                    $(target).live('hidden',function() {
+                        $(target).remove();
+
+                        if(target !== '#filemanager')
+                        {
+                            setTimeout(function() {
+                                flashMessage('warning','Reloading page...');
+                            }, 2500);
+                            window.location.reload(true);
+                        }
+                    });
                 });
-            });
         }
     });
 
@@ -110,7 +144,14 @@ $(document).ready(function() {
                 $(this).find('.modal-header').remove();
                 var text = (type === 'properties') ? 'property' : 'holiday';
                 // Append text to modal
-                $(this).find('#block-form').prepend('<h1>Please enter your ' + text + ' details</h1>');
+				if(text === 'property')
+				{
+					$(this).find('#block-form').prepend('<h1>Please tell us about the property you own');
+				}
+				else
+				{
+					$(this).find('#block-form').prepend('<h1>Please enter your ' + text + ' details</h1>');
+				}
             }).on("shown.bs.modal", function() {
                 // Only do this if we're on the holidays page
                 if (type === 'holidays') {
@@ -118,7 +159,12 @@ $(document).ready(function() {
                     if (params.hasOwnProperty('id')) {
                         $('input[data-name="property_id"]').val(params.id);
                     }
-                }                
+                }    
+                
+                // i think fileupload.js is adding this once it's been registered
+                $('.modal-scrollable').removeClass('modal-scrollable');
+                $('.modal-backdrop').attr('style','');
+                
             }).modal();
 
             initRichTextEditors();
@@ -130,15 +176,28 @@ $(document).ready(function() {
         e.preventDefault();
 
         var url = $(this).attr('href');
+        var target = $(this).data('target');
 
         $.get(url, function(response)
         {
-        	$(".modal").remove();
+            $(".modal").remove();
+            
             $(response).on("show.bs.modal", function() {
-                $(this).find('.modal-header').remove();
-                var text = (type === 'properties') ? 'property' : 'holiday';
-                // Append text to modal
-                $(this).find('#block-form').prepend('<h1>Please edit your ' + text + ' details</h1>');
+                
+                if(target !== 'profile')
+                {
+                    $(this).find('.modal-header').remove();
+                    var text = ($(this).find('form').attr('action').indexOf('properties') > 0) ? 'property' : 'holiday';
+                    //var text = (type === 'properties') ? 'property' : 'holiday';
+                    // Append text to modal
+                    $(this).find('#block-form').prepend('<h1>Please edit your ' + text + ' details</h1>');
+                }
+                
+            }).on("shown.bs.modal",function(){
+                // i think fileupload.js is adding this once it's been registered
+                $('.modal-scrollable').removeClass('modal-scrollable');
+                $('.modal-backdrop').attr('style','');
+                
             }).modal();
             initRichTextEditors();
         });
@@ -197,7 +256,8 @@ $(document).ready(function() {
                                     'landlord_name' : $('#landlord-params').data('name'),
                                     'landlord_email': $('#landlord-params').data('email'),
                                     'holiday_start' : holiday_start,
-                                    'holiday_end'   : holiday_end
+                                    'holiday_end'   : holiday_end,
+                                    'cc'            : 'bookings@giveustime.org.uk'
                                 }
                             },
                             type: 'post',
@@ -258,7 +318,8 @@ $(document).ready(function() {
                                     'landlord_name' : $('#landlord-params').data('name'),
                                     'landlord_email': $('#landlord-params').data('email'),
                                     'holiday_start' : holiday_start,
-                                    'holiday_end'   : holiday_end
+                                    'holiday_end'   : holiday_end,
+                                    'cc'            : 'bookings@giveustime.org.uk'
                                 }
                             },
                             type: 'post',
@@ -303,7 +364,15 @@ $(document).ready(function() {
         }
         var refreshUrl = $(this).data('href');
 
-        var form = $(this).parents('#block-management').find('.modal-body form');
+        if(target == 'user-list')
+        {
+            var form = $(this).parents('#update-user-management').find('.modal-body form');
+        }
+        else
+        {
+            var form = $(this).parents('#block-management').find('.modal-body form');
+        }
+        
         $.ajax({
             type: 'POST',
             dataType: 'json',
@@ -312,16 +381,161 @@ $(document).ready(function() {
             success: function(data) {
                 if (data.success)
                 {
+                    if (this.url.indexOf('profileupdatepassword') > 0)
+                        alert(data.success);
+                    
                     updateList();
+                    // only refresh for updating property/profile
+                    if (this.url.indexOf('list/properties') > 0 || this.url.indexOf('user/profileupdate') > 0) {
+                        window.location.reload();
+                    }
                 }
             }
-        });
+        });        
     });
+    
+    $('.provisionally-booked .cancel').live('click', function(e) {
+        e.preventDefault();
+                
+        var indexes = $('#indexes').data();
+        var status = indexes.status;
+        var bookedby = indexes.bookedby;
+        
+        // set contents values
+        var postData = {
+            'Content' : {}
+        };
+        postData['Content'][status] = {
+            'string_value': 'available'
+        };
+        postData['Content'][bookedby] = {
+            'string_value': ''
+        }; 
+                
+        // Update database
+        $.ajax({
+            url: this.href,
+            data : postData,
+            dataType: 'json',
+            type: 'post',
+            success: function(r) {
+                window.location.reload();
+            }
+        });
+        
+        return false;
+    });
+    
+    
+        
+    $('#story #fileupload').fileupload({
+        url: 'upload/assets/source',
+        dataType: 'json',
+        add: function(e, data){
+            $('#progress').show();
+            data.submit();
+        },
+        progress: function(e, data){
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .progress-bar').css(
+                'width',
+                progress + '%'
+            );            
+        },
+        fail: function(e, data){
+            $('#progress').hide();
+            $('#error').html('Your image could not be uploaded.');
+        },
+        done: function (e, data) {
+            // get name of new file
+            var filename = '/assets/source/' + data.result.files[0].name;
+
+            var $html = $("<div class='thumbnail'></div>");
+            var $img = $("<img src='/thumbs"+filename+"_75x75' />");
+            var $remove = $("<a href='"+ data.result.files[0].deleteUrl +"' class='remove'>Remove Image</a>");
+            var $input = $("<input type='hidden' name='Content["+$('#image_index').val()+"][file_value]' value='"+filename+"' />");
+
+            $html.append($img); 
+            $html.append($remove);
+            $html.append($input);
+
+            $('.uploaded-images').append($html);
+
+            $('#progress').hide();
+        },
+    });    
+    
+    
+    tinymce.init({
+        selector: "textarea#redactor.tinymce-editor",
+        theme: "modern",
+        width: 680,
+        height: 300,
+        menubar: false,
+        statusbar: false,
+    });
+    
+    
+    $('form#story').live('submit', function(e){
+        e.preventDefault();
+
+        // check there's at least a story
+        if($('#redactor').val() === '')
+        {
+            alert('Please supply a story!');
+            return false;
+        }
+
+         $.ajax({
+             type: 'POST',
+             dataType: 'json',
+             data: $(this).serialize(),
+             url: $(this).attr('action'),
+             success: function(data) {
+                 if (data.success)
+                 {
+                     // thank you msg
+                     window.location.reload();
+                 }
+                 else
+                 {
+                     //msg
+                 }
+             }
+         });
+       
+    });
+    
+    
+    $('#story .remove').live('click', function(e){
+        e.preventDefault();
+
+        // remove image
+        /* $.ajax({
+             type: 'DELETE',
+             dataType: 'json',
+             url: $(this).attr('action'),
+             success: function(data) {
+                 if (data.success)
+                 {
+                     // thank you msg
+                     window.location.reload();
+                 }
+                 else
+                 {
+                     //msg
+                 }
+             }
+         });*/
+         
+        // remove input 
+        $(this).parent().remove();
+    });
+    
 
     // Update the list for the specified type
     function updateList()
     {
-
         var url = type + '/management';
 
         $.ajax({

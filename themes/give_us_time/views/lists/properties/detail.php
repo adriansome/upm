@@ -115,14 +115,14 @@ $departure = date_parse_from_format('d/m/Y', $holidayData['departure_date']);
 
             </div>
             <div class="column full-details-column">
-				<h2 class="property-name"><?php echo $propertyData['title'] ?> <span class="property-type">(<?php echo $propertyData['type'] ?>)</span></h2>
-				<div class="property-location"><?php echo $propertyData['area'] ?>, <?php echo $propertyData['city'] ?>, <?php echo $propertyData['location'] ?></div>
+				<h2 class="property-name"><?php echo $propertyData['title'] ?> <span class="property-type">(<?php echo $this->attributes['type']['values'][$propertyData['type']] ?>)</span></h2>
+				<div class="property-location"><?php echo $propertyData['area'] ?>, <?php echo $propertyData['city'] ?>, <?php echo $this->attributes['location']['values'][$propertyData['location']] ?></div>
 
 				<?php
 				if ($propertyData['description']) {
 				?>
 				<div class="property-description">
-					<p><?php echo $propertyData['description'] ?></p>
+					<p><?php echo nl2br($propertyData['description']) ?></p>
 				</div>
 				<?php
 				}
@@ -136,19 +136,11 @@ $departure = date_parse_from_format('d/m/Y', $holidayData['departure_date']);
                 </ul>
 
 				<?php
-				if ($propertyData['additional_info']) {
-				?>
-				<div class="property-additional">
-					<p><?php echo $propertyData['additional_info'] ?></p>
-				</div>
-				<?php
-				}
-
 				if ($propertyData['accessibility']) {
 				?>
 				<div class="property-accessibility">
 					<h3>Accessibility Information</h3>
-					<p><?php echo $propertyData['accessibility'] ?></p>
+					<p><?php echo nl2br($propertyData['accessibility']) ?></p>
 				</div>
 				<?php
 				}
@@ -157,7 +149,7 @@ $departure = date_parse_from_format('d/m/Y', $holidayData['departure_date']);
 				?>
 				<div class="property-additional-costs">
 					<h3>Any extra costs that you could be required to pay</h3>
-					<p><?php echo $propertyData['extras'] ?></p>
+					<p><?php echo nl2br($propertyData['extras']) ?></p>
 				</div>
 				<?php
 				}
