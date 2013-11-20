@@ -7,19 +7,15 @@
                         },
                 "location":
                         {
-                            "type": "multiline"
+                            "type": "singleline"
                         },
                 "name":
                         {
                             "type": "singleline"
                         },
-                "description":
+                "caption":
                         {
-                            "type": "multiline",
-                            "rules":
-                                    {
-                                        "maxlength": 300
-                                    }
+                            "type": "singleline"
                         },
                 "tag_1":
                         {

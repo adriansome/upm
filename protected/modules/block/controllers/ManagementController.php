@@ -19,6 +19,7 @@ class ManagementController extends BlockController
 	 * @return array access control rules
 	 */
 	public function accessRules() {
+        //TODO: theme-specific rules need to be picked up from a theme config
         return array(
             array('allow',
                 'users'=>array('@'),
@@ -38,6 +39,10 @@ class ManagementController extends BlockController
                 'actions' => array('item','update'),
                 'users' => array('@'),
                 'roles' => array('user')
+            ),
+            array('allow',
+                'actions' => array('item'),
+                'users' => array('*')
             ),
             array('deny',
                 'users' => array('*'),
