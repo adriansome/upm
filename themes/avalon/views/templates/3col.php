@@ -54,11 +54,11 @@
 				)); ?>
 
 				<div class="image-nugget-wrapper">
-					<?php $this->widget('Nugget',array(
+					<?php $this->widget('PhotoNugget',array(
 						'name'=>'picture nugget',
 						'scope'=>'page',
 					)); ?>
-				</div>			
+				</div>	
 
 				<div class="checklist-nugget">
 					<h2>Wildlife Check List</h2>
