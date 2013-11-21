@@ -83,7 +83,7 @@
 
                                             <?php if(substr($field, 0, 3) == 'tag'):?>
 
-                                                <li><label><?php echo $details['label']?> <input data-filter-value=".<?php echo $details['class']?>" type="checkbox" /></label></li>
+                                        <li><label><?php echo $details['label']?> <span></span><input data-filter-value=".<?php echo $details['class']?>" type="checkbox" /></label></li>
 
                                             <?php endif; ?>
 
@@ -101,28 +101,34 @@
 
 			<div class="photos" id="photos">
                             <!--jcavi: bring in all live photos -->
-				<a data-rel="lightbox:photos" href="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/insect-full.jpg" class="insect photo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/insect-full.jpg" alt="" /></a>
-				<a data-rel="lightbox:photos" href="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/bird.jpg" class="bird photo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/bird.jpg" alt="" /></a>
-				<a data-rel="lightbox:photos" href="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/bird.jpg" class="bird photo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/bird.jpg" alt="" /></a>
-				<a data-rel="lightbox:photos" href="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/plant-full.jpg" class="plant photo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/plant-full.jpg" alt="" /></a>
-				<a data-rel="lightbox:photos" href="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/landscape-full.jpg" class="landscape photo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/landscape-full.jpg" alt="" /></a>
-				<a data-rel="lightbox:photos" href="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/bird.jpg" class="bird photo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/bird.jpg" alt="" /></a>
-				<a data-rel="lightbox:photos" href="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/bird.jpg" class="bird photo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/bird.jpg" alt="" /></a>
-				<a data-rel="lightbox:photos" href="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/landscape-full.jpg" class="landscape photo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/landscape-full.jpg" alt="" /></a>
-				<a data-rel="lightbox:photos" href="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/insect-full.jpg" class="insect photo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/insect-full.jpg" alt="" /></a>
-				<a data-rel="lightbox:photos" href="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/bird.jpg" class="bird photo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/bird.jpg" alt="" /></a>
-				<a data-rel="lightbox:photos" href="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/plant-full.jpg" class="plant photo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/plant-full.jpg" alt="" /></a>
-				<a data-rel="lightbox:photos" href="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/plant-full.jpg" class="plant photo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/plant-full.jpg" alt="" /></a>
-				<a data-rel="lightbox:photos" href="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/bird.jpg" class="bird photo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/bird.jpg" alt="" /></a>
-				<a data-rel="lightbox:photos" href="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/plant-full.jpg" class="plant photo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/plant-full.jpg" alt="" /></a>
-				<a data-rel="lightbox:photos" href="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/plant-full.jpg" class="plant photo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/plant-full.jpg" alt="" /></a>
-				<a data-rel="lightbox:photos" href="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/bird.jpg" class="bird photo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/bird.jpg" alt="" /></a>
-				<a data-rel="lightbox:photos" href="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/bird.jpg" class="bird photo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/bird.jpg" alt="" /></a>
-				<a data-rel="lightbox:photos" href="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/landscape-full.jpg" class="landscape photo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/landscape-full.jpg" alt="" /></a>
-				<a data-rel="lightbox:photos" href="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/insect-full.jpg" class="insect photo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/insect-full.jpg" alt="" /></a>
-				<a data-rel="lightbox:photos" href="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/bird.jpg" class="bird photo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/bird.jpg" alt="" /></a>
+                            <?php $listWidget = new ListWidget();
+                                $listWidget->name = 'user-photos';
+                                $listWidget->filters = array(
+                                    'live' => array(
+                                        'field_type' => 'boolean_value',
+                                        'value' => 0)
+                                );
+                                
+                                $listWidget->init();
+                                $data = $listWidget->contents->getData();
+                                
+                                foreach($data as $photo):?>
+                            
+                                    <?php $classes = array('photo'); ?>
+                            
+                                    <?php foreach($photo as $field=>$value):
+                                        
+                                            if(substr($field,0,3) == 'tag' && $value)
+                                                    $classes[] = $attributes[$field]['class'];
+                                        
+                                        endforeach; 
+                                        
+                                    ?>
+                                                        
+                                    <a data-rel="lightbox:photos" href="<?php Yii::app()->getBaseUrl(true) . $photo['photo'] ?>" class="<?php echo implode(' ', $classes)?>"><img src="<?php echo Yii::app()->getBaseUrl(true) . '/thumbs' . $photo['photo'] . '_130x130'; ?>" alt="" /></a>
+                                
+                                <?php endforeach; ?>
 			</div>
-
 		</div>
 	</section>
 	<!-- End #photo-stream -->
