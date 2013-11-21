@@ -94,11 +94,11 @@ $this->pageTitle = $model->window_title;
                         </div>
 
                     </div>
-                    <!--jcavi: todo - add this back in
+                    <!--jcavi: todo - add in capthca
                     <div class="form-column one-half">
                         <label>Captcha</label>
                         <input type="text" id="captcha" name="Content[captcha_code]" />
-                        <?php// $this->widget('CCaptcha');?>
+                        <?php $this->widget('CCaptcha');?>
                     </div>-->
                     
                     <input type="hidden" name="Content[<?php echo array_search('live', array_keys($fields->parts))?>][boolean_value]" value="0" />
