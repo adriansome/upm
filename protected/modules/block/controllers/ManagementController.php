@@ -224,11 +224,11 @@ class ManagementController extends BlockController
 		}
 
 		$this->performAjaxValidation($block);
-
+        
 		$this->renderPartial('createBlock',array(
 			'block'=>$block,
 			'fields'=>$fields,
-			'url'=>$url,
+			'url'=>$url
 		));
     }
 

@@ -1,5 +1,5 @@
 $(function()
-{
+{    
     function initRichTextEditors()
     {
         // Initiate tinyMCE for text areas.
@@ -49,7 +49,7 @@ $(function()
 //			var url = $(this).attr('href');
 //			var id = $(this).attr('id');
 //			var target = $(this).attr('data-target');
-			
+            
 			$.get(url,function(response) {
 				// Pull modal content into side panel.
 				console.log(target);
@@ -93,7 +93,7 @@ $(function()
         
         var url = $(this).attr('href');
         var target = $(this).attr('data-target');
-
+        
         if($(this).is('[data-index]'))
             var fileFieldID = $(this).attr('data-index');
 
@@ -297,7 +297,3 @@ $(function()
     $(".in-page-edit").parent().css({position: 'relative'});
 
 });
-
-function testFunction() {
-    alert('In test function');
-}

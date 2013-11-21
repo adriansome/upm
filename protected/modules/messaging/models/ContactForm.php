@@ -5,7 +5,7 @@
  * ContactForm is the data structure for keeping
  * contact form data. It is used by the 'contact' action of 'SiteController'.
  */
-class ContactForm extends CFormModel
+class ContactForm extends CActiveRecord
 {
 	public $name;
 	public $email;
@@ -39,4 +39,6 @@ class ContactForm extends CFormModel
 			'verifyCode'=>'Verification Code',
 		);
 	}
+    
+    public function action
 }

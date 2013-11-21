@@ -34,6 +34,11 @@
 		<?php Yii::app()->clientScript->registerCoreScript('jquery');?>
 		<?php Yii::app()->clientScript->registerCoreScript('jquery.ui');?>
 		<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->getModule('page')->getAssets() . '/js/nestedsortable/jquery.ui.nestedSortable.js');?>
+        
+        <?php 
+        Yii::app()->clientScript->registerCoreScript('bbq');
+        $listViewPath = Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('zii.widgets.assets')).'/listview';
+        Yii::app()->clientScript->registerScriptFile($listViewPath.'/jquery.yiilistview.js',CClientScript::POS_END); ?>
 
 		<style>
 		.in-page-edit.btn-link

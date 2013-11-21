@@ -1,5 +1,4 @@
 <?php
-$recipient = Yii::app()->params['adminEmail'];
 
 $errors = array();
 $success = FALSE;
@@ -12,16 +11,17 @@ if (isset($_POST['contact-send']) && $_POST['contact-send']) {
             if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
                 $errors['email'] = 'Please enter a valid email address.';
             }
-            $email = new YiiMailMessage;
-            $email->setBody($_POST['message'], 'text/html');
+
+            $email = new MessageCentre('contact');
+            $email->setMessage($_POST['message']);
             $email->setSubject('Contact Form - ' . Yii::app()->name);
-            $email->addTo($recipient);
             $email->setFrom(array($_POST['email'] => $_POST['name']));
-            if (Yii::app()->mail->send($email)) {
+            if ($email->send()) {
                 // If message sends, clear out contact form
                 unset($_POST['name'], $_POST['email'], $_POST['message']);
                 $success = TRUE;
             }
+            
         } else {
             if (!$_POST['name']) {
                 $errors['name'] = 'This field is required.';
@@ -81,6 +81,7 @@ if (isset($_POST['contact-send']) && $_POST['contact-send']) {
                 ?>
 
                 <?php
+                /*
                 try {
                     $this->widget('Form', array(
                         'name' => 'contact-form',
@@ -92,11 +93,10 @@ if (isset($_POST['contact-send']) && $_POST['contact-send']) {
                 } catch (Exception $e) {
                     Yii::log($e->getMessage(), 'error');
                     echo "<p class='error'>An error occurred while outputting this form</p>";
-                }
+                }*/
                 ?>
 
                 <?php
-                /*
                 if ($success) {
                     echo "<p class='success'>Your message has been sent.</p>";
                 }
@@ -148,9 +148,6 @@ if (isset($_POST['contact-send']) && $_POST['contact-send']) {
 						<input name="contact-send" type="submit" value="Send" />
 					</div>
 				</form>
-                <?php
-                 */
-                ?>
 			</div>
 		</section>
 		<!-- End #main-content -->

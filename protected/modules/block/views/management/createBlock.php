@@ -47,7 +47,8 @@ $this->beginWidget('TbModal', array('id'=>'block-management', 'htmlOptions'=>arr
             'data-dismiss'=>'modal',
             'class'=>'discard',
         ),
-    )); ?>
+    )); 
+    ?>
     
     <?php $this->widget('TbButton', array(
         'type'=>'success',

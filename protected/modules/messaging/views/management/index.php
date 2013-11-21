@@ -11,12 +11,38 @@ $this->beginWidget('TbModal', array('id'=>'message-management', 'htmlOptions'=>a
 
 <div class="modal-body">
     
-    <h3>Message Templates</h3>
+    <div class="list-view">
+        <h4>Message Templates</h4>
+
+        <?php
+        // Output templates
+        foreach ($templates as $id => $template) {
+            echo "<div class='template'>";
+            echo $template['name']; ?><a data-target=".item-view" 
+               data-toggle="edit-item" href="<?php 
+                echo Yii::app()->createUrl(Yii::app()->getModule('messaging')->id 
+                    . '/management/edit/' . $id); ?>">
+                <i class="icon-edit"></i>
+            </a>
+            <?php
+            echo "</div>";
+        }
+        ?>
+        <h4>Message List</h4>
+        <?php
+        $this->widget('zii.widgets.CListView', array(
+            'dataProvider'=>$dataProvider,
+            'itemView'=>'_listItem',
+            'id'=>'listing',
+            'htmlOptions' => array(
+                'class' => ''
+            )
+        )); 
+        ?>
+
+        
     
-	<a class="add btn btn-link" data-toggle="default-action" data-target=".item-view" href="<?php echo $this->createUrl('create'); ?>">Add Template</a>
-	<br/><br/>
-    
-    <h3>Message List</h3>
+    </div>
 
     <div class="item-view">
         <div class="item-header">
