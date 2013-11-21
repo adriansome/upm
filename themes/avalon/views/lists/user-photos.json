@@ -8,7 +8,8 @@
                 "date":
                         {
                             "type": "date",
-                            "label": "Date photo was taken"
+                            "label": "Date photo was taken",
+                            "format": "d/m/Y"
                         },
                 "location":
                         {
