@@ -7,3 +7,6 @@
 <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/styles.css" />
 
 <title><?php echo CHtml::encode($this->pageTitle); ?> | <?php echo Yii::app()->name; ?></title>
+<!--[if lte IE 8]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
