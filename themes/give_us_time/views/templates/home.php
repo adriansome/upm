@@ -120,11 +120,16 @@
 			'name'=>'message-from-liam-text',
 			'scope'=>'page',
 		)); ?>
-
-		<?php $this->widget('HyperLink', array(
-			'name'=>'message-from-liam-more-link',
-			'scope'=>'page',
-		)); ?>
+<!--
+		<?php
+		/*
+			$this->widget('HyperLink', array(
+				'name'=>'message-from-liam-more-link',
+				'scope'=>'page',
+			));
+		*/
+		?>
+-->
 	</div>
 
 </section>
