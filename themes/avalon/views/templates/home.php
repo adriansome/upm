@@ -1,9 +1,7 @@
-<?php $this->pageTitle = $model->window_title; ?>
-
-<?php $this->bodyId = 'home'; ?>
-
-<?php require_once(Yii::app()->theme->basepath.'/views/elements/header.php'); ?>
-
+<?php $this->pageTitle = $model->window_title; 
+$this->bodyId = 'home'; 
+require_once(Yii::app()->theme->basepath.'/views/elements/header.php'); 
+?>
 	<!-- Begin #slider -->
 	<div id="slider">
 
@@ -112,20 +110,18 @@
                                 $listWidget->init();
                                 $data = $listWidget->contents->getData();
                                 
-                                foreach($data as $photo):?>
-                            
-                                    <?php $classes = array('photo'); ?>
-                            
-                                    <?php foreach($photo as $field=>$value):
+                                foreach($data as $photo):
+                                    
+                                    $classes = array('photo'); 
+                                
+                                    foreach($photo as $field=>$value):
                                         
-                                            if(substr($field,0,3) == 'tag' && $value)
-                                                    $classes[] = $attributes[$field]['class'];
+                                        if(substr($field,0,3) == 'tag' && $value)
+                                            $classes[] = $attributes[$field]['class'];
                                         
-                                        endforeach; 
-                                        
-                                    ?>
+                                    endforeach;  ?>
                                                         
-                                    <a data-rel="lightbox:photos" href="<?php Yii::app()->getBaseUrl(true) . $photo['photo'] ?>" class="<?php echo implode(' ', $classes)?>"><img src="<?php echo Yii::app()->getBaseUrl(true) . '/thumbs' . $photo['photo'] . '_130x130'; ?>" alt="" /></a>
+                                    <a data-rel="lightbox:photos" href="<?php echo Yii::app()->getBaseUrl(true) . $photo['photo'] ?>" class="<?php echo implode(' ', $classes)?>"><img src="<?php echo Yii::app()->getBaseUrl(true) . '/thumbs' . $photo['photo'] . '_130x130'; ?>" alt="" /></a>
                                 
                                 <?php endforeach; ?>
 			</div>
