@@ -30,45 +30,50 @@ $this->pageTitle = $model->window_title;
 
             <p><span class="highlighted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eu nisl dui. Quisque ullamcorper tempor purus quis dapibus. Morbi scelerisque eros quis elit aliquet suscipit. Nulla venenatis dictum ipsum id fringilla. Nulla facilisi. Integer risus sapien, fringilla eu magna vel, porttitor aliquam.</span></p>
 
-            <?php $form = new BlockForm('user-photos');?>
-            <pre>
-            <?php $form->fetchFormParts();
-            //var_dump($form->parts);
+            <?php $fields = new BlockForm('user-photos');?>
+            
+            <?php $fields->fetchFormParts();
+            //var_dump($fields->parts);
             ?>
-            </pre>
             <form action="/user-photos/management/item" method="post" class="upload-form">
                 <fieldset>
                     <h2>Choose image to upload</h2>
                     
-                    <div class="form-column one-half">
-                        <?php echo $form->parts['caption']['label']; ?>
-                        <?php echo $form->parts['caption']['input']; ?>
+                    <div class="form-column one-half" id="caption">
+                        <?php echo $fields->parts['caption']['label']; ?>
+                        <?php echo $fields->parts['caption']['input']; ?>
                     </div>
-                    <div class="form-column one-half">
-                        <?php echo $form->parts['date']['label']; ?>
-                        <?php echo $form->parts['date']['input']; ?>
+                    <div class="form-column one-half" id="date">
+                        <?php echo $fields->parts['date']['label']; ?>
+                        <?php $date_index = array_search('date', array_keys($fields->parts))?>
+                        <?php $this->widget('zii.widgets.jui.CJuiDatePicker',array(
+                            'name'=>"Content[$date_index][date_value]",
+                            'options'=>array(
+                                'showAnim'=>'fold',
+                            ),
+                        ));?>
                     </div>
-                    <div class="form-column one-half">
-                        <?php echo $form->parts['location']['label']; ?>
-                        <?php echo $form->parts['location']['input']; ?>
+                    <div class="form-column one-half" id="location">
+                        <?php echo $fields->parts['location']['label']; ?>
+                        <?php echo $fields->parts['location']['input']; ?>
                     </div>
-                    <div class="form-column one-half">
-                        <?php echo $form->parts['name']['label']; ?>
-                        <?php echo $form->parts['name']['input']; ?>
+                    <div class="form-column one-half" id="name">
+                        <?php echo $fields->parts['name']['label']; ?>
+                        <?php echo $fields->parts['name']['input']; ?>
                     </div>
                     
                     <?php for($i=1;$i<=10;$i++):?>
                     
-                        <div class="form-column one-half">
-                            <?php echo $form->parts["tag_$i"]['label']; ?>
-                            <?php echo $form->parts["tag_$i"]['input']; ?>
+                        <div class="form-column one-half tag">
+                            <?php echo $fields->parts["tag_$i"]['label']; ?>
+                            <?php echo $fields->parts["tag_$i"]['input']; ?>
                         </div>
                     
                     <?php endfor;?>
                     
                     <div class="form-column one-half" id="upload-images">
-                        <?php echo $form->parts['photo']['label']; ?>
-                        <?php echo $form->parts['photo']['input']; ?>
+                        <?php echo $fields->parts['photo']['label']; ?>
+                        <?php echo $fields->parts['photo']['input']; ?>
                         <span class="btn btn-success fileinput-button">
                             <span>Add An Image</span>
                             <input id="fileupload" type="file" name="files[]">
@@ -84,11 +89,11 @@ $this->pageTitle = $model->window_title;
                     </div>
                     <div class="form-column one-half">
                         <label>Captcha</label>
-                        <input type="text" name="" />
+                        <input type="text" id="captcha" name="Content[captcha_code]" />
                         <?php $this->widget('CCaptcha');?>
                     </div>
                     
-                    <input type="hidden" name="Content[<?php echo array_search('live', array_keys($form->parts))?>][boolean_value]" value="0" />
+                    <input type="hidden" name="Content[<?php echo array_search('live', array_keys($fields->parts))?>][boolean_value]" value="0" />
 
                     <div class="form-row button-row">
                         <input type="submit" class="submit">
@@ -156,7 +161,27 @@ $this->pageTitle = $model->window_title;
         $('.submit').live('click', function(e){
             e.preventDefault();
             
-        
+            // ensure required fields are present
+            if($('#upload-images > input[type=hidden]').val() == '')
+            {
+                alert('You must supply a photo');
+                return false;
+            }
+            
+            //tags
+            if($('input:checked').length == 0) {
+                alert('You must assign at least one tag to your photo');
+                return false;
+            }
+            
+            //captcha
+            
+            if($('#captcha').val() == '')
+            {
+                alert('You must supply the captcha value');
+                return false;
+            }
+            
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
