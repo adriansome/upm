@@ -59,15 +59,24 @@ $this->pageTitle = $model->window_title;
                         <?php echo $fields->parts['name']['label']; ?>
                         <?php echo $fields->parts['name']['input']; ?>
                     </div>
+                    <?php $listWidget = new ListWidget();
+                        $listWidget->name = 'user-photos';
+                        $listWidget->init();
+                        $attributes = $listWidget->itemAttributes();
+                        unset($listWidget);?>
                     
-                    <?php for($i=1;$i<=10;$i++):?>
+                    <?php foreach($attributes as $attribute=>$data):
+                        
+                        if(substr($attribute,0,3) == 'tag'):?>
                     
-                        <div class="form-column one-half tag">
-                            <?php echo $fields->parts["tag_$i"]['label']; ?>
-                            <?php echo $fields->parts["tag_$i"]['input']; ?>
-                        </div>
-                    
-                    <?php endfor;?>
+                            <div class="form-column one-half tag">
+                                <?php echo $fields->parts[$attribute]['label']; ?>
+                                <?php echo $fields->parts[$attribute]['input']; ?>
+                            </div>
+
+                        <?php endif;
+                        
+                    endforeach;?>
                     
                     <div class="form-column one-half" id="upload-images">
                         <?php echo $fields->parts['photo']['label']; ?>
