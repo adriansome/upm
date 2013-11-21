@@ -23,7 +23,7 @@
                 </h2>
             </div>
             <div class='summary'>
-                <p><?php echo Yii::app()->utility->truncate_text($data['holiday_story'], 200); ?></p>	
+                <p><?php echo Yii::app()->utility->truncate_text($data['holiday_story'], 400); ?></p>	
                 <a class='more' href='?slug=<?php echo $data['slug']; ?>'>Read more</a>
             </div>
         </div>

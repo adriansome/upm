@@ -3,7 +3,7 @@ $data = $this->contents->rawData;
 ?>
 
 <div class="news-item">
-    
+
     <h1><?php echo $data['title']; ?></h1>
     <?php
     if (isset($data['full_image']) && !empty($data['full_image'])) {
@@ -18,5 +18,7 @@ $data = $this->contents->rawData;
     ?>
     <div class="story">
         <?php echo $data['full_story']; ?>
+
+        <a href="/news/" class="back">Back to listing</a>
     </div>
 </div>

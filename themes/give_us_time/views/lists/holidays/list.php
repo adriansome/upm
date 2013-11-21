@@ -16,6 +16,7 @@ $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$this->contents,
 	'itemView'=>'summary',
         'tagName' => 'ul',
+		'emptyText' => 'You have no holiday weeks for this property.',
 	'htmlOptions' => array(
 		'class' => 'booking-listing constrained'					   
 	),

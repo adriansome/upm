@@ -23,8 +23,8 @@
                 </h2>
             </div>
             <div class='summary'>
-                <p><?php echo Yii::app()->utility->truncate_text($data['summary'], 200); ?></p>	
-                <a class='more' href='?slug=<?php echo $data['slug']; ?>'>Read more</a>
+                <?php echo $data['full_story']; ?>
+                <?php //href attribute for 'view more' link: ?slug=<?php echo $data['slug']; ?>
             </div>
         </div>
     </div>

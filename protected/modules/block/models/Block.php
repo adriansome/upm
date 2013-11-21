@@ -127,4 +127,23 @@ class Block extends CActiveRecord
 
 		return parent::beforeSave();
 	}
+    
+    
+   public function getContentValue($contentName, $fieldValue)
+   {
+        $i = 0;
+        
+        $content = $this->contents[$i];
+
+        while($content->attributes['name'] != $contentName)
+        {
+            $content = $this->contents[++$i];
+        }
+        
+        if($content)        
+            return $content->attributes[$fieldValue];
+        else
+            // throw error?
+            return null;
+   }
 }

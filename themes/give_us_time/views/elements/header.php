@@ -22,9 +22,11 @@
 		<?php elseif(Yii::app()->user->isLandlord()): ?>
 		<div class="login">
 			<form action="/logout">
+				<div class="message">
 				<p>Welcome <?php echo Yii::app()->user->firstname
 					. ' ' . Yii::app()->user->lastname ?></p>
-				<a href="/profile" class="message">Profile</a>
+				</div>
+				<a href="/profile" class="action-button edit">Profile</a>
 				<input type="submit" value="Logout" />
 			</form>
 		</div>
@@ -34,7 +36,9 @@
 		?>
 		<div class="login">
 			<form action="/logout">
-				<p>Welcome <?php echo $fullname ?></p>
+				<div class="message">
+					<p>Welcome <?php echo $fullname ?></p>
+				</div>
 				<input type="submit" value="Logout" />
 			</form>
 		</div>
@@ -45,7 +49,7 @@
 			<a href="https://www.facebook.com/GiveUsTime" title="Find us on Facebook" class="facebook" target="_blank">Find us on Facebook</a>
 		</div>
 
-		<div class="strapline">Helping Families Adjust to Life After Combat</div>
+		<div class="strapline">Helping families adjust to life after combat</div>
 
 	</div>
 

@@ -22,7 +22,7 @@ class DefaultController extends PageController
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('view'),
+				'actions'=>array('view','captcha'),
 				'users'=>array('*'),
 			),
 			array('deny',  // deny all users
@@ -105,4 +105,16 @@ class DefaultController extends PageController
 			Yii::app()->end();
 		}
 	}
+    
+
+
+    public function actions()
+    {
+        return array(
+            'captcha' => array(
+                'class' => 'CCaptchaAction',
+                'backColor' => 0xFFFFFF,
+            ),
+        );
+    }
 }

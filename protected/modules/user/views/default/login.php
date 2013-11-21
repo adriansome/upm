@@ -2,7 +2,11 @@
 /* @var $this SiteController */
 /* @var $model LoginForm */
 /* @var $form CActiveForm  */
-$this->bodyId = 'page-login';
+if ($page) {
+    $this->bodyId = $page . '-login';
+} else {
+    $this->bodyId = 'page-login';
+}
 $this->pageTitle=Yii::app()->name . ' - Login';
 $this->breadcrumbs=array(
 	'Login',

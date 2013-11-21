@@ -13,13 +13,13 @@
 	<!-- Begin #home-upper -->
 	<section id="home-upper" class="constrained">
 		<div class="nugget" id="nugget-register">
-			<h2>Register For Time</h2>
+			<h2>Register for time</h2>
 			<p>Get verified as service personnel before searching for a holiday.</p>
 			<a href="/welcome-user/" class="more">Register</a>
 		</div>
 
 		<div class="nugget" id="nugget-search">
-			<h2>Search For Time</h2>
+			<h2>Search for time</h2>
 			<p>Registered and verified? Search for a Give Us Time holiday.</p>
 			<form id="search-form" action="/search" method="post">
 			<div class="form-row">
@@ -50,8 +50,8 @@
 		</div>
 
 		<div class="nugget" id="nugget-donate">
-			<h2>Donate Time</h2>
-			<p>Donate a holiday in your second home or timeshare to a military family.</p>
+			<h2>Donate time</h2>
+			<p>Donate some time in your holiday property to a military family.</p>
 			<a href="/welcome-timedonor/" class="more">Donate</a>
 		</div>
 	</section>
@@ -70,7 +70,7 @@
 
 	<div class="nugget-wrapper">
 		<div class="nugget">
-			<h2>Real Give Us Time Holidays</h2>
+			<h2>Real Give Us Time holidays</h2>
 			<div id="photo-slideshow">
 				<?php $this->widget('Carousel',array(
 					'name'=>'holidays-carousel',
@@ -81,7 +81,7 @@
 				)); ?>
 			</div>
 			<div class="slideshow-controls"></div>
-			<a href="#" class="button-link">View holiday stories</a>
+			<a href="/holiday-stories" class="button-link">View holiday stories</a>
 		</div>
 	</div>
 
@@ -110,7 +110,7 @@
 				'scope'=>'page',
 			)); ?>
 		</h1>
-		<a href="http://www.youtube.com/embed/4CVO2lRoL-Y?rel=0" class="video-trigger">
+		<a href="http://www.youtube.com/watch?v=4CVO2lRoL-Y" class="video-trigger">
 			<?php $this->widget('Image', array(
 				'name'=>'video-thumbnail',
 				'scope'=>'page',

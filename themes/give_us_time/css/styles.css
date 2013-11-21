@@ -382,6 +382,14 @@ nav:after,
 	/*width: 48.784722%;*/
 }
 
+.span10 {
+	width: 706px;
+}
+
+.span11 {
+	width: 778px;
+}
+
 .span12 {
 	width: 850px;
 	/*width: 73.784722%;*/
@@ -476,9 +484,13 @@ nav:after,
 }
 
 .login .message {
-	width: 300px;
+	width: 280px;
 	margin: 0 0 0 10px;
 	display: inline-block;
+}
+
+.login .message p {
+	margin-bottom: 0;
 }
 
 #page-header .social-media {
@@ -934,7 +946,7 @@ ul li.provisionally-booked,
 .status.provisionally-booked {
 	background: #ede4de;
 }
-
+/* what is this rule for? *//
 .resort-listing > li > * {
 	margin-right: 10px;
 }
@@ -947,6 +959,16 @@ ul li.provisionally-booked,
 	overflow: hidden;
 }
 
+.listing-details-wrapper {
+	float: left;
+	width: 600px;
+	margin-left: 7px;
+}
+
+.listing-details-wrapper .column:first-child {
+	margin-left: 0px;
+}
+
 .resort-listing .column {
 	width: 202px;
 }
@@ -954,6 +976,7 @@ ul li.provisionally-booked,
 .resort-listing .column:last-child,
 .resort-listing .column.last {
 	width: 355px; /* why was this changed from 375px? */
+	width: 380px;
 }
 
 .date-range {
@@ -1317,6 +1340,15 @@ label,
 	padding: 6px 0;
 }
 
+span.required {
+	display: inline-block;
+	width: 5px;
+	height: 10px;
+	overflow: hidden;
+	text-indent: -9999px;
+	background: transparent url(../images/asterisk.png) center top no-repeat;
+}
+
 .standard-form h3,
 .step h3,
 .form-heading {
@@ -1437,6 +1469,10 @@ form .back {
 	font-size: 1.4rem;
 	line-height: normal;
 	list-style-type: none;
+}
+
+#properties.list-view {
+	padding-top: 0px;
 }
 
 .booking-listing.constrained,
@@ -1566,6 +1602,10 @@ form .back {
 	margin-bottom: 15px;
 }
 
+.landlord-details > h2 {
+	margin-bottom: 10px;
+}
+
 .landlord-details .landlord-name {
 	float: left;
 	color: #999999;
@@ -1626,8 +1666,36 @@ form .back {
 .image-column {
 	width: 465px;
 }
+
 .full-details-column {
 	width: 340px;
+}
+
+/* ----- Edit Landlord Details ----- */
+
+.details-row {
+	position: relative;
+	padding: 10px 0;
+	border-bottom: 1px solid #ddd;
+}
+
+.details-row:first-child {
+	padding-top: 0px;
+}
+
+
+.details-row:first-child .edit {
+	top: 0px;
+}
+
+.details-row p {
+	margin-bottom: 0;
+}
+
+.details-row .edit {
+	position: absolute;
+	right: 0px;
+	top: 8px;
 }
 
 /* ----- CONTACT ------------------------------------------------- */
@@ -1693,7 +1761,8 @@ form .back {
 	width: 100%;
 }
 
-#news .news-item .summary {
+#news .news-item .summary,
+#stories .news-item .summary {
 	color: #777;
 	padding-top: 1em;
 	text-align: left;
@@ -2735,3 +2804,9 @@ img.mfp-img {
 	opacity: .6;
 	border-radius: 8px;
 }
+
+/*
+.modal-scrollable .close-modal.btn.btn-danger {
+	display: none;
+}
+*/

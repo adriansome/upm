@@ -23,7 +23,8 @@ return array(
         ),
         'urlManager' => array(
             'rules' => array(
-                $module_name . '/management' => $module_name . '/management/index', 
+                $module_name . '/management' => $module_name . '/management/index',
+                'adminzone' => $module_name  . '/' . $default_controller . '/login/page/adminzone',
                 '<action:(register|login|profile|logout|registrationsuccess)>' => $module_name . '/'. $default_controller . '/<action>',
                 'login/forgotten-credentials' => $module_name . '/'. $default_controller . '/forgottenCredentials',
                 'login/forgotten-credentials/reminder-sent' => $module_name . '/'. $default_controller . '/reminderSent',
