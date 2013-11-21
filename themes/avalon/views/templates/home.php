@@ -114,11 +114,18 @@
 			<div class="column one-half">
 				<div class="twitter container">
 					<h2>Twitter</h2>
+					<!--
 					<ul class="tweets">
 						<li><p class="js-tweet-text tweet-text">GPS devices charged and ready for hire. Time to explore the marshes. <a href="/search?q=%23Geocaching&amp;src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr"><s>#</s><b>Geocaching</b></a> <a href="/search?q=%23nature&amp;src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr"><s>#</s><b>nature</b></a> <a href="/search?q=%23halfterm&amp;src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr"><s>#</s><b>halfterm</b></a> <a href="http://t.co/pjZzoJm6lu" rel="nofollow" dir="ltr" data-expanded-url="http://tinyurl.com/p8xo9r7" class="twitter-timeline-link" target="_blank" title="http://tinyurl.com/p8xo9r7"><span class="tco-ellipsis"></span><span class="js-display-url">tinyurl.com/p8xo9r7</span><span class="invisible"></span><span class="tco-ellipsis"><span class="invisible">&nbsp;</span></span></a></p></li>
 						<li><p class="js-tweet-text tweet-text"><a href="/SomersetWT" class="twitter-atreply pretty-link" dir="ltr"><s>@</s><b>SomersetWT</b></a> <a href="/Hawkandowluk" class="twitter-atreply pretty-link" dir="ltr"><s>@</s><b>Hawkandowluk</b></a> <a href="/RSPBSouthWest" class="twitter-atreply pretty-link" dir="ltr"><s>@</s><b>RSPBSouthWest</b></a> <a href="/NESouthWest" class="twitter-atreply pretty-link" dir="ltr"><s>@</s><b>NESouthWest</b></a> 127 applicants for apprenticeship scheme! V excited to have 2 starting with us v soon</p></li>
 						<li><p class="js-tweet-text tweet-text">Or you can download the Geocaching activity here - <a href="http://t.co/qg4IB4DNbG" rel="nofollow" dir="ltr" data-expanded-url="http://docs.com/XAO4" class="twitter-timeline-link" target="_blank" title="http://docs.com/XAO4"><span class="tco-ellipsis"></span><span class="js-display-url">docs.com/XAO4</span><span class="invisible"></span><span class="tco-ellipsis"><span class="invisible">&nbsp;</span></span></a>. More info re. GPS hire on FB. <a href="/search?q=%23Geocaching&amp;src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr"><s>#</s><b>Geocaching</b></a> <a href="/search?q=%23wildlife&amp;src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr"><s>#</s><b>wildlife</b></a> <a href="/search?q=%23halfterm&amp;src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr"><s>#</s><b>halfterm</b></a></p></li>
 					</ul>
+					-->
+
+					<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/AvalonMarshes" data-widget-id="402791803570491393" data-chrome="nofooter transparent noheader noborder" data-tweet-limit="3">Tweets by @AvalonMarshes</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
 
 					<div class="social-media-links">
 						<a href="https://twitter.com/AvalonMarshes" class="twitter" title="Follow us on Twiter">Twitter</a>

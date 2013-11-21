@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<link rel="stylesheet" href="../css/styles.css" />
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Signika:400,700">
+
+	<script src="js/jquery-1.9.1.min.js"></script>
+	<script src="js/jquery.isotope.min.js"></script>
+	<script src="js/jquery.carouFredSel-6.2.1.js"></script>
+
+	<script src="js/lightcase.js"></script>
+	<script>
+		$(document).ready(function($) {
+			$('a[data-rel^=lightbox]').lightcase('init');
+		});
+	</script>
+
+	<script>
+		$(document).ready(function() {
+
+			$("#slider .slides").carouFredSel({
+				responsive: true,
+				auto: 4000,
+				scroll: {
+					fx: "scroll"
+				},
+				items: {
+					visible: 1
+				},
+				pagination: "#slider .pagination",
+				prev: "#slider .previous",
+				next: "#slider .next"
+			});
+		});
+	</script>
+
+	<!--[if lte IE 8]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+	<!-- Begin #page-header -->
+	<header id="page-header">
+		<div class="constrained">
+			<a href="index.html"><img src="../images/logo.png" class="logo" alt="" /></a>
+
+			<nav>
+				<ul>
+					<li><a href="#">The Avalon Marshes</a></li>
+					<li><a href="#">Natural and Cultural Heritage</a></li>
+					<li><a href="#">Visiting</a></li>
+					<li><a href="#">Events</a></li>
+					<li><a href="#">Education</a></li>
+					<li><a href="#">Getting Involved</a></li>
+					<li class="current"><a href="#">Galleries</a></li>
+				</ul>
+		 	</nav>
+
+			<div class="search">
+				<label for="search-terms">Search</label>
+				<input type="search" id="search-terms" />
+				<input type="submit" value="search" />
+			</div>
+		</div>
+	</header>
+	<!-- End #page-header -->
+
+	<!-- Begin #banner -->
+	<div class="banner banner1">
+		<div class="constrained">
+			<h1>Photo Stream</h1>
+		</div>
+	</div>
+	<!-- End #banner -->
+
+	<!-- Begin #main -->
+	<div id="main">
+		<div class="constrained">
+
+			<!-- Begin #sub-navigation -->
+			<div class="column" id="sub-navigation">
+				<ul>
+					<li><a href="#">Getting here</a></li>
+					<li><a href="#">Where to stay</a></li>
+					<li><a href="#">Watering holes</a></li>
+					<li><a href="#">Using grid references</a></li>
+					<li><a href="#">Weather forecast</a></li>
+				</ul>
+			</div>
+			<!-- End #sub-navigation -->
+
+			<!-- Begin #main-content -->
+			<div class="column span13" id="main-content">
+
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eu nisl dui. Quisque ullamcorper tempor purus quis dapibus. Morbi scelerisque eros quis elit aliquet suscipit. Nulla venenatis dictum ipsum id fringilla. Nulla facilisi. Integer risus sapien, fringilla eu magna vel, porttitor aliquam urna.</p>
+
+				<!-- Begin #photo-steam -->
+				<section id="photo-stream">
+					<div class="panel">
+
+						<div class="tag-wrapper">
+							<h3>Choose tags:</h3>
+							<ul class="tags">
+								<li><label>Birds (64) <input type="checkbox" /></label></li>
+								<li><label>Insects (64) <input type="checkbox" /></label></li>
+								<li><label>Plants (64) <input type="checkbox" /></label></li>
+								<li><label>Landscapes (64) <input type="checkbox" /></label></li>
+								<li><label>Birds (64) <input type="checkbox" /></label></li>
+								<li><label>Insects (64) <input type="checkbox" /></label></li>
+								<li><label>Plants (64) <input type="checkbox" /></label></li>
+								<li><label>Landscapes (64) <input type="checkbox" /></label></li>
+								<li><label>Birds (64) <input type="checkbox" /></label></li>
+							</ul>
+						</div>
+
+						<div class="text-wrapper">
+							<h2>Get Involved</h2>
+							<p>Taken a great photograph at Avalon Marshes? Upload it to our Photo Stream.</p>
+							<a href="#" class="view-more">Upload Photo</a>
+						</div>
+					</div>
+
+					<div class="photos" id="photos">
+						<a data-rel="lightbox:photos" href="example-content/insect-full.jpg" class="insect photo"><img src="../example-content/insect-full.jpg" alt="" /></a>
+						<a data-rel="lightbox:photos" href="example-content/bird.jpg" class="bird photo"><img src="../example-content/bird.jpg" alt="" /></a>
+						<a data-rel="lightbox:photos" href="example-content/bird.jpg" class="bird photo"><img src="../example-content/bird.jpg" alt="" /></a>
+						<a data-rel="lightbox:photos" href="example-content/plant-full.jpg" class="plant photo"><img src="../example-content/plant-full.jpg" alt="" /></a>
+						<a data-rel="lightbox:photos" href="example-content/landscape-full.jpg" class="landscape photo"><img src="../example-content/landscape-full.jpg" alt="" /></a>
+						<a data-rel="lightbox:photos" href="example-content/bird.jpg" class="bird photo"><img src="../example-content/bird.jpg" alt="" /></a>
+						<a data-rel="lightbox:photos" href="example-content/bird.jpg" class="bird photo"><img src="../example-content/bird.jpg" alt="" /></a>
+						<a data-rel="lightbox:photos" href="example-content/landscape-full.jpg" class="landscape photo"><img src="../example-content/landscape-full.jpg" alt="" /></a>
+						<a data-rel="lightbox:photos" href="example-content/insect-full.jpg" class="insect photo"><img src="../example-content/insect-full.jpg" alt="" /></a>
+						<a data-rel="lightbox:photos" href="example-content/bird.jpg" class="bird photo"><img src="../example-content/bird.jpg" alt="" /></a>
+						<a data-rel="lightbox:photos" href="example-content/plant-full.jpg" class="plant photo"><img src="../example-content/plant-full.jpg" alt="" /></a>
+						<a data-rel="lightbox:photos" href="example-content/plant-full.jpg" class="plant photo"><img src="../example-content/plant-full.jpg" alt="" /></a>
+						<a data-rel="lightbox:photos" href="example-content/bird.jpg" class="bird photo"><img src="../example-content/bird.jpg" alt="" /></a>
+						<a data-rel="lightbox:photos" href="example-content/plant-full.jpg" class="plant photo"><img src="../example-content/plant-full.jpg" alt="" /></a>
+						<a data-rel="lightbox:photos" href="example-content/plant-full.jpg" class="plant photo"><img src="../example-content/plant-full.jpg" alt="" /></a>
+						<a data-rel="lightbox:photos" href="example-content/bird.jpg" class="bird photo"><img src="../example-content/bird.jpg" alt="" /></a>
+						<a data-rel="lightbox:photos" href="example-content/bird.jpg" class="bird photo"><img src="../example-content/bird.jpg" alt="" /></a>
+						<a data-rel="lightbox:photos" href="example-content/landscape-full.jpg" class="landscape photo"><img src="../example-content/landscape-full.jpg" alt="" /></a>
+						<a data-rel="lightbox:photos" href="example-content/insect-full.jpg" class="insect photo"><img src="../example-content/insect-full.jpg" alt="" /></a>
+						<a data-rel="lightbox:photos" href="example-content/bird.jpg" class="bird photo"><img src="../example-content/bird.jpg" alt="" /></a>
+					</div>
+
+					<script>
+					  $(document).ready(function(){
+					    var $container = $('#photos');
+					    var filters = {};
+
+					    $container.isotope({
+					      itemSelector : '.photo',
+					    });
+
+					    // filter buttons
+					    $('.filter a').click(function() {
+					      var $this = $(this);
+					      // don't proceed if already selected
+					      if ( $this.hasClass('selected') ) {
+					        return;
+					      }
+
+					      // This is the <ul>
+					      var $optionSet = $this.parents('.option-set');
+
+					      var group = $optionSet.attr('data-filter-group'); // the name of the <ul>, set via data attribute. photoCategory
+					      var filterValue = $this.attr('data-filter-value'); // any, Birds or Insects
+
+					      filters[group] = filterValue;
+					      reFilter();
+					    });
+
+					    function reFilter() {
+					      console.log(filters);
+
+					      // convert filters object into array
+					      var isoFilters = [];
+					      for (var prop in filters) {
+					        isoFilters.push( filters[prop] )
+					      }
+					      var selector = isoFilters.join('');
+
+					      $container.isotope({ filter: selector });
+					    }
+					  });
+					</script>
+
+				</section>
+				<!-- End #photo-stream -->
+
+			</div>
+			<!-- End  #main-content -->
+
+		</div>
+	</div>
+	<!-- End #main -->
+
+	<!-- #page-footer -->
+	<footer id="page-footer">
+		<div class="constrained">
+			<div class="column one-quarter">
+				<h2>Heading 1</h2>
+				<ul>
+					<li><a href="#">Dijon</a></li>
+					<li><a href="#">Beaune</a></li>
+					<li><a href="#">Chalon</a></li>
+					<li><a href="#">Macon-Cluny</a></li>
+					<li><a href="#">Sens</a></li>
+					<li><a href="#">Auxerre-Chablis</a></li>
+				</ul>
+			</div>
+
+			<div class="column one-quarter">
+				<h2>Heading 2</h2>
+				<ul>
+					<li><a href="#">Dijon</a></li>
+					<li><a href="#">Beaune</a></li>
+					<li><a href="#">Chalon</a></li>
+					<li><a href="#">Macon-Cluny</a></li>
+					<li><a href="#">Sens</a></li>
+					<li><a href="#">Auxerre-Chablis</a></li>
+				</ul>
+			</div>
+
+			<div class="column one-quarter">
+				<h2>Heading 3</h2>
+				<ul>
+					<li><a href="#">Dijon</a></li>
+					<li><a href="#">Beaune</a></li>
+					<li><a href="#">Chalon</a></li>
+					<li><a href="#">Macon-Cluny</a></li>
+					<li><a href="#">Sens</a></li>
+					<li><a href="#">Auxerre-Chablis</a></li>
+				</ul>
+			</div>
+
+			<div class="column one-quarter">
+				<h2>Heading 4</h2>
+				<ul>
+					<li><a href="#">Dijon</a></li>
+					<li><a href="#">Beaune</a></li>
+					<li><a href="#">Chalon</a></li>
+					<li><a href="#">Macon-Cluny</a></li>
+					<li><a href="#">Sens</a></li>
+					<li><a href="#">Auxerre-Chablis</a></li>
+				</ul>
+			</div>
+		</div>
+	</footer>
+	<!-- End #page-footer -->
+
+</body>
+</html>
