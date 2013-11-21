@@ -21,46 +21,26 @@
                 "tag_1":
                         {
                             "type": "boolean",
-                            "label": "Birds"
+                            "label": "Birds",
+                            "class": "bird"
                         },
                 "tag_2":
                         {
                             "type": "boolean",
-                            "label": "Insects"
+                            "label": "Insects",
+                            "class": "insect"
                         },
                 "tag_3":
                         {
                             "type": "boolean",
-                            "label": "Plants"
+                            "label": "Plants",
+                            "class": "plant"
                         },
                 "tag_4":
                         {
                             "type": "boolean",
-                            "label": "Landscapes"
-                        },
-                "tag_5":
-                        {
-                            "type": "boolean"
-                        },
-                "tag_6":
-                        {
-                            "type": "boolean"
-                        },
-                "tag_7":
-                        {
-                            "type": "boolean"
-                        },
-                "tag_8":
-                        {
-                            "type": "boolean"
-                        },
-                "tag_9":
-                        {
-                            "type": "boolean"
-                        },
-                "tag_10":
-                        {
-                            "type": "boolean"
+                            "label": "Landscapes",
+                            "class": "landscape"
                         },
                 "photo":
                         {

@@ -68,13 +68,31 @@
 			<div class="panel">
 				<h2>Photo Stream</h2>
 				<h3>Choose tags:</h3>
-				<ul class="tags">
-					<li><label>Birds (64) <input type="checkbox" /></label></li>
-					<li><label>Insects (64) <input type="checkbox" /></label></li>
-					<li><label>Plants (64) <input type="checkbox" /></label></li>
-					<li><label>Landscapes (64) <input type="checkbox" /></label></li>
-				</ul>
-				<div class="number-of-results">Displaying 64 images</div>
+                                <section id="options" class="combo-filters">
+                                    <ul class="tags filter option-set" data-filter-group="category">
+
+                                        <li><label>All<input id="all" data-filter-value=".photo" type="checkbox" /></label></li>
+
+                                        <?php $listWidget = new ListWidget();
+                                            $listWidget->name = 'user-photos';
+                                            $listWidget->init();
+                                            $attributes = $listWidget->itemAttributes();
+                                            unset($listWidget);?>
+
+                                        <?php foreach($attributes as $field=>$details): ?>
+
+                                            <?php if(substr($field, 0, 3) == 'tag'):?>
+
+                                                <li><label><?php echo $details['label']?> <input data-filter-value=".<?php echo $details['class']?>" type="checkbox" /></label></li>
+
+                                            <?php endif; ?>
+
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </section>
+                                
+                                
+                                <div class="number-of-results">Displaying <span></span> images</div>
 
 				<h3>Get Involved</h3>
 				<p>Taken a great photograph at Avalon Marshes? Upload it to our Photo Stream.</p>
@@ -82,6 +100,7 @@
 			</div>
 
 			<div class="photos" id="photos">
+                            <!--jcavi: bring in all live photos -->
 				<a data-rel="lightbox:photos" href="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/insect-full.jpg" class="insect photo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/insect-full.jpg" alt="" /></a>
 				<a data-rel="lightbox:photos" href="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/bird.jpg" class="bird photo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/bird.jpg" alt="" /></a>
 				<a data-rel="lightbox:photos" href="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/bird.jpg" class="bird photo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/example-content/bird.jpg" alt="" /></a>
@@ -184,6 +203,49 @@
 				next: "#slider .next"
 			});
 
-			$("#photo-stream .tags input[type=checkbox]").prettyCheckable();
+			//$("#photo-stream .tags input[type=checkbox]").prettyCheckable();
 		});
 	</script>
+        <script type="text/javascript">
+            
+            $(document).ready(function(){
+                
+		var $container = $('#photos');
+		var filters = {};
+                
+		$container.isotope({itemSelector : '.photo'}, function($items){
+                        $('.number-of-results span').html($items.length);
+                });
+                $('#all').prop('checked', true);
+                
+                $('.filter input[type=checkbox]').click(function(){
+                    
+                    var $optionSet = $(this).parents('.option-set');
+                    
+                    $optionSet.find('input[type=checkbox]').prop('checked', false);
+                    $(this).prop('checked', true);
+                    
+                    var group = $optionSet.attr('data-filter-group');
+                    var filterValue = $(this).attr('data-filter-value');
+                    
+                    filters[group] = filterValue;
+                    reFilter();
+                });
+                
+                function reFilter() {
+                    var isoFilters = [];
+                    
+                    for (var prop in filters) {
+                        isoFilters.push(filters[prop]);
+                    }
+                    
+                    var selector = isoFilters.join('');
+                    
+                    $container.isotope({ filter: selector }, function($items){
+                        $('.number-of-results span').html($items.length);
+                    });
+                }
+                
+            });
+            
+        </script>
