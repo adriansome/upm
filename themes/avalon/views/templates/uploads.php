@@ -32,9 +32,7 @@ $this->pageTitle = $model->window_title;
 
             <?php $fields = new BlockForm('user-photos');?>
             
-            <?php $fields->fetchFormParts();
-            //var_dump($fields->parts);
-            ?>
+            <?php $fields->fetchFormParts(); ?>
             <form action="/user-photos/management/item" method="post" class="upload-form">
                 <fieldset>
                     <h2>Choose image to upload</h2>

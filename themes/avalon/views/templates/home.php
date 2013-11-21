@@ -98,13 +98,12 @@ require_once(Yii::app()->theme->basepath.'/views/elements/header.php');
 			</div>
 
 			<div class="photos" id="photos">
-                            <!--jcavi: bring in all live photos -->
                             <?php $listWidget = new ListWidget();
                                 $listWidget->name = 'user-photos';
                                 $listWidget->filters = array(
                                     'live' => array(
                                         'field_type' => 'boolean_value',
-                                        'value' => 0)
+                                        'value' => 1)
                                 );
                                 
                                 $listWidget->init();
