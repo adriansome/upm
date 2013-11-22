@@ -355,12 +355,23 @@ class ManagementController extends BlockController
 					break;
 
 				case 'image':
-                    //jcavi: todo - check if role is admin/editor => file manager
-					$fields[$content->name]['input']=$this->renderPartial('_imageField', array(
-						'form'=>$form,
-						'index'=>$index,
-						'content'=>$content,
-					), true, true);
+                    //allow editors/admin full filemanager
+                    if(in_array(Yii::app()->user->role, array('admin', 'editor')))
+                    {
+                        $fields[$content->name]['input']=$this->renderPartial('_fileField', array(
+                            'form'=>$form,
+                            'index'=>$index,
+                            'content'=>$content,
+                        ), true, true);
+                    }
+                    else
+                    {
+                        $fields[$content->name]['input']=$this->renderPartial('_imageField', array(
+                            'form'=>$form,
+                            'index'=>$index,
+                            'content'=>$content,
+                        ), true, true);                        
+                    }
 					break;
 
 				case 'file':
@@ -380,7 +391,6 @@ class ManagementController extends BlockController
 					unset($listWidget);
 		
 					$fields[$content->name]['input']=CHtml::dropDownList('Content['.$index.'][string_value]',$content->string_value, $attributes[$content->name]['values']);
-// 					$fields[$content->name]['input']='<select><option>Test</option></select>';
 					break;
 
 				case 'date':

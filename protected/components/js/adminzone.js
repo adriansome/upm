@@ -87,6 +87,18 @@ $(function()
             }, 7000);
         });
     }
+    
+    // update thumbnail in modal
+    $('#filemanager .close').live('click',function(e) {
+        var querystring = $(this).parent().parent().find('iframe').attr('src');
+        var position = querystring.indexOf('field_id=');
+        
+        var inputId = querystring.substr(position + 9);
+        var filename = $('#'+inputId).val();
+        
+        $('#'+inputId).parent().find('a.update-thumb').attr('href', filename);
+        $('#'+inputId).parent().find('a.update-thumb > img').attr('src', '/thumbs/' + filename + '_100x100');
+    });
 
     $('[data-toggle=\"modal\"]').live('click',function(e) {
         e.preventDefault();
@@ -135,6 +147,8 @@ $(function()
             });
         }
     });
+    
+                
 
 	/**
 	 * defaultAction: Inject response into target

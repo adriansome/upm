@@ -1,6 +1,8 @@
-<?php echo $form->textField($content,"[$index]file_value",array('size'=>60,'maxlength'=>140)); ?>
+<a class="update-thumb" href="<?php echo $content->attributes['file_value']?>" target="_blank" ><img src="/thumbs/<?php echo $content->attributes['file_value']?>_100x100" /></a>
+<?php echo $form->hiddenField($content,"[$index]file_value",array('size'=>60,'maxlength'=>140));?>
+<?php
 
-<?php $this->widget('TbButton',array(
+$this->widget('TbButton',array(
     'type'=>'success',
     'label' => 'Browse',
     'size' => 'small',

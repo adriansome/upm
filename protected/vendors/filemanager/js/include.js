@@ -448,9 +448,12 @@ function close_window() {
    else if ($('#popup').val()==1) window.close();
    else{
 	if ( typeof parent.$ !== "undefined" && parent.$) {
-	    parent.$.fancybox.close();
+        // remove code that's failing because fancybox hasn't been setup. at least this means subsequent js calls will be run       
+        
+        //this almost closed the window! --> parent.$('.'+window.frameElement.parentNode.classList[0]).dialog('close')
+	    //parent.$.fancybox.close();
 	}else{
-	    parent.jQuery.fancybox.close();
+	    //parent.jQuery.fancybox.close();
 	}
    }
 }
