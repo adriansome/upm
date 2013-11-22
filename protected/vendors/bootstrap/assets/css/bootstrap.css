@@ -5219,7 +5219,7 @@ table th[class*="span"],
 }
 
 .modal.fade.in {
-	top: 30%;
+	top: 20%; /* was 30%; changed to help prevent modals being cut off vertically on small screens */
 }
 
 .modal-header {

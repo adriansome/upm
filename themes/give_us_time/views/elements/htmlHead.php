@@ -2,6 +2,7 @@
 <meta name="language" content="en" />
 <meta name="description" content="" />
 <meta name="keywords" content="" />
+<meta name="viewport" content="width=1152" />
 
 <link rel="icon" href="<?php echo Yii::app()->theme->baseUrl; ?>/images/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/styles.css" />
