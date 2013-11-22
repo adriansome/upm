@@ -316,14 +316,20 @@ class ManagementController extends BlockController
             $attributes = $listWidget->itemAttributes();
             unset($listWidget);            
         }
+        else
+        {
+            // get labels from nugget (which holds all possible attributes)
+            $nugget = new Nugget;
+            $attributes = $nugget->attributes();
+        }
 
 		foreach($contents as $index=>$content)
-		{         
-            if(isset($attributes[$content->name]['label']) && !empty($attributes[$content->name]['label']))
+		{
+            if (isset($attributes[$content->name]['label']) && !empty($attributes[$content->name]['label'])) 
             {
                 $label = $attributes[$content->name]['label'];
-            }
-            else
+            } 
+            else 
             {
                 $label = $content->name;
             }
@@ -349,6 +355,7 @@ class ManagementController extends BlockController
 					break;
 
 				case 'image':
+                    //jcavi: todo - check if role is admin/editor => file manager
 					$fields[$content->name]['input']=$this->renderPartial('_imageField', array(
 						'form'=>$form,
 						'index'=>$index,

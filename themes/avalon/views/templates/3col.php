@@ -55,7 +55,7 @@
 
 				<div class="image-nugget-wrapper">
 					<?php $this->widget('PhotoNugget',array(
-						'name'=>'picture nugget',
+						'name'=>'image nugget',
 						'scope'=>'page',
 					)); ?>
 				</div>	
