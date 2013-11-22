@@ -40,8 +40,8 @@ require_once(Yii::app()->theme->basepath . '/views/elements/header.php');
             $listWidget->init();
 
             $attributes = $listWidget->itemAttributes();
-            $locationAttributes = array('' => 'Any Location');
-            $locationAttributes += $attributes['location']['values'];
+            $locationAttributes = array('' => 'Any Country');
+            $locationAttributes += $attributes['country']['values'];
             unset($listWidget);
 
             Yii::app()->controller->renderPartial('webroot.themes.give_us_time.views.elements.search-bar', array(

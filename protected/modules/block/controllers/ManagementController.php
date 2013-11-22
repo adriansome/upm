@@ -287,6 +287,7 @@ class ManagementController extends BlockController
                 
 		$block=$this->loadModel($id);
 		$contents = $block->contents;
+        $sublists = array();
 
 		if(isset($_POST['Content']))
 		{
@@ -415,6 +416,7 @@ class ManagementController extends BlockController
 					break;
 
 				case 'file':
+                    $fields[$content->name]['class'] = 'filemanager-row';
 					$fields[$content->name]['input']=$this->renderPartial('_fileField', array(
 						'form'=>$form,
 						'index'=>$index,
@@ -429,8 +431,28 @@ class ManagementController extends BlockController
 			
 					$attributes = $listWidget->itemAttributes();
 					unset($listWidget);
-		
-					$fields[$content->name]['input']=CHtml::dropDownList('Content['.$index.'][string_value]',$content->string_value, $attributes[$content->name]['values']);
+
+                    // Get values from database instead of a static list
+                    if (isset($attributes[$content->name]['source']) && $attributes[$content->name]['source'] === 'db') {
+                        if (isset($attributes[$content->name]['source_url'])) {
+                            $actionUrl = 'action' . ucfirst($attributes[$content->name]['source_url']);
+                            $attributes[$content->name]['values'] = $this->$actionUrl();
+                        }
+                    }
+                    $htmlOptions = array();
+                    // If a sublist has been specified, add it to array so it won't be displayed by default
+                    if (isset($attributes[$content->name]['sublist'])) {
+                        $sublist = $attributes[$content->name]['sublist'];
+                        $sublists[] = $sublist;
+                        $htmlOptions = array(
+                            'data-child-list' => $sublist
+                        );
+                    }
+                    if (in_array($content->name, $sublists)) {
+                        $fields[$content->name]['class'] = 'hidden';
+                        $htmlOptions['data-sublist'] = $content->name;
+                    }                    
+					$fields[$content->name]['input']=CHtml::dropDownList('Content['.$index.'][string_value]',$content->string_value, $attributes[$content->name]['values'], $htmlOptions);
 // 					$fields[$content->name]['input']='<select><option>Test</option></select>';
 					break;
 
