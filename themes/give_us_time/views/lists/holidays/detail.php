@@ -6,7 +6,7 @@ $listWidget->init();
 
 $attributes = $listWidget->itemAttributes();
 $locationAttributes = array('' => 'Any Location');
-$locationAttributes += $attributes['location']['values'];
+$locationAttributes += $attributes['country']['values'];
 unset($listWidget);
 ?>
 
@@ -22,7 +22,7 @@ unset($listWidget);
                     <?php
 
 
-                    echo CHtml::dropDownList('Search[location]',$_POST['Search']['location'], $locationAttributes);
+                    echo CHtml::dropDownList('Search[country]',$_POST['Search']['country'], $locationAttributes);
                     ?>
                     </div>
                     <div class="form-row">

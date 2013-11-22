@@ -11,7 +11,7 @@ $listWidget->init();
 
 $attributes = $listWidget->itemAttributes();
 $locationAttributes = array('' => 'Any Location');
-$locationAttributes += $attributes['location']['values'];
+$locationAttributes += $attributes['country']['values'];
 unset($listWidget);
 
 // Set location and date params
@@ -116,7 +116,7 @@ $departure = date_parse_from_format('d/m/Y', $holidayData['departure_date']);
             </div>
             <div class="column full-details-column">
 				<h2 class="property-name"><?php echo $propertyData['title'] ?> <span class="property-type">(<?php echo $this->attributes['type']['values'][$propertyData['type']] ?>)</span></h2>
-				<div class="property-location"><?php echo $propertyData['area'] ?>, <?php echo $propertyData['city'] ?>, <?php echo $this->attributes['location']['values'][$propertyData['location']] ?></div>
+				<div class="property-location"><?php echo $propertyData['area'] ?>, <?php echo $propertyData['city'] ?>, <?php echo $this->attributes['country']['values'][$propertyData['country']] ?></div>
 
 				<?php
 				if ($propertyData['description']) {

@@ -1,7 +1,7 @@
 <?php /* @var $this ListWidget */
 
-if ($_POST['Search']['location']) {
-    $locationText = $this->viewData['attributes']['location']['values'][$_POST['Search']['location']];
+if ($_POST['Search']['country']) {
+    $locationText = $this->viewData['attributes']['country']['values'][$_POST['Search']['country']];
 } else {
     $locationText = '';
 }
@@ -19,6 +19,7 @@ $allHolidays = array();
 
 // Get holidays for properties
 foreach ($propertyData as $property) {
+
     $listWidget = new ListWidget();
     $listWidget->name = 'holidays';
     $listWidget->filters = array(

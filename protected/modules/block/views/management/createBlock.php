@@ -18,10 +18,7 @@ $this->beginWidget('TbModal', array('id'=>'block-management', 'htmlOptions'=>arr
 		'enableAjaxValidation'=>true,
 	)); ?>
 	<?php foreach($fields as $field): 
-                $class = ' ';
-                if (!is_object($field['input']) && strpos($field['input'], '#filemanager')) {
-                    $class .= 'filemanager-row';
-                }    
+                $class = (isset($field['class'])) ? " " . $field['class'] : '';   
         ?>
 		<div class="row<?php echo $class ?>">
 			<?php echo $field['label']; ?>

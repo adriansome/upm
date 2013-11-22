@@ -49,6 +49,28 @@ class Utility extends CApplicationComponent {
     }
     
     /**
+     * Outputs a month select dropdown in the specified format
+     * 
+     * @param string $format
+     *      The format to out the month select in
+     */
+    public function get_month_options($format)
+    {       
+        $months = array();
+        $current_date = new DateTime("last month");
+
+        // Loop over months
+        for ($i=1;$i<=12;$i++) {
+            $current_date->modify('next month');
+            $month_value = $current_date->format('Y-m-d');
+            $months[$month_value] =  $current_date->format($format);
+        }
+        
+        return $months;
+        
+    }
+    
+    /**
      * Formats a date into a human readable format
      * 
      * @param string $format

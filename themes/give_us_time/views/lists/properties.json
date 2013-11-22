@@ -6,40 +6,35 @@
             "type": "singleline",
             "label": "Property name"
         },
-        
-        "location":
+                
+        "country":
         {
             "type": "list",
-            "values":
-            {
-		"1":	"Wales",
-		"2":	"Scotland",
-		"3":	"East Anglia",
-		"4":	"Midlands",
-		"5":	"North West",
-		"6":	"North East",
-		"7":	"South West",
-		"8":	"South East",
-		"9":	"London",
-		"10":	"Midlands",
-		"11":	"Europe",
-		"12":	"World"
-            }
+            "source": "db",
+            "source_url": "loadCountryList",
+            "sublist": "region"
         },
+        
+        "region":
+        {
+            "type": "list",
+            "source": "db",
+            "source_url": "loadRegionList"
+        },        
         
         "type":
         {
             "type": "list",
             "label": "Property type",
-		"values":
-		{
-			"1": "House",
-			"2": "Apartment",
-			"3": "Hotel",
-			"4": "Resort",
-			"5": "Lodge",
-			"6": "Other"
-		}
+            "values":
+            {
+                "1": "House",
+                "2": "Apartment",
+                "3": "Hotel",
+                "4": "Resort",
+                "5": "Lodge",
+                "6": "Other"
+            }
         },
         
         "city":
@@ -49,11 +44,6 @@
         },
 		
         "area":
-        {
-            "type": "singleline"
-        },
-        
-        "country":
         {
             "type": "singleline"
         },

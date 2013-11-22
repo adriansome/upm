@@ -5,8 +5,8 @@ $departure = date_parse_from_format('d/m/Y', $data['holiday']['departure_date'])
 
 $propertyUrl = '/properties?slug=' . $data['property']['slug']
             . '&h=' . $data['holiday']['block_id'];
-if (isset($_POST['Search']['location']) && $_POST['Search']['location']) {
-    $propertyUrl .= '&l=' . $_POST['Search']['location'];
+if (isset($_POST['Search']['country']) && $_POST['Search']['country']) {
+    $propertyUrl .= '&l=' . $_POST['Search']['country'];
 }
 if (isset($_POST['Search']['holiday']) && $_POST['Search']['holiday']) {
     $propertyUrl .= '&d=' . $_POST['Search']['holiday'];
@@ -26,7 +26,7 @@ if (isset($_POST['Search']['holiday']) && $_POST['Search']['holiday']) {
         </div>
 
         <div class="listing-details-wrapper">
-			<h2><?php echo $data['property']['title'] . ', ' . $data['property']['area'] . ', ' . $data['property']['country'] . ' (' . $attributes['location']['values'][$data['property']['location']] .  ')'; ?></h2>
+			<h2><?php echo $data['property']['title'] . ', ' . $data['property']['area'] . ', ' . $attributes['country']['values'][$data['property']['country']]; ?></h2>
 			<p><?php
 			echo $data['holiday']['number_of_bedrooms'] . ' bed ' .
 			$attributes['type']['values'][$data['property']['type']] . '. ';

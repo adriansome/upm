@@ -24,25 +24,31 @@
 			<form id="search-form" action="/search" method="post">
 			<div class="form-row">
 				<?php
-					$weeks[''] = 'Any Week';
-					$weeks += Yii::app()->utility->get_week_options('M d, Y');
+					$months[''] = 'Any Month';
+					$months += Yii::app()->utility->get_month_options('F, Y');
 
-					echo CHtml::dropDownList('Search[holiday]','', $weeks);
+					echo CHtml::dropDownList('Search[holiday]','', $months);
 				?>
 			</div>
+            
 			<div class="form-row">
 				<?php
 					$listWidget = new ListWidget();
 					$listWidget->name = 'properties';
 					$listWidget->init();
 
-					$attributes = $listWidget->itemAttributes();
+					$attributes = $listWidget->itemAttributes(array('withHolidays' => TRUE));
 					unset($listWidget);
-
-					array_unshift($attributes['location']['values'],'Any Location');
-					echo CHtml::dropDownList('Search[location]','', $attributes['location']['values']);
+                    $countries = array('Any Country') + $attributes['country']['values'];
+					echo CHtml::dropDownList('Search[country]','', $countries);
 				?>
 			</div>
+			<div class="form-row hidden">
+				<?php
+                    $regions = array('' => 'Any Region');
+					echo CHtml::dropDownList('Search[region]','', $regions);
+				?>
+			</div>                
 			<div class="form-row">
 				<input type="submit" class="more" value="Search" />
 			</div>
@@ -138,7 +144,7 @@
 <?php require_once(Yii::app()->theme->basepath.'/views/elements/footer.php'); ?>
 
 <script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/jquery.magnific-popup.min.js"></script>
-
+<script src="<?php echo Yii::app()->theme->baseUrl; ?>/js/search.js"></script>
 <script>
 	$(document).ready(function() {
 		$('.video-trigger').magnificPopup({

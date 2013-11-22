@@ -30,7 +30,9 @@ class ManagementController extends BlockController
                 'roles' => array('editor'),
             ),
             array('allow',
-                'actions'=>array('index','create','update','delete','list', 'item'),
+                'actions'=>array('index','create','update','delete','list',
+                                'item', 'loadCountryList', 'loadRegionList',
+                                'loadCountryRegion'),
                 'users'=>array('@'),
                 'roles' => array('landlord'),
             ),
@@ -51,14 +53,17 @@ class ManagementController extends BlockController
 		$block->name = $name;
 		$block->scope = $scope;
 
-		$contents = array(); $i = 0;
-
+        $contents = array(); $i = 0;
 		foreach($attributes as $attribute=>$definition)
 		{
+            $contentType = ContentType::model()->findByAttributes(array('name'=>$definition['type']));
+            if ($contentType === null) {
+                throw new Exception($definition['type'] . " is not a valid content type");
+            }
 			$contents[$i] = new Content;
 			$contents[$i]->name = $attribute;
 			$contents[$i]->block_id = $block->id;
-			$contents[$i]->type_id = ContentType::model()->findByAttributes(array('name'=>$definition['type']))->id;
+			$contents[$i]->type_id = $contentType->id;
 			$i++;
 		}
 		
@@ -67,6 +72,7 @@ class ManagementController extends BlockController
 			// Forever an optimist.. Presume everything will validate without error.
 			$contentValidates = true;
 			$response = array();
+            $countryId = $regionId = 0;
 			
 			foreach($data['Content'] as $index => $content)
 			{
@@ -102,12 +108,17 @@ class ManagementController extends BlockController
                     {
                         $contentValidates = false;                        
                     }
+                } else if ($fieldName == 'country') {
+                    $countryId = $value[0];
+                } else if ($fieldName === 'region') {
+                    $regionId = $value[0];
                 }
 				
 				$contents[$index]->attributes = $content;
 				// If any content is not valid set $contentSaved flag to false.
-				if(!$contents[$index]->validate())
+				if(!$contents[$index]->validate()) {
 					$contentValidates = false;
+                }
 			}
 			
 			// Add slug field to content
@@ -130,6 +141,16 @@ class ManagementController extends BlockController
 					$contents[$index]->block_id = $block->id;
 					$contents[$index]->save();
 				}
+                // Check if this is a properties item and link ID to country / region
+                if ($block->name === 'properties item') {
+                    Yii::app()->db->createCommand()->insert('property_country',
+                        array(
+                            'property_id' => $block->id,
+                            'country_id' => $countryId,
+                            'region_id' => $regionId
+                        )
+                    );
+                }
 
 				$response['success'] = $block->name.' has been saved.';
 			}
@@ -141,10 +162,10 @@ class ManagementController extends BlockController
 		}
 
 		$form = new CActiveForm;
-		$fields = array();
+		$fields = $sublists = array();
 
 		foreach($contents as $index=>$content)
-		{            
+		{
             if(isset($attributes[$content->name]['label']) && !empty($attributes[$content->name]['label']))
             {
                 $label = $attributes[$content->name]['label'];
@@ -183,6 +204,7 @@ class ManagementController extends BlockController
 					break;
 
 				case 'file':
+                    $fields[$content->name]['class'] = 'filemanager-row';
 					$fields[$content->name]['input']=$this->renderPartial('_fileField', array(
 						'form'=>$form,
 						'index'=>$index,
@@ -201,8 +223,29 @@ class ManagementController extends BlockController
 					break;
 
 				case 'list':
+                    // Get values from database instead of a static list
+                    if (isset($attributes[$content->name]['source']) && $attributes[$content->name]['source'] === 'db') {
+                        if (isset($attributes[$content->name]['source_url'])) {
+                            $actionUrl = 'action' . ucfirst($attributes[$content->name]['source_url']);
+                            $attributes[$content->name]['values'] = $this->$actionUrl();
+                        }
+                    }
+                    $htmlOptions = array();
+                    // If a sublist has been specified, add it to array so it won't be displayed by default
+                    if (isset($attributes[$content->name]['sublist'])) {
+                        $sublist = $attributes[$content->name]['sublist'];
+                        $sublists[] = $sublist;
+                        $htmlOptions = array(
+                            'data-child-list' => $sublist
+                        );
+                    }
+                    if (in_array($content->name, $sublists)) {
+                        $fields[$content->name]['class'] = 'hidden';
+                        $htmlOptions['data-sublist'] = $content->name;
+                    }
 // 					$fields[$content->name]['input']=$form->listBox($content,"[$index]string_value",'',$attributes[$content->name]['values']);
-					$fields[$content->name]['input']=CHtml::dropDownList('Content['.$index.'][string_value]','', $attributes[$content->name]['values']);
+					$fields[$content->name]['input']=CHtml::dropDownList('Content['.$index.'][string_value]','', $attributes[$content->name]['values'], $htmlOptions);
+
 					break;
 
 				case 'boolean':
@@ -250,6 +293,7 @@ class ManagementController extends BlockController
 			// Forever an optimist.. Presume everything will save without error.
 			$contentSaved = true;
 			$response = array();
+            $countryId = $regionId = null;
 			
 			foreach($_POST['Content'] as $index => $content)
 			{
@@ -280,6 +324,25 @@ class ManagementController extends BlockController
                     if($content[$fieldType[0]] < $arrival_date)
                     {
                         $contentSaved = false;                        
+                    }
+                } else if ($contents[$index]->name == 'country') {
+                    // Check if this is a properties item and link ID to country / region
+                    if ($block->name === 'properties item') {
+                        Yii::app()->db->createCommand()->update('property_country',
+                            array(
+                                'country_id' => $value[0],
+                            ),
+                            'property_id=' . $block->id
+                        );
+                    }
+                } else if ($contents[$index]->name === 'region') {
+                    if ($block->name === 'properties item') {
+                        Yii::app()->db->createCommand()->update('property_country',
+                            array(
+                                'region_id' => $value[0]
+                            ),
+                            'property_id=' . $block->id
+                        );
                     }
                 }
                 
@@ -654,6 +717,76 @@ class ManagementController extends BlockController
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
 	}
+    
+    /**
+     * Load country list
+     */
+    public function actionLoadCountryList()
+    {
+        $params = array(
+            'table' => 'country',
+            'key' => 'id',
+            'value' => 'name'
+        );
+        $values = $this->_getDbValues($params);
+        
+        if (isset($_POST['ajax'])) {
+            echo json_encode(array('values' => $values));
+        } else {
+            return $values;
+        }
+       
+    }
+    
+    /**
+     * Load region list
+     */
+    public function actionLoadRegionList()
+    {        
+        $params = array(
+            'table' => 'region',
+            'key' => 'id',
+            'value' => 'name'
+        );
+        $values = $this->_getDbValues($params);
+        
+        if (isset($_POST['ajax'])) {
+            echo json_encode(array('values' => $values));
+        } else {
+            return $values;
+        }
+       
+    }
+    
+    /**
+     * Load regions specific to a given country
+     */
+    public function actionLoadCountryRegion()
+    {
+        $id = (isset($_POST['id'])) ? $_POST['id'] : null;
+        
+        
+        $command = Yii::app()->db->createCommand()
+                    ->select('r.id, r.name')
+                    ->from('country_region cr')
+                    ->join('region r', 'cr.region_id=r.id')
+                    ->where('cr.country_id=?', array($id));    
+
+        $rows = $command->queryAll();
+        
+        foreach ($rows as $row) {
+            $values[$row['id']] = $row['name'];
+        }
+        
+        if (isset($_POST['ajax'])) {
+            if (!empty($values)) {
+                echo json_encode(array('values' => $values));
+            }
+        } else {
+            return $values;
+        }
+       
+    }    
 
 	/**
 	 * Performs the AJAX validation.
@@ -714,4 +847,41 @@ class ManagementController extends BlockController
 		return $slugText;
 		
 	}
+    
+    /**
+     * Retrievs a list of values from the database
+     * @param array $params
+     *      The parameters array for retrieving values
+     *      [table] => The table to retrieve data from
+     *      [field] => The field to use as the value field
+     */
+    private function _getDbValues(array $params = array())
+    {
+        if (!isset($params['table']) || !isset($params['value'])) {
+            throw new Exception("A table and value field must be set for this list");
+        }
+        $fields = $params['value'];
+        if (isset($params['key'])) {
+            $fields .= ", " . $params['key'];
+        }
+        $command = Yii::app()->db->createCommand();
+        $command->select($fields)->from($params['table']);
+        if (isset($params['condition'])) {
+            $command->where($params['condition']);
+        }
+        $rows = $command->queryAll();
+        $values = array();
+
+        if (!empty($rows)) {
+            foreach ($rows as $row) {
+                if (isset($params['key'])) {
+                    $values[$row[$params['key']]] = $row[$params['value']];
+                } else {
+                    $values[] = $row[$params['value']];
+                }
+            }
+        }
+        return $values;
+        
+    }
 }

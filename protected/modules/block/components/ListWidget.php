@@ -5,6 +5,7 @@ class ListWidget extends CWidget
 	public $scenario;
 	public $pageSize;
 	public $maxItems;
+	public $customQuery;
 	public $filters;
 	public $item_id;
 	public $item_slug;
@@ -15,7 +16,7 @@ class ListWidget extends CWidget
 	protected $contents;
 	protected $attributes;
 	protected $id;
-        protected $_userList = array();
+    protected $_userList = array();
 
 	public function getViewPath($checkTheme=false)
 	{
@@ -29,9 +30,9 @@ class ListWidget extends CWidget
             $this->id = str_replace(' ', '-', $this->name);
 
             $this->configure();
-
+            
             $this->attributes = $this->itemAttributes();
-
+            
             if ($this->name == 'holidays') {
                 $this->_userList = $this->_getUsers();
             }
@@ -55,7 +56,7 @@ class ListWidget extends CWidget
 		$this->config = json_decode($config);
 	}
 
-	public function itemAttributes()
+	public function itemAttributes(array $params = array())
 	{
             $attributes = Yii::app()->utility->object_to_array($this->config->attributes);
             // Add a slug if a title field is present
@@ -63,6 +64,23 @@ class ListWidget extends CWidget
                 $attributes['slug'] = array(
                     'type' => 'hidden'
                 );
+            }
+            
+            foreach ($attributes as $field => $properties) {
+                $values = array();
+                if (isset($properties['source']) && $properties['source'] === 'db') {
+                    if ($field === 'country') {
+                        Yii::import('application.modules.block.controllers.*');
+                        $management = new ManagementController('block');
+                        $values = $management->actionLoadCountryList();
+                        $withHolidays = FALSE;
+                        if (isset($params['withHolidays'])) {
+                            $withHolidays = $params['withHolidays'];
+                        }
+                        $attributes[$field]['values'] = $this->_getCountryList($values, $withHolidays);
+                    }
+                }
+
             }
 
 	    return $attributes;
@@ -74,18 +92,23 @@ class ListWidget extends CWidget
 		
 		if(isset($this->maxItems))
 			$params['limit'] = $this->maxItems;
-		if ($this->filters) {
-                    $sql = "SELECT b.* "
-                            . "FROM block AS b "
-                            . "LEFT JOIN content AS c "
-                            . "ON c.`block_id` = b.`id` "
-                            . "WHERE b.`name` LIKE '{$this->name} item%' ";
-                    foreach ($this->filters as $field => $fieldData) {
-                        $fieldType = $fieldData['field_type'];
-                        $value = $fieldData['value'];
-                        $sql .= " AND c.`name` = '{$field}' AND c.`{$fieldType}` = '{$value}'";                       
-                    }
-                    $items = Block::model()->findAllBySql($sql, $params);
+        // Run a custom query to load items
+		if ($this->customQuery || $this->filters) {
+            if (!$this->customQuery) {
+                $sql = "SELECT b.* "
+                        . "FROM block AS b "
+                        . "LEFT JOIN content AS c "
+                        . "ON c.`block_id` = b.`id` "
+                        . "WHERE b.`name` LIKE '{$this->name} item%' ";
+                foreach ($this->filters as $field => $fieldData) {
+                    $fieldType = $fieldData['field_type'];
+                    $value = $fieldData['value'];
+                    $sql .= " AND c.`name` = '{$field}' AND c.`{$fieldType}` = '{$value}'";                       
+                }
+            } else {
+                $sql = $this->customQuery;
+            }
+            $items = Block::model()->findAllBySql($sql, $params);
 		} else {
                     $items = Block::model()->with('contents')->findAll(array(
                             'condition'=>'t.name LIKE "'.$this->name.' item%"'
@@ -95,10 +118,10 @@ class ListWidget extends CWidget
 		$list = array();
                 
                 foreach($items as $index=>$item) 
-		{
-			$list[$index] = $this->loadContents($item);
-			$list[$index]['block_id'] = $item->id;
-		}
+                {
+                    $list[$index] = $this->loadContents($item);
+                    $list[$index]['block_id'] = $item->id;
+                }
 
                 $listData = array(
                     'id' => 'title',
@@ -233,14 +256,55 @@ class ListWidget extends CWidget
             }
 	}
         
-        protected function _getUsers()
-        {
-            // Load users list for holiday items
-            $userList = array();
-            $users = User::model()->findAll();
-            foreach ($users as $user) {
-                $userList[$user->id] = $user;
-            }
-            return $userList;
+    protected function _getUsers()
+    {
+        // Load users list for holiday items
+        $userList = array();
+        $users = User::model()->findAll();
+        foreach ($users as $user) {
+            $userList[$user->id] = $user;
         }
+        return $userList;
+    }
+    
+    /**
+     * Get the list of countries
+     * @param array $values
+     *      An array containing countries from the database
+     */
+    protected function _getCountryList(array $values = array(), $withHolidays=FALSE)
+    {
+        
+        if (!$withHolidays) {
+            $rows = Yii::app()->db->createCommand()
+                    ->select('country_id')
+                    ->from('property_country')
+                    ->queryAll();
+        } else {
+            $sql = "SELECT * "
+                    . "FROM block AS b "
+                    . "LEFT JOIN content AS c "
+                    . "ON b.id = c.block_id "
+                    . "LEFT JOIN property_country AS pc "
+                    . "ON pc.property_id = c.string_value "
+                    . "WHERE b.name LIKE '%holidays item%' "
+                    . "AND c.name = 'property_id' "
+                    . "AND pc.property_id = c.string_value ";
+            $command = Yii::app()->db->createCommand($sql);
+            $rows = $command->queryAll();
+        }
+        
+        $countryIds = array();
+        foreach ($rows as $row) {
+            $countryIds[] = $row['country_id'];
+        }
+        
+        $list = array();
+
+        foreach ($countryIds as $id) {
+            $list[$id] = $values[$id];
+        }
+
+        return $list;
+    }
 }

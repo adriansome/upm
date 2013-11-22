@@ -3,14 +3,14 @@
     <fieldset>
         <div class="form-row">
         <?php
-        echo CHtml::dropDownList('Search[location]',$selectedLocation, $locationAttributes);
+        echo CHtml::dropDownList('Search[country]',$selectedLocation, $locationAttributes);
         ?>
         </div>
         <div class="form-row">
             <?php
-            $weeks[''] = 'Any Week';
-            $weeks += Yii::app()->utility->get_week_options('M d, Y');
-            echo CHtml::dropDownList('Search[holiday]',$selectedDate, $weeks);
+            $months[''] = 'Any Month';
+            $months += Yii::app()->utility->get_month_options('F, Y');
+            echo CHtml::dropDownList('Search[holiday]',$selectedDate, $months);
             ?>
         </div>
         <div class="form-row button-row">

@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     var type, params;
-    
+        
     // Check for different DOM elements to determine what type of page we're on
     if ($('.properties-container').length) {
         type = 'properties';
@@ -136,7 +136,7 @@ $(document).ready(function() {
         e.preventDefault();
 
         var url = $(this).attr('href') + '?profile=true';
-
+        
         $.get(url, function(response) {
         	$(".modal").remove();
             // Wait for the modal to appear and then amend property ID
@@ -170,6 +170,36 @@ $(document).ready(function() {
             initRichTextEditors();
         });
 
+    });
+    
+    $('select[data-child-list]').live('change', function() {
+        var ref = $(this);
+        $.ajax({
+            url : '/block/management/loadCountryRegion',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                ajax: true,
+                id: ref.val()
+            },
+            success: function(r) {
+                if (r) {
+                    if (r.hasOwnProperty('values')) {
+                        var selector = 'select[data-sublist="' + ref.data('child-list') + '"]';
+                        $(selector + ' option').remove();
+                        $.each(r.values, function(value, text) {
+                            $(selector).append($('<option></option>')
+                                    .attr("value", value).text(text));
+                        });
+                        $(selector).parent().removeClass('hidden');
+                        
+                    }
+                } else {
+                    var selector = 'select[data-sublist="' + ref.data('child-list') + '"]';
+                    $(selector).parent().addClass('hidden');
+                }
+            }
+        });
     });
 
     $('[data-toggle=\"edit-item\"]').live('click', function(e) {
@@ -371,6 +401,17 @@ $(document).ready(function() {
         else
         {
             var form = $(this).parents('#block-management').find('.modal-body form');
+        }
+        
+        var selector = 'select[data-sublist="region"]';
+        var region_selector = $('select[data-sublist="region"]');
+        
+        // Set the region selector to 0 if no regions are available for the country selected
+        if (region_selector.length) {
+            if (region_selector.parent().hasClass('hidden')) {
+                $(selector + ' option').remove();
+                region_selector.append('<option value="0"></option>');
+            }
         }
         
         $.ajax({
