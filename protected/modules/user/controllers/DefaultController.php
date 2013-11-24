@@ -690,6 +690,9 @@ class DefaultController extends UserController
 		if ($regType == 'landlord') {
 			$model->scenario = 'register_landlord';
 		}
+        elseif ($regType='user') {
+            $model->active = 0;
+        }
 
 		if($model->save())
 		{

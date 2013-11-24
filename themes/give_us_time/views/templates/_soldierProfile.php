@@ -16,7 +16,7 @@ $indexes = array(
 
 <h1>Welcome <?php echo $model->title, ' ', $model->lastname ?></h1>
 
-<?php if($model->attributes['date_activated'] === null) :?>
+<?php if($model->attributes['active'] == '0') :?>
     
     <p>You will be unable to search for holidays until your account has been activated.</p>
 

@@ -9,7 +9,7 @@ else if(Yii::app()->user->role == 'user')
 {
     $user = User::model()->findByPk(Yii::app()->user->id);
     
-    if($user->attributes['date_activated'] === NULL)
+    if($user->attributes['active'] == '0')
     {
         $this->redirect('/profile');
     }

@@ -1,2 +1,2 @@
 
-ALTER TABLE  `user` ADD  `date_activated` DATETIME NULL DEFAULT NULL ;
+ALTER TABLE  `user` ADD  `active` INT NOT NULL DEFAULT  '1';
