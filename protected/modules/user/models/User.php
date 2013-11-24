@@ -121,6 +121,7 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+            array('firstname, lastname, email, role', 'required', 'on'=>'insert'),
 			array('personnel_type, personnel_rank, personnel_service_number, personnel_unit,
 					email, email_confirm, lastname, title, firstname, phone_number, date_terms_agreed',
 					'required',
@@ -171,7 +172,7 @@ class User extends CActiveRecord
 			'currentPassword' => 'Current Password',
 			'password1' => 'Choose a password',
 			'password2' => 'Confirm password',
-			'role' => 'role',
+			'role' => 'Role',
 			'username' => 'Username',
 			'personnel_type' => 'Your current situation',
 			'personnel_rank' => 'Your rank/rating',

@@ -83,9 +83,9 @@ class ManagementController extends UserController
 		{
 			$model->attributes=$_POST['User'];
 			if($model->save())
-				$response['success'] = $model->username.' has been saved.';
+				$response['success'] = $model->email.' has been saved.';
 			else
-				$response['error'] = $model->username.' could not be saved.';
+				$response['error'] = $model->email.' could not be saved.';
 			
 			echo json_encode($response);
 			exit;

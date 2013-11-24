@@ -24,7 +24,7 @@ Yii::app()->clientScript->registerCss('user-management-form', '
     <?php
     $form = $this->beginWidget('CActiveForm', array(
         'id' => 'user-form',
-        'enableAjaxValidation' => false,
+        'enableAjaxValidation' => true,
     ));
     ?>
 
@@ -60,8 +60,10 @@ Yii::app()->clientScript->registerCss('user-management-form', '
 <div class="row roles">
     <?php echo $form->labelEx($model, 'role'); ?>
     <?php
+    $model->role = 'user'; //todo: move this to be theme-specific
+    
     echo $form->radioButtonList($model, 'role', array(
-        'subscriber' => 'Subscriber', 'user' => 'User', 'editor' => 'Editor', 'admin' => 'Admin'
+        'landlord' => 'Landlord', 'user' => 'Soldier', 'editor' => 'Editor', 'admin' => 'Admin'
             ), array(
         'separator' => '', 'template' => '{input} {label}',
             )
