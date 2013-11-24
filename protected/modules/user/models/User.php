@@ -33,6 +33,7 @@
  * @property string $date_created
  * @property string $date_validation_email_sent
  * @property string $activation_code
+ * @property string $date_activated
  * @property string $date_email_validated
  * @property string $date_account_expire
  * @property string $date_revert
@@ -196,6 +197,7 @@ class User extends CActiveRecord
 			'date_created' => 'Date Joined',
 			'date_validation_email_sent' => 'Date Validation Email Sent',
 			'activation_code' => 'Activation Code',
+            'date_activated' => 'Date Activated',
 			'date_email_validated' => 'Date Email Validated',
 			'date_account_expire' => 'Date Account Expire',
 			'date_revert' => 'Date Revert',

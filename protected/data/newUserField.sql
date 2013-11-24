@@ -1,0 +1,2 @@
+
+ALTER TABLE  `user` ADD  `date_activated` DATETIME NULL DEFAULT NULL ;

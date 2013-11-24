@@ -16,6 +16,12 @@ $indexes = array(
 
 <h1>Welcome <?php echo $model->title, ' ', $model->lastname ?></h1>
 
+<?php if($model->attributes['date_activated'] === null) :?>
+    
+    <p>You will be unable to search for holidays until your account has been activated.</p>
+
+<?php endif;?>
+
 <h2>Your Provisional Holiday Booking</h2>
         
 <input type="hidden" id="indexes" data-status="<?php echo $indexes['status'] ?>"
