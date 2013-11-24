@@ -56,7 +56,6 @@ Yii::app()->clientScript->registerCss('user-management-form', '
 <?php echo $form->error($model, 'active'); ?>
     </div>
     
-</div>
 
 <div class="row roles">
     <?php echo $form->labelEx($model, 'role'); ?>
