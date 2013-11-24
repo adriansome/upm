@@ -221,9 +221,10 @@ class User extends CActiveRecord
 		$criteria->compare('role', $this->role, true);
 
 		$criteria->addCondition('date_deleted IS NULL');
-
+        
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+            'pagination' => false,
 		));
 	}
 
