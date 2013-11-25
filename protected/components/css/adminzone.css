@@ -30,6 +30,7 @@
 	width: 965px;
 	left: 50%;
 	margin-left: -482px;
+	height:600px;
 }
 
 .modal .list-view,
@@ -604,3 +605,7 @@
 	display: block;
 }
 */
+
+.btn-danger {
+	display:none;
+}
