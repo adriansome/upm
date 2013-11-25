@@ -24,7 +24,11 @@ if (isset($_POST['Search']['holiday']) && $_POST['Search']['holiday']) {
 
 <?php endif?>
         </div>
-
+    <div style="hidden">
+    <?php
+    var_dump($attributes['country']['values']);
+    ?>
+    </div>
         <div class="listing-details-wrapper">
 			<h2><?php echo $data['property']['title'] . ', ' . $data['property']['area'] . ', ' . $attributes['country']['values'][$data['property']['country']]; ?></h2>
 			<p><?php
