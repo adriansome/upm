@@ -26,6 +26,10 @@
 	margin-left: -365px;
 }
 
+.modal .summary {
+	width: 95%;
+}
+
 .modal.wide
 {
 	width: 965px;
