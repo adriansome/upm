@@ -24,7 +24,7 @@ if (isset($_POST['Search']['holiday']) && $_POST['Search']['holiday']) {
 
 <?php endif?>
         </div>
-    <div style="hidden">
+    <div style="display: none;">
     <?php
     var_dump($attributes['country']['values']);
     ?>
