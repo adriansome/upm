@@ -4,6 +4,7 @@
 
 .modal-body {
 	max-height: 527px !important
+	overflow-y: hidden;
 }
 
 .modal.fade.in
@@ -41,6 +42,8 @@
 .modal .item-view
 {
 	width: 49%;
+	height: 450px;
+	overflow-y:auto;
 }
 
 .modal .list-view {
