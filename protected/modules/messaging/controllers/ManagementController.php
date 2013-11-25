@@ -36,16 +36,25 @@ class ManagementController extends Controller
                 ));            
             }
         }
-        
+        $error = FALSE;
         if (isset($_POST['Template'])) {
             $row->header = $_POST['Template']['header'];
             $row->footer = $_POST['Template']['footer'];
-            if ($row->save()) {
+            if (filter_var($_POST['Template']['recipient'], FILTER_VALIDATE_EMAIL)) {
+                $row->recipient = $_POST['Template']['recipient'];
+            } else {
+                $error = $_POST['Template']['recipient'] . ' is not a valid email address.';
+            }
+            if (!$error && $row->save()) {
                 $response['success'] = $row->name.' has been saved.';
                 $response['id'] = $row->id;
             }
-            else
+            else {
                 $response['error'] = $row->name.' could not be saved.';
+                if ($error) {
+                    $response['error'] .= " " . $error;
+                }
+            }
 
             echo json_encode($response);
             exit;
