@@ -2811,11 +2811,11 @@ img.mfp-img {
 }
 */
 
-.adminzone-login {
+#adminzone-login {
 	background:#000;
 	color:#fff;
 }
-.adminzone-login h1 {
+#adminzone-login h1 {
 	color:#fff;
 }
 
