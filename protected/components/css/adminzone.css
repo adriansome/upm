@@ -48,6 +48,7 @@
 	width: 49%;
 	height: 450px;
 	overflow-y:auto;
+	padding-right: 5px;
 }
 
 .modal .list-view {
