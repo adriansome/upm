@@ -2810,3 +2810,13 @@ img.mfp-img {
 	display: none;
 }
 */
+
+#adminzone-login {
+	background:#000;
+	color:#fff;
+}
+#adminzone-login h1 {
+	color:#fff;
+}
+
+

@@ -4,7 +4,16 @@
 if (!Yii::app()->user->isLoggedIn()) {
     $this->redirect('/register');
 }
-
+// if user hasn't been activated, redirect
+else if(Yii::app()->user->role == 'user')
+{
+    $user = User::model()->findByPk(Yii::app()->user->id);
+    
+    if($user->attributes['active'] == '0')
+    {
+        $this->redirect('/profile');
+    }
+}
 // Redirect to home page if no search results provided
 if (!isset($_POST['Search'])) {
     $this->redirect('/');
@@ -38,7 +47,6 @@ $locationAttributes += $attributes['country']['values'];
 unset($listWidget);
 
 require_once(Yii::app()->theme->basepath.'/views/elements/header.php'); ?>
-
 	<div class="constrained">
 
 		<!-- Begin #sidebar -->

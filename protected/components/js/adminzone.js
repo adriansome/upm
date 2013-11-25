@@ -183,6 +183,13 @@ $(function()
                 {
                     flashMessage('success',data.success);
                     updateList(target,id,refreshUrl);
+            
+                    // reset right pane
+                    if(url.indexOf('/delete/') > 0) {
+                        $('.item-view > .item-header').html('');
+                        $('.item-view > .item-form').html('');
+                        $('.item-view > .item-buttons').html('');
+                    }
                 }
                 else
                     flashMessage('danger',data.error);

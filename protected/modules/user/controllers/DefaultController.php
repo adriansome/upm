@@ -184,31 +184,28 @@ class DefaultController extends UserController
 		    	unset($record);
 		    }
 
-                    if(isset($record->date_email_validated))
-                        if (isset($_POST['type'])) {
-                            echo json_encode(array(
-                                'error' => 'This email address has already been validated',
-                                'success' => false));
-                            exit;
-                        } else {
-                            $this->redirect(array('login', 'username'=>$record->username));
-                        }
-                    else {
-                        $regMethod = isset($_POST['register_method']) ? $_POST['register_method'] : 'ajax';
-                        $model=$this->saveModel($model, $_POST['User'], 'registrationSuccess', $regType, $regMethod);
-                        if ($model === TRUE) {
-                            if (isset($_POST['success_view'])) {
-                                $view = $this->renderPartial($_POST['success_view'],
-                                        array('type' => $regType), TRUE);
-                            }
-                            echo json_encode(array(
-                                'success' => 1,
-                                'html' => $view
-                            ));
-                            exit;
-                        }
-
+            if (isset($record->date_email_validated))
+                if (isset($_POST['type'])) {
+                    echo json_encode(array(
+                        'error' => 'This email address has already been validated',
+                        'success' => false));
+                    exit;
+                } else {
+                    $this->redirect(array('login', 'username' => $record->username));
+                } else {
+                $regMethod = isset($_POST['register_method']) ? $_POST['register_method'] : 'ajax';
+                $model = $this->saveModel($model, $_POST['User'], 'registrationSuccess', $regType, $regMethod);
+                if ($model === TRUE) {
+                    if (isset($_POST['success_view'])) {
+                        $view = $this->renderPartial($_POST['success_view'], array('type' => $regType), TRUE);
                     }
+                    echo json_encode(array(
+                        'success' => 1,
+                        'html' => $view
+                    ));
+                    exit;
+                }
+            }
 		}
 
 		$this->render('register',array(
@@ -693,6 +690,9 @@ class DefaultController extends UserController
 		if ($regType == 'landlord') {
 			$model->scenario = 'register_landlord';
 		}
+        elseif ($regType='user') {
+            $model->active = 0;
+        }
 
 		if($model->save())
 		{

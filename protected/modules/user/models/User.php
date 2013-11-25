@@ -33,6 +33,7 @@
  * @property string $date_created
  * @property string $date_validation_email_sent
  * @property string $activation_code
+ * @property string $active
  * @property string $date_email_validated
  * @property string $date_account_expire
  * @property string $date_revert
@@ -120,6 +121,7 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
+            array('firstname, lastname, email, role', 'required', 'on'=>'insert'),
 			array('personnel_type, personnel_rank, personnel_service_number, personnel_unit,
 					email, email_confirm, lastname, title, firstname, phone_number, date_terms_agreed',
 					'required',
@@ -138,7 +140,7 @@ class User extends CActiveRecord
 			array('email_confirm', 'compare', 'compareAttribute' => 'email', 'on' => 'register'),
 			array('role', 'length', 'max'=>10),
 			array('username, activation_code', 'length', 'max'=>40),
-			array('searchTerm, currentPassword, date_updated, date_last_login, date_validation_email_sent, date_email_validated, date_account_expire, date_revert, dateReset, date_deleted', 'safe'),
+			array('searchTerm, currentPassword, date_updated, date_last_login, date_validation_email_sent, date_email_validated, date_account_expire, date_revert, dateReset, date_deleted, active', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('searchTerm, id, email, old_email, password, password1, password2, role, username, firstname, lastname, fullname, date_terms_agreed, date_updated, date_last_login, date_created, date_validation_email_sent, activation_code, date_email_validated, date_account_expire, date_revert, dateReset, date_deleted', 'safe', 'on'=>'search'),
@@ -170,7 +172,7 @@ class User extends CActiveRecord
 			'currentPassword' => 'Current Password',
 			'password1' => 'Choose a password',
 			'password2' => 'Confirm password',
-			'role' => 'role',
+			'role' => 'Role',
 			'username' => 'Username',
 			'personnel_type' => 'Your current situation',
 			'personnel_rank' => 'Your rank/rating',
@@ -196,6 +198,7 @@ class User extends CActiveRecord
 			'date_created' => 'Date Joined',
 			'date_validation_email_sent' => 'Date Validation Email Sent',
 			'activation_code' => 'Activation Code',
+            'active' => 'Active User',
 			'date_email_validated' => 'Date Email Validated',
 			'date_account_expire' => 'Date Account Expire',
 			'date_revert' => 'Date Revert',
@@ -219,9 +222,10 @@ class User extends CActiveRecord
 		$criteria->compare('role', $this->role, true);
 
 		$criteria->addCondition('date_deleted IS NULL');
-
+        
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+            'pagination' => false,
 		));
 	}
 

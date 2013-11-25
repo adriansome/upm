@@ -2,3 +2,4 @@
 /nbproject
 /protected/config/main.php
 .htaccess
+protected/config/main_avalon.php

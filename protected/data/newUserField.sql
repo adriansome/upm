@@ -1,0 +1,2 @@
+
+ALTER TABLE  `user` ADD  `active` INT NOT NULL DEFAULT  '1';

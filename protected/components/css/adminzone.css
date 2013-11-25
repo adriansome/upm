@@ -3,7 +3,8 @@
 }
 
 .modal-body {
-	max-height: 430px !important;
+	max-height: 527px !important ;
+	overflow-y: hidden;
 }
 
 .modal.fade.in
@@ -25,17 +26,29 @@
 	margin-left: -365px;
 }
 
+.modal .summary {
+	width: 98%;
+}
+
 .modal.wide
 {
 	width: 965px;
 	left: 50%;
 	margin-left: -482px;
+	height:600px;
+}
+
+.modal.wide .modal-footer{ /*Ian added this*/
+	display: none;
 }
 
 .modal .list-view,
 .modal .item-view
 {
 	width: 49%;
+	height: 450px;
+	overflow-y:auto;
+	padding-right: 5px;
 }
 
 .modal .list-view {
@@ -60,10 +73,12 @@
 
 .item-buttons {
 	text-align: right;
+	width: 98%;
 }
 
 .mce-tinymce.mce-container.mce-panel {
 	width: auto !important;
+	margin-bottom: 10px;
 }
 
 /* ----- Messages ----- */
@@ -125,7 +140,7 @@
 #admin-menu a
 {
 	padding: 8px 12px;
-	color: #fff;
+	color: #fff;	
 	text-decoration: none;
 
 	-moz-transition: background 0.1s ease;
@@ -212,7 +227,7 @@
 
 .modal .row label {
 	float: left;
-	width: 35%;
+	width: 30%;
 }
 
 .modal .row input[type=text],
@@ -221,7 +236,7 @@
 .modal .row select,
 .modal .row textarea {
 	float: left;
-	width: 65%;
+	width: 70%;
 }
 
 .modal .row.upload-row input[type=text],
@@ -344,6 +359,8 @@
 	border-top-color: #646464;
 	border-bottom-color: #0a0a0a;
 	border-radius: 3px;
+	
+
 }
 
 .menu-item-list .item-wrapper:hover,
@@ -604,3 +621,26 @@
 	display: block;
 }
 */
+
+.modal-scrollable .btn-danger {
+	display:none;
+}
+
+#message-management .template {
+	margin-bottom: 3px;
+	padding: 5px;
+	background: #444343;
+	background: -moz-linear-gradient(top,  #444343 0%, #262628 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#444343), color-stop(100%,#262628));
+	background: -webkit-linear-gradient(top,  #444343 0%,#262628 100%);
+	background: -o-linear-gradient(top,  #444343 0%,#262628 100%);
+	background: -ms-linear-gradient(top,  #444343 0%,#262628 100%);
+	background: linear-gradient(to bottom,  #444343 0%,#262628 100%);
+
+	border: 1px solid #2e2e2f;
+	border-top-color: #646464;
+	border-bottom-color: #0a0a0a;
+	border-radius: 3px;
+	
+	width:200px;
+}

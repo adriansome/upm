@@ -12,10 +12,10 @@ $this->beginWidget('TbModal', array('id'=>'user-management', 'htmlOptions'=>arra
 
 <div class="modal-body">
 
-<a class="button" data-toggle="default-action" data-target=".item-view" href="<?php echo $this->createUrl('create'); ?>">
+<a class="add btn btn-link" data-toggle="default-action" data-target=".item-view" href="<?php echo $this->createUrl('create'); ?>">
 Add a User</a>
 
-<?php $this->renderPartial('_search', array('model'=>$model)); ?>
+<?php // $this->renderPartial('_search', array('model'=>$model)); ?>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

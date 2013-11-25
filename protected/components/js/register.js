@@ -1,6 +1,10 @@
 $(document).ready( function() {
 
-	$('#User_date_terms_agreed').after('<p class="form-value" style="display:inline;"> I agree to the <a target="_blank" href="/usertermsandconditions">Give Us Time rules</a>, give permission for my details to be verified by Give Us Time and understand that providing false information is a criminal offence.</p>');
+    var tc_url = ($('label.terms').hasClass('landlord')) 
+             ? 'timedonortermsconditions'
+             : 'usertermsandconditions';
+
+	$('#User_date_terms_agreed').after('<p class="form-value" style="display:inline;"> I agree to the <a target="_blank" href="/'+tc_url+'">Give Us Time rules</a>, give permission for my details to be verified by Give Us Time and understand that providing false information is a criminal offence.</p>');
 
    $('#yw0').ready( function() {
        $('#yw0_button').click();
@@ -32,17 +36,6 @@ $(document).ready( function() {
         currentStep.removeClass('active complete');
         previousStep.addClass('active');        
 
-   });
-   
-   $('label.terms').click( function() {
-       
-       var url = ($(this).hasClass('landlord')) 
-                ? 'timedonortermsconditions'
-                : 'usertermsandconditions';
-       
-       window.open('/' + url, 'terms-popup', 'height=800,width=700');
-       return false;
-       
    });
    
    // Update confirmation form as user inputs data
