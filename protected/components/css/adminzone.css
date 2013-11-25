@@ -33,6 +33,10 @@
 	height:600px;
 }
 
+.modal.wide .modal-footer{ /*Ian added this*/
+	display: hidden;
+}
+
 .modal .list-view,
 .modal .item-view
 {
