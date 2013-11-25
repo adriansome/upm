@@ -27,7 +27,7 @@
 }
 
 .modal .summary {
-	width: 95%;
+	width: 98%;
 }
 
 .modal.wide
@@ -72,11 +72,12 @@
 
 .item-buttons {
 	text-align: right;
-	width: 95%;
+	width: 98%;
 }
 
 .mce-tinymce.mce-container.mce-panel {
 	width: auto !important;
+	margin-bottom: 10px;
 }
 
 /* ----- Messages ----- */
@@ -138,7 +139,7 @@
 #admin-menu a
 {
 	padding: 8px 12px;
-	color: #fff;
+	color: #fff;	
 	text-decoration: none;
 
 	-moz-transition: background 0.1s ease;
