@@ -235,7 +235,7 @@
 .modal .row select,
 .modal .row textarea {
 	float: left;
-	width: 65%;
+	width: 70%;
 }
 
 .modal .row.upload-row input[type=text],
