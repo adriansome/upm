@@ -3,7 +3,7 @@
 }
 
 .modal-body {
-	max-height: 527px !important
+	max-height: 527px !important ;
 	overflow-y: hidden;
 }
 
