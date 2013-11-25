@@ -27,6 +27,7 @@ if (isset($_POST['Search']['holiday']) && $_POST['Search']['holiday']) {
     <div style="display: none;">
     <?php
     var_dump($attributes['country']['values']);
+    die;
     ?>
     </div>
         <div class="listing-details-wrapper">
