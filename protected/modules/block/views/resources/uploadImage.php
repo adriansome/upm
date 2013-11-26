@@ -22,7 +22,7 @@ $this->beginWidget('TbModal', array('id' => 'upload-images', 'htmlOptions' => ar
     <div id="progress" class="progress">
         <div class="progress-bar progress-bar-success"></div>
     </div>
-    <p class="info">The maximum file size for uploads is 5 MB </p>
+    <p class="info">Click on image to select. The maximum file size for uploads is 5 MB</p>
     <p style="color:red;" id="error"></p>
     <span class="btn btn-success fileinput-button">
         <i class="glyphicon glyphicon-plus"></i>

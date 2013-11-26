@@ -28,6 +28,7 @@
 
 #upload-images .info {
     float:left;
+    text-align:left;
 }
 
 #upload-images #progress {
