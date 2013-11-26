@@ -187,6 +187,9 @@ $(document).ready(function() {
                     if (r.hasOwnProperty('values')) {
                         var selector = 'select[data-sublist="' + ref.data('child-list') + '"]';
                         $(selector + ' option').remove();
+                        
+                        $(selector).append($('<option>Please select</option>'));
+                        
                         $.each(r.values, function(value, text) {
                             $(selector).append($('<option></option>')
                                     .attr("value", value).text(text));
