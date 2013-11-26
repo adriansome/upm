@@ -431,6 +431,10 @@ $(document).ready(function() {
                         window.location.reload();
                     }
                 }
+                else if(data.error)
+                {
+                    alert(data.error);
+                }
             }
         });        
     });

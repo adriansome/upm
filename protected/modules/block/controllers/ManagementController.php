@@ -100,12 +100,14 @@ class ManagementController extends BlockController
                     if($content[$fieldType[0]] < date('Y-m-d H:m:s'))
                     {
                         $contentValidates = false;
+                        $customErrorMsg = 'Arrival date cannot be set before today';
                     }                
 				} else if ($fieldName == 'departure_date') {
                     // check it's set after arrival
                     if($content[$fieldType[0]] < $arrival_date)
                     {
-                        $contentValidates = false;                        
+                        $contentValidates = false;   
+                        $customErrorMsg = 'Departure date cannot be set before arrival date';                     
                     }
                 } else if ($fieldName == 'country') {
                     $countryId = $value[0];
@@ -153,9 +155,18 @@ class ManagementController extends BlockController
 
 				$response['success'] = $block->name.' has been saved.';
 			}
-			else
-				$response['error'] = $block->name.' contains invalid content';
-			
+			else {
+                $response['success'] = false;
+                        
+                if($customErrorMsg) {
+                    $response['error'] = $customErrorMsg;
+                }
+                else
+                {
+                    $response['error'] = $block->name.' contains invalid content';                    
+                }
+            }
+            
 			echo json_encode($response);
 			exit;
 		}
