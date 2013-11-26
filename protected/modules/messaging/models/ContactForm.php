@@ -39,6 +39,4 @@ class ContactForm extends CActiveRecord
 			'verifyCode'=>'Verification Code',
 		);
 	}
-    
-    public function action
 }
