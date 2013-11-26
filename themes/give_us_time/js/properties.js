@@ -146,7 +146,8 @@ $(document).ready(function() {
                 // Append text to modal
 				if(text === 'property')
 				{
-					$(this).find('#block-form').prepend('<h1>Please tell us about the property you own');
+					$(this).find('#block-form').prepend('<h1>Please tell us about the property you own</h1>');
+                    $(this).find('#block-form').append('<p>Thanks for listing your property. Don\'t forget to add holiday dates by clicking the Add Holiday Availability button</p>');
 				}
 				else
 				{
