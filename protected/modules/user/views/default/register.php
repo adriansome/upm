@@ -112,7 +112,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
 			<?php
 			$labels = $model->attributeLabels();
 
-			CHtml::$afterRequiredLabel = ' <span>*Required</span>';
+			CHtml::$afterRequiredLabel = ' <span>*</span>';
 
 			// Output fields for this step
 			foreach ($fields as $name => $properties) {
@@ -189,6 +189,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publ
 				$x++;
 			}
 			?>
+            <p>* Required field</p>
 			<div class="form-row button-row">
 				<?php
 				if ($step_count >= 1) {
