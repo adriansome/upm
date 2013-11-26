@@ -38,7 +38,8 @@
 			<form action="/logout">
 				<div class="message">
 					<p>Welcome <?php echo $fullname ?></p>
-				</div>
+				</div>                
+				<a href="/profile" class="action-button edit">Profile</a>
 				<input type="submit" value="Logout" />
 			</form>
 		</div>
