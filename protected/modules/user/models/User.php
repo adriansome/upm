@@ -14,6 +14,7 @@
  * @property string $initial
  * @property string $firstname
  * @property string $lastname
+ * @property string $companyname
  * @property string $address1
  * @property string $address2
  * @property string $area
@@ -140,7 +141,7 @@ class User extends CActiveRecord
 			array('email_confirm', 'compare', 'compareAttribute' => 'email', 'on' => 'register'),
 			array('role', 'length', 'max'=>10),
 			array('username, activation_code', 'length', 'max'=>40),
-			array('searchTerm, currentPassword, date_updated, date_last_login, date_validation_email_sent, date_email_validated, date_account_expire, date_revert, dateReset, date_deleted, active', 'safe'),
+			array('searchTerm, currentPassword, date_updated, date_last_login, date_validation_email_sent, date_email_validated, date_account_expire, date_revert, dateReset, date_deleted, active, companyname', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('searchTerm, id, email, old_email, password, password1, password2, role, username, firstname, lastname, fullname, date_terms_agreed, date_updated, date_last_login, date_created, date_validation_email_sent, activation_code, date_email_validated, date_account_expire, date_revert, dateReset, date_deleted', 'safe', 'on'=>'search'),

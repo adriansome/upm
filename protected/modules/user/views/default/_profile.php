@@ -38,11 +38,11 @@ Yii::app()->clientScript->registerCss('user-management-form','
     </div> 
   
     <div class="row"> 
-        <?php echo $form->labelEx($model,'initial'); ?> 
-        <?php echo $form->textField($model,'initial'); ?> 
-        <?php echo $form->error($model,'initial'); ?> 
+        <?php echo $form->labelEx($model,'companyname'); ?> 
+        <?php echo $form->textField($model,'companyname',array('size'=>40,'maxlength'=>40)); ?> 
+        <?php echo $form->error($model,'companyname'); ?> 
     </div> 
-  
+    
     <div class="row"> 
         <?php echo $form->labelEx($model,'firstname'); ?> 
         <?php echo $form->textField($model,'firstname',array('size'=>40,'maxlength'=>40)); ?> 
