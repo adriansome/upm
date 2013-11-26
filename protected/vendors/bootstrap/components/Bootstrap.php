@@ -57,10 +57,10 @@ class Bootstrap extends CApplicationComponent
 	public function registerResponsiveCss()
 	{
 		/** @var CClientScript $cs */
-		$cs = Yii::app()->getClientScript();
-		$cs->registerMetaTag('width=device-width, initial-scale=1.0', 'viewport');
-		$filename = YII_DEBUG ? 'bootstrap-responsive.css' : 'bootstrap-responsive.min.css';
-		$cs->registerCssFile($this->getAssetsUrl().'/css/'.$filename);
+		//$cs = Yii::app()->getClientScript();
+		//$cs->registerMetaTag('width=device-width, initial-scale=1.0', 'viewport');
+		//$filename = YII_DEBUG ? 'bootstrap-responsive.css' : 'bootstrap-responsive.min.css';
+		//$cs->registerCssFile($this->getAssetsUrl().'/css/'.$filename);
 	}
 
 	/**

@@ -576,6 +576,49 @@
 	content: "×";
 }
 
+/* ----- Utility Round Icons ----- */
+
+.items .view .btn.edit,
+.items .view .btn.delete {
+	display: inline-block;
+	width: 17px;
+	height: 17px;
+	padding: 0px;
+	overflow: hidden;
+	text-indent: -9999px;
+}
+
+.btn.btn-link.activate {
+	display: none;
+}
+
+.items .view .btn.edit {
+	background: transparent url(/themes/give_us_time/images/icon-edit.png) 0 0 no-repeat;	
+}
+
+.items .view .btn.delete {
+	background: transparent url(/themes/give_us_time/images/icon-remove.png) 0 0 no-repeat;		
+}
+
+.view b {
+	display: inline-block;
+	width: 88%;
+}
+
+#area-management .view b {
+	width: 77%
+}
+
+#area-management .view .btn.btn-link.activate {
+	display: inline-block;
+	width: 26px;
+	height: 17px;
+	padding: 0px;
+	overflow: hidden;
+	text-indent: -9999px;
+	background: transparent url(/themes/give_us_time/images/icon-activate-deactivate.png) 0 0 no-repeat;	
+}
+
 /* ----- File manager ----- */
 
 .navbar-inner {
