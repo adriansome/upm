@@ -495,7 +495,7 @@ nav:after,
 
 #page-header .social-media {
 	position: absolute;
-	right: 506px;
+	right: 516px;
 	top: 5px;
 }
 
@@ -1701,13 +1701,22 @@ form .back {
 /* ----- CONTACT ------------------------------------------------- */
 
 #contact-form {
-	width: 60%;
 	padding-top: 0px;
 	border: none;
 }
 
 .validation.error {
 	color: #b22;
+}
+
+.contact-form-text {
+	float: left;
+	width: 34%;
+}
+
+.contact-form-wrapper {
+	float: right;
+	width: 64%;
 }
 
 /* ----- NEWS ITEMS ---------------------------------------------- */
@@ -1770,9 +1779,26 @@ form .back {
 
 /* ----- LOGIN --------------------------------------------------- */
 
-#page-login {
+#page-login,
+#adminzone-login {
 	height: 100%;
 	padding: 15px;
+}
+
+#adminzone-login #page-login {
+	padding: 0;
+}
+
+#adminzone-login {
+	background: #000;
+	color: #fff;
+}
+#adminzone-login h1 {
+	color:#fff;
+}
+
+#adminzone-login .standard-form {
+	border-color: #424242;
 }
 
 #page-login #content {
@@ -2810,13 +2836,3 @@ img.mfp-img {
 	display: none;
 }
 */
-
-#adminzone-login {
-	background:#000;
-	color:#fff;
-}
-#adminzone-login h1 {
-	color:#fff;
-}
-
-

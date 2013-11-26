@@ -5,7 +5,7 @@ $success = FALSE;
 
 // Send the contact form
 if (isset($_POST['contact-send']) && $_POST['contact-send']) {
-    
+
     if(isset($_POST['name'], $_POST['email'], $_POST['message'])) {
         if ($_POST['name'] && $_POST['email'] && $_POST['message']) {
             if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
@@ -21,7 +21,7 @@ if (isset($_POST['contact-send']) && $_POST['contact-send']) {
                 unset($_POST['name'], $_POST['email'], $_POST['message']);
                 $success = TRUE;
             }
-            
+
         } else {
             if (!$_POST['name']) {
                 $errors['name'] = 'This field is required.';
@@ -36,7 +36,7 @@ if (isset($_POST['contact-send']) && $_POST['contact-send']) {
     } else {
         $errors[] = 'Missing required fields';
     }
-    
+
 }
 
 ?>
@@ -74,80 +74,83 @@ if (isset($_POST['contact-send']) && $_POST['contact-send']) {
 			)); ?>
 			</h1>
 			<div class="inner-content">
+				<div class="contact-form-text">
 				<?php $this->widget('RichText',array(
-					'name'=>'main content area',
-					'scope'=>'page',
-				));
-                ?>
+						'name'=>'main content area',
+						'scope'=>'page',
+					));
+				?>
+                </div>
+                <div class="contact-form-wrapper">
+					<?php
+						/*
+						try {
+							$this->widget('Form', array(
+								'name' => 'contact-form',
+								'page_id' => $model->id,
+								'scope' => 'page',
+								//'view' => 'forms.templates.contact',
+								'json' => 'forms/json/contact'
+							));
+						} catch (Exception $e) {
+							Yii::log($e->getMessage(), 'error');
+							echo "<p class='error'>An error occurred while outputting this form</p>";
+						}*/
+					?>
+					<?php
+						if ($success) {
+							echo "<p class='success'>Your message has been sent.</p>";
+						}
+						if (!empty($errors)) {
+							echo "<p class='validation error'>An error occurred while trying to send the form.</p>";
+						}
+					?>
 
-                <?php
-                /*
-                try {
-                    $this->widget('Form', array(
-                        'name' => 'contact-form',
-                        'page_id' => $model->id,
-                        'scope' => 'page',
-                        //'view' => 'forms.templates.contact',
-                        'json' => 'forms/json/contact'
-                    ));   
-                } catch (Exception $e) {
-                    Yii::log($e->getMessage(), 'error');
-                    echo "<p class='error'>An error occurred while outputting this form</p>";
-                }*/
-                ?>
+					<div class="key">
+						<p>Fields marked '<span class="required">(required)</span>' are mandatory.</p>
+					</div>
 
-                <?php
-                if ($success) {
-                    echo "<p class='success'>Your message has been sent.</p>";
-                }
-                if (!empty($errors)) {
-                    echo "<p class='validation error'>An error occurred while trying to send the form.</p>";
-                }
-                ?>
-				<div class="key">
-					<p>Fields marked '<span class="required">(required)</span>' are mandatory.</p>
+					<form action="#" method="post" class="standard-form" id="contact-form">
+						<div class="form-row">
+							<label for="contact-name">Name <span class="required">(required)</span></label>
+							<input name="name" id="contact-name" value="<?php if (isset($_POST['name'])) { echo  htmlentities($_POST['name']); } ?>" type="text" />
+							<?php
+							if (isset($errors['name'])):
+							?>
+							<p class="validation error"><?php echo $errors['name'] ?></p>
+							<?php
+							endif;
+							?>
+						</div>
+						<div class="form-row">
+							<label for="contact-email">E-mail <span class="required">(required)</span></label>
+							<input name="email" value="<?php if (isset($_POST['email'])) { echo  htmlentities($_POST['email']); } ?>"  id="contact-email" type="text" />
+							<?php
+							if (isset($errors['email'])):
+							?>
+							<p class="validation error"><?php echo $errors['email'] ?></p>
+							<?php
+							endif;
+							?>
+						</div>
+						<div class="form-row">
+							<label for="contact-message">Message <span class="required">(required)</span></label>
+							<textarea name="message" id="contact-message" cols="20" rows="6"><?php if (isset($_POST['message'])) {
+								echo htmlentities($_POST['message']);
+							} ?></textarea>
+							<?php
+							if (isset($errors['message'])):
+							?>
+							<p class="validation error"><?php echo $errors['message'] ?></p>
+							<?php
+							endif;
+							?>
+						</div>
+						<div class="form-row button-row">
+							<input name="contact-send" type="submit" value="Send" />
+						</div>
+					</form>
 				</div>
-
-				<form action="#" method="post" class="standard-form" id="contact-form">
-					<div class="form-row">
-						<label for="contact-name">Name <span class="required">(required)</span></label>
-                        <input name="name" id="contact-name" value="<?php if (isset($_POST['name'])) { echo  htmlentities($_POST['name']); } ?>" type="text" />
-                        <?php
-                        if (isset($errors['name'])):
-                        ?>
-						<p class="validation error"><?php echo $errors['name'] ?></p>
-                        <?php
-                        endif;
-                        ?>
-					</div>
-					<div class="form-row">
-						<label for="contact-email">E-mail <span class="required">(required)</span></label>
-						<input name="email" value="<?php if (isset($_POST['email'])) { echo  htmlentities($_POST['email']); } ?>"  id="contact-email" type="text" />
-                        <?php
-                        if (isset($errors['email'])):
-                        ?>
-						<p class="validation error"><?php echo $errors['email'] ?></p>
-                        <?php
-                        endif;
-                        ?>
-					</div>
-					<div class="form-row">
-						<label for="contact-message">Message <span class="required">(required)</span></label>
-                        <textarea name="message" id="contact-message" cols="20" rows="6"><?php if (isset($_POST['message'])) { 
-                            echo htmlentities($_POST['message']);
-                        } ?></textarea>
-                        <?php
-                        if (isset($errors['message'])):
-                        ?>
-						<p class="validation error"><?php echo $errors['message'] ?></p>
-                        <?php
-                        endif;
-                        ?>
-					</div>
-					<div class="form-row button-row">
-						<input name="contact-send" type="submit" value="Send" />
-					</div>
-				</form>
 			</div>
 		</section>
 		<!-- End #main-content -->
