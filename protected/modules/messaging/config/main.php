@@ -18,8 +18,8 @@ return array(
         'urlManager' => array(
             'rules' => array(
                 $module_name . '/management' => $module_name . '/management/index',
-                $module_name . '/management/<action:\w+>/<name:\w+>' => $module_name . '/management/<action>',
-                $module_name . '/management/<action:\w+>/<msgId:\w+>' => $module_name . '/management/<action>',
+                $module_name . '/management/<action:\w+>/<msgId:\d+>' => $module_name . '/management/<action>',
+                $module_name . '/management/<action:\w+>/<name:.+>' => $module_name . '/management/<action>',
             ),
         ),
     ),

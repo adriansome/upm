@@ -9,6 +9,9 @@
     echo $form->errorSummary($model);
     ?>
     <div class="row">
+        Dear &lt;Recipient&gt;,
+    </div>
+    <div class="row">
         <?php echo $form->labelEx($model, 'header'); ?>
         <?php echo $form->textArea($model, 'header', array('rows' => 6, 'cols' => 50)); ?>
         <?php echo $form->error($model, 'header'); ?>
