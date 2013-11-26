@@ -34,7 +34,6 @@ class ManagementController extends BlockController
                                 'item', 'loadCountryList', 'loadRegionList',
                                 'loadCountryRegion'),
                 'users'=>array('@'),
-                'roles' => array('landlord'),
             ),
             array('allow',
                 'actions' => array('item','update'),

@@ -78,6 +78,15 @@ class ListWidget extends CWidget
                             $withHolidays = $params['withHolidays'];
                         }
                         $attributes[$field]['values'] = $this->_getCountryList($values, $withHolidays);
+                    } else if ($field === 'region') {
+                        Yii::import('application.modules.block.controllers.*');
+                        $management = new ManagementController('block');
+                        $values = $management->actionLoadRegionList();
+                        $withHolidays = FALSE;
+                        if (isset($params['withHolidays'])) {
+                            $withHolidays = $params['withHolidays'];
+                        }
+                        $attributes[$field]['values'] = $values;//jcavi                       
                     }
                 }
 
@@ -302,6 +311,47 @@ class ListWidget extends CWidget
         $list = array();
 
         foreach ($countryIds as $id) {
+            $list[$id] = $values[$id];
+        }
+
+        return $list;
+    }
+    
+    /**
+     * Get the list of regions
+     * @param array $values
+     *      An array containing countries from the database
+     */
+    protected function _getRegionList(array $values = array(), $withHolidays=FALSE)
+    {
+        
+        if (!$withHolidays) {
+            $rows = Yii::app()->db->createCommand()
+                    ->select('region_id')
+                    ->from('property_country')
+                    ->queryAll();
+        } else {
+            $sql = "SELECT * "
+                    . "FROM block AS b "
+                    . "LEFT JOIN content AS c "
+                    . "ON b.id = c.block_id "
+                    . "LEFT JOIN property_country AS pc "
+                    . "ON pc.property_id = c.string_value "
+                    . "WHERE b.name LIKE '%holidays item%' "
+                    . "AND c.name = 'property_id' "
+                    . "AND pc.property_id = c.string_value ";
+            $command = Yii::app()->db->createCommand($sql);
+            $rows = $command->queryAll();
+        }
+        
+        $regionIds = array();
+        foreach ($rows as $row) {
+            $regionIds[] = $row['region_id'];
+        }
+        
+        $list = array();
+
+        foreach ($regionIds as $id) {
             $list[$id] = $values[$id];
         }
 

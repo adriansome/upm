@@ -1,6 +1,7 @@
 <?php /* @var $this ListWidget */
-
-if ($_POST['Search']['country']) {
+if ($_POST['Search']['region']) {
+    $locationText = $this->viewData['attributes']['region']['values'][$_POST['Search']['region']];    
+} else if ($_POST['Search']['country']) {
     $locationText = $this->viewData['attributes']['country']['values'][$_POST['Search']['country']];
 } else {
     $locationText = '';

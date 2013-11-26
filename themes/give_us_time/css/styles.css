@@ -2831,6 +2831,9 @@ img.mfp-img {
 	opacity: .6;
 	border-radius: 8px;
 }
+.hidden {
+    display:none;
+}
 
 /*
 .modal-scrollable .close-modal.btn.btn-danger {

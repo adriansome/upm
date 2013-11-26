@@ -22,36 +22,36 @@
 			<h2>Search for time</h2>
 			<p>Registered and verified? Search for a Give Us Time holiday.</p>
 			<form id="search-form" action="/search" method="post">
-			<div class="form-row">
-				<?php
-					$months[''] = 'Any Month';
-					$months += Yii::app()->utility->get_month_options('F, Y');
+                <div class="form-row">
+                    <?php
+                        $months[''] = 'Any Month';
+                        $months += Yii::app()->utility->get_month_options('F, Y');
 
-					echo CHtml::dropDownList('Search[holiday]','', $months);
-				?>
-			</div>
-            
-			<div class="form-row">
-				<?php
-					$listWidget = new ListWidget();
-					$listWidget->name = 'properties';
-					$listWidget->init();
+                        echo CHtml::dropDownList('Search[holiday]','', $months);
+                    ?>
+                </div>
 
-					$attributes = $listWidget->itemAttributes(array('withHolidays' => TRUE));
-					unset($listWidget);
-                    $countries = array('Any Country') + $attributes['country']['values'];
-					echo CHtml::dropDownList('Search[country]','', $countries);
-				?>
-			</div>
-			<div class="form-row hidden">
-				<?php
-                    $regions = array('' => 'Any Region');
-					echo CHtml::dropDownList('Search[region]','', $regions);
-				?>
-			</div>                
-			<div class="form-row">
-				<input type="submit" class="more" value="Search" />
-			</div>
+                <div class="form-row">
+                    <?php
+                        $listWidget = new ListWidget();
+                        $listWidget->name = 'properties';
+                        $listWidget->init();
+
+                        $attributes = $listWidget->itemAttributes(array('withHolidays' => TRUE));
+                        unset($listWidget);
+                        $countries = array('Any Country') + $attributes['country']['values'];
+                        echo CHtml::dropDownList('Search[country]','', $countries);
+                    ?>
+                </div>
+                <div class="form-row hidden">
+                    <?php
+                        $regions = array('' => 'Any Region');
+                        echo CHtml::dropDownList('Search[region]','', $regions);
+                    ?>
+                </div>                
+                <div class="form-row">
+                    <input type="submit" class="more" value="Search" />
+                </div>
 			</form>
 		</div>
 

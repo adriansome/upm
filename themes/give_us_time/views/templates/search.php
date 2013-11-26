@@ -21,13 +21,22 @@ if (!isset($_POST['Search'])) {
 
 $customQuery = null;
 
-if ($_POST['Search']['country']) {
-    $id = (int)$_POST['Search']['country'];
+// if region sent, no need to bother with country
+if($_POST['Search']['region']) {
+    $regionid = (int)$_POST['Search']['region'];
     $customQuery = "SELECT b.* "
                     . "FROM `property_country` pc "
                     . "LEFT JOIN block b "
                     . "ON pc.`property_id` = b.id "
-                    . "WHERE pc.`country_id` = \"{$id}\"";
+                    . "WHERE pc.`region_id` = \"{$regionid}\"";
+    
+} else if ($_POST['Search']['country']) {
+    $countryid = (int)$_POST['Search']['country'];
+    $customQuery = "SELECT b.* "
+                    . "FROM `property_country` pc "
+                    . "LEFT JOIN block b "
+                    . "ON pc.`property_id` = b.id "
+                    . "WHERE pc.`country_id` = \"{$countryid}\"";
 }
 
 
