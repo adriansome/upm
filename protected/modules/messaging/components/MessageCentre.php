@@ -52,8 +52,10 @@ class MessageCentre extends YiiMailMessage
         $this->setBody($data);
         $this->setContentType('text/html');
                 
-        //var_dump($this->getCc());        
+               
         //var_dump($this->getTo());
+        //var_dump($this->getCc()); 
+        //var_dump($this->getFrom()); 
         //echo $this->getBody();exit;
 
         if (!Yii::app()->mail->send($this)) {

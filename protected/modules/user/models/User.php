@@ -399,6 +399,10 @@ class User extends CActiveRecord
     {
         $email = new MessageCentre($template);
         $email->setSubject($subject . ' - ' . Yii::app()->name);
+        if(isset($params['from']) && $params['from'] == 'currentUser') {
+            $currentUser = User::model()->findByPk(Yii::app()->user->id);
+            $email->setFrom($currentUser->email);
+        }
         $email->setAdditionalParams($params);
         if($recipient != '') {
             $email->setRecipient($recipient);

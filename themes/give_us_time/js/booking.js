@@ -56,7 +56,8 @@ $(document).ready( function() {
                 'holiday_start' : $('#holiday-dates').data('start'),
                 'holiday_end'   : $('#holiday-dates').data('end'),
                 'people' : form.serializeArray(),
-                'property_name' : $('.resort-name').html()
+                'property_name' : $('.resort-name').html(),
+                'from': 'currentUser'
             }
         }
         
