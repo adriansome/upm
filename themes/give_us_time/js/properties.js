@@ -235,7 +235,41 @@ $(document).ready(function() {
                 // show region if it's set
                 var region_select = $('[data-sublist=\"region\"]');
                 if(region_select.val() != '') {
-                    region_select.parent().removeClass('hidden');
+                    
+                    var select_id = region_select.val();
+                    
+                    // filter list to given country                    
+                    var ref = $('[data-child-list=\"region\"]');
+                    $.ajax({
+                        url : '/block/management/loadCountryRegion',
+                        type: 'post',
+                        dataType: 'json',
+                        data: {
+                            ajax: true,
+                            id: ref.val()
+                        },
+                        success: function(r) {
+                            if (r) {
+                                if (r.hasOwnProperty('values')) {
+                                    var selector = 'select[data-sublist="' + ref.data('child-list') + '"]';
+                                    $(selector + ' option').remove();
+
+                                    $(selector).append($('<option>Please select</option>'));
+
+                                    $.each(r.values, function(value, text) {
+                                        $(selector).append($('<option></option>')
+                                                .attr("value", value).text(text));
+                                    });
+                                    $(selector).val(select_id);
+                                    
+                                    $(selector).parent().removeClass('hidden');
+                                }
+                            } else {
+                                var selector = 'select[data-sublist="' + ref.data('child-list') + '"]';
+                                $(selector).parent().addClass('hidden');
+                            }
+                        }
+                    });
                 }
                 else
                 {
