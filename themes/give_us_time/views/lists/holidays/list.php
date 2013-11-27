@@ -1,5 +1,5 @@
 <?php /* @var $this ListWidget */ ?>
-<a data-toggle="add-item" class="more" href="<?php echo Yii::app()->createUrl('/holidays/management/item'); ?>">Add Holiday</a>
+<a data-toggle="add-item" class="more" href="<?php echo Yii::app()->createUrl('/holidays/management/item'); ?>">Add Holiday Availability</a>
 <?php
 $keys = array_keys($this->attributes);
 $indexes = array(
@@ -18,7 +18,7 @@ $this->widget('zii.widgets.CListView', array(
         'tagName' => 'ul',
 		'emptyText' => 'You have no holiday weeks for this property.',
 	'htmlOptions' => array(
-		'class' => 'booking-listing constrained'					   
+		'class' => 'booking-listing constrained'
 	),
 	//'summaryText'=> 'Properties',
 	'template'=>'{items}',

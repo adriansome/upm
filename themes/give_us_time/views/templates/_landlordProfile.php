@@ -37,8 +37,41 @@ if (isset($id) && (int) $id) {
         <div class="inner-content">
             <div class="details-row" id="address">
                 <div class="landlord-name"><?php echo $model->fullname; ?></div>
-                <p>
-                    <?php echo " <br/>
+                <p><br/>
+
+                    <?php
+
+                    	/*
+                    	if($model->address1) {
+                    		echo $model->address1 . ',';
+                    	};
+                    	if($model->address2) {
+                    		echo $model->address2 . ',<br/>';
+                    	};
+
+                    	if($model->area) {
+							echo $model->area . ',';
+                    	};
+                    	if($model->city) {
+							echo $model->city . ',<br/>';
+                    	};
+
+                    	if($model->county) {
+							echo $model->county . ',<br/>';
+                    	};
+
+                    	if($model->postcode) {
+							echo $model->postcode . ',<br/>';
+                    	};
+
+                    	if($model->country) {
+							echo $model->country . ',<br/><br/>';
+                    	};
+                    	echo $model->phone_number;
+                    	*/
+					?>
+
+                    <?php echo "
                                         $model->address1, $model->address2 <br/>
                                         $model->area, $model->city, <br/>
                                         $model->county <br/>
