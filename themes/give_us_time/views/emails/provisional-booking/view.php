@@ -2,7 +2,7 @@
 
 <?php
 if (isset($header)) {
-    echo $header . "\n\n";
+    echo "<p>$header</p>";
 } ?>
 
 <p>The holiday dates are from <?php echo $params['holiday_start']; ?> to <?php echo $params['holiday_end'] ?>, requested by <?php echo $params['user_name']?>.</p>
@@ -38,6 +38,6 @@ for ($i = 1; $i <= $total_people-1; $i++) {
 }
 
 if (isset($footer)) {
-    echo $footer;
+    echo "<p>$footer</p>";
 }
 ?>

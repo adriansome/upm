@@ -52,6 +52,7 @@ class MessageCentre extends YiiMailMessage
         $this->setBody($data);
         $this->setContentType('text/html');
                 
+        //var_dump($this->getCc());        
         //var_dump($this->getTo());
         //echo $this->getBody();exit;
 
@@ -82,15 +83,23 @@ class MessageCentre extends YiiMailMessage
     }
     
     private function _getRecipient()
-    {
-        if($this->_recipient == '') {
-            $this->_recipient = Yii::app()->params['adminEmail'];
-            if (isset($this->_templateData['data']['recipient'])) {
-                $recipient = $this->_templateData['data']['recipient'];
-                if (!empty($recipient) && filter_var($recipient, FILTER_VALIDATE_EMAIL)) {
-                    $this->_recipient = $recipient;
-                }
+    {        
+        $value = Yii::app()->params['adminEmail'];
+        if (isset($this->_templateData['data']['recipient'])) {
+            $recipient = $this->_templateData['data']['recipient'];
+            if (!empty($recipient) && filter_var($recipient, FILTER_VALIDATE_EMAIL)) {
+                $value = $recipient;
             }
+        }        
+        
+        if($this->_recipient == '') {
+            $this->_recipient = $value;
+        }
+        else
+        {
+            // cc the stored recipient if we already have a specific recipient
+            $this->addCc($value);
+            
         }
         return $this->_recipient;
     }

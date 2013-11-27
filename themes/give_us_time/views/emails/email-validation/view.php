@@ -1,4 +1,3 @@
-
 <h3>Hi <?php echo $params['fullname']; ?>,</h3>
 
 <?php
