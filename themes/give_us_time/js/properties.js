@@ -426,6 +426,11 @@ $(document).ready(function() {
             }
         }
         
+        form.find('.datepicker').each(function(){
+            var formatteddate = $(this).val().replace('/', '-').replace('/', '-');
+            $(this).val(formatteddate);
+        });
+        
         $.ajax({
             type: 'POST',
             dataType: 'json',
