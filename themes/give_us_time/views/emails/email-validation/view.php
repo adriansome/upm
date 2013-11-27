@@ -2,7 +2,7 @@
 
 <?php
 if (isset($header)) {
-    echo "<p style="margin:20px 0 20px 0">$header</p>";
+    echo "<p style='margin:20px 0 20px 0'>$header</p>";
 }?>
 
 <?php $url = $this->createAbsoluteUrl('/user/validate?uid=' . $params['uid']) ?>
@@ -10,6 +10,6 @@ if (isset($header)) {
 <p><?php echo CHtml::link('' .  Yii::app()->name, $url); ?></p>
 
 <?php if (isset($footer)) {
-    echo "<p style="margin:20px 0 20px 0" >$footer</p>";
+    echo "<p style='margin:20px 0 20px 0'>$footer</p>";
 }
 ?>
