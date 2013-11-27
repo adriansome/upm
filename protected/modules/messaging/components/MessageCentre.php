@@ -3,6 +3,7 @@ class MessageCentre extends YiiMailMessage
 {
     
     private $_message, $_templateData, $_params = array();
+    private $_recipient = '';
     
     public function __construct($template)
     {
@@ -48,8 +49,10 @@ class MessageCentre extends YiiMailMessage
         $data = array_merge(array('message' => $this->_message), $templateData, $this->_params);
         
         $this->view = $this->_templateData['template']['alias'] . '.view';
-        $this->setBody($data);
         
+        $this->setBody($data);
+                
+        //var_dump($this->getTo());
         //echo $this->getBody();exit;
 
         if (!Yii::app()->mail->send($this)) {
@@ -80,14 +83,23 @@ class MessageCentre extends YiiMailMessage
     
     private function _getRecipient()
     {
-        $templateRecipient = Yii::app()->params['adminEmail'];
-        if (isset($this->_templateData['data']['recipient'])) {
-            $recipient = $this->_templateData['data']['recipient'];
-            if (!empty($recipient) && filter_var($recipient, FILTER_VALIDATE_EMAIL)) {
-                $templateRecipient = $recipient;
+        if($this->_recipient == '') {
+            $this->_recipient = Yii::app()->params['adminEmail'];
+            if (isset($this->_templateData['data']['recipient'])) {
+                $recipient = $this->_templateData['data']['recipient'];
+                if (!empty($recipient) && filter_var($recipient, FILTER_VALIDATE_EMAIL)) {
+                    $this->_recipient = $recipient;
+                }
             }
         }
-        return $templateRecipient;
+        return $this->_recipient;
+    }
+    
+    public function setRecipient($recipient)
+    {
+        if (!empty($recipient) && filter_var($recipient, FILTER_VALIDATE_EMAIL)) {
+            $this->_recipient = $recipient;
+        }
     }
     
     public function setAdditionalParams($params)

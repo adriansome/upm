@@ -369,14 +369,9 @@ class User extends CActiveRecord
 
 	protected function sendValidationEmail()
 	{
-		$validationEmail = new YiiMailMessage;
-		$validationEmail->view = 'user.views.mail.validationEmail';
-		$validationEmail->setBody(array('fullname'=>$this->fullname, 'uid'=>$this->activation_code), 'text/html');
-        $validationEmail->setSubject('Validate Email - ' . Yii::app()->name);
-		$validationEmail->addTo($this->email);
-		$validationEmail->from = Yii::app()->params['adminEmail'];
-		return (Yii::app()->mail->send($validationEmail));
-        }
+        $params = array('fullname'=>$this->fullname, 'uid'=>$this->activation_code);        
+		return $this->sendNotification('email-validation', 'Validate Email', $params, $this->email);
+    }
 
 	protected function sendCredentialsEmail()
 	{
@@ -400,11 +395,14 @@ class User extends CActiveRecord
 		Yii::app()->mail->send($revertEmail);
 	}
     
-    public function sendNotification($template, $subject, array $params = array())
+    public function sendNotification($template, $subject, array $params = array(), $recipient = '')
     {
         $email = new MessageCentre($template);
         $email->setSubject($subject . ' - ' . Yii::app()->name);
         $email->setAdditionalParams($params);
+        if($recipient != '') {
+            $email->setRecipient($recipient);
+        }
         return $email->send();
     }
 
