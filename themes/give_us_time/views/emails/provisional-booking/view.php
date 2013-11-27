@@ -1,11 +1,12 @@
-<h3>Dear <?php echo $params['recipient_name'] ?>,</h3>
+<p>Dear <?php echo $params['recipient_name'] ?>,</p>
 
 <?php
 if (isset($header)) {
-    echo "<p>$header</p>";
+    echo "<p styles="margin:20px 0 20px 0;" >$header</p>";
 } ?>
 
-<p>The holiday dates are from <?php echo $params['holiday_start']; ?> to <?php echo $params['holiday_end'] ?>, requested by <?php echo $params['user_name']?>.</p>
+<p>The holiday dates are from <?php echo $params['holiday_start']; ?> to <?php echo $params['holiday_end'] ?> </p>
+<p>Requested by <?php echo $params['user_name']?>.</p>
 <p>The resort is <?php echo $params['property_name'] ?>.</p>
 
 <?php
@@ -14,7 +15,7 @@ $total_people = $params['people'][0]['value'];
 <p>Total People: <?php echo $total_people ?></p>
 
 <p>Person 1</p>
-<ul>
+<ul  styles="margin:20px 0 20px 0;">
     <li>Name: <?php echo $params['people'][1]['value'] ?></li>
 </ul>
 
@@ -38,6 +39,6 @@ for ($i = 1; $i <= $total_people-1; $i++) {
 }
 
 if (isset($footer)) {
-    echo "<p>$footer</p>";
+    echo "<p styles="margin:20px 0 20px 0;">$footer</p>";
 }
 ?>
