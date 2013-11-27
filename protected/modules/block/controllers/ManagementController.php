@@ -461,6 +461,7 @@ class ManagementController extends BlockController
                     if (in_array($content->name, $sublists)) {
                         $fields[$content->name]['class'] = 'hidden';
                         $htmlOptions['data-sublist'] = $content->name;
+                        $htmlOptions['prompt'] = 'Please select';
                     }                    
 					$fields[$content->name]['input']=CHtml::dropDownList('Content['.$index.'][string_value]',$content->string_value, $attributes[$content->name]['values'], $htmlOptions);
 // 					$fields[$content->name]['input']='<select><option>Test</option></select>';

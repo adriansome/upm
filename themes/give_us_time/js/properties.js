@@ -231,6 +231,16 @@ $(document).ready(function() {
                 // i think fileupload.js is adding this once it's been registered
                 $('.modal-scrollable').removeClass('modal-scrollable');
                 $('.modal-backdrop').attr('style','');
+                    
+                // show region if it's set
+                var region_select = $('[data-sublist=\"region\"]');
+                if(region_select.val() != '') {
+                    region_select.parent().removeClass('hidden');
+                }
+                else
+                {
+                    region_select.parent().addClass('hidden');
+                }
                 
             }).modal();
             initRichTextEditors();
