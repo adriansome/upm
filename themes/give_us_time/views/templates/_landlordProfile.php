@@ -41,44 +41,51 @@ if (isset($id) && (int) $id) {
 
                     <?php
 
-                    	/*
+
                     	if($model->address1) {
-                    		echo $model->address1 . ',';
+                    		echo $model->address1 . '&nbsp;&nbsp;&nbsp;';
                     	};
                     	if($model->address2) {
-                    		echo $model->address2 . ',<br/>';
+                    		echo $model->address2;
                     	};
 
+                    ?>
+					<br/>
+					<?php
                     	if($model->area) {
-							echo $model->area . ',';
+							echo $model->area . '&nbsp;&nbsp;&nbsp;';
                     	};
                     	if($model->city) {
-							echo $model->city . ',<br/>';
+							echo $model->city;
                     	};
-
+                    ?>
+					<br/>
+					<?php
                     	if($model->county) {
-							echo $model->county . ',<br/>';
+							echo $model->county . '<br/>';
                     	};
 
                     	if($model->postcode) {
-							echo $model->postcode . ',<br/>';
+							echo $model->postcode . '<br/>';
                     	};
 
                     	if($model->country) {
-							echo $model->country . ',<br/><br/>';
+							echo $model->country . '<br/>';
                     	};
+                    ?>
+                    <br/>
+                    <?php
                     	echo $model->phone_number;
-                    	*/
 					?>
 
-                    <?php echo "
+                    <?php /* echo "
                                         $model->address1, $model->address2 <br/>
                                         $model->area, $model->city, <br/>
                                         $model->county <br/>
                                         $model->postcode.<br/>
                                         $model->country<br/><br/>
 										$model->phone_number
-                                        " ?>
+                                        " */ ?>
                 </p>
                 <a data-toggle="edit-item" data-target="profile" class="action-button edit" href="/user/profileupdate/">Edit</a>
             </div>

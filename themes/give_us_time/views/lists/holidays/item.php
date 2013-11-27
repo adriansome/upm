@@ -26,7 +26,7 @@ if (isset($_POST['Search']['holiday']) && $_POST['Search']['holiday']) {
         </div>
 
         <div class="listing-details-wrapper">
-			<h2><?php echo $data['property']['title'] . ', ' . $data['property']['area'] . ', ' . $attributes['country']['values'][$data['property']['country']]; ?></h2>
+			<h2><?php echo $data['property']['title'] . '&nbsp;&nbsp;&nbsp;' . $data['property']['area'] . '&nbsp;&nbsp;&nbsp;' . $attributes['country']['values'][$data['property']['country']]; ?></h2>
 			<p><?php
 			echo $data['holiday']['number_of_bedrooms'] . ' bed ' .
 			$attributes['type']['values'][$data['property']['type']] . '. ';
