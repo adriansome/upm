@@ -224,28 +224,33 @@ class ManagementController extends UserController
         public function actionSendNotification()
         {
             if (isset($_POST['ajax'])) {
-                if (!isset($_POST['id']) || !isset($_POST['view_path'])) {
+                if (!isset($_POST['id']) || !isset($_POST['template']) || !isset($_POST['subject']) || !isset($_POST['params'])) {
                     $response['error'] = "Missing required information to send notification";
                 } else {
-                    $id = (int)$_POST['id'];
-                    if (!$this->getViewFile($_POST['view_path']) || !$id) {
+                    $recipientid = (int) $_POST['id'];
+                    $params = $_POST['params'];
+                    
+                    if(!$recipientid) {
                         $response['error'] = 'Invalid parameters';
                     } else {
-                        $viewPath = $_POST['view_path'];
-                        $model = $this->loadModel($id);
-                        if (isset($_POST['params']) && is_array($_POST['params'])) {
-                            $params = $_POST['params'];
-                        } else {
-                            $params = array();
+                        
+                        // get params for recipient
+                        $recipient = $this->loadModel($recipientid);
+                        $params['recipient_name'] = $recipient->getFullname();
+                        
+                        // get params for current user
+                        $currentUser = User::model()->findByPk(Yii::app()->user->id);
+                        $params['user_name'] = $currentUser->getFullname();                        
+                        
+                        if($recipient->sendNotification($_POST['template'],$_POST['subject'],$params)) {
+                            $response['success'] = 'Email sent successfully';
                         }
-                        if ($model->sendNotification($viewPath, $params)) {
-                            $response['success'] = 'Notification sent';
-                        } else {
-                            $response['error'] = 'Could not send notification';
+                        else {                            
+                            $response['success'] = false;
+                            $response['error'] = 'An error occurred when sending the email.';
                         }
                     }
                 }
-                
             } else {
                 $response['error'] = "Invalid request";
             }

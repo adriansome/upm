@@ -1,11 +1,7 @@
-<?php
-if (isset($header)) {
-    echo $header . "\n\n";
-}
+<?php if (isset($header)) :?>
+    <p><?php echo $header ?></p>
+<?php endif; ?>
 
-echo $message . "\n\n";
-
-if (isset($footer)) {
-    echo $footer;
-}
-?>
+<?php if (isset($footer)) :?>
+    <p><?php echo $footer ?></p>
+<?php endif; ?>

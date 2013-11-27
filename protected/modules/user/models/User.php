@@ -399,49 +399,14 @@ class User extends CActiveRecord
 		$revertEmail->from = Yii::app()->params['adminEmail'];
 		Yii::app()->mail->send($revertEmail);
 	}
-
-        /**
-         * Sends a notification
-         * @param type $view
-         * @param array $params
-         *      Additional params for view
-         */
-        public function sendNotification($view, array $params = array())
-        {
-            $notification = new YiiMailMessage;
-            $notification->view = $view;
-            if (isset($params['booking']) && $params['booking']) {
-                $params['from_email'] = Yii::app()->user->email;
-                $userModel = User::model()->findByPk(Yii::app()->user->id);
-                $params['user_name'] = $userModel->getFullname();
-                // Load landlord name
-                if (isset($params['id']) && (int)$params['id']) {
-                    $landlordModel = User::model()->findByPk($params['id']);
-                    $params['landlord_name'] = $landlordModel->getFullname();
-                } else {
-                    // Don't try to send email without landlord info
-                    return FALSE;
-                }
-            }
-            $notification->setBody(array('data' => $this, 'params' => $params), 'text/html');
-            $subject = 'Provisional Booking';
-            if (isset($params['status'])) {
-                $subject .= " " . ucfirst($params['status']);
-            }
-            $notification->setSubject($subject);
-            $notification->addTo($this->email);
-            if (isset($params['cc'])) {
-                $notification->addCc($params['cc']);                
-            }            
-            if (isset($params['from_email'])) {
-                $from = $params['from_email'];
-            } else {
-                $from = Yii::app()->params['adminEmail'];
-            }
-            $notification->from = $from;
-            return (Yii::app()->mail->send($notification));
-
-        }
+    
+    public function sendNotification($template, $subject, array $params = array())
+    {
+        $email = new MessageCentre($template);
+        $email->setSubject($subject . ' - ' . Yii::app()->name);
+        $email->setAdditionalParams($params);
+        return $email->send();
+    }
 
 	private function generateUniqueId()
 	{

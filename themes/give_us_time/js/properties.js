@@ -282,16 +282,15 @@ $(document).ready(function() {
                             url : '/user/management/sendNotification',
                             data : {
                                 ajax: true,
+                                template: 'rejected-booking',
                                 id: user_id,
-                                view_path: 'webroot.themes.give_us_time.views.emails.notification',
+                                subject: 'Booking result',
                                 params: {
-                                    'status': 'rejected',
                                     'property_name' : $('#property-params').data('name'),
                                     'landlord_name' : $('#landlord-params').data('name'),
                                     'landlord_email': $('#landlord-params').data('email'),
                                     'holiday_start' : holiday_start,
                                     'holiday_end'   : holiday_end,
-                                    'cc'            : 'bookings@giveustime.org.uk'
                                 }
                             },
                             type: 'post',
@@ -345,15 +344,14 @@ $(document).ready(function() {
                             data : {
                                 ajax: true,
                                 id: user_id,
-                                view_path: 'webroot.themes.give_us_time.views.emails.notification',
+                                template: 'confirmed-booking',
+                                subject: 'Booking accepted',
                                 params: {
-                                    'status': 'accepted',
                                     'property_name' : $('#property-params').data('name'),
                                     'landlord_name' : $('#landlord-params').data('name'),
                                     'landlord_email': $('#landlord-params').data('email'),
                                     'holiday_start' : holiday_start,
-                                    'holiday_end'   : holiday_end,
-                                    'cc'            : 'bookings@giveustime.org.uk'
+                                    'holiday_end'   : holiday_end
                                 }
                             },
                             type: 'post',

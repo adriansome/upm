@@ -2,7 +2,7 @@
 class MessageCentre extends YiiMailMessage
 {
     
-    private $_message, $_templateData = array();
+    private $_message, $_templateData, $_params = array();
     
     public function __construct($template)
     {
@@ -36,16 +36,21 @@ class MessageCentre extends YiiMailMessage
      */
     public function send()
     {
-        
+        if($this->getFrom() == '') {
+            $this->from = Yii::app()->params['adminEmail'];
+        }
         $this->addTo($this->_getRecipient());
         
         $templateData = (isset($this->_templateData['data'])) 
                         ? $this->_templateData['data']
                         : array();
 
-        $data = array_merge(array('message' => $this->_message), $templateData);
+        $data = array_merge(array('message' => $this->_message), $templateData, $this->_params);
+        
         $this->view = $this->_templateData['template']['alias'] . '.view';
         $this->setBody($data);
+        
+        //echo $this->getBody();exit;
 
         if (!Yii::app()->mail->send($this)) {
             throw new Exception("Sending this email caused an error");
@@ -83,6 +88,11 @@ class MessageCentre extends YiiMailMessage
             }
         }
         return $templateRecipient;
+    }
+    
+    public function setAdditionalParams($params)
+    {
+        $this->_params['params'] = $params;
     }
     
     /**

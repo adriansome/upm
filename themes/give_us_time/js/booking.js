@@ -46,20 +46,18 @@ $(document).ready( function() {
         };        
         
         var landlord_id =  $('#landlord-data').data('id');
-        
+                
         var notificationData = {
             ajax: true,
-            id: landlord_id,
-            view_path: 'webroot.themes.give_us_time.views.emails.booking',
+            template: 'provisional-booking',
+            id : landlord_id, 
+            subject: 'Provisional Booking Made',
             params: {
-                'booking' : true,
-                'id' : landlord_id, 
                 'holiday_start' : $('#holiday-dates').data('start'),
                 'holiday_end'   : $('#holiday-dates').data('end'),
-                'people' : form.serializeArray(),
-                'cc' : 'bookings@giveustime.org.uk'
+                'people' : form.serializeArray()
             }
-        };
+        }
         
         // Update database
         $.ajax({
@@ -82,6 +80,10 @@ $(document).ready( function() {
                                 + "Your request has been sent to the landlord, you "
                                 + "will recieve an email from the landlord confirming "
                                 + "your booking shortly.<p>");
+                            }
+                            else 
+                            {
+                                 $('.form-row.button-row .error').html("We were unable to send an email to confirm your provisional booking.").show();
                             }
                         }
                     });
