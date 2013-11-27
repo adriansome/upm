@@ -2,7 +2,7 @@
 
 <?php
 if (isset($header)) {
-    echo "<p styles='margin:20px 0 20px 0;'>$header</p>";
+    echo "<p styles='margin:20px 0 20px 0;'>" . nl2br($header) . "</p>";
 } ?>
 
 <p>The holiday dates are from <?php echo $params['holiday_start']; ?> to <?php echo $params['holiday_end'] ?> </p>
@@ -39,6 +39,6 @@ for ($i = 1; $i <= $total_people-1; $i++) {
 }
 
 if (isset($footer)) {
-    echo "<p styles='margin:20px 0 20px 0;'>$footer</p>";
+    echo "<p styles='margin:20px 0 20px 0;'>" . nl2br($footer) . "</p>";
 }
 ?>

@@ -1,7 +1,7 @@
 <?php if (isset($header)) :?>
-    <p><?php echo $header ?></p>
+    <p><?php echo nl2br($header) ?></p>
 <?php endif; ?>
 
 <?php if (isset($footer)) :?>
-    <p><?php echo $footer ?></p>
+    <p><?php echo nl2br($footer) ?></p>
 <?php endif; ?>
