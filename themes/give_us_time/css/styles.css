@@ -140,6 +140,10 @@ strong {
 	font-weight: bold;
 }
 
+.fileinput-button {
+	border: 1px solid red;
+}
+
 input[type=submit],
 .more {
 	padding: 4px 54px 4px 28px;
@@ -166,7 +170,8 @@ input[type=submit],
 	float: right;	/* makes it block level instead of inline-block, which means the preceding .form-row's bottom margin appears as expected */
 }
 
-.button-link {
+.button-link,
+.fileinput-button {
 /*	padding: 6px 30px;*/
 	padding: 7px 28px;
 	background: #f6f6f6;
@@ -184,11 +189,13 @@ input[type=submit],
 	text-decoration: none;	
 }
 
-.button-link:hover {
+.button-link:hover,
+.fileinput-button:hover {
 	border-color: #c4c4c4;
 }
 
-.button-link:active {
+.button-link:active,
+.fileinput-button:active {
 	background: #eee;
 	background: #f6f6f6;
 	background: -moz-linear-gradient(top,  #e6e6e6 0%, #f2f2f2 100%);
@@ -208,6 +215,11 @@ input[type=submit],
 	font-size: 16px;
 	font-size: 1.6rem;
 	text-decoration: none;
+}
+
+.fileinput-button {
+	display: inline-block;
+	margin-bottom: 10px;
 }
 
 /* CSS Tooltips */
@@ -307,6 +319,10 @@ nav:after,
 .nugget:after,
 .resort-listing > li:before,
 .resort-listing > li:after,
+
+.resort-listing .items > li:before,
+.resort-listing .items > li:after,
+
 .property-details:before,
 .property-details:after,
 #holiday-details:before,
@@ -933,7 +949,8 @@ nav:after,
 	list-style-type: none;
 }
 
-.resort-listing > li {
+.resort-listing > li,
+.resort-listing .items > li {
 	position: relative;
 	margin-bottom: 14px;
 	padding: 14px;
@@ -1810,7 +1827,7 @@ form .back {
 	max-width: 550px;
 }
 
-/* Tweak styles to match PSDs: */
+/* ----- Tweaker styles to match PSDs: --------------------------- */
 
 body {
 	background: #f4f4f4;
@@ -1978,7 +1995,8 @@ body {
 .button-link,
 .more,
 #message-from-liam-more-link,
-.nugget .btn-link {
+.nugget .btn-link,
+.fileinput-button {
 	font-style: italic;
 }
 
@@ -2022,6 +2040,10 @@ h2 {
 
 #footer-navigation ul ul {
 	display: none;
+}
+
+.heading-bottom-margin {
+	margin-bottom: 10px;
 }
 
 /* ----- Temporary Styles during CMS integration ----- */

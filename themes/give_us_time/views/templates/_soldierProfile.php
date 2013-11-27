@@ -17,13 +17,13 @@ $indexes = array(
 <h1>Welcome <?php echo $model->title, ' ', $model->lastname ?></h1>
 
 <?php if($model->attributes['active'] == '0') :?>
-    
+
     <p>You will be unable to search for holidays until your account has been activated.</p>
 
 <?php endif;?>
 
 <h2>Your Provisional Holiday Booking</h2>
-        
+
 <input type="hidden" id="indexes" data-status="<?php echo $indexes['status'] ?>"
        data-bookedby="<?php echo $indexes['booked_by'] ?>" />
 <?php
@@ -59,13 +59,13 @@ $indexes = array(
 
 ?>
 
-<h2>Your Holiday Story</h2>
+<h2 class="heading-bottom-margin">Your Holiday Story</h2>
 
 <div class="inner-content">
     <p>We would like you to complete a short holiday story, and upload a picture, so that we can show the people who donate holidays. It's great for them to see that they provided a break that was valued by you.</p>
 
     <p>Please tell us about your holiday, even if it is only a short summary:</p>
-    
+
     <form action="/stories/management/item" method="post" id="story">
         <input type="hidden" name="Content[<?php echo $indexes['full_name'] ?>][string_value]" value="<?php echo $model->fullname?>" />
         <input type="hidden" name="Content[<?php echo $indexes['status'] ?>][string_value]" value="submitted" />
@@ -80,13 +80,13 @@ $indexes = array(
         </div>
 
         <div class="form-row" id="upload-images">
-            
+
             <span class="btn btn-success fileinput-button">
                 <i class="glyphicon glyphicon-plus"></i>
                 <span>Add An Image</span>
                 <input id="fileupload" type="file" name="files[]">
             </span>
-            
+
             <div class="uploaded-images">
                 <div id="progress" class="progress">
                     <div class="progress-bar progress-bar-success"></div>
@@ -104,10 +104,10 @@ $indexes = array(
         </div>
     </form>
 </div>
-<?php 
+<?php
 
 Yii::app()->clientScript->registerCssFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.css')) . '/jquery.fileupload.css');
-Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/jquery.ui.widget.js'); 
+Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/jquery.ui.widget.js');
 Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/jquery.ui.widget.js');
 Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/jquery.iframe-transport.js');
 Yii::app()->clientScript->registerScriptFile(Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.js')).'/jquery.fileupload.js');
