@@ -7,10 +7,11 @@ if ($_POST['Search']['region']) {
     $locationText = '';
 }
 
-$dateStart = (isset($_POST['Search']['holiday'])) ? $_POST['Search']['holiday'] : FALSE;
+$date = (isset($_POST['Search']['holiday'])) ? $_POST['Search']['holiday'] : FALSE;
 
-$dateText = ($dateStart) ? date('M d', strtotime($dateStart)) : '';
-$dateTextFull = ($dateStart) ? date('M d Y', strtotime($dateStart)) : '';
+$month = ($date) ? date('m', strtotime($date)) : '';
+$dateText = ($date) ? date('F', strtotime($date)) : '';
+$dateTextFull = ($date) ? date('F', strtotime($date)) : '';
 
 $propertyData = $this->contents->getData();
 
@@ -44,8 +45,9 @@ foreach ($propertyData as $property) {
         
         // Convert to database format
         $arrivalParts = date_parse_from_format("d/m/Y", $holiday['arrival_date']);
+        $departureParts = date_parse_from_format("d/m/Y", $holiday['departure_date']);
         $arrivalDate = implode('-', array($arrivalParts['year'], $arrivalParts['month'], $arrivalParts['day']));
-        $userDate = new DateTime($dateStart);
+        $userDate = new DateTime($date);
         $systemDate = new DateTime($arrivalDate);
         $today_date = new DateTime('now');
         
@@ -54,12 +56,9 @@ foreach ($propertyData as $property) {
             continue;
         }
         
-        if ($dateStart) {
-            $diff = $userDate->diff($systemDate);
-
-            // Make sure the holiday falls within  a week of the user's specified date
-            // The holiday should either fall on, or 6 days after the chosen date
-            if ($diff->days > 6 || $diff->invert == 1) {
+        if ($date) {
+            // make sure either arrival or departure is in the month that's been chosen
+            if($arrivalParts['month'] != $month && $departureParts['month'] != $month) {
                 continue;
             }
         }
@@ -85,8 +84,8 @@ $dataProvider = new CArrayDataProvider($allHolidays);
     $summaryText .= ($itemCount > 1) ? 'es' : '';
     if ($dateText || $locationText) {
         $summaryText .= " for {$locationText}";
-        if ($dateStart) {
-            $summaryText .= " beginning in the week of {$dateTextFull}</p>";
+        if ($date) {
+            $summaryText .= " the month of {$dateTextFull}</p>";
         }
     }
     $this->widget('zii.widgets.CListView', array(
