@@ -6,6 +6,7 @@ if (isset($header)) {
 } ?>
 
 <p>The holiday dates are from <?php echo $params['holiday_start']; ?> to <?php echo $params['holiday_end'] ?>, requested by <?php echo $params['user_name']?>.</p>
+<p>The resort is <?php echo $params['property_name'] ?>.</p>
 
 <?php
 $total_people = $params['people'][0]['value'];
