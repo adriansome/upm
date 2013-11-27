@@ -52,8 +52,9 @@ class MessageCentre extends YiiMailMessage
         
         $this->setBody($data);
                 
-        var_dump($this->getTo());
-        echo $this->getBody();exit;
+        //var_dump($this->getTo());
+        //echo $this->getBody();exit;
+        var_dump($this);exit;
 
         if (!Yii::app()->mail->send($this)) {
             throw new Exception("Sending this email caused an error");
