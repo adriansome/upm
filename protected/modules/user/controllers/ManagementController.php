@@ -242,7 +242,7 @@ class ManagementController extends UserController
                         $currentUser = User::model()->findByPk(Yii::app()->user->id);
                         $params['user_name'] = $currentUser->getFullname();                        
                         
-                        if($recipient->sendNotification($_POST['template'],$_POST['subject'],$params)) {
+                        if($recipient->sendNotification($_POST['template'],$_POST['subject'],$params, $recipient->email)) {
                             $response['success'] = 'Email sent successfully';
                         }
                         else {                            
