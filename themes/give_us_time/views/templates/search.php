@@ -38,7 +38,6 @@ if($_POST['Search']['region']) {
                     . "ON pc.`property_id` = b.id "
                     . "WHERE pc.`country_id` = \"{$countryid}\"";
 }
-echo 'customsql=',$customQuery;
 
 // Set location and date params
 $selectedLocation = (isset($_POST['Search']['country'])) 
