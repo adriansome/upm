@@ -36,9 +36,9 @@ class MessageCentre extends YiiMailMessage
      *      The template to use to send the email
      */
     public function send()
-    {
-        if($this->getFrom() == '') {
-            $this->from = Yii::app()->params['adminEmail'];
+    {        
+        if(!$this->getFrom()) {
+            $this->setFrom(Yii::app()->params['adminEmail']);
         }
         $this->addTo($this->_getRecipient());
         
