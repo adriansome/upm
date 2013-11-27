@@ -48,9 +48,9 @@ class MessageCentre extends YiiMailMessage
 
         $data = array_merge(array('message' => $this->_message), $templateData, $this->_params);
         
-        $this->view = $this->_templateData['template']['alias'] . '.view';
-        
+        $this->view = $this->_templateData['template']['alias'] . '.view';        
         $this->setBody($data);
+        $this->setContentType('text/html');
                 
         //var_dump($this->getTo());
         //echo $this->getBody();exit;
