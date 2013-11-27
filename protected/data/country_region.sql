@@ -234,7 +234,7 @@ CREATE TABLE IF NOT EXISTS `template` (
 --
 
 INSERT INTO `template` (`id`, `name`, `header`, `footer`, `recipient`) VALUES
-(1, 'contact', 'HEADER TEXTs', 'FOOTER TEXT', 'jack@mightysquid.com');
+(1, 'contact', 'HEADER TEXTs', 'FOOTER TEXT', 'jo@jobult.co.uk');
 
 --
 -- Constraints for dumped tables
