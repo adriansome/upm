@@ -687,3 +687,43 @@
 	
 	width:200px;
 }
+
+/* ----- Pagination ----- */
+
+.pager li > a, .pager li > span {
+	display: inline-block;
+	padding: 4px 10px;
+	background-color: #1e1e1e;
+	border: 1px solid #888;
+	border: none;
+	border-radius: 5px;
+}
+
+.pager li > a:hover, .pager li > a:focus {
+	background-color: #383838;
+	color: #fff;
+}
+
+.pager li.selected a {
+	background-color: #444;
+
+	background: -moz-linear-gradient(top,  #262628 0%, #444343 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#262628), color-stop(100%,#444343));
+	background: -webkit-linear-gradient(top,  #262628 0%,#444343 100%);
+	background: -o-linear-gradient(top,  #262628 0%,#444343 100%);
+	background: -ms-linear-gradient(top,  #262628 0%,#444343 100%);
+	background: linear-gradient(to bottom,  #262628 0%,#444343 100%);	
+}
+
+.pager .previous > a, .pager .previous > span,
+.pager .next > a, .pager .next > span{
+	float: none;
+}
+
+.list-view .pager {
+	margin-top: 10px;
+}
+
+.list-view .pager .yiiPager {
+	margin-top: 5px;
+}

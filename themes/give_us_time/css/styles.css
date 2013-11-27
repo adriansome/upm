@@ -557,7 +557,11 @@ nav:after,
 
 	border-top: 1px solid #b9beae;
 }
-
+/*
+#page-footer .credits {
+	text-align: right;
+}
+*/
 #footer-navigation {
 	margin-bottom: 18px;
 	margin-bottom: 1.8rem;
@@ -2065,6 +2069,10 @@ h2 {
 	color: #333;
 	font-size: 13px; /* does this need to be made more specific */
 	text-decoration: none;	
+}
+
+.nugget .btn-link {
+	display: inline-block;
 }
 
 #message-from-liam .video img {
