@@ -81,7 +81,7 @@ $departure = date_parse_from_format('d/m/Y', $holidayData['departure_date']);
 					<div class="resort-name"><?php echo $propertyData['title'] ?>, <?php echo $propertyData['area'] ?></div>
 					<div class="resort-details"><?php
 					echo $holidayData['number_of_bedrooms'] . ' bed ' .
-						$attributes['type']['values'][$propertyData['type']] . '. ';
+						$propertyData['type'] . '. ';
 					 echo 'Sleeps ' . $holidayData['sleeps_number'];?></div>
 				</div>
 			</div>
@@ -115,7 +115,7 @@ $departure = date_parse_from_format('d/m/Y', $holidayData['departure_date']);
 
             </div>
             <div class="column full-details-column">
-				<h2 class="property-name"><?php echo $propertyData['title'] ?> <span class="property-type">(<?php echo $this->attributes['type']['values'][$propertyData['type']] ?>)</span></h2>
+				<h2 class="property-name"><?php echo $propertyData['title'] ?> <span class="property-type">(<?php echo $propertyData['type'] ?>)</span></h2>
 				<div class="property-location"><?php echo $propertyData['area'] ?>&nbsp;&nbsp;&nbsp;<?php echo $propertyData['city'] ?>&nbsp;&nbsp;&nbsp;<?php echo $this->attributes['country']['values'][$propertyData['country']] ?></div>
 
 				<?php

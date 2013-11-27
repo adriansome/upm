@@ -14,7 +14,7 @@ $attributes = $listWidget->itemAttributes();
 
 $property = $listWidget->contents->rawData;
 
-$property_type = $attributes['type']['values'][$property['type']];
+$property_type = $property['type'];
 $property_location = $attributes['country']['values'][$property['country']];
 $property_url = '/properties?slug='.$property['slug'].'&h='.$data['block_id'];
 

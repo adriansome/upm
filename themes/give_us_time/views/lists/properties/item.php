@@ -9,8 +9,8 @@
         </div>
 <?php endif?>
         <div class="column">
-        <h2><?php echo $attributes['country']['values'][$data['country']]  ?></h2>
-                <p><?php echo $attributes['type']['values'][$data['type']]  ?></p>
+        <h2><?php echo $data['country']  ?></h2>
+                <p><?php echo $data['type']  ?></p>
 
                 <div class="date-range">
                         <div class="date">

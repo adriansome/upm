@@ -29,7 +29,7 @@ if (isset($_POST['Search']['holiday']) && $_POST['Search']['holiday']) {
 			<h2><?php echo $data['property']['title'] . '&nbsp;&nbsp;&nbsp;' . $data['property']['area'] . '&nbsp;&nbsp;&nbsp;' . $attributes['country']['values'][$data['property']['country']]; ?></h2>
 			<p><?php
 			echo $data['holiday']['number_of_bedrooms'] . ' bed ' .
-			$attributes['type']['values'][$data['property']['type']] . '. ';
+			$data['property']['type'] . '. ';
 			echo 'Sleeps ' . $data['holiday']['sleeps_number'];
 			?>
 			</p>

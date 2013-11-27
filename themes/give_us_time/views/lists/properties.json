@@ -24,17 +24,8 @@
         
         "type":
         {
-            "type": "list",
-            "label": "Property type",
-            "values":
-            {
-                "1": "House",
-                "2": "Apartment",
-                "3": "Hotel",
-                "4": "Resort",
-                "5": "Lodge",
-                "6": "Other"
-            }
+            "type": "singleline",
+            "label": "Property type"
         },
         
         "city":

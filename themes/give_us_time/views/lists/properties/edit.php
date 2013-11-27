@@ -40,7 +40,7 @@ $data = $this->contents->rawData;
 		</div>
 
 		<div class="column full-details-column">
-			<h2 class="property-name"><?php echo $data['title'] ?> <span class="property-type">(<?php echo $this->attributes['type']['values'][$data['type']] ?>)</span></h2>
+			<h2 class="property-name"><?php echo $data['title'] ?> <span class="property-type">(<?php echo $data['type'] ?>)</span></h2>
 			<div class="property-location"><?php echo $data['area'] ?>&nbsp;&nbsp;&nbsp;<?php echo $data['city'] ?>&nbsp;&nbsp;&nbsp;<?php echo $this->attributes['country']['values'][$data['country']] ?></div>
 
 			<?php
