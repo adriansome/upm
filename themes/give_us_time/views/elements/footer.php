@@ -27,5 +27,11 @@
 		</div>
 
 	</div>
+
+	<div class="constrained">
+		<div class="credits">
+			<p>Site by <a href="http://www.fanaticdesign.co.uk" target="_blank">Fanatic.</a></p>
+		</div>
+	</div>
 </footer>
 <!-- End #page-footer -->
